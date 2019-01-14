@@ -121,9 +121,9 @@ Internet-Draft                    CBOR                      January 2019
        4.7.1.  Equivalence of Keys . . . . . . . . . . . . . . . . .  29
      4.8.  Undefined Values  . . . . . . . . . . . . . . . . . . . .  30
      4.9.  Preferred Serialization . . . . . . . . . . . . . . . . .  30
-     4.10. Canonical CBOR  . . . . . . . . . . . . . . . . . . . . .  31
+     4.10. Canonically Encoded CBOR  . . . . . . . . . . . . . . . .  31
        4.10.1.  Length-first map key ordering  . . . . . . . . . . .  33
-     4.11. Strict Mode . . . . . . . . . . . . . . . . . . . . . . .  34
+     4.11. Strict Decoding Mode  . . . . . . . . . . . . . . . . . .  34
    5.  Converting Data between CBOR and JSON . . . . . . . . . . . .  35
      5.1.  Converting from CBOR to JSON  . . . . . . . . . . . . . .  35
      5.2.  Converting from JSON to CBOR  . . . . . . . . . . . . . .  37
@@ -1691,7 +1691,7 @@ Internet-Draft                    CBOR                      January 2019
    Section 4.6).  Definite length encoding is preferred whenever the
    length is known at the time the serialization of the item starts.
 
-4.10.  Canonical CBOR
+4.10.  Canonically Encoded CBOR
 
    Some protocols may want encoders to only emit CBOR in a particular
    canonical format; those protocols might also have the decoders check
@@ -1858,7 +1858,7 @@ Internet-Draft                    CBOR                      January 2019
 
    8.  [100], encoded as 0x811864.
 
-4.11.  Strict Mode
+4.11.  Strict Decoding Mode
 
    Some areas of application of CBOR do not require canonicalization
    (Section 4.10) but may require that different decoders reach the same

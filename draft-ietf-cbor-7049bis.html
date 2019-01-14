@@ -314,9 +314,9 @@ address {
 <link href="#rfc.section.4.7.1" rel="Chapter" title="4.7.1 Equivalence of Keys">
 <link href="#rfc.section.4.8" rel="Chapter" title="4.8 Undefined Values">
 <link href="#rfc.section.4.9" rel="Chapter" title="4.9 Preferred Serialization">
-<link href="#rfc.section.4.10" rel="Chapter" title="4.10 Canonical CBOR">
+<link href="#rfc.section.4.10" rel="Chapter" title="4.10 Canonically Encoded CBOR">
 <link href="#rfc.section.4.10.1" rel="Chapter" title="4.10.1 Length-first map key ordering">
-<link href="#rfc.section.4.11" rel="Chapter" title="4.11 Strict Mode">
+<link href="#rfc.section.4.11" rel="Chapter" title="4.11 Strict Decoding Mode">
 <link href="#rfc.section.5" rel="Chapter" title="5 Converting Data between CBOR and JSON">
 <link href="#rfc.section.5.1" rel="Chapter" title="5.1 Converting from CBOR to JSON">
 <link href="#rfc.section.5.2" rel="Chapter" title="5.2 Converting from JSON to CBOR">
@@ -487,11 +487,11 @@ address {
 </li>
 <li>4.9.   <a href="#rfc.section.4.9">Preferred Serialization</a>
 </li>
-<li>4.10.   <a href="#rfc.section.4.10">Canonical CBOR</a>
+<li>4.10.   <a href="#rfc.section.4.10">Canonically Encoded CBOR</a>
 </li>
 <ul><li>4.10.1.   <a href="#rfc.section.4.10.1">Length-first map key ordering</a>
 </li>
-</ul><li>4.11.   <a href="#rfc.section.4.11">Strict Mode</a>
+</ul><li>4.11.   <a href="#rfc.section.4.11">Strict Decoding Mode</a>
 </li>
 </ul><li>5.   <a href="#rfc.section.5">Converting Data between CBOR and JSON</a>
 </li>
@@ -1213,7 +1213,7 @@ C5             -- Tag 5
 <p id="rfc.section.4.9.p.3">Similarly, a constrained encoder may be limited in the variety of representation variants it supports in such a way that it does not emit preferred serializations (&#8220;variant encoder&#8221;): Say, it could be designed to always use the 32-bit variant for an integer that it encodes even if a short representation is available (again, assuming that there is no application need for integers that can only be represented with the 64-bit variant).  A decoder that does not rely on only ever receiving preferred serializations (&#8220;variation-tolerant decoder&#8221;) can there be said to be more universally interoperable (it might very well optimize for the case of receiving preferred serializations, though).  Full implementations of CBOR decoders are by definition variation-tolerant; the distinction is only relevant if a constrained implementation of a CBOR decoder meets a variant encoder.</p>
 <p id="rfc.section.4.9.p.4">The preferred serialization always uses the shortest form of representing the argument (<a href="#encoding" class="xref">Section 3</a>)); it also uses the shortest floating point encoding that preserves the value being encoded (see <a href="#numbers" class="xref">Section 4.6</a>).  Definite length encoding is preferred whenever the length is known at the time the serialization of the item starts.</p>
 <h1 id="rfc.section.4.10">
-<a href="#rfc.section.4.10">4.10.</a> <a href="#c14n" id="c14n">Canonical CBOR</a>
+<a href="#rfc.section.4.10">4.10.</a> <a href="#c14n" id="c14n">Canonically Encoded CBOR</a>
 </h1>
 <p id="rfc.section.4.10.p.1">Some protocols may want encoders to only emit CBOR in a particular canonical format; those protocols might also have the decoders check that their input is canonical. Those protocols are free to define what they mean by a canonical format and what encoders and decoders are expected to do. This section defines a set of restrictions that can serve as the base of such a canonical format.</p>
 <p id="rfc.section.4.10.p.2">A CBOR encoding satisfies the &#8220;core canonicalization requirements&#8221; if it satisfies the following restrictions:</p>
@@ -1281,7 +1281,7 @@ C5             -- Tag 5
 <li>[100], encoded as 0x811864.</li>
 </ol>
 <h1 id="rfc.section.4.11">
-<a href="#rfc.section.4.11">4.11.</a> <a href="#strict-mode" id="strict-mode">Strict Mode</a>
+<a href="#rfc.section.4.11">4.11.</a> <a href="#strict-mode" id="strict-mode">Strict Decoding Mode</a>
 </h1>
 <p id="rfc.section.4.11.p.1">Some areas of application of CBOR do not require canonicalization (<a href="#c14n" class="xref">Section 4.10</a>) but may require that different decoders reach the same (semantically equivalent) results, even in the presence of potentially malicious data.  This can be required if one application (such as a firewall or other protecting entity) makes a decision based on the data that another application, which independently decodes the data, relies on.</p>
 <p id="rfc.section.4.11.p.2">Normally, it is the responsibility of the sender to avoid ambiguously decodable data.  However, the sender might be an attacker specially making up CBOR data such that it will be interpreted differently by different decoders in an attempt to exploit that as a vulnerability.  Generic decoders used in applications where this might be a problem need to support a strict mode in which it is also the responsibility of the receiver to reject ambiguously decodable data. It is expected that firewalls and other security systems that decode CBOR will only decode in strict mode.</p>
