@@ -9,30 +9,77 @@
 
   
 <style type="text/css">/*<![CDATA[*/
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+
+@media screen and (min-width: 1024px) {
+  ul.toc, #rfc\.toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 500px);
+    width: 300px;
+    padding: 0 1em;
+    z-index: 1;
+  }
+  #rfc\.toc {
+    top: 16px;
+  }
+  ul.toc {
+    top: 80px;
+    overflow: auto;
+  }
+
+  body {
+    padding-left: 1.5em;
+    padding-right: 29em;
+  }
+}
 
 body {
-  font: 16px "Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
+  font: 15px "Helvetica Neue",Helvetica,Arial,sans-serif;
   color: #333;
   font-size-adjust: 0.5;
-  line-height: 24px;
-  margin: 75px auto;
-  max-width: 624px;
-  padding: 0 5px;
+  line-height: 130%;
+  margin: 2.5em auto;
+  max-width: 724px;
 }
 
-.title, .filename, h1, h2, h3, h4, h5 {
-  font: 16px "Roboto Condensed","Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
+.title, .filename, h1, h2, h3, h4 {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size-adjust: 0.5;
-  font-weight: bold;
+  font-weight: 500;
   color: #333;
   line-height: 100%;
-  margin: 1.2em 0 0.3em;
+  margin: 0.8em 0 0.3em;
 }
-.title, #rfc\.title h1 { font-size: 32px; }
-h1, section h1, h2, section h2, section h3, nav h2 { font-size: 20px; }
-h3, section h4, h4, section h5 { font-size: 16px; }
+.title { font-size: 36px; }
+h1 { font-size: 30px; }
+h2 { font-size: 24px; }
+h3, h4 { font-size: 18px; }
 h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
   color: #333;
+}
+
+ul.toc li {
+  list-style: none;
+  text-indent: -2.5em;
+  padding-left: 2.5em;
+  padding-bottom: 5px;
+  margin: 0;
+}
+ul.toc ul {
+  margin: 0;
+}
+/* xml2rfc nests ul directly inside ul which messes with the style badly */
+ul.toc, ul.toc>ul, ul.toc ul>ul {
+  margin: 0 0 0 1.5em;
 }
 
 table {
@@ -61,30 +108,29 @@ td.reference {
 }
 
 
-table.header, table#rfc\.headerblock {
+table.header {
   width: 100%;
 }
-table.header td, table#rfc\.headerblock td {
+table.header td {
   border: none;
   background-color: transparent;
   color: black;
-  padding: 0;
 }
 .filename {
-  display: block;
   color: rgb(119, 119, 119);
-  font-size: 20px;
+  font-size: 23px;
   font-weight: normal;
+  height: auto;
   line-height: 100%;
-  margin: 10px 0 32px;
 }
-#rfc\.abstract+p, #rfc\.abstract p {
+#rfc\.abstract+p {
   font-size: 20px;
-  line-height: 28px;
+  font-weight: 300;
+  line-height: 130%;
 }
 
-samp, tt, code, pre, span.tt {
-  font: 13.5px Consolas, monospace;
+samp, tt, code, pre {
+  font: 11pt consolas, monospace;
   font-size-adjust: none;
 }
 pre {
@@ -94,15 +140,13 @@ pre {
   padding: 5px;
   margin: 5px;
 }
-.figure, caption {
+.figure {
   font-style: italic;
   margin: 0 1.5em;
-  text-align: left;
 }
 
 address {
-  margin: 16px 2px;
-  line-height: 20px;
+  margin: 10px 0 0;
 }
 .vcard {
   font-style: normal;
@@ -110,8 +154,8 @@ address {
 .vcardline {
   display: block;
 }
-.vcardline .fn, address b {
-  font-weight: normal;
+.vcardline .fn {
+  font-weight: bold;
 }
 .vcardline .hidden {
   display: none;
@@ -151,9 +195,6 @@ hr {
   border: 0;
   border-top: 1px solid #eee;
 }
-hr.noprint {
-  display: none;
-}
 
 a {
   text-decoration: none;
@@ -165,59 +206,15 @@ a[href]:hover {
   background-color: #eee;
 }
 
-p, ol, ul, li {
+ol, ul, li, p {
   padding: 0;
+  margin: 0.5em 0 0.5em 2em;
 }
-p {
-  margin: 0.5em 0;
-}
-ol, ul {
-  margin: 0.2em 0 0.2em 2em;
-}
-li {
-  margin: 0.2em 0;
+li, p {
+  margin-left: 0;
 }
 address {
   font-style: normal;
-}
-
-ul.toc ul {
-  margin: 0 0 0 2em;
-}
-ul.toc li {
-  list-style: none;
-  margin: 0;
-}
-
-@media screen and (min-width: 924px) {
-  body {
-    padding-right: 350px;
-  }
-  body>ul.toc, body>#rfc\.toc {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    right: calc(50vw - 500px);
-    width: 300px;
-    z-index: 1;
-    overflow: auto;
-    overscroll-behavior: contain;
-  }
-  body>#rfc\.toc {
-    top: 55px;
-  }
-  body>ul.toc {
-    top: 100px;
-  }
-
-  ul.toc {
-    margin: 0 0 0 4px;
-    font-size: 12px;
-    line-height: 20px;
-  }
-  ul.toc ul {
-    margin-left: 1.2em;
-  }
 }
 
 .github-fork-ribbon-wrapper {
@@ -276,8 +273,7 @@ ul.toc li {
   .github-fork-ribbon-wrapper {
     position: fixed;
   }
-/*]]>*/</style>
-<meta name="viewport" content="initial-scale=1.0">
+  /*]]>*/</style>
 
 
   <link href="#rfc.toc" rel="Contents">
@@ -354,12 +350,12 @@ ul.toc li {
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.15.1 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.16.3 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Bormann, C. and P. Hoffman" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-cbor-7049bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-12-19" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-01-14" />
   <meta name="dct.abstract" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack." />
   <meta name="description" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack." />
 
@@ -383,12 +379,12 @@ ul.toc li {
 <td class="right">P. Hoffman</td>
 </tr>
 <tr>
-<td class="left">Expires: June 22, 2019</td>
+<td class="left">Expires: July 18, 2019</td>
 <td class="right">ICANN</td>
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">December 19, 2018</td>
+<td class="right">January 14, 2019</td>
 </tr>
 
     	
@@ -407,9 +403,9 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on June 22, 2019.</p>
+<p>This Internet-Draft will expire on July 18, 2019.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
-<p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
 
   
@@ -675,7 +671,7 @@ ul.toc li {
 <p id="rfc.section.3.p.3">Additional information values from 0 to 27 describes how to construct an &#8220;argument&#8221;, possibly consuming additional bytes.  For major type 7 and additional information 25 to 27 (floating point numbers), there is a special case; in all other cases the additional information value, possibly combined with following bytes, the argument constructed is an unsigned integer.</p>
 <p id="rfc.section.3.p.4">When the value of the additional information is less than 24, it is directly used as the argument&#8217;s value.  When it is 24 to 27, the argument&#8217;s value is held in the following 1, 2, 4, or 8, respectively, bytes, in network byte order.</p>
 <p id="rfc.section.3.p.5">The meaning of this argument depends on the major type.  For example, in major type 0, the argument is the value of the data item itself (and in major type 1 the value of the data item is computed from the argument); in major type 2 and 3 it gives the length of the string data in bytes that follows; and in major types 4 and 5 it is used to determine the number of data items enclosed.</p>
-<p id="rfc.section.3.p.6">If the encoded sequence of bytes ends before the end of a data item would be reached, that encoding is not well-formed. If the encoded sequence of bytes still has bytes remaining after the outermost encoded item is parsed, that encoding is not a single well-formed CBOR item.</p>
+<p id="rfc.section.3.p.6">If the encoded sequence of bytes ends before the end of a data item would be reached, that encoding is not well-formed. If the encoded sequence of bytes still has bytes remaining after the outermost encoded item is decoded, that encoding is not a single well-formed CBOR item.</p>
 <p id="rfc.section.3.p.7">A CBOR decoder implementation can be based on a jump table with all 256 defined values for the initial byte (<a href="#jumptable" class="xref">Table 5</a>).  A decoder in a constrained implementation can instead use the structure of the initial byte and following bytes for more compact code (see <a href="#pseudocode" class="xref">Appendix C</a> for a rough impression of how this could look).</p>
 <h1 id="rfc.section.3.1">
 <a href="#rfc.section.3.1">3.1.</a> <a href="#majortypes" id="majortypes">Major Types</a>
@@ -790,7 +786,7 @@ BF           -- Start indefinite-length map
 <a href="#rfc.section.3.2.2">3.2.2.</a> <a href="#indefinite-length-byte-strings-and-text-strings" id="indefinite-length-byte-strings-and-text-strings">Indefinite-Length Byte Strings and Text Strings</a>
 </h1>
 <p id="rfc.section.3.2.2.p.1">Indefinite-length byte strings and text strings are actually a concatenation of zero or more definite-length byte or text strings (&#8220;chunks&#8221;) that are together treated as one contiguous string. Indefinite-length strings are opened with the major type and additional information value of 31, but what follows are a series of byte or text strings that have definite lengths (the chunks). The end of the series of chunks is indicated by encoding the &#8220;break&#8221; stop code (0b111_11111) in a place where the next chunk in the series would occur. The contents of the chunks are concatenated together, and the overall length of the indefinite-length string will be the sum of the lengths of all of the chunks.  In summary, an indefinite-length string is encoded similarly to how an indefinite-length array of its chunks would be encoded, except that the major type of the indefinite-length string is that of a (text or byte) string and matches the major types of its chunks.</p>
-<p id="rfc.section.3.2.2.p.2">For indefinite-length byte strings, every data item (chunk) between the indefinite-length indicator and the &#8220;break&#8221; MUST be a definite-length byte string item; if the parser sees any item type other than a byte string before it sees the &#8220;break&#8221;, it is an error.</p>
+<p id="rfc.section.3.2.2.p.2">For indefinite-length byte strings, every data item (chunk) between the indefinite-length indicator and the &#8220;break&#8221; MUST be a definite-length byte string item; if the decoder sees any item type other than a byte string before it sees the &#8220;break&#8221;, it is an error.</p>
 <p id="rfc.section.3.2.2.p.3">For example, assume the sequence:</p>
 <p id="rfc.section.3.2.2.p.4">0b010_11111 0b010_00100 0xaabbccdd 0b010_00011 0xeeff99 0b111_11111</p>
 <pre>
@@ -1080,7 +1076,7 @@ C5             -- Tag 5
 <h1 id="rfc.section.3.4.6.1">
 <a href="#rfc.section.3.4.6.1">3.4.6.1.</a> <a href="#embedded-di" id="embedded-di">Encoded CBOR Data Item</a>
 </h1>
-<p id="rfc.section.3.4.6.1.p.1">Sometimes it is beneficial to carry an embedded CBOR data item that is not meant to be decoded immediately at the time the enclosing data item is being parsed.  Tag 24 (CBOR data item) can be used to tag the embedded byte string as a data item encoded in CBOR format.</p>
+<p id="rfc.section.3.4.6.1.p.1">Sometimes it is beneficial to carry an embedded CBOR data item that is not meant to be decoded immediately at the time the enclosing data item is being decoded.  Tag 24 (CBOR data item) can be used to tag the embedded byte string as a data item encoded in CBOR format.</p>
 <h1 id="rfc.section.3.4.6.2">
 <a href="#rfc.section.3.4.6.2">3.4.6.2.</a> <a href="#convexpect" id="convexpect">Expected Later Encoding for CBOR-to-JSON Converters</a>
 </h1>
@@ -1106,7 +1102,7 @@ C5             -- Tag 5
 <p id="rfc.section.3.4.7.p.1">In many applications, it will be clear from the context that CBOR is being employed for encoding a data item.  For instance, a specific protocol might specify the use of CBOR, or a media type is indicated that specifies its use.  However, there may be applications where such context information is not available, such as when CBOR data is stored in a file and disambiguating metadata is not in use.  Here, it may help to have some distinguishing characteristics for the data itself.</p>
 <p id="rfc.section.3.4.7.p.2">Tag 55799 is defined for this purpose.  It does not impart any special semantics on the data item that follows; that is, the semantics of a data item tagged with tag 55799 is exactly identical to the semantics of the data item itself.</p>
 <p id="rfc.section.3.4.7.p.3">The serialization of this tag is 0xd9d9f7, which appears not to be in use as a distinguishing mark for frequently used file types.  In particular, it is not a valid start of a Unicode text in any Unicode encoding if followed by a valid CBOR data item.</p>
-<p id="rfc.section.3.4.7.p.4">For instance, a decoder might be able to parse both CBOR and JSON. Such a decoder would need to mechanically distinguish the two formats. An easy way for an encoder to help the decoder would be to tag the entire CBOR item with tag 55799, the serialization of which will never be found at the beginning of a JSON text.</p>
+<p id="rfc.section.3.4.7.p.4">For instance, a decoder might be able to decode both CBOR and JSON. Such a decoder would need to mechanically distinguish the two formats. An easy way for an encoder to help the decoder would be to tag the entire CBOR item with tag 55799, the serialization of which will never be found at the beginning of a JSON text.</p>
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#creating-cbor-based-protocols" id="creating-cbor-based-protocols">Creating CBOR-Based Protocols</a>
 </h1>
@@ -1134,7 +1130,7 @@ C5             -- Tag 5
 <h1 id="rfc.section.4.3.1">
 <a href="#rfc.section.4.3.1">4.3.1.</a> <a href="#incomplete-cbor-data-items" id="incomplete-cbor-data-items">Incomplete CBOR Data Items</a>
 </h1>
-<p id="rfc.section.4.3.1.p.1">The representation of a CBOR data item has a specific length, determined by its initial bytes and by the structure of any data items enclosed in the data items.  If less data is available, this can be treated as a syntax error.  A decoder may also implement incremental parsing, that is, decode the data item as far as it is available and present the data found so far (such as in an event-based interface), with the option of continuing the decoding once further data is available.</p>
+<p id="rfc.section.4.3.1.p.1">The representation of a CBOR data item has a specific length, determined by its initial bytes and by the structure of any data items enclosed in the data items.  If less data is available, this can be treated as a syntax error.  A decoder may also decode incrementally, that is, decode the data item as far as it is available and present the data found so far (such as in an event-based interface), with the option of continuing the decoding once further data is available.</p>
 <p id="rfc.section.4.3.1.p.2">Examples of incomplete data items include:</p>
 <p></p>
 
@@ -1158,7 +1154,7 @@ C5             -- Tag 5
 <h1 id="rfc.section.4.3.3">
 <a href="#rfc.section.4.3.3">4.3.3.</a> <a href="#unknown-additional-information-values" id="unknown-additional-information-values">Unknown Additional Information Values</a>
 </h1>
-<p id="rfc.section.4.3.3.p.1">At the time of writing, some additional information values are unassigned and reserved for future versions of this document (see <a href="#curating" class="xref">Section 6.2</a>).  Since the overall syntax for these additional information values is not yet defined, a decoder that sees an additional information value that it does not understand cannot continue parsing.</p>
+<p id="rfc.section.4.3.3.p.1">At the time of writing, some additional information values are unassigned and reserved for future versions of this document (see <a href="#curating" class="xref">Section 6.2</a>).  Since the overall syntax for these additional information values is not yet defined, a decoder that sees an additional information value that it does not understand cannot continue decoding.</p>
 <h1 id="rfc.section.4.4">
 <a href="#rfc.section.4.4">4.4.</a> <a href="#semantic-errors" id="semantic-errors">Other Decoding Errors</a>
 </h1>
@@ -1362,7 +1358,7 @@ C5             -- Tag 5
 <ul>
 <li>the &#8220;simple&#8221; space (values in major type 7).  Of the 24 efficient (and 224 slightly less efficient) values, only a small number have been allocated.  Implementations receiving an unknown simple data item may be able to process it as such, given that the structure of the value is indeed simple. The IANA registry in <a href="#simple-values-registry" class="xref">Section 8.1</a> is the appropriate way to address the extensibility of this codepoint space.</li>
 <li>the &#8220;tag&#8221; space (values in major type 6).  Again, only a small part of the codepoint space has been allocated, and the space is abundant (although the early numbers are more efficient than the later ones).  Implementations receiving an unknown tag can choose to simply ignore it or to process it as an unknown tag wrapping the following data item. The IANA registry in <a href="#ianatags" class="xref">Section 8.2</a> is the appropriate way to address the extensibility of this codepoint space.</li>
-<li>the &#8220;additional information&#8221; space.  An implementation receiving an unknown additional information value has no way to continue parsing, so allocating codepoints to this space is a major step.  There are also very few codepoints left.</li>
+<li>the &#8220;additional information&#8221; space.  An implementation receiving an unknown additional information value has no way to continue decoding, so allocating codepoints to this space is a major step.  There are also very few codepoints left.</li>
 </ul>
 <h1 id="rfc.section.6.2">
 <a href="#rfc.section.6.2">6.2.</a> <a href="#curating" id="curating">Curating the Additional Information Space</a>
@@ -2279,7 +2275,7 @@ well_formed_indefinite(mt, breakable) {
 }
 </pre>
 <p class="figure">Figure 1: Pseudocode for Well-Formedness Check</p>
-<p id="rfc.section.C.p.5">Note that the remaining complexity of a complete CBOR decoder is about presenting data that has been parsed to the application in an appropriate form.</p>
+<p id="rfc.section.C.p.5">Note that the remaining complexity of a complete CBOR decoder is about presenting data that has been decoded to the application in an appropriate form.</p>
 <p id="rfc.section.C.p.6">Major types 0 and 1 are designed in such a way that they can be encoded in C from a signed integer without actually doing an if-then-else for positive/negative (<a href="#branchless" class="xref">Figure 2</a>).  This uses the fact that (-1-n), the transformation for major type 1, is the same as ~n (bitwise complement) in C unsigned arithmetic; ~n can then be expressed as (-1)^n for the negative case, while 0^n leaves n unchanged for non-negative.  The sign of a number can be converted to -1 for negative and 0 for non-negative (0 or positive) by arithmetic-shifting the number by one bit less than the bit length of the number (for example, by 63 for 64-bit numbers).</p>
 <div id="rfc.figure.2"></div>
 <div id="branchless"></div>
@@ -2472,5 +2468,6 @@ def decode_half(half):
   </address>
 </div>
 
+  <div class="github-fork-ribbon-wrapper"><div class="github-fork-ribbon"><a href="https://github.com/cbor-wg/CBORbis">Fork me on GitHub</a></div></div>
 </body>
 </html>

@@ -5,8 +5,8 @@
 Network Working Group                                         C. Bormann
 Internet-Draft                                   Universitaet Bremen TZI
 Intended status: Standards Track                              P. Hoffman
-Expires: June 22, 2019                                             ICANN
-                                                       December 19, 2018
+Expires: July 18, 2019                                             ICANN
+                                                        January 14, 2019
 
 
               Concise Binary Object Representation (CBOR)
@@ -47,20 +47,20 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 22, 2019.
+   This Internet-Draft will expire on July 18, 2019.
 
 
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                 [Page 1]
+Bormann & Hoffman         Expires July 18, 2019                 [Page 1]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
 Copyright Notice
 
-   Copyright (c) 2018 IETF Trust and the persons identified as the
+   Copyright (c) 2019 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                 [Page 2]
+Bormann & Hoffman         Expires July 18, 2019                 [Page 2]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
      4.4.  Other Decoding Errors . . . . . . . . . . . . . . . . . .  26
@@ -165,9 +165,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                 [Page 3]
+Bormann & Hoffman         Expires July 18, 2019                 [Page 3]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    generalized for arbitrary data.  In the IETF, probably the best-known
@@ -221,9 +221,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                 [Page 4]
+Bormann & Hoffman         Expires July 18, 2019                 [Page 4]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
        *  Similar to JSON, encoded data should be self-describing so
@@ -277,9 +277,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                 [Page 5]
+Bormann & Hoffman         Expires July 18, 2019                 [Page 5]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    The term "byte" is used in its now-customary sense as a synonym for
@@ -333,9 +333,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                 [Page 6]
+Bormann & Hoffman         Expires July 18, 2019                 [Page 6]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    byte strings in network byte order, including any leading zero bytes
@@ -389,9 +389,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                 [Page 7]
+Bormann & Hoffman         Expires July 18, 2019                 [Page 7]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    integer, the length of a text or byte string, the number of elements
@@ -445,9 +445,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                 [Page 8]
+Bormann & Hoffman         Expires July 18, 2019                 [Page 8]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    Specific data models can also specify what values (including values
@@ -496,14 +496,14 @@ Internet-Draft                    CBOR                     December 2018
    If the encoded sequence of bytes ends before the end of a data item
    would be reached, that encoding is not well-formed.  If the encoded
    sequence of bytes still has bytes remaining after the outermost
-   encoded item is parsed, that encoding is not a single well-formed
+   encoded item is decoded, that encoding is not a single well-formed
    CBOR item.
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                 [Page 9]
+Bormann & Hoffman         Expires July 18, 2019                 [Page 9]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    A CBOR decoder implementation can be based on a jump table with all
@@ -557,9 +557,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 10]
+Bormann & Hoffman         Expires July 18, 2019                [Page 10]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
       the array.  Items in an array do not need to all be of the same
@@ -613,9 +613,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 11]
+Bormann & Hoffman         Expires July 18, 2019                [Page 11]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
 3.2.1.  Indefinite-Length Arrays and Maps
@@ -669,9 +669,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 12]
+Bormann & Hoffman         Expires July 18, 2019                [Page 12]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    0x9f018202039f0405ffff
@@ -725,9 +725,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 13]
+Bormann & Hoffman         Expires July 18, 2019                [Page 13]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    0xbf6346756ef563416d7421ff
@@ -760,7 +760,7 @@ Internet-Draft                    CBOR                     December 2018
 
    For indefinite-length byte strings, every data item (chunk) between
    the indefinite-length indicator and the "break" MUST be a definite-
-   length byte string item; if the parser sees any item type other than
+   length byte string item; if the decoder sees any item type other than
    a byte string before it sees the "break", it is an error.
 
    For example, assume the sequence:
@@ -781,9 +781,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 14]
+Bormann & Hoffman         Expires July 18, 2019                [Page 14]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    Text strings with indefinite lengths act the same as byte strings
@@ -837,9 +837,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 15]
+Bormann & Hoffman         Expires July 18, 2019                [Page 15]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
                        +---------+-----------------+
@@ -893,9 +893,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 16]
+Bormann & Hoffman         Expires July 18, 2019                [Page 16]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    2 for the tag) followed by 0b010_01100 (major type 2, additional
@@ -927,11 +927,11 @@ Internet-Draft                    CBOR                     December 2018
    +-----------+--------------+----------------------------------------+
    | Tag       | Data Item    | Semantics                              |
    +-----------+--------------+----------------------------------------+
-   | 0         | UTF-8 string | Standard date/time string; see         |
-   |           |              | Section 3.4.2                          |
+   | 0         | UTF-8 string | Standard date/time string; see Section |
+   |           |              | 3.4.2                                  |
    |           |              |                                        |
-   | 1         | multiple     | Epoch-based date/time; see             |
-   |           |              | Section 3.4.3                          |
+   | 1         | multiple     | Epoch-based date/time; see Section     |
+   |           |              | 3.4.3                                  |
    |           |              |                                        |
    | 2         | byte string  | Positive bignum; see Section 3.4.4     |
    |           |              |                                        |
@@ -949,9 +949,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 17]
+Bormann & Hoffman         Expires July 18, 2019                [Page 17]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    | 22        | multiple     | Expected conversion to base64          |
@@ -960,8 +960,8 @@ Internet-Draft                    CBOR                     December 2018
    | 23        | multiple     | Expected conversion to base16          |
    |           |              | encoding; see Section 3.4.6.2          |
    |           |              |                                        |
-   | 24        | byte string  | Encoded CBOR data item; see            |
-   |           |              | Section 3.4.6.1                        |
+   | 24        | byte string  | Encoded CBOR data item; see Section    |
+   |           |              | 3.4.6.1                                |
    |           |              |                                        |
    | 25..31    | (Unassigned) | (Unassigned)                           |
    |           |              |                                        |
@@ -971,8 +971,8 @@ Internet-Draft                    CBOR                     December 2018
    |           |              |                                        |
    | 34        | UTF-8 string | base64; see Section 3.4.6.3            |
    |           |              |                                        |
-   | 35        | UTF-8 string | Regular expression; see                |
-   |           |              | Section 3.4.6.3                        |
+   | 35        | UTF-8 string | Regular expression; see Section        |
+   |           |              | 3.4.6.3                                |
    |           |              |                                        |
    | 36        | UTF-8 string | MIME message; see Section 3.4.6.3      |
    |           |              |                                        |
@@ -1005,9 +1005,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 18]
+Bormann & Hoffman         Expires July 18, 2019                [Page 18]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    The tagged item MUST be an unsigned or negative integer (major types
@@ -1061,9 +1061,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 19]
+Bormann & Hoffman         Expires July 18, 2019                [Page 19]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    C2                        -- Tag 2
@@ -1117,9 +1117,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 20]
+Bormann & Hoffman         Expires July 18, 2019                [Page 20]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    An example of a bigfloat is that the number 1.5 could be represented
@@ -1156,8 +1156,8 @@ Internet-Draft                    CBOR                     December 2018
 
    Sometimes it is beneficial to carry an embedded CBOR data item that
    is not meant to be decoded immediately at the time the enclosing data
-   item is being parsed.  Tag 24 (CBOR data item) can be used to tag the
-   embedded byte string as a data item encoded in CBOR format.
+   item is being decoded.  Tag 24 (CBOR data item) can be used to tag
+   the embedded byte string as a data item encoded in CBOR format.
 
 3.4.6.2.  Expected Later Encoding for CBOR-to-JSON Converters
 
@@ -1173,9 +1173,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 21]
+Bormann & Hoffman         Expires July 18, 2019                [Page 21]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    not the converter will be generic, and therefore wants to say what it
@@ -1229,9 +1229,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 22]
+Bormann & Hoffman         Expires July 18, 2019                [Page 22]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    such context information is not available, such as when CBOR data is
@@ -1249,7 +1249,7 @@ Internet-Draft                    CBOR                     December 2018
    particular, it is not a valid start of a Unicode text in any Unicode
    encoding if followed by a valid CBOR data item.
 
-   For instance, a decoder might be able to parse both CBOR and JSON.
+   For instance, a decoder might be able to decode both CBOR and JSON.
    Such a decoder would need to mechanically distinguish the two
    formats.  An easy way for an encoder to help the decoder would be to
    tag the entire CBOR item with tag 55799, the serialization of which
@@ -1285,9 +1285,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 23]
+Bormann & Hoffman         Expires July 18, 2019                [Page 23]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
 4.1.  CBOR in Streaming Applications
@@ -1341,9 +1341,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 24]
+Bormann & Hoffman         Expires July 18, 2019                [Page 24]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    Generic encoders provide an application interface that allows the
@@ -1363,8 +1363,8 @@ Internet-Draft                    CBOR                     December 2018
    The representation of a CBOR data item has a specific length,
    determined by its initial bytes and by the structure of any data
    items enclosed in the data items.  If less data is available, this
-   can be treated as a syntax error.  A decoder may also implement
-   incremental parsing, that is, decode the data item as far as it is
+   can be treated as a syntax error.  A decoder may also decode
+   incrementally, that is, decode the data item as far as it is
    available and present the data found so far (such as in an event-
    based interface), with the option of continuing the decoding once
    further data is available.
@@ -1397,9 +1397,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 25]
+Bormann & Hoffman         Expires July 18, 2019                [Page 25]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    Another error is finding a "break" stop code at a point in the data
@@ -1413,7 +1413,7 @@ Internet-Draft                    CBOR                     December 2018
    Section 6.2).  Since the overall syntax for these additional
    information values is not yet defined, a decoder that sees an
    additional information value that it does not understand cannot
-   continue parsing.
+   continue decoding.
 
 4.4.  Other Decoding Errors
 
@@ -1453,9 +1453,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 26]
+Bormann & Hoffman         Expires July 18, 2019                [Page 26]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
 4.5.  Handling Unknown Simple Values and Tags
@@ -1509,9 +1509,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 27]
+Bormann & Hoffman         Expires July 18, 2019                [Page 27]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    There is an expectation that encoders will use the most compact
@@ -1565,9 +1565,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 28]
+Bormann & Hoffman         Expires July 18, 2019                [Page 28]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    identical keys in a map indicates a malformed map and that the
@@ -1621,9 +1621,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 29]
+Bormann & Hoffman         Expires July 18, 2019                [Page 29]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    As discussed in Section 2.2, specific data models can make values
@@ -1677,9 +1677,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 30]
+Bormann & Hoffman         Expires July 18, 2019                [Page 30]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    a constrained implementation of a CBOR decoder meets a variant
@@ -1733,9 +1733,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 31]
+Bormann & Hoffman         Expires July 18, 2019                [Page 31]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
       5.  "aa", encoded as 0x626161.
@@ -1789,9 +1789,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 32]
+Bormann & Hoffman         Expires July 18, 2019                [Page 32]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
       2.  Encode all values as the smallest of 16-, 32-, or 64-bit
@@ -1845,9 +1845,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 33]
+Bormann & Hoffman         Expires July 18, 2019                [Page 33]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    5.  "z", encoded as 0x617a.
@@ -1901,9 +1901,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 34]
+Bormann & Hoffman         Expires July 18, 2019                [Page 34]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    o  It can report an error (and not return data).
@@ -1957,9 +1957,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 35]
+Bormann & Hoffman         Expires July 18, 2019                [Page 35]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    o  A UTF-8 string (major type 3) becomes a JSON string.  Note that
@@ -2013,9 +2013,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 36]
+Bormann & Hoffman         Expires July 18, 2019                [Page 36]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
 5.2.  Converting from JSON to CBOR
@@ -2069,9 +2069,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 37]
+Bormann & Hoffman         Expires July 18, 2019                [Page 37]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    are well known, particularly from JSON format development of JSON-
@@ -2125,12 +2125,12 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 38]
+Bormann & Hoffman         Expires July 18, 2019                [Page 38]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
-      parsing, so allocating codepoints to this space is a major step.
+      decoding, so allocating codepoints to this space is a major step.
       There are also very few codepoints left.
 
 6.2.  Curating the Additional Information Space
@@ -2181,9 +2181,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 39]
+Bormann & Hoffman         Expires July 18, 2019                [Page 39]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    allow them).  A tagged item is written as an integer number for the
@@ -2237,9 +2237,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 40]
+Bormann & Hoffman         Expires July 18, 2019                [Page 40]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    As a special case, byte and text strings of indefinite length can be
@@ -2293,9 +2293,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 41]
+Bormann & Hoffman         Expires July 18, 2019                [Page 41]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
 8.3.  Media Type ("MIME Type")
@@ -2349,9 +2349,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 42]
+Bormann & Hoffman         Expires July 18, 2019                [Page 42]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    Id: 60
@@ -2405,9 +2405,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 43]
+Bormann & Hoffman         Expires July 18, 2019                [Page 43]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
 9.  Security Considerations
@@ -2461,9 +2461,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 44]
+Bormann & Hoffman         Expires July 18, 2019                [Page 44]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    This document also incorporates suggestions made by many people,
@@ -2517,9 +2517,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 45]
+Bormann & Hoffman         Expires July 18, 2019                [Page 45]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
@@ -2573,9 +2573,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 46]
+Bormann & Hoffman         Expires July 18, 2019                [Page 46]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    [RFC7228]  Bormann, C., Ersue, M., and A. Keranen, "Terminology for
@@ -2629,9 +2629,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 47]
+Bormann & Hoffman         Expires July 18, 2019                [Page 47]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
 Appendix A.  Examples
@@ -2685,9 +2685,9 @@ Appendix A.  Examples
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 48]
+Bormann & Hoffman         Expires July 18, 2019                [Page 48]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    | -18446744073709551617        | 0xc349010000000000000000           |
@@ -2741,9 +2741,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 49]
+Bormann & Hoffman         Expires July 18, 2019                [Page 49]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    | Infinity                     | 0xfb7ff0000000000000               |
@@ -2797,9 +2797,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 50]
+Bormann & Hoffman         Expires July 18, 2019                [Page 50]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    | "\u6c34"                     | 0x63e6b0b4                         |
@@ -2853,9 +2853,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 51]
+Bormann & Hoffman         Expires July 18, 2019                [Page 51]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    |                              |                                    |
@@ -2909,9 +2909,9 @@ Appendix B.  Jump Table
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 52]
+Bormann & Hoffman         Expires July 18, 2019                [Page 52]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    | 0x5a       | byte string (four-byte uint32_t for n, and then n    |
@@ -2965,9 +2965,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 53]
+Bormann & Hoffman         Expires July 18, 2019                [Page 53]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    |            | data items follow)                                   |
@@ -2981,8 +2981,8 @@ Internet-Draft                    CBOR                     December 2018
    | 0xbf       | map, pairs of data items follow, terminated by       |
    |            | "break"                                              |
    |            |                                                      |
-   | 0xc0       | Text-based date/time (data item follows; see         |
-   |            | Section 3.4.2)                                       |
+   | 0xc0       | Text-based date/time (data item follows; see Section |
+   |            | 3.4.2)                                               |
    |            |                                                      |
    | 0xc1       | Epoch-based date/time (data item follows; see        |
    |            | Section 3.4.3)                                       |
@@ -2994,13 +2994,13 @@ Internet-Draft                    CBOR                     December 2018
    | 0xc4       | Decimal Fraction (data item "array" follows; see     |
    |            | Section 3.4.5)                                       |
    |            |                                                      |
-   | 0xc5       | Bigfloat (data item "array" follows; see             |
-   |            | Section 3.4.5)                                       |
+   | 0xc5       | Bigfloat (data item "array" follows; see Section     |
+   |            | 3.4.5)                                               |
    |            |                                                      |
    | 0xc6..0xd4 | (tagged item)                                        |
    |            |                                                      |
-   | 0xd5..0xd7 | Expected Conversion (data item follows; see          |
-   |            | Section 3.4.6.2)                                     |
+   | 0xd5..0xd7 | Expected Conversion (data item follows; see Section  |
+   |            | 3.4.6.2)                                             |
    |            |                                                      |
    | 0xd8..0xdb | (more tagged items, 1/2/4/8 bytes and then a data    |
    |            | item follow)                                         |
@@ -3021,9 +3021,9 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 54]
+Bormann & Hoffman         Expires July 18, 2019                [Page 54]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    |            |                                                      |
@@ -3077,9 +3077,9 @@ Appendix C.  Pseudocode
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 55]
+Bormann & Hoffman         Expires July 18, 2019                [Page 55]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    well_formed (breakable = false) {
@@ -3128,14 +3128,14 @@ Internet-Draft                    CBOR                     December 2018
               Figure 1: Pseudocode for Well-Formedness Check
 
    Note that the remaining complexity of a complete CBOR decoder is
-   about presenting data that has been parsed to the application in an
+   about presenting data that has been decoded to the application in an
    appropriate form.
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 56]
+Bormann & Hoffman         Expires July 18, 2019                [Page 56]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    Major types 0 and 1 are designed in such a way that they can be
@@ -3189,9 +3189,9 @@ Appendix D.  Half-Precision
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 57]
+Bormann & Hoffman         Expires July 18, 2019                [Page 57]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    #include <math.h>
@@ -3245,9 +3245,9 @@ Appendix E.  Comparison of Other Binary Formats to CBOR's Design
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 58]
+Bormann & Hoffman         Expires July 18, 2019                [Page 58]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    to cover CBOR's objectives in the priority we have assigned them.  A
@@ -3301,9 +3301,9 @@ E.2.  MessagePack
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 59]
+Bormann & Hoffman         Expires July 18, 2019                [Page 59]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    its usages for binary and text data.  The extension mechanism for
@@ -3357,9 +3357,9 @@ E.5.  Conciseness on the Wire
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 60]
+Bormann & Hoffman         Expires July 18, 2019                [Page 60]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    +-------------+--------------------------+--------------------------+
@@ -3413,9 +3413,9 @@ Authors' Addresses
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 61]
+Bormann & Hoffman         Expires July 18, 2019                [Page 61]
 
-Internet-Draft                    CBOR                     December 2018
+Internet-Draft                    CBOR                      January 2019
 
 
    Carsten Bormann
@@ -3469,4 +3469,4 @@ Internet-Draft                    CBOR                     December 2018
 
 
 
-Bormann & Hoffman         Expires June 22, 2019                [Page 62]
+Bormann & Hoffman         Expires July 18, 2019                [Page 62]
