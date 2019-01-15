@@ -355,7 +355,7 @@ address {
 
   <meta name="dct.creator" content="Bormann, C. and P. Hoffman" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-cbor-7049bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-01-14" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-01-15" />
   <meta name="dct.abstract" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack." />
   <meta name="description" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack." />
 
@@ -379,12 +379,12 @@ address {
 <td class="right">P. Hoffman</td>
 </tr>
 <tr>
-<td class="left">Expires: July 18, 2019</td>
+<td class="left">Expires: July 19, 2019</td>
 <td class="right">ICANN</td>
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">January 14, 2019</td>
+<td class="right">January 15, 2019</td>
 </tr>
 
     	
@@ -403,7 +403,7 @@ address {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on July 18, 2019.</p>
+<p>This Internet-Draft will expire on July 19, 2019.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -1516,7 +1516,7 @@ Author/Change Controller:
 </h1>
 <p id="rfc.section.9.p.1">A network-facing application can exhibit vulnerabilities in its processing logic for incoming data. Complex parsers are well known as a likely source of such vulnerabilities, such as the ability to remotely crash a node, or even remotely execute arbitrary code on it.  CBOR attempts to narrow the opportunities for introducing such vulnerabilities by reducing parser complexity, by giving the entire range of encodable values a meaning where possible.</p>
 <p id="rfc.section.9.p.2">Resource exhaustion attacks might attempt to lure a decoder into allocating very big data items (strings, arrays, maps) or exhaust the stack depth by setting up deeply nested items.  Decoders need to have appropriate resource management to mitigate these attacks.  (Items for which very large sizes are given can also attempt to exploit integer overflow vulnerabilities.)</p>
-<p id="rfc.section.9.p.3">Protocols that are used in a security context should be defined in such a way that multiple interpretations are reliably reduced to a single one.  For example, an on-path attacker could make use of duplicate keys in maps and precision issues in numbers to make one decoder base its decisions on a different interpretation than the one that will be used by a second decoder.  To facilitate this, encoder and decoder implementations used in such contexts should provide at least one strict mode of operation (<a href="#strict-mode" class="xref">Section 4.11</a>).</p>
+<p id="rfc.section.9.p.3">Protocols that are used in a security context should be defined in such a way that potential multiple interpretations are reliably reduced to a single one.  For example, an attacker could make use of duplicate keys in maps or precision issues in numbers to make one decoder base its decisions on a different interpretation than the one that will be used by a second decoder.  To facilitate this, encoder and decoder implementations used in such contexts should provide at least one strict mode of operation (<a href="#strict-mode" class="xref">Section 4.11</a>).</p>
 <h1 id="rfc.section.10">
 <a href="#rfc.section.10">10.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a>
 </h1>
