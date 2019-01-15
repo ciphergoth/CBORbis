@@ -1197,11 +1197,15 @@ Internet-Draft                    CBOR                      January 2019
    data item tagged with an expected conversion.
 
    These three tag types suggest conversions to three of the base data
-   encodings defined in [RFC4648].  For base64url encoding, padding is
-   not used (see Section 3.2 of RFC 4648); that is, all trailing equals
-   signs ("=") are removed from the base64url-encoded string.  Later
-   tags might be defined for other data encodings of RFC 4648 or for
-   other ways to encode binary data in strings.
+   encodings defined in [RFC4648].  For base64url encoding (tag 21),
+   padding is not used (see Section 3.2 of RFC 4648); that is, all
+   trailing equals signs ("=") are removed from the encoded string.  For
+   base64 encoding (tag 22), padding is used as defined in RFC 4648.
+   For both base64url and base64, padding bits are set to zero (see
+   Section 3.5 of RFC 4648), and encoding is performed without the
+   inclusion of any line breaks, whitespace, or other additional
+   characters.  Note that, for all three tags, the encoding of the empty
+   byte string is the empty text string.
 
 3.4.6.3.  Encoded Text
 
@@ -1223,16 +1227,15 @@ Internet-Draft                    CBOR                      January 2019
       expression, or more than just the text of the regular expression
       itself, need to be conveyed.)
 
-   o  Tag 36 is for MIME messages (including all headers), as defined in
-      [RFC2045];
-
-
 
 
 Bormann & Hoffman         Expires July 19, 2019                [Page 22]
 
 Internet-Draft                    CBOR                      January 2019
 
+
+   o  Tag 36 is for MIME messages (including all headers), as defined in
+      [RFC2045];
 
    Note that tags 33 and 34 differ from 21 and 22 in that the data is
    transported in base-encoded form for the former and in raw byte
@@ -1280,9 +1283,6 @@ Internet-Draft                    CBOR                      January 2019
    item is a map that has byte strings for keys and contains at least
    one pair whose key is 0xab01".
 
-   This specification puts no restrictions on CBOR-based protocols.  An
-   encoder can be capable of encoding as many or as few types of values
-
 
 
 Bormann & Hoffman         Expires July 19, 2019                [Page 23]
@@ -1290,6 +1290,8 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 23]
 Internet-Draft                    CBOR                      January 2019
 
 
+   This specification puts no restrictions on CBOR-based protocols.  An
+   encoder can be capable of encoding as many or as few types of values
    as is required by the protocol in which it is used; a decoder can be
    capable of understanding as many or as few types of values as is
    required by the protocols in which it is used.  This lack of
@@ -1336,8 +1338,6 @@ Internet-Draft                    CBOR                      January 2019
    values below 32 that are encoded with an extension byte.  Also,
    specific tags may make semantic constraints that may be violated,
    such as by including a tag in a bignum tag or by following a byte
-   string within a date tag.  Finally, the data may be invalid, such as
-   invalid UTF-8 strings or date strings that do not conform to
 
 
 
@@ -1346,6 +1346,8 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 24]
 Internet-Draft                    CBOR                      January 2019
 
 
+   string within a date tag.  Finally, the data may be invalid, such as
+   invalid UTF-8 strings or date strings that do not conform to
    [RFC3339].  There is no requirement that generic encoders and
    decoders make unnatural choices for their application interface to
    enable the processing of invalid data.  Generic encoders and decoders
@@ -1391,9 +1393,7 @@ Internet-Draft                    CBOR                      January 2019
    o  A decoder has just seen a tag and then encounters the end of the
       data.
 
-   o  A decoder has seen the beginning of an indefinite-length item but
-      encounters the end of the data before it sees the "break" stop
-      code.
+
 
 
 
@@ -1401,6 +1401,10 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 25]
 
 Internet-Draft                    CBOR                      January 2019
 
+
+   o  A decoder has seen the beginning of an indefinite-length item but
+      encounters the end of the data before it sees the "break" stop
+      code.
 
 4.3.2.  Malformed Indefinite-Length Items
 
@@ -1445,11 +1449,7 @@ Internet-Draft                    CBOR                      January 2019
       the same key).  Thus, a generic decoder that gets a CBOR map item
       that has duplicate keys will decode to a map with only one
       instance of that key, or it might stop processing altogether.  On
-      the other hand, a "streaming decoder" may not even be able to
-      notice (Section 4.7).
 
-   Inadmissible type on the value following a tag:  Tags (Section 3.4)
-      specify what type of data item is supposed to follow the tag; for
 
 
 
@@ -1458,6 +1458,11 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 26]
 Internet-Draft                    CBOR                      January 2019
 
 
+      the other hand, a "streaming decoder" may not even be able to
+      notice (Section 4.7).
+
+   Inadmissible type on the value following a tag:  Tags (Section 3.4)
+      specify what type of data item is supposed to follow the tag; for
       example, the tags for positive or negative bignums are supposed to
       be put on byte strings.  A decoder that decodes the tagged data
       item into a native representation (a native big integer in this
@@ -1500,12 +1505,7 @@ Internet-Draft                    CBOR                      January 2019
    uses CBOR might say that decoders need to be able to handle either
    type of number.
 
-   CBOR-based protocols should take into account that different language
-   environments pose different restrictions on the range and precision
-   of numbers that are representable.  For example, the JavaScript
-   number system treats all numbers as floating point, which may result
-   in silent loss of precision in decoding integers with more than 53
-   significant bits.  A protocol that uses numbers should define its
+
 
 
 
@@ -1514,6 +1514,12 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 27]
 Internet-Draft                    CBOR                      January 2019
 
 
+   CBOR-based protocols should take into account that different language
+   environments pose different restrictions on the range and precision
+   of numbers that are representable.  For example, the JavaScript
+   number system treats all numbers as floating point, which may result
+   in silent loss of precision in decoding integers with more than 53
+   significant bits.  A protocol that uses numbers should define its
    expectations on the handling of non-trivial numbers in decoders and
    receiving applications.
 
@@ -1556,12 +1562,6 @@ Internet-Draft                    CBOR                      January 2019
    If multiple types of keys are to be used, consideration should be
    given to how these types would be represented in the specific
    programming environments that are to be used.  For example, in
-   JavaScript Maps [ECMA262], a key of integer 1 cannot be distinguished
-   from a key of floating point 1.0.  This means that, if integer keys
-   are used, the protocol needs to avoid use of floating-point keys the
-   values of which happen to be integer numbers in the same map.
-
-
 
 
 
@@ -1569,6 +1569,11 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 28]
 
 Internet-Draft                    CBOR                      January 2019
 
+
+   JavaScript Maps [ECMA262], a key of integer 1 cannot be distinguished
+   from a key of floating point 1.0.  This means that, if integer keys
+   are used, the protocol needs to avoid use of floating-point keys the
+   values of which happen to be integer numbers in the same map.
 
    Decoders that deliver data items nested within a CBOR data item
    immediately on decoding them ("streaming decoders") often do not keep
@@ -1614,11 +1619,6 @@ Internet-Draft                    CBOR                      January 2019
    tagged value is distinct from an untagged value or from a value
    tagged with a different tag.
 
-   Within each of these groups, numeric values are distinct unless they
-   are numerically equal (specifically, -0.0 is equal to 0.0); for the
-   purpose of map key equivalence, NaN (not a number) values are
-
-
 
 
 Bormann & Hoffman         Expires July 19, 2019                [Page 29]
@@ -1626,6 +1626,9 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 29]
 Internet-Draft                    CBOR                      January 2019
 
 
+   Within each of these groups, numeric values are distinct unless they
+   are numerically equal (specifically, -0.0 is equal to 0.0); for the
+   purpose of map key equivalence, NaN (not a number) values are
    equivalent if they have the same significand after zero-extending
    both significands at the right to 64 bits.
 
@@ -1671,9 +1674,6 @@ Internet-Draft                    CBOR                      January 2019
    out the code that would be needed to decode 64-bit arguments in
    integers.  An encoder that always uses preferred serialization
    ("preferred encoder") interoperates with this decoder for the numbers
-   that can occur in this application.  More generally speaking, it
-   therefore can be said that a preferred encoder is more universally
-
 
 
 
@@ -1682,6 +1682,8 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 30]
 Internet-Draft                    CBOR                      January 2019
 
 
+   that can occur in this application.  More generally speaking, it
+   therefore can be said that a preferred encoder is more universally
    interoperable (and also less wasteful) than one that, say, always
    uses 64-bit integers.
 
@@ -1727,8 +1729,6 @@ Internet-Draft                    CBOR                      January 2019
       *  24 to 255 and -25 to -256 MUST be expressed only with an
          additional uint8_t;
 
-      *  256 to 65535 and -257 to -65536 MUST be expressed only with an
-         additional uint16_t;
 
 
 
@@ -1737,6 +1737,9 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 31]
 
 Internet-Draft                    CBOR                      January 2019
 
+
+      *  256 to 65535 and -257 to -65536 MUST be expressed only with an
+         additional uint16_t;
 
       *  65536 to 4294967295 and -65537 to -4294967296 MUST be expressed
          only with an additional uint32_t.
@@ -1783,9 +1786,6 @@ Internet-Draft                    CBOR                      January 2019
    based protocol that uses canonicalization might instead say that all
    tags that appear in a message must be retained regardless of whether
    they are optional.
-
-
-
 
 
 
