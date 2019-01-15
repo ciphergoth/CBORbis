@@ -75,17 +75,18 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   4
      1.1.  Objectives  . . . . . . . . . . . . . . . . . . . . . . .   4
-     1.2.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   5
+     1.2.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   6
    2.  CBOR Data Models  . . . . . . . . . . . . . . . . . . . . . .   7
      2.1.  Extended Generic Data Models  . . . . . . . . . . . . . .   8
-     2.2.  Specific Data Models  . . . . . . . . . . . . . . . . . .   8
+     2.2.  Specific Data Models  . . . . . . . . . . . . . . . . . .   9
    3.  Specification of the CBOR Encoding  . . . . . . . . . . . . .   9
      3.1.  Major Types . . . . . . . . . . . . . . . . . . . . . . .  10
-     3.2.  Indefinite Lengths for Some Major Types . . . . . . . . .  11
-       3.2.1.  Indefinite-Length Arrays and Maps . . . . . . . . . .  12
-       3.2.2.  Indefinite-Length Byte Strings and Text Strings . . .  14
+     3.2.  Indefinite Lengths for Some Major Types . . . . . . . . .  12
+       3.2.1.  The "break" Stop Code . . . . . . . . . . . . . . . .  12
+       3.2.2.  Indefinite-Length Arrays and Maps . . . . . . . . . .  12
+       3.2.3.  Indefinite-Length Byte Strings and Text Strings . . .  14
      3.3.  Floating-Point Numbers and Values with No Content . . . .  15
      3.4.  Optional Tagging of Items . . . . . . . . . . . . . . . .  16
        3.4.1.  Date and Time . . . . . . . . . . . . . . . . . . . .  18
@@ -96,7 +97,7 @@ Table of Contents
        3.4.6.  Content Hints . . . . . . . . . . . . . . . . . . . .  21
          3.4.6.1.  Encoded CBOR Data Item  . . . . . . . . . . . . .  21
          3.4.6.2.  Expected Later Encoding for CBOR-to-JSON
-                   Converters  . . . . . . . . . . . . . . . . . . .  21
+                   Converters  . . . . . . . . . . . . . . . . . . .  22
          3.4.6.3.  Encoded Text  . . . . . . . . . . . . . . . . . .  22
        3.4.7.  Self-Described CBOR . . . . . . . . . . . . . . . . .  23
    4.  Creating CBOR-Based Protocols . . . . . . . . . . . . . . . .  23
@@ -105,7 +106,6 @@ Table of Contents
      4.3.  Syntax Errors . . . . . . . . . . . . . . . . . . . . . .  25
        4.3.1.  Incomplete CBOR Data Items  . . . . . . . . . . . . .  25
        4.3.2.  Malformed Indefinite-Length Items . . . . . . . . . .  26
-       4.3.3.  Unknown Additional Information Values . . . . . . . .  26
 
 
 
@@ -114,6 +114,7 @@ Bormann & Hoffman         Expires July 19, 2019                 [Page 2]
 Internet-Draft                    CBOR                      January 2019
 
 
+       4.3.3.  Unknown Additional Information Values . . . . . . . .  26
      4.4.  Other Decoding Errors . . . . . . . . . . . . . . . . . .  26
      4.5.  Handling Unknown Simple Values and Tags . . . . . . . . .  27
      4.6.  Numbers . . . . . . . . . . . . . . . . . . . . . . . . .  27
@@ -142,7 +143,7 @@ Internet-Draft                    CBOR                      January 2019
    10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  45
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  45
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  45
-     11.2.  Informative References . . . . . . . . . . . . . . . . .  47
+     11.2.  Informative References . . . . . . . . . . . . . . . . .  46
    Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  48
    Appendix B.  Jump Table . . . . . . . . . . . . . . . . . . . . .  52
    Appendix C.  Pseudocode . . . . . . . . . . . . . . . . . . . . .  55
@@ -157,11 +158,10 @@ Internet-Draft                    CBOR                      January 2019
    Appendix F.  Changes from RFC 7049  . . . . . . . . . . . . . . .  61
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  61
 
-1.  Introduction
 
-   There are hundreds of standardized formats for binary representation
-   of structured data (also known as binary serialization formats).  Of
-   those, some are for specific domains of information, while others are
+
+
+
 
 
 
@@ -170,6 +170,11 @@ Bormann & Hoffman         Expires July 19, 2019                 [Page 3]
 Internet-Draft                    CBOR                      January 2019
 
 
+1.  Introduction
+
+   There are hundreds of standardized formats for binary representation
+   of structured data (also known as binary serialization formats).  Of
+   those, some are for specific domains of information, while others are
    generalized for arbitrary data.  In the IETF, probably the best-known
    formats in the latter category are ASN.1's BER and DER [ASN.1].
 
@@ -213,11 +218,6 @@ Internet-Draft                    CBOR                      January 2019
           small amount of code (for example, in class 1 constrained
           nodes as defined in [RFC7228]).
 
-       *  The format should use contemporary machine representations of
-          data (for example, not requiring binary-to-decimal
-          conversion).
-
-   3.  Data must be able to be decoded without a schema description.
 
 
 
@@ -225,6 +225,12 @@ Bormann & Hoffman         Expires July 19, 2019                 [Page 4]
 
 Internet-Draft                    CBOR                      January 2019
 
+
+       *  The format should use contemporary machine representations of
+          data (for example, not requiring binary-to-decimal
+          conversion).
+
+   3.  Data must be able to be decoded without a schema description.
 
        *  Similar to JSON, encoded data should be self-describing so
           that a generic decoder can be written.
@@ -266,13 +272,7 @@ Internet-Draft                    CBOR                      January 2019
        *  The format must be able to be extended in the future by later
           IETF standards.
 
-1.2.  Terminology
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in RFC 2119, BCP 14
-   [RFC2119] and indicate requirement levels for compliant CBOR
-   implementations.
 
 
 
@@ -281,6 +281,14 @@ Bormann & Hoffman         Expires July 19, 2019                 [Page 5]
 
 Internet-Draft                    CBOR                      January 2019
 
+
+1.2.  Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC 2119, BCP 14
+   [RFC2119] and indicate requirement levels for compliant CBOR
+   implementations.
 
    The term "byte" is used in its now-customary sense as a synonym for
    "octet".  All multi-byte values are encoded in network byte order
@@ -322,14 +330,6 @@ Internet-Draft                    CBOR                      January 2019
    Where bit arithmetic or data types are explained, this document uses
    the notation familiar from the programming language C, except that
    "**" denotes exponentiation.  Similar to the "0x" notation for
-   hexadecimal numbers, numbers in binary notation are prefixed with
-   "0b".  Underscores can be added to such a number solely for
-   readability, so 0b00100001 (0x21) might be written 0b001_00001 to
-   emphasize the desired interpretation of the bits in the byte; in this
-   case, it is split into three bits and five bits.  Encoded CBOR data
-   items are sometimes given in the "0x" or "0b" notation; these values
-   are first interpreted as numbers as in C and are then interpreted as
-
 
 
 
@@ -338,6 +338,13 @@ Bormann & Hoffman         Expires July 19, 2019                 [Page 6]
 Internet-Draft                    CBOR                      January 2019
 
 
+   hexadecimal numbers, numbers in binary notation are prefixed with
+   "0b".  Underscores can be added to such a number solely for
+   readability, so 0b00100001 (0x21) might be written 0b001_00001 to
+   emphasize the desired interpretation of the bits in the byte; in this
+   case, it is split into three bits and five bits.  Encoded CBOR data
+   items are sometimes given in the "0x" or "0b" notation; these values
+   are first interpreted as numbers as in C and are then interpreted as
    byte strings in network byte order, including any leading zero bytes
    expressed in the notation.
 
@@ -378,14 +385,7 @@ Internet-Draft                    CBOR                      January 2019
    o  a mapping (mathematical function) from zero or more data items
       ("keys") each to a data item ("values"), ("map")
 
-   o  a tagged data item, comprising a tag (an integer in the range
-      0..2**64-1) and a value (a data item)
 
-   Note that integer and floating-point values are distinct in this
-   model, even if they have the same numeric value.
-
-   Also note that serialization variants, such as number of bytes of the
-   encoded floating value, or the choice of one of the ways in which an
 
 
 
@@ -394,6 +394,14 @@ Bormann & Hoffman         Expires July 19, 2019                 [Page 7]
 Internet-Draft                    CBOR                      January 2019
 
 
+   o  a tagged data item, comprising a tag (an integer in the range
+      0..2**64-1) and a value (a data item)
+
+   Note that integer and floating-point values are distinct in this
+   model, even if they have the same numeric value.
+
+   Also note that serialization variants, such as number of bytes of the
+   encoded floating value, or the choice of one of the ways in which an
    integer, the length of a text or byte string, the number of elements
    in an array or pairs in a map, or a tag value, (collectively "the
    argument", see Section 3) can be encoded, are not visible at the
@@ -432,6 +440,16 @@ Internet-Draft                    CBOR                      January 2019
    environment, implementation of the data model extensions created by
    tags is truly optional and a matter of implementation quality.
 
+
+
+
+
+
+Bormann & Hoffman         Expires July 19, 2019                 [Page 8]
+
+Internet-Draft                    CBOR                      January 2019
+
+
 2.2.  Specific Data Models
 
    The specific data model for a CBOR-based protocol usually subsets the
@@ -442,13 +460,6 @@ Internet-Draft                    CBOR                      January 2019
    they have in the generic data model ("negative integer", "array")
    instead of by referring to aspects of their CBOR representation
    ("major type 1", "major type 4").
-
-
-
-Bormann & Hoffman         Expires July 19, 2019                 [Page 8]
-
-Internet-Draft                    CBOR                      January 2019
-
 
    Specific data models can also specify what values (including values
    of different types) are equivalent for the purposes of map keys and
@@ -486,6 +497,15 @@ Internet-Draft                    CBOR                      January 2019
    argument's value is held in the following 1, 2, 4, or 8,
    respectively, bytes, in network byte order.
 
+
+
+
+
+Bormann & Hoffman         Expires July 19, 2019                 [Page 9]
+
+Internet-Draft                    CBOR                      January 2019
+
+
    The meaning of this argument depends on the major type.  For example,
    in major type 0, the argument is the value of the data item itself
    (and in major type 1 the value of the data item is computed from the
@@ -498,13 +518,6 @@ Internet-Draft                    CBOR                      January 2019
    sequence of bytes still has bytes remaining after the outermost
    encoded item is decoded, that encoding is not a single well-formed
    CBOR item.
-
-
-
-Bormann & Hoffman         Expires July 19, 2019                 [Page 9]
-
-Internet-Draft                    CBOR                      January 2019
-
 
    A CBOR decoder implementation can be based on a jump table with all
    256 defined values for the initial byte (Table 5).  A decoder in a
@@ -541,6 +554,14 @@ Internet-Draft                    CBOR                      January 2019
 
    Major type 3:  a text string (Section 2), encoded as UTF-8
       ([RFC3629]).  The number of bytes in the string is equal to the
+
+
+
+Bormann & Hoffman         Expires July 19, 2019                [Page 10]
+
+Internet-Draft                    CBOR                      January 2019
+
+
       argument.  A string containing an invalid UTF-8 sequence is well-
       formed but invalid.  This type is provided for systems that need
       to interpret or display human-readable text, and allows the
@@ -554,14 +575,6 @@ Internet-Draft                    CBOR                      January 2019
 
    Major type 4:  an array of data items.  Arrays are also called lists,
       sequences, or tuples.  The argument is the number of data items in
-
-
-
-Bormann & Hoffman         Expires July 19, 2019                [Page 10]
-
-Internet-Draft                    CBOR                      January 2019
-
-
       the array.  Items in an array do not need to all be of the same
       type.  For example, an array that contains 10 items of any type
       would have an initial byte of 0b100_01010 (major type of 4,
@@ -595,6 +608,16 @@ Internet-Draft                    CBOR                      January 2019
    future specification.  See Section 8 for more information on these
    values.
 
+
+
+
+
+
+Bormann & Hoffman         Expires July 19, 2019                [Page 11]
+
+Internet-Draft                    CBOR                      January 2019
+
+
 3.2.  Indefinite Lengths for Some Major Types
 
    Four CBOR items (arrays, maps, byte strings, and text strings) can be
@@ -607,46 +630,49 @@ Internet-Draft                    CBOR                      January 2019
    Indefinite-length arrays and maps are dealt with differently than
    indefinite-length byte strings and text strings.
 
+3.2.1.  The "break" Stop Code
 
+   The "break" stop code is encoded with major type 7 and additional
+   information value 31 (0b111_11111).  It is not itself a data item: it
+   is just a syntactic feature to close an indefinite-length item.
 
+   If the "break" stop code appears anywhere where a data item is
+   expected, other than directly inside an indefinite-length string,
+   array, or map -- for example directly inside a definite-length array
+   or map -- the enclosing item is not well-formed.
 
+3.2.2.  Indefinite-Length Arrays and Maps
 
-
-
-Bormann & Hoffman         Expires July 19, 2019                [Page 11]
-
-Internet-Draft                    CBOR                      January 2019
-
-
-3.2.1.  Indefinite-Length Arrays and Maps
-
-   Indefinite-length arrays and maps are simply opened without
-   indicating the number of data items that will be included in the
-   array or map, using the additional information value of 31.  The
-   initial major type and additional information byte is followed by the
-   elements of the array or map, just as they would be in other arrays
-   or maps.  The end of the array or map is indicated by encoding a
-   "break" stop code in a place where the next data item would normally
-   have been included.  The "break" is encoded with major type 7 and
-   additional information value 31 (0b111_11111) but is not itself a
-   data item: it is just a syntactic feature to close the array or map.
-   That is, the "break" stop code comes after the last item in the array
-   or map, and it cannot occur anywhere else in place of a data item.
-   In this way, indefinite-length arrays and maps look identical to
+   Indefinite-length arrays and maps are represented using their major
+   type with the additional information value of 31, followed by an
+   arbitrary-length sequence of items for an array or key/value pairs
+   for a map, followed by the "break" stop code (Section 3.2.1).  In
+   other words, indefinite-length arrays and maps look identical to
    other arrays and maps except for beginning with the additional
-   information value 31 and ending with the "break" stop code.
+   information value of 31 and ending with the "break" stop code.
 
-   Arrays and maps with indefinite lengths allow any number of items
-   (for arrays) and key/value pairs (for maps) to be given before the
-   "break" stop code.  There is no restriction against nesting
-   indefinite-length array or map items.  A "break" only terminates a
-   single item, so nested indefinite-length items need exactly as many
-   "break" stop codes as there are type bytes starting an indefinite-
-   length item.
+   If the break stop code appears after a key in a map, in place of that
+   key's value, the map is not well-formed.
+
+   There is no restriction against nesting indefinite-length array or
+   map items.  A "break" only terminates a single item, so nested
+   indefinite-length items need exactly as many "break" stop codes as
+   there are type bytes starting an indefinite-length item.
 
    For example, assume an encoder wants to represent the abstract array
    [1, [2, 3], [4, 5]].  The definite-length encoding would be
    0x8301820203820405:
+
+
+
+
+
+
+
+Bormann & Hoffman         Expires July 19, 2019                [Page 12]
+
+Internet-Draft                    CBOR                      January 2019
+
 
    83        -- Array of length 3
       01     -- 1
@@ -660,19 +686,6 @@ Internet-Draft                    CBOR                      January 2019
    Indefinite-length encoding could be applied independently to each of
    the three arrays encoded in this data item, as required, leading to
    representations such as:
-
-
-
-
-
-
-
-
-
-Bormann & Hoffman         Expires July 19, 2019                [Page 12]
-
-Internet-Draft                    CBOR                      January 2019
-
 
    0x9f018202039f0405ffff
    9F        -- Start indefinite-length array
@@ -708,6 +721,15 @@ Internet-Draft                    CBOR                      January 2019
          05  -- 5
          FF  -- "break"
 
+
+
+
+
+Bormann & Hoffman         Expires July 19, 2019                [Page 13]
+
+Internet-Draft                    CBOR                      January 2019
+
+
    0x83019f0203ff820405
    83        -- Array of length 3
       01     -- 1
@@ -722,14 +744,6 @@ Internet-Draft                    CBOR                      January 2019
    An example of an indefinite-length map (that happens to have two key/
    value pairs) might be:
 
-
-
-
-Bormann & Hoffman         Expires July 19, 2019                [Page 13]
-
-Internet-Draft                    CBOR                      January 2019
-
-
    0xbf6346756ef563416d7421ff
    BF           -- Start indefinite-length map
       63        -- First key, UTF-8 string length 3
@@ -740,32 +754,37 @@ Internet-Draft                    CBOR                      January 2019
       21        -- Second value, -2
       FF        -- "break"
 
-3.2.2.  Indefinite-Length Byte Strings and Text Strings
+3.2.3.  Indefinite-Length Byte Strings and Text Strings
 
-   Indefinite-length byte strings and text strings are actually a
-   concatenation of zero or more definite-length byte or text strings
-   ("chunks") that are together treated as one contiguous string.
-   Indefinite-length strings are opened with the major type and
-   additional information value of 31, but what follows are a series of
-   byte or text strings that have definite lengths (the chunks).  The
-   end of the series of chunks is indicated by encoding the "break" stop
-   code (0b111_11111) in a place where the next chunk in the series
-   would occur.  The contents of the chunks are concatenated together,
-   and the overall length of the indefinite-length string will be the
-   sum of the lengths of all of the chunks.  In summary, an indefinite-
-   length string is encoded similarly to how an indefinite-length array
-   of its chunks would be encoded, except that the major type of the
-   indefinite-length string is that of a (text or byte) string and
-   matches the major types of its chunks.
+   Indefinite-length strings a represented by a byte containing the
+   major type and additional information value of 31, followed by a
+   series of byte or text strings ("chunks") that have definite lengths,
+   followed by the "break" stop code (Section 3.2.1).  The data item
+   represented by the indefinite-length string is the concatenation of
+   the chunks.
 
-   For indefinite-length byte strings, every data item (chunk) between
-   the indefinite-length indicator and the "break" MUST be a definite-
-   length byte string item; if the decoder sees any item type other than
-   a byte string before it sees the "break", it is an error.
+   If any item between the indefinite-length string indicator
+   (0b010_11111 or 0b011_11111) and the "break" stop code is not a
+   definite-length string item of the same major type, the string is not
+   well-formed.
+
+   If any definite-length text string inside an indefinite-length text
+   string is invalid, the indefinite-length text string is invalid.
+   Note that this implies that the bytes of a single UTF-8 character
+   cannot be spread between chunks: a new chunk can only be started at a
+   character boundary.
 
    For example, assume the sequence:
 
    0b010_11111 0b010_00100 0xaabbccdd 0b010_00011 0xeeff99 0b111_11111
+
+
+
+
+Bormann & Hoffman         Expires July 19, 2019                [Page 14]
+
+Internet-Draft                    CBOR                      January 2019
+
 
    5F              -- Start indefinite-length byte string
       44           -- Byte string of length 4
@@ -777,21 +796,6 @@ Internet-Draft                    CBOR                      January 2019
    After decoding, this results in a single byte string with seven
    bytes: 0xaabbccddeeff99.
 
-
-
-
-
-Bormann & Hoffman         Expires July 19, 2019                [Page 14]
-
-Internet-Draft                    CBOR                      January 2019
-
-
-   Text strings with indefinite lengths act the same as byte strings
-   with indefinite lengths, except that all their chunks MUST be
-   definite-length text strings.  Note that this implies that the bytes
-   of a single UTF-8 character cannot be spread between chunks: a new
-   chunk can only be started at a character boundary.
-
 3.3.  Floating-Point Numbers and Values with No Content
 
    Major type 7 is for two types of data: floating-point numbers and
@@ -801,23 +805,25 @@ Internet-Draft                    CBOR                      January 2019
    items of this major type do not carry content data; all the
    information is in the initial bytes.
 
-    +-------------+--------------------------------------------------+
-    | 5-Bit Value | Semantics                                        |
-    +-------------+--------------------------------------------------+
-    | 0..23       | Simple value (value 0..23)                       |
-    |             |                                                  |
-    | 24          | Simple value (value 32..255 in following byte)   |
-    |             |                                                  |
-    | 25          | IEEE 754 Half-Precision Float (16 bits follow)   |
-    |             |                                                  |
-    | 26          | IEEE 754 Single-Precision Float (32 bits follow) |
-    |             |                                                  |
-    | 27          | IEEE 754 Double-Precision Float (64 bits follow) |
-    |             |                                                  |
-    | 28-30       | (Unassigned)                                     |
-    |             |                                                  |
-    | 31          | "break" stop code for indefinite-length items    |
-    +-------------+--------------------------------------------------+
+   +------------+------------------------------------------------------+
+   | 5-Bit      | Semantics                                            |
+   | Value      |                                                      |
+   +------------+------------------------------------------------------+
+   | 0..23      | Simple value (value 0..23)                           |
+   |            |                                                      |
+   | 24         | Simple value (value 32..255 in following byte)       |
+   |            |                                                      |
+   | 25         | IEEE 754 Half-Precision Float (16 bits follow)       |
+   |            |                                                      |
+   | 26         | IEEE 754 Single-Precision Float (32 bits follow)     |
+   |            |                                                      |
+   | 27         | IEEE 754 Double-Precision Float (64 bits follow)     |
+   |            |                                                      |
+   | 28-30      | (Unassigned)                                         |
+   |            |                                                      |
+   | 31         | "break" stop code for indefinite-length items        |
+   |            | (Section 3.2.1)                                      |
+   +------------+------------------------------------------------------+
 
         Table 1: Values for Additional Information in Major Type 7
 
@@ -828,12 +834,6 @@ Internet-Draft                    CBOR                      January 2019
    other major types, the length of these always depends on the
    additional information in the first byte.  Table 2 lists the values
    assigned and available for simple types.
-
-
-
-
-
-
 
 
 
@@ -1040,24 +1040,24 @@ Internet-Draft                    CBOR                      January 2019
 3.4.4.  Bignums
 
    Protocols using tag values 2 and 3 extend the generic data model
-   (Section 2) with "bignums" representing arbitrary integers.  In the
-   generic data model, bignum values are not equal to integers from the
-   basic data model, but specific data models can define that
-   equivalence.
+   (Section 2) with "bignums" representing arbitrarily sized integers.
+   In the generic data model, bignum values are not equal to integers
+   from the basic data model, but specific data models can define that
+   equivalence, and preferred encoding never makes use of bignums that
+   also can be expressed as basic integers (see below).
 
    Bignums are encoded as a byte string data item, which is interpreted
    as an unsigned integer n in network byte order.  For tag value 2, the
    value of the bignum is n.  For tag value 3, the value of the bignum
-   is -1 - n.  Decoders that understand these tags MUST be able to
-   decode bignums that have leading zeroes.
-
-   For example, the number 18446744073709551616 (2**64) is represented
-   as 0b110_00010 (major type 6, tag 2), followed by 0b010_01001 (major
-   type 2, length 9), followed by 0x010000000000000000 (one byte 0x01
-   and eight bytes 0x00).  In hexadecimal:
-
-
-
+   is -1 - n.  The preferred encoding of the byte string is to leave out
+   any leading zeroes (note that this means the preferred encoding for
+   n = 0 is the empty byte string, but see below).  Decoders that
+   understand these tags MUST be able to decode bignums that do have
+   leading zeroes.  The preferred encoding of an integer that can be
+   represented using major type 0 or 1 is to encode it this way instead
+   of as a bignum (which means that the empty string never occurs in a
+   bignum when using preferred encoding).  Note that this means the non-
+   preferred choice of a bignum representation instead of a basic
 
 
 
@@ -1065,6 +1065,15 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 19]
 
 Internet-Draft                    CBOR                      January 2019
 
+
+   integer for encoding a number is not intended to have application
+   semantics (just as the choice of a longer basic integer
+   representation than needed, such as 0x1800 for 0x00 does not).
+
+   For example, the number 18446744073709551616 (2**64) is represented
+   as 0b110_00010 (major type 6, tag 2), followed by 0b010_01001 (major
+   type 2, length 9), followed by 0x010000000000000000 (one byte 0x01
+   and eight bytes 0x00).  In hexadecimal:
 
    C2                        -- Tag 2
       49                     -- Byte string of length 9
@@ -1105,6 +1114,14 @@ Internet-Draft                    CBOR                      January 2019
    information of 4 for the type of tag), followed by 0b100_00010 (major
    type of 4 for the array, additional information of 2 for the length
    of the array), followed by 0b001_00001 (major type of 1 for the first
+
+
+
+Bormann & Hoffman         Expires July 19, 2019                [Page 20]
+
+Internet-Draft                    CBOR                      January 2019
+
+
    integer, additional information of 1 for the value of -2), followed
    by 0b000_11001 (major type of 0 for the second integer, additional
    information of 25 for a two-byte value), followed by
@@ -1114,13 +1131,6 @@ Internet-Draft                    CBOR                      January 2019
       82          -- Array of length 2
          21       -- -2
          19 6ab3  -- 27315
-
-
-
-Bormann & Hoffman         Expires July 19, 2019                [Page 20]
-
-Internet-Draft                    CBOR                      January 2019
-
 
    An example of a bigfloat is that the number 1.5 could be represented
    as 0b110_00101 (major type of 6 for the tag, additional information
@@ -1159,6 +1169,15 @@ Internet-Draft                    CBOR                      January 2019
    item is being decoded.  Tag 24 (CBOR data item) can be used to tag
    the embedded byte string as a data item encoded in CBOR format.
 
+
+
+
+
+Bormann & Hoffman         Expires July 19, 2019                [Page 21]
+
+Internet-Draft                    CBOR                      January 2019
+
+
 3.4.6.2.  Expected Later Encoding for CBOR-to-JSON Converters
 
    Tags 21 to 23 indicate that a byte string might require a specific
@@ -1169,15 +1188,6 @@ Internet-Draft                    CBOR                      January 2019
    base64url, and so on.  The encoder uses byte strings instead of doing
    the encoding itself to reduce the message size, to reduce the code
    size of the encoder, or both.  The encoder does not know whether or
-
-
-
-
-Bormann & Hoffman         Expires July 19, 2019                [Page 21]
-
-Internet-Draft                    CBOR                      January 2019
-
-
    not the converter will be generic, and therefore wants to say what it
    believes is the proper way to convert binary strings to JSON.
 
@@ -1217,22 +1227,19 @@ Internet-Draft                    CBOR                      January 2019
       expression, or more than just the text of the regular expression
       itself, need to be conveyed.)
 
-   o  Tag 36 is for MIME messages (including all headers), as defined in
-      [RFC2045];
-
-   Note that tags 33 and 34 differ from 21 and 22 in that the data is
-   transported in base-encoded form for the former and in raw byte
-   string form for the latter.
-
-
-
-
 
 
 Bormann & Hoffman         Expires July 19, 2019                [Page 22]
 
 Internet-Draft                    CBOR                      January 2019
 
+
+   o  Tag 36 is for MIME messages (including all headers), as defined in
+      [RFC2045];
+
+   Note that tags 33 and 34 differ from 21 and 22 in that the data is
+   transported in base-encoded form for the former and in raw byte
+   string form for the latter.
 
 3.4.7.  Self-Described CBOR
 
@@ -1276,13 +1283,6 @@ Internet-Draft                    CBOR                      January 2019
    item is a map that has byte strings for keys and contains at least
    one pair whose key is 0xab01".
 
-   This specification puts no restrictions on CBOR-based protocols.  An
-   encoder can be capable of encoding as many or as few types of values
-   as is required by the protocol in which it is used; a decoder can be
-   capable of understanding as many or as few types of values as is
-   required by the protocols in which it is used.  This lack of
-
-
 
 
 Bormann & Hoffman         Expires July 19, 2019                [Page 23]
@@ -1290,6 +1290,11 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 23]
 Internet-Draft                    CBOR                      January 2019
 
 
+   This specification puts no restrictions on CBOR-based protocols.  An
+   encoder can be capable of encoding as many or as few types of values
+   as is required by the protocol in which it is used; a decoder can be
+   capable of understanding as many or as few types of values as is
+   required by the protocols in which it is used.  This lack of
    restrictions allows CBOR to be used in extremely constrained
    environments.
 
@@ -1333,11 +1338,6 @@ Internet-Draft                    CBOR                      January 2019
    values below 32 that are encoded with an extension byte.  Also,
    specific tags may make semantic constraints that may be violated,
    such as by including a tag in a bignum tag or by following a byte
-   string within a date tag.  Finally, the data may be invalid, such as
-   invalid UTF-8 strings or date strings that do not conform to
-   [RFC3339].  There is no requirement that generic encoders and
-   decoders make unnatural choices for their application interface to
-   enable the processing of invalid data.  Generic encoders and decoders
 
 
 
@@ -1346,6 +1346,11 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 24]
 Internet-Draft                    CBOR                      January 2019
 
 
+   string within a date tag.  Finally, the data may be invalid, such as
+   invalid UTF-8 strings or date strings that do not conform to
+   [RFC3339].  There is no requirement that generic encoders and
+   decoders make unnatural choices for their application interface to
+   enable the processing of invalid data.  Generic encoders and decoders
    are expected to forward simple values and tags even if their specific
    codepoints are not registered at the time the encoder/decoder is
    written (Section 4.5).
@@ -1388,11 +1393,6 @@ Internet-Draft                    CBOR                      January 2019
    o  A decoder has just seen a tag and then encounters the end of the
       data.
 
-   o  A decoder has seen the beginning of an indefinite-length item but
-      encounters the end of the data before it sees the "break" stop
-      code.
-
-
 
 
 
@@ -1401,6 +1401,10 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 25]
 
 Internet-Draft                    CBOR                      January 2019
 
+
+   o  A decoder has seen the beginning of an indefinite-length item but
+      encounters the end of the data before it sees the "break" stop
+      code.
 
 4.3.2.  Malformed Indefinite-Length Items
 
@@ -1445,11 +1449,7 @@ Internet-Draft                    CBOR                      January 2019
       the same key).  Thus, a generic decoder that gets a CBOR map item
       that has duplicate keys will decode to a map with only one
       instance of that key, or it might stop processing altogether.  On
-      the other hand, a "streaming decoder" may not even be able to
-      notice (Section 4.7).
 
-   Inadmissible type on the value following a tag:  Tags (Section 3.4)
-      specify what type of data item is supposed to follow the tag; for
 
 
 
@@ -1458,6 +1458,11 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 26]
 Internet-Draft                    CBOR                      January 2019
 
 
+      the other hand, a "streaming decoder" may not even be able to
+      notice (Section 4.7).
+
+   Inadmissible type on the value following a tag:  Tags (Section 3.4)
+      specify what type of data item is supposed to follow the tag; for
       example, the tags for positive or negative bignums are supposed to
       be put on byte strings.  A decoder that decodes the tagged data
       item into a native representation (a native big integer in this
@@ -1500,12 +1505,7 @@ Internet-Draft                    CBOR                      January 2019
    uses CBOR might say that decoders need to be able to handle either
    type of number.
 
-   CBOR-based protocols should take into account that different language
-   environments pose different restrictions on the range and precision
-   of numbers that are representable.  For example, the JavaScript
-   number system treats all numbers as floating point, which may result
-   in silent loss of precision in decoding integers with more than 53
-   significant bits.  A protocol that uses numbers should define its
+
 
 
 
@@ -1514,6 +1514,12 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 27]
 Internet-Draft                    CBOR                      January 2019
 
 
+   CBOR-based protocols should take into account that different language
+   environments pose different restrictions on the range and precision
+   of numbers that are representable.  For example, the JavaScript
+   number system treats all numbers as floating point, which may result
+   in silent loss of precision in decoding integers with more than 53
+   significant bits.  A protocol that uses numbers should define its
    expectations on the handling of non-trivial numbers in decoders and
    receiving applications.
 
@@ -1556,12 +1562,6 @@ Internet-Draft                    CBOR                      January 2019
    If multiple types of keys are to be used, consideration should be
    given to how these types would be represented in the specific
    programming environments that are to be used.  For example, in
-   JavaScript Maps [ECMA262], a key of integer 1 cannot be distinguished
-   from a key of floating point 1.0.  This means that, if integer keys
-   are used, the protocol needs to avoid use of floating-point keys the
-   values of which happen to be integer numbers in the same map.
-
-
 
 
 
@@ -1569,6 +1569,11 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 28]
 
 Internet-Draft                    CBOR                      January 2019
 
+
+   JavaScript Maps [ECMA262], a key of integer 1 cannot be distinguished
+   from a key of floating point 1.0.  This means that, if integer keys
+   are used, the protocol needs to avoid use of floating-point keys the
+   values of which happen to be integer numbers in the same map.
 
    Decoders that deliver data items nested within a CBOR data item
    immediately on decoding them ("streaming decoders") often do not keep
@@ -1614,11 +1619,6 @@ Internet-Draft                    CBOR                      January 2019
    tagged value is distinct from an untagged value or from a value
    tagged with a different tag.
 
-   Within each of these groups, numeric values are distinct unless they
-   are numerically equal (specifically, -0.0 is equal to 0.0); for the
-   purpose of map key equivalence, NaN (not a number) values are
-
-
 
 
 Bormann & Hoffman         Expires July 19, 2019                [Page 29]
@@ -1626,6 +1626,9 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 29]
 Internet-Draft                    CBOR                      January 2019
 
 
+   Within each of these groups, numeric values are distinct unless they
+   are numerically equal (specifically, -0.0 is equal to 0.0); for the
+   purpose of map key equivalence, NaN (not a number) values are
    equivalent if they have the same significand after zero-extending
    both significands at the right to 64 bits.
 
@@ -1671,9 +1674,6 @@ Internet-Draft                    CBOR                      January 2019
    out the code that would be needed to decode 64-bit arguments in
    integers.  An encoder that always uses preferred serialization
    ("preferred encoder") interoperates with this decoder for the numbers
-   that can occur in this application.  More generally speaking, it
-   therefore can be said that a preferred encoder is more universally
-
 
 
 
@@ -1682,6 +1682,8 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 30]
 Internet-Draft                    CBOR                      January 2019
 
 
+   that can occur in this application.  More generally speaking, it
+   therefore can be said that a preferred encoder is more universally
    interoperable (and also less wasteful) than one that, say, always
    uses 64-bit integers.
 
@@ -1727,8 +1729,6 @@ Internet-Draft                    CBOR                      January 2019
       *  24 to 255 and -25 to -256 MUST be expressed only with an
          additional uint8_t;
 
-      *  256 to 65535 and -257 to -65536 MUST be expressed only with an
-         additional uint16_t;
 
 
 
@@ -1737,6 +1737,9 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 31]
 
 Internet-Draft                    CBOR                      January 2019
 
+
+      *  256 to 65535 and -257 to -65536 MUST be expressed only with an
+         additional uint16_t;
 
       *  65536 to 4294967295 and -65537 to -4294967296 MUST be expressed
          only with an additional uint32_t.
@@ -1783,9 +1786,6 @@ Internet-Draft                    CBOR                      January 2019
    based protocol that uses canonicalization might instead say that all
    tags that appear in a message must be retained regardless of whether
    they are optional.
-
-
-
 
 
 
@@ -2455,9 +2455,9 @@ Internet-Draft                    CBOR                      January 2019
    for which very large sizes are given can also attempt to exploit
    integer overflow vulnerabilities.)
 
-   Applications where a CBOR data item is examined by a gatekeeper
-   function and later used by a different application may exhibit
-   vulnerabilities when multiple interpretations of the data item are
+   Protocols that are used in a security context should be defined in
+   such a way that potential multiple interpretations are reliably
+   reduced to a single one.  For example, an attacker could make use of
 
 
 
@@ -2466,14 +2466,11 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 44]
 Internet-Draft                    CBOR                      January 2019
 
 
-   possible.  For example, an attacker could make use of duplicate keys
-   in maps and precision issues in numbers to make the gatekeeper base
-   its decisions on a different interpretation than the one that will be
-   used by the second application.  Protocols that are used in a
-   security context should be defined in such a way that these multiple
-   interpretations are reliably reduced to a single one.  To facilitate
-   this, encoder and decoder implementations used in such contexts
-   should provide at least one strict mode of operation (Section 4.11).
+   duplicate keys in maps or precision issues in numbers to make one
+   decoder base its decisions on a different interpretation than the one
+   that will be used by a second decoder.  To facilitate this, encoder
+   and decoder implementations used in such contexts should provide at
+   least one strict mode of operation (Section 4.11).
 
 10.  Acknowledgements
 
@@ -2511,7 +2508,10 @@ Internet-Draft                    CBOR                      January 2019
               international.org/publications/files/ECMA-ST/
               Ecma-262.pdf>.
 
-
+   [IEEE.754.2008]
+              Institute of Electrical and Electronics Engineers, "IEEE
+              Standard for Floating-Point Arithmetic", IEEE
+              Standard 754-2008, August 2008.
 
 
 
@@ -2521,11 +2521,6 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 45]
 
 Internet-Draft                    CBOR                      January 2019
 
-
-   [IEEE.754.2008]
-              Institute of Electrical and Electronics Engineers, "IEEE
-              Standard for Floating-Point Arithmetic", IEEE
-              Standard 754-2008, August 2008.
 
    [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part One: Format of Internet Message
@@ -2569,6 +2564,11 @@ Internet-Draft                    CBOR                      January 2019
               <http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/
               V1_chap04.html#tag_04_15>.
 
+11.2.  Informative References
+
+
+
+
 
 
 
@@ -2577,8 +2577,6 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 46]
 
 Internet-Draft                    CBOR                      January 2019
 
-
-11.2.  Informative References
 
    [ASN.1]    International Telecommunication Union, "Information
               Technology -- ASN.1 encoding rules: Specification of Basic
@@ -2621,6 +2619,8 @@ Internet-Draft                    CBOR                      January 2019
    [YAML]     Ben-Kiki, O., Evans, C., and I. Net, "YAML Ain't Markup
               Language (YAML[TM]) Version 1.2", 3rd Edition, October
               2009, <http://www.yaml.org/spec/1.2/spec.html>.
+
+
 
 
 

@@ -286,8 +286,9 @@ address {
 <link href="#rfc.section.3" rel="Chapter" title="3 Specification of the CBOR Encoding">
 <link href="#rfc.section.3.1" rel="Chapter" title="3.1 Major Types">
 <link href="#rfc.section.3.2" rel="Chapter" title="3.2 Indefinite Lengths for Some Major Types">
-<link href="#rfc.section.3.2.1" rel="Chapter" title="3.2.1 Indefinite-Length Arrays and Maps">
-<link href="#rfc.section.3.2.2" rel="Chapter" title="3.2.2 Indefinite-Length Byte Strings and Text Strings">
+<link href="#rfc.section.3.2.1" rel="Chapter" title="3.2.1 The &#8220;break&#8221; Stop Code">
+<link href="#rfc.section.3.2.2" rel="Chapter" title="3.2.2 Indefinite-Length Arrays and Maps">
+<link href="#rfc.section.3.2.3" rel="Chapter" title="3.2.3 Indefinite-Length Byte Strings and Text Strings">
 <link href="#rfc.section.3.3" rel="Chapter" title="3.3 Floating-Point Numbers and Values with No Content">
 <link href="#rfc.section.3.4" rel="Chapter" title="3.4 Optional Tagging of Items">
 <link href="#rfc.section.3.4.1" rel="Chapter" title="3.4.1 Date and Time">
@@ -431,9 +432,11 @@ address {
 </li>
 <li>3.2.   <a href="#rfc.section.3.2">Indefinite Lengths for Some Major Types</a>
 </li>
-<ul><li>3.2.1.   <a href="#rfc.section.3.2.1">Indefinite-Length Arrays and Maps</a>
+<ul><li>3.2.1.   <a href="#rfc.section.3.2.1">The &#8220;break&#8221; Stop Code</a>
 </li>
-<li>3.2.2.   <a href="#rfc.section.3.2.2">Indefinite-Length Byte Strings and Text Strings</a>
+<li>3.2.2.   <a href="#rfc.section.3.2.2">Indefinite-Length Arrays and Maps</a>
+</li>
+<li>3.2.3.   <a href="#rfc.section.3.2.3">Indefinite-Length Byte Strings and Text Strings</a>
 </li>
 </ul><li>3.3.   <a href="#rfc.section.3.3">Floating-Point Numbers and Values with No Content</a>
 </li>
@@ -705,11 +708,17 @@ address {
 <p id="rfc.section.3.2.p.1">Four CBOR items (arrays, maps, byte strings, and text strings) can be encoded with an indefinite length using additional information value 31.  This is useful if the encoding of the item needs to begin before the number of items inside the array or map, or the total length of the string, is known.  (The application of this is often referred to as &#8220;streaming&#8221; within a data item.)</p>
 <p id="rfc.section.3.2.p.2">Indefinite-length arrays and maps are dealt with differently than indefinite-length byte strings and text strings.</p>
 <h1 id="rfc.section.3.2.1">
-<a href="#rfc.section.3.2.1">3.2.1.</a> <a href="#indefinite-length-arrays-and-maps" id="indefinite-length-arrays-and-maps">Indefinite-Length Arrays and Maps</a>
+<a href="#rfc.section.3.2.1">3.2.1.</a> <a href="#break" id="break">The &#8220;break&#8221; Stop Code</a>
 </h1>
-<p id="rfc.section.3.2.1.p.1">Indefinite-length arrays and maps are simply opened without indicating the number of data items that will be included in the array or map, using the additional information value of 31. The initial major type and additional information byte is followed by the elements of the array or map, just as they would be in other arrays or maps. The end of the array or map is indicated by encoding a &#8220;break&#8221; stop code in a place where the next data item would normally have been included.  The &#8220;break&#8221; is encoded with major type 7 and additional information value 31 (0b111_11111) but is not itself a data item: it is just a syntactic feature to close the array or map.  That is, the &#8220;break&#8221; stop code comes after the last item in the array or map, and it cannot occur anywhere else in place of a data item. In this way, indefinite-length arrays and maps look identical to other arrays and maps except for beginning with the additional information value 31 and ending with the &#8220;break&#8221; stop code.</p>
-<p id="rfc.section.3.2.1.p.2">Arrays and maps with indefinite lengths allow any number of items (for arrays) and key/value pairs (for maps) to be given before the &#8220;break&#8221; stop code.  There is no restriction against nesting indefinite-length array or map items.  A &#8220;break&#8221; only terminates a single item, so nested indefinite-length items need exactly as many &#8220;break&#8221; stop codes as there are type bytes starting an indefinite-length item.</p>
-<p id="rfc.section.3.2.1.p.3">For example, assume an encoder wants to represent the abstract array [1, [2, 3], [4, 5]].  The definite-length encoding would be 0x8301820203820405:</p>
+<p id="rfc.section.3.2.1.p.1">The &#8220;break&#8221; stop code is encoded with major type 7 and additional information value 31 (0b111_11111). It is not itself a data item: it is just a syntactic feature to close an indefinite-length item.</p>
+<p id="rfc.section.3.2.1.p.2">If the &#8220;break&#8221; stop code appears anywhere where a data item is expected, other than directly inside an indefinite-length string, array, or map &#8212; for example directly inside a definite-length array or map &#8212; the enclosing item is not well-formed.</p>
+<h1 id="rfc.section.3.2.2">
+<a href="#rfc.section.3.2.2">3.2.2.</a> <a href="#indefinite-length-arrays-and-maps" id="indefinite-length-arrays-and-maps">Indefinite-Length Arrays and Maps</a>
+</h1>
+<p id="rfc.section.3.2.2.p.1">Indefinite-length arrays and maps are represented using their major type with the additional information value of 31, followed by an arbitrary-length sequence of items for an array or key/value pairs for a map, followed by the &#8220;break&#8221; stop code (<a href="#break" class="xref">Section 3.2.1</a>).  In other words, indefinite-length arrays and maps look identical to other arrays and maps except for beginning with the additional information value of 31 and ending with the &#8220;break&#8221; stop code.</p>
+<p id="rfc.section.3.2.2.p.2">If the break stop code appears after a key in a map, in place of that key&#8217;s value, the map is not well-formed.</p>
+<p id="rfc.section.3.2.2.p.3">There is no restriction against nesting indefinite-length array or map items.  A &#8220;break&#8221; only terminates a single item, so nested indefinite-length items need exactly as many &#8220;break&#8221; stop codes as there are type bytes starting an indefinite-length item.</p>
+<p id="rfc.section.3.2.2.p.4">For example, assume an encoder wants to represent the abstract array [1, [2, 3], [4, 5]].  The definite-length encoding would be 0x8301820203820405:</p>
 <pre>
 83        -- Array of length 3
    01     -- 1
@@ -720,7 +729,7 @@ address {
       04  -- 4
       05  -- 5
 </pre>
-<p id="rfc.section.3.2.1.p.4">Indefinite-length encoding could be applied independently to each of the three arrays encoded in this data item, as required, leading to representations such as:</p>
+<p id="rfc.section.3.2.2.p.5">Indefinite-length encoding could be applied independently to each of the three arrays encoded in this data item, as required, leading to representations such as:</p>
 <pre>
 0x9f018202039f0405ffff
 9F        -- Start indefinite-length array
@@ -770,7 +779,7 @@ address {
       04  -- 4
       05  -- 5
 </pre>
-<p id="rfc.section.3.2.1.p.5">An example of an indefinite-length map (that happens to have two key/value pairs) might be:</p>
+<p id="rfc.section.3.2.2.p.6">An example of an indefinite-length map (that happens to have two key/value pairs) might be:</p>
 <pre>
 0xbf6346756ef563416d7421ff
 BF           -- Start indefinite-length map
@@ -782,13 +791,14 @@ BF           -- Start indefinite-length map
    21        -- Second value, -2
    FF        -- "break"
 </pre>
-<h1 id="rfc.section.3.2.2">
-<a href="#rfc.section.3.2.2">3.2.2.</a> <a href="#indefinite-length-byte-strings-and-text-strings" id="indefinite-length-byte-strings-and-text-strings">Indefinite-Length Byte Strings and Text Strings</a>
+<h1 id="rfc.section.3.2.3">
+<a href="#rfc.section.3.2.3">3.2.3.</a> <a href="#indefinite-length-byte-strings-and-text-strings" id="indefinite-length-byte-strings-and-text-strings">Indefinite-Length Byte Strings and Text Strings</a>
 </h1>
-<p id="rfc.section.3.2.2.p.1">Indefinite-length byte strings and text strings are actually a concatenation of zero or more definite-length byte or text strings (&#8220;chunks&#8221;) that are together treated as one contiguous string. Indefinite-length strings are opened with the major type and additional information value of 31, but what follows are a series of byte or text strings that have definite lengths (the chunks). The end of the series of chunks is indicated by encoding the &#8220;break&#8221; stop code (0b111_11111) in a place where the next chunk in the series would occur. The contents of the chunks are concatenated together, and the overall length of the indefinite-length string will be the sum of the lengths of all of the chunks.  In summary, an indefinite-length string is encoded similarly to how an indefinite-length array of its chunks would be encoded, except that the major type of the indefinite-length string is that of a (text or byte) string and matches the major types of its chunks.</p>
-<p id="rfc.section.3.2.2.p.2">For indefinite-length byte strings, every data item (chunk) between the indefinite-length indicator and the &#8220;break&#8221; MUST be a definite-length byte string item; if the decoder sees any item type other than a byte string before it sees the &#8220;break&#8221;, it is an error.</p>
-<p id="rfc.section.3.2.2.p.3">For example, assume the sequence:</p>
-<p id="rfc.section.3.2.2.p.4">0b010_11111 0b010_00100 0xaabbccdd 0b010_00011 0xeeff99 0b111_11111</p>
+<p id="rfc.section.3.2.3.p.1">Indefinite-length strings a represented by a byte containing the major type and additional information value of 31, followed by a series of byte or text strings (&#8220;chunks&#8221;) that have definite lengths, followed by the &#8220;break&#8221; stop code (<a href="#break" class="xref">Section 3.2.1</a>).  The data item represented by the indefinite-length string is the concatenation of the chunks.</p>
+<p id="rfc.section.3.2.3.p.2">If any item between the indefinite-length string indicator (0b010_11111 or 0b011_11111) and the &#8220;break&#8221; stop code is not a definite-length string item of the same major type, the string is not well-formed.</p>
+<p id="rfc.section.3.2.3.p.3">If any definite-length text string inside an indefinite-length text string is invalid, the indefinite-length text string is invalid.  Note that this implies that the bytes of a single UTF-8 character cannot be spread between chunks: a new chunk can only be started at a character boundary.</p>
+<p id="rfc.section.3.2.3.p.4">For example, assume the sequence:</p>
+<p id="rfc.section.3.2.3.p.5">0b010_11111 0b010_00100 0xaabbccdd 0b010_00011 0xeeff99 0b111_11111</p>
 <pre>
 5F              -- Start indefinite-length byte string
    44           -- Byte string of length 4
@@ -797,8 +807,7 @@ BF           -- Start indefinite-length map
       eeff99    -- Bytes content
    FF           -- "break"
 </pre>
-<p id="rfc.section.3.2.2.p.5">After decoding, this results in a single byte string with seven bytes: 0xaabbccddeeff99.</p>
-<p id="rfc.section.3.2.2.p.6">Text strings with indefinite lengths act the same as byte strings with indefinite lengths, except that all their chunks MUST be definite-length text strings.  Note that this implies that the bytes of a single UTF-8 character cannot be spread between chunks: a new chunk can only be started at a character boundary.</p>
+<p id="rfc.section.3.2.3.p.6">After decoding, this results in a single byte string with seven bytes: 0xaabbccddeeff99.</p>
 <h1 id="rfc.section.3.3">
 <a href="#rfc.section.3.3">3.3.</a> <a href="#fpnocont" id="fpnocont">Floating-Point Numbers and Values with No Content</a>
 </h1>
@@ -838,7 +847,7 @@ BF           -- Start indefinite-length map
 </tr>
 <tr>
 <td class="left">31</td>
-<td class="left">&#8220;break&#8221; stop code for indefinite-length items</td>
+<td class="left">&#8220;break&#8221; stop code for indefinite-length items (<a href="#break" class="xref">Section 3.2.1</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -1039,8 +1048,8 @@ BF           -- Start indefinite-length map
 <h1 id="rfc.section.3.4.4">
 <a href="#rfc.section.3.4.4">3.4.4.</a> <a href="#bignums" id="bignums">Bignums</a>
 </h1>
-<p id="rfc.section.3.4.4.p.1">Protocols using tag values 2 and 3 extend the generic data model (<a href="#cbor-data-models" class="xref">Section 2</a>) with &#8220;bignums&#8221; representing arbitrary integers. In the generic data model, bignum values are not equal to integers from the basic data model, but specific data models can define that equivalence.</p>
-<p id="rfc.section.3.4.4.p.2">Bignums are encoded as a byte string data item, which is interpreted as an unsigned integer n in network byte order.  For tag value 2, the value of the bignum is n.  For tag value 3, the value of the bignum is -1 - n.  Decoders that understand these tags MUST be able to decode bignums that have leading zeroes.</p>
+<p id="rfc.section.3.4.4.p.1">Protocols using tag values 2 and 3 extend the generic data model (<a href="#cbor-data-models" class="xref">Section 2</a>) with &#8220;bignums&#8221; representing arbitrarily sized integers. In the generic data model, bignum values are not equal to integers from the basic data model, but specific data models can define that equivalence, and preferred encoding never makes use of bignums that also can be expressed as basic integers (see below).</p>
+<p id="rfc.section.3.4.4.p.2">Bignums are encoded as a byte string data item, which is interpreted as an unsigned integer n in network byte order.  For tag value 2, the value of the bignum is n.  For tag value 3, the value of the bignum is -1 - n.  The preferred encoding of the byte string is to leave out any leading zeroes (note that this means the preferred encoding for n&#160;=&#160;0 is the empty byte string, but see below).  Decoders that understand these tags MUST be able to decode bignums that do have leading zeroes.  The preferred encoding of an integer that can be represented using major type 0 or 1 is to encode it this way instead of as a bignum (which means that the empty string never occurs in a bignum when using preferred encoding).  Note that this means the non-preferred choice of a bignum representation instead of a basic integer for encoding a number is not intended to have application semantics (just as the choice of a longer basic integer representation than needed, such as 0x1800 for 0x00 does not).</p>
 <p id="rfc.section.3.4.4.p.3">For example, the number 18446744073709551616 (2**64) is represented as 0b110_00010 (major type 6, tag 2), followed by 0b010_01001 (major type 2, length 9), followed by 0x010000000000000000 (one byte 0x01 and eight bytes 0x00). In hexadecimal:</p>
 <pre>
 C2                        -- Tag 2
@@ -1516,7 +1525,7 @@ Author/Change Controller:
 </h1>
 <p id="rfc.section.9.p.1">A network-facing application can exhibit vulnerabilities in its processing logic for incoming data. Complex parsers are well known as a likely source of such vulnerabilities, such as the ability to remotely crash a node, or even remotely execute arbitrary code on it.  CBOR attempts to narrow the opportunities for introducing such vulnerabilities by reducing parser complexity, by giving the entire range of encodable values a meaning where possible.</p>
 <p id="rfc.section.9.p.2">Resource exhaustion attacks might attempt to lure a decoder into allocating very big data items (strings, arrays, maps) or exhaust the stack depth by setting up deeply nested items.  Decoders need to have appropriate resource management to mitigate these attacks.  (Items for which very large sizes are given can also attempt to exploit integer overflow vulnerabilities.)</p>
-<p id="rfc.section.9.p.3">Applications where a CBOR data item is examined by a gatekeeper function and later used by a different application may exhibit vulnerabilities when multiple interpretations of the data item are possible. For example, an attacker could make use of duplicate keys in maps and precision issues in numbers to make the gatekeeper base its decisions on a different interpretation than the one that will be used by the second application.  Protocols that are used in a security context should be defined in such a way that these multiple interpretations are reliably reduced to a single one.  To facilitate this, encoder and decoder implementations used in such contexts should provide at least one strict mode of operation (<a href="#strict-mode" class="xref">Section 4.11</a>).</p>
+<p id="rfc.section.9.p.3">Protocols that are used in a security context should be defined in such a way that potential multiple interpretations are reliably reduced to a single one.  For example, an attacker could make use of duplicate keys in maps or precision issues in numbers to make one decoder base its decisions on a different interpretation than the one that will be used by a second decoder.  To facilitate this, encoder and decoder implementations used in such contexts should provide at least one strict mode of operation (<a href="#strict-mode" class="xref">Section 4.11</a>).</p>
 <h1 id="rfc.section.10">
 <a href="#rfc.section.10">10.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a>
 </h1>
