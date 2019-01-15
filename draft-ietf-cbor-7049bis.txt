@@ -143,7 +143,7 @@ Internet-Draft                    CBOR                      January 2019
    10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  45
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  45
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  45
-     11.2.  Informative References . . . . . . . . . . . . . . . . .  47
+     11.2.  Informative References . . . . . . . . . . . . . . . . .  46
    Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  48
    Appendix B.  Jump Table . . . . . . . . . . . . . . . . . . . . .  52
    Appendix C.  Pseudocode . . . . . . . . . . . . . . . . . . . . .  55
@@ -2455,9 +2455,9 @@ Internet-Draft                    CBOR                      January 2019
    for which very large sizes are given can also attempt to exploit
    integer overflow vulnerabilities.)
 
-   Applications where a CBOR data item is examined by a gatekeeper
-   function and later used by a different application may exhibit
-   vulnerabilities when multiple interpretations of the data item are
+   Protocols that are used in a security context should be defined in
+   such a way that potential multiple interpretations are reliably
+   reduced to a single one.  For example, an attacker could make use of
 
 
 
@@ -2466,14 +2466,11 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 44]
 Internet-Draft                    CBOR                      January 2019
 
 
-   possible.  For example, an attacker could make use of duplicate keys
-   in maps and precision issues in numbers to make the gatekeeper base
-   its decisions on a different interpretation than the one that will be
-   used by the second application.  Protocols that are used in a
-   security context should be defined in such a way that these multiple
-   interpretations are reliably reduced to a single one.  To facilitate
-   this, encoder and decoder implementations used in such contexts
-   should provide at least one strict mode of operation (Section 4.11).
+   duplicate keys in maps or precision issues in numbers to make one
+   decoder base its decisions on a different interpretation than the one
+   that will be used by a second decoder.  To facilitate this, encoder
+   and decoder implementations used in such contexts should provide at
+   least one strict mode of operation (Section 4.11).
 
 10.  Acknowledgements
 
@@ -2511,7 +2508,10 @@ Internet-Draft                    CBOR                      January 2019
               international.org/publications/files/ECMA-ST/
               Ecma-262.pdf>.
 
-
+   [IEEE.754.2008]
+              Institute of Electrical and Electronics Engineers, "IEEE
+              Standard for Floating-Point Arithmetic", IEEE
+              Standard 754-2008, August 2008.
 
 
 
@@ -2521,11 +2521,6 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 45]
 
 Internet-Draft                    CBOR                      January 2019
 
-
-   [IEEE.754.2008]
-              Institute of Electrical and Electronics Engineers, "IEEE
-              Standard for Floating-Point Arithmetic", IEEE
-              Standard 754-2008, August 2008.
 
    [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part One: Format of Internet Message
@@ -2569,6 +2564,11 @@ Internet-Draft                    CBOR                      January 2019
               <http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/
               V1_chap04.html#tag_04_15>.
 
+11.2.  Informative References
+
+
+
+
 
 
 
@@ -2577,8 +2577,6 @@ Bormann & Hoffman         Expires July 19, 2019                [Page 46]
 
 Internet-Draft                    CBOR                      January 2019
 
-
-11.2.  Informative References
 
    [ASN.1]    International Telecommunication Union, "Information
               Technology -- ASN.1 encoding rules: Specification of Basic
@@ -2621,6 +2619,8 @@ Internet-Draft                    CBOR                      January 2019
    [YAML]     Ben-Kiki, O., Evans, C., and I. Net, "YAML Ain't Markup
               Language (YAML[TM]) Version 1.2", 3rd Edition, October
               2009, <http://www.yaml.org/spec/1.2/spec.html>.
+
+
 
 
 
