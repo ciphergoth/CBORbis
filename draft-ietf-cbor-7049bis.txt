@@ -756,7 +756,7 @@ Internet-Draft                    CBOR                      January 2019
 
 3.2.3.  Indefinite-Length Byte Strings and Text Strings
 
-   Indefinite-length strings a represented by a byte containing the
+   Indefinite-length strings are represented by a byte containing the
    major type and additional information value of 31, followed by a
    series of byte or text strings ("chunks") that have definite lengths,
    followed by the "break" stop code (Section 3.2.1).  The data item
@@ -3389,7 +3389,7 @@ Appendix F.  Changes from RFC 7049
    non-authoritative.  It is meant to help reviewers see the significant
    differences.
 
-   o  Updated reference for [RFC4267] to [RFC8259] in many places
+   o  Updated reference for [RFC4627] to [RFC8259] in many places
 
    o  Updated reference for [CNN-TERMS] to [RFC7228]
 

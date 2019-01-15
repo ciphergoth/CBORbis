@@ -794,7 +794,7 @@ BF           -- Start indefinite-length map
 <h1 id="rfc.section.3.2.3">
 <a href="#rfc.section.3.2.3">3.2.3.</a> <a href="#indefinite-length-byte-strings-and-text-strings" id="indefinite-length-byte-strings-and-text-strings">Indefinite-Length Byte Strings and Text Strings</a>
 </h1>
-<p id="rfc.section.3.2.3.p.1">Indefinite-length strings a represented by a byte containing the major type and additional information value of 31, followed by a series of byte or text strings (&#8220;chunks&#8221;) that have definite lengths, followed by the &#8220;break&#8221; stop code (<a href="#break" class="xref">Section 3.2.1</a>).  The data item represented by the indefinite-length string is the concatenation of the chunks.</p>
+<p id="rfc.section.3.2.3.p.1">Indefinite-length strings are represented by a byte containing the major type and additional information value of 31, followed by a series of byte or text strings (&#8220;chunks&#8221;) that have definite lengths, followed by the &#8220;break&#8221; stop code (<a href="#break" class="xref">Section 3.2.1</a>).  The data item represented by the indefinite-length string is the concatenation of the chunks.</p>
 <p id="rfc.section.3.2.3.p.2">If any item between the indefinite-length string indicator (0b010_11111 or 0b011_11111) and the &#8220;break&#8221; stop code is not a definite-length string item of the same major type, the string is not well-formed.</p>
 <p id="rfc.section.3.2.3.p.3">If any definite-length text string inside an indefinite-length text string is invalid, the indefinite-length text string is invalid.  Note that this implies that the bytes of a single UTF-8 character cannot be spread between chunks: a new chunk can only be started at a character boundary.</p>
 <p id="rfc.section.3.2.3.p.4">For example, assume the sequence:</p>
@@ -2422,7 +2422,7 @@ def decode_half(half):
 <p></p>
 
 <ul>
-<li>Updated reference for [RFC4267] to <a href="#RFC8259" class="xref">[RFC8259]</a> in many places</li>
+<li>Updated reference for [RFC4627] to <a href="#RFC8259" class="xref">[RFC8259]</a> in many places</li>
 <li>Updated reference for [CNN-TERMS] to <a href="#RFC7228" class="xref">[RFC7228]</a>
 </li>
 <li>Added a comment to the last example in Section 2.2.1 (added &#8220;Second value&#8221;)</li>
