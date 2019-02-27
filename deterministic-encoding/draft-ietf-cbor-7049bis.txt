@@ -1880,13 +1880,13 @@ Internet-Draft                    CBOR                     February 2019
 
    8.  [100], encoded as 0x811864.
 
-   (Although [RFC7049] used the term "Canonical CBOR" for its form of
-   requirements on deterministic encoding, this document avoids this
-   term because "canonicalization" is often associated with specific
-   uses of deterministic encoding only.  The terms are essentially
-   exchangeable, however, and the set of core requirements in this
-   document could also be called "Canonical CBOR", while the length-
-   first-ordered version of that could be called "Old Canonical CBOR".)
+   (While [RFC7049] used the term "Canonical CBOR" for its form of
+   requirements on deterministic encoding, we are avoiding this term
+   here as it is often associated with specific usages of deterministic
+   encoding only.  The terms are essentially exchangeable, however, and
+   the set of core requirements set up by the present document could
+   also be called "Canonical CBOR" while the length-first-ordered
+   version of that could be called "Old Canonical CBOR".)
 
 4.11.  Strict Decoding Mode
 
