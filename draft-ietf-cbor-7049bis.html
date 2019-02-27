@@ -320,7 +320,9 @@ ul.toc li {
 <link href="#rfc.section.4.8" rel="Chapter" title="4.8 Undefined Values">
 <link href="#rfc.section.4.9" rel="Chapter" title="4.9 Preferred Serialization">
 <link href="#rfc.section.4.10" rel="Chapter" title="4.10 Deterministically Encoded CBOR">
-<link href="#rfc.section.4.10.1" rel="Chapter" title="4.10.1 Length-first map key ordering">
+<link href="#rfc.section.4.10.1" rel="Chapter" title="4.10.1 Core Deterministic Encoding Requirements">
+<link href="#rfc.section.4.10.2" rel="Chapter" title="4.10.2 Additional Deterministic Encoding Considerations">
+<link href="#rfc.section.4.10.3" rel="Chapter" title="4.10.3 Length-first map key ordering">
 <link href="#rfc.section.4.11" rel="Chapter" title="4.11 Strict Decoding Mode">
 <link href="#rfc.section.5" rel="Chapter" title="5 Converting Data between CBOR and JSON">
 <link href="#rfc.section.5.1" rel="Chapter" title="5.1 Converting from CBOR to JSON">
@@ -496,7 +498,11 @@ ul.toc li {
 </li>
 <li>4.10.   <a href="#rfc.section.4.10">Deterministically Encoded CBOR</a>
 </li>
-<ul><li>4.10.1.   <a href="#rfc.section.4.10.1">Length-first map key ordering</a>
+<ul><li>4.10.1.   <a href="#rfc.section.4.10.1">Core Deterministic Encoding Requirements</a>
+</li>
+<li>4.10.2.   <a href="#rfc.section.4.10.2">Additional Deterministic Encoding Considerations</a>
+</li>
+<li>4.10.3.   <a href="#rfc.section.4.10.3">Length-first map key ordering</a>
 </li>
 </ul><li>4.11.   <a href="#rfc.section.4.11">Strict Decoding Mode</a>
 </li>
@@ -1229,7 +1235,10 @@ C5             -- Tag 5
 <a href="#rfc.section.4.10">4.10.</a> <a href="#det-enc" id="det-enc">Deterministically Encoded CBOR</a>
 </h1>
 <p id="rfc.section.4.10.p.1">Some protocols may want encoders to only emit CBOR in a particular deterministic format; those protocols might also have the decoders check that their input is in that deterministic format. Those protocols are free to define what they mean by a &#8220;deterministic format&#8221; and what encoders and decoders are expected to do. This section defines a set of restrictions that can serve as the base of such a deterministic format.</p>
-<p id="rfc.section.4.10.p.2">A CBOR encoding satisfies the &#8220;core deterministic encoding requirements&#8221; if it satisfies the following restrictions:</p>
+<h1 id="rfc.section.4.10.1">
+<a href="#rfc.section.4.10.1">4.10.1.</a> <a href="#core-deterministic-encoding-requirements" id="core-deterministic-encoding-requirements">Core Deterministic Encoding Requirements</a>
+</h1>
+<p id="rfc.section.4.10.1.p.1">A CBOR encoding satisfies the &#8220;core deterministic encoding requirements&#8221; if it satisfies the following restrictions:</p>
 <p></p>
 
 <ul>
@@ -1253,9 +1262,12 @@ C5             -- Tag 5
 </li>
 <li>Indefinite-length items MUST NOT appear. They can be encoded as definite-length items instead.</li>
 </ul>
-<p id="rfc.section.4.10.p.4">If a protocol allows for IEEE floats, then additional deterministic encoding rules might need to be added.  One example rule might be to have all floats start as a 64-bit float, then do a test conversion to a 32-bit float; if the result is the same numeric value, use the shorter value and repeat the process with a test conversion to a 16-bit float. (This rule selects 16-bit float for positive and negative Infinity as well.) Also, there are many representations for NaN. If NaN is an allowed value, it must always be represented as 0xf97e00.</p>
-<p id="rfc.section.4.10.p.5">CBOR tags present additional considerations for deterministic encoding. The absence or presence of tags in a deterministic format is determined by the optionality of the tags in the protocol. In a CBOR-based protocol that allows optional tagging anywhere, the deterministic format must not allow them.  In a protocol that requires tags in certain places, the tag needs to appear in the deterministic format. A CBOR-based protocol that uses deterministic encoding might instead say that all tags that appear in a message must be retained regardless of whether they are optional.</p>
-<p id="rfc.section.4.10.p.6">Protocols that include floating, big integer, or other complex values need to define extra requirements on their deterministic encodings. For example:</p>
+<h1 id="rfc.section.4.10.2">
+<a href="#rfc.section.4.10.2">4.10.2.</a> <a href="#additional-deterministic-encoding-considerations" id="additional-deterministic-encoding-considerations">Additional Deterministic Encoding Considerations</a>
+</h1>
+<p id="rfc.section.4.10.2.p.1">If a protocol allows for IEEE floats, then additional deterministic encoding rules might need to be added.  One example rule might be to have all floats start as a 64-bit float, then do a test conversion to a 32-bit float; if the result is the same numeric value, use the shorter value and repeat the process with a test conversion to a 16-bit float. (This rule selects 16-bit float for positive and negative Infinity as well.) Also, there are many representations for NaN. If NaN is an allowed value, it must always be represented as 0xf97e00.</p>
+<p id="rfc.section.4.10.2.p.2">CBOR tags present additional considerations for deterministic encoding. The absence or presence of tags in a deterministic format is determined by the optionality of the tags in the protocol. In a CBOR-based protocol that allows optional tagging anywhere, the deterministic format must not allow them.  In a protocol that requires tags in certain places, the tag needs to appear in the deterministic format. A CBOR-based protocol that uses deterministic encoding might instead say that all tags that appear in a message must be retained regardless of whether they are optional.</p>
+<p id="rfc.section.4.10.2.p.3">Protocols that include floating, big integer, or other complex values need to define extra requirements on their deterministic encodings. For example:</p>
 <p></p>
 
 <ul>
@@ -1269,18 +1281,18 @@ C5             -- Tag 5
 <li>If a protocol includes a field that can express integers larger than 2^64 using tag 2 (<a href="#bignums" class="xref">Section 3.4.4</a>), the protocol&#8217;s deterministic encoding needs to specify whether small integers are expressed using the tag or major types 0 and 1.</li>
 <li>A protocol might give encoders the choice of representing a URL as either a text string or, using <a href="#encodedtext" class="xref">Section 3.4.6.3</a>, tag 32 containing a text string. This protocol&#8217;s deterministic encoding needs to either require that the tag is present or require that it&#8217;s absent, not allow either one.</li>
 </ul>
-<h1 id="rfc.section.4.10.1">
-<a href="#rfc.section.4.10.1">4.10.1.</a> <a href="#length-first-map-key-ordering" id="length-first-map-key-ordering">Length-first map key ordering</a>
+<h1 id="rfc.section.4.10.3">
+<a href="#rfc.section.4.10.3">4.10.3.</a> <a href="#length-first-map-key-ordering" id="length-first-map-key-ordering">Length-first map key ordering</a>
 </h1>
-<p id="rfc.section.4.10.1.p.1">The core deterministic encoding requirements sort map keys in a different order from the one suggested by Section 3.9 of <a href="#RFC7049" class="xref">[RFC7049]</a> (called &#8220;Canonical CBOR&#8221; there). Protocols that need to be compatible with <a href="#RFC7049" class="xref">[RFC7049]</a>&#8217;s order can instead be specified in terms of this specification&#8217;s &#8220;length-first core deterministic encoding requirements&#8221;:</p>
-<p id="rfc.section.4.10.1.p.2">A CBOR encoding satisfies the &#8220;length-first core deterministic encoding requirements&#8221; if it satisfies the core deterministic encoding requirements except that the keys in every map MUST be sorted such that:</p>
+<p id="rfc.section.4.10.3.p.1">The core deterministic encoding requirements sort map keys in a different order from the one suggested by Section 3.9 of <a href="#RFC7049" class="xref">[RFC7049]</a> (called &#8220;Canonical CBOR&#8221; there). Protocols that need to be compatible with <a href="#RFC7049" class="xref">[RFC7049]</a>&#8217;s order can instead be specified in terms of this specification&#8217;s &#8220;length-first core deterministic encoding requirements&#8221;:</p>
+<p id="rfc.section.4.10.3.p.2">A CBOR encoding satisfies the &#8220;length-first core deterministic encoding requirements&#8221; if it satisfies the core deterministic encoding requirements except that the keys in every map MUST be sorted such that:</p>
 <p></p>
 
 <ol>
 <li>If two keys have different lengths, the shorter one sorts earlier;</li>
 <li>If two keys have the same length, the one with the lower value in (byte-wise) lexical order sorts earlier.</li>
 </ol>
-<p id="rfc.section.4.10.1.p.4">For example, under the length-first core deterministic encoding requirements, the following keys are sorted correctly:</p>
+<p id="rfc.section.4.10.3.p.4">For example, under the length-first core deterministic encoding requirements, the following keys are sorted correctly:</p>
 <p></p>
 
 <ol>
@@ -1293,7 +1305,7 @@ C5             -- Tag 5
 <li>&#8220;aa&#8221;, encoded as 0x626161.</li>
 <li>[100], encoded as 0x811864.</li>
 </ol>
-<p id="rfc.section.4.10.1.p.6">(Although <a href="#RFC7049" class="xref">[RFC7049]</a> used the term &#8220;Canonical CBOR&#8221; for its form of requirements on deterministic encoding, this document avoids this term because &#8220;canonicalization&#8221; is often associated with specific uses of deterministic encoding only.  The terms are essentially exchangeable, however, and the set of core requirements in this document could also be called &#8220;Canonical CBOR&#8221;, while the length-first-ordered version of that could be called &#8220;Old Canonical CBOR&#8221;.)</p>
+<p id="rfc.section.4.10.3.p.6">(Although <a href="#RFC7049" class="xref">[RFC7049]</a> used the term &#8220;Canonical CBOR&#8221; for its form of requirements on deterministic encoding, this document avoids this term because &#8220;canonicalization&#8221; is often associated with specific uses of deterministic encoding only.  The terms are essentially exchangeable, however, and the set of core requirements in this document could also be called &#8220;Canonical CBOR&#8221;, while the length-first-ordered version of that could be called &#8220;Old Canonical CBOR&#8221;.)</p>
 <h1 id="rfc.section.4.11">
 <a href="#rfc.section.4.11">4.11.</a> <a href="#strict-mode" id="strict-mode">Strict Decoding Mode</a>
 </h1>
