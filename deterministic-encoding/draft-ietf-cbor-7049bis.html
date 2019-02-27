@@ -9,77 +9,30 @@
 
   
 <style type="text/css">/*<![CDATA[*/
-@viewport {
-  zoom: 1.0;
-  width: extend-to-zoom;
-}
-@-ms-viewport {
-  width: extend-to-zoom;
-  zoom: 1.0;
-}
-
-@media screen and (min-width: 1024px) {
-  ul.toc, #rfc\.toc {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    right: calc(50vw - 500px);
-    width: 300px;
-    padding: 0 1em;
-    z-index: 1;
-  }
-  #rfc\.toc {
-    top: 16px;
-  }
-  ul.toc {
-    top: 80px;
-    overflow: auto;
-  }
-
-  body {
-    padding-left: 1.5em;
-    padding-right: 29em;
-  }
-}
 
 body {
-  font: 15px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font: 16px "Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
   color: #333;
   font-size-adjust: 0.5;
-  line-height: 130%;
-  margin: 2.5em auto;
-  max-width: 724px;
+  line-height: 24px;
+  margin: 75px auto;
+  max-width: 624px;
+  padding: 0 5px;
 }
 
-.title, .filename, h1, h2, h3, h4 {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+.title, .filename, h1, h2, h3, h4, h5 {
+  font: 16px "Roboto Condensed","Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
   font-size-adjust: 0.5;
-  font-weight: 500;
+  font-weight: bold;
   color: #333;
   line-height: 100%;
-  margin: 0.8em 0 0.3em;
+  margin: 1.2em 0 0.3em;
 }
-.title { font-size: 36px; }
-h1 { font-size: 30px; }
-h2 { font-size: 24px; }
-h3, h4 { font-size: 18px; }
+.title, #rfc\.title h1 { font-size: 32px; }
+h1, section h1, h2, section h2, section h3, nav h2 { font-size: 20px; }
+h3, section h4, h4, section h5 { font-size: 16px; }
 h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
   color: #333;
-}
-
-ul.toc li {
-  list-style: none;
-  text-indent: -2.5em;
-  padding-left: 2.5em;
-  padding-bottom: 5px;
-  margin: 0;
-}
-ul.toc ul {
-  margin: 0;
-}
-/* xml2rfc nests ul directly inside ul which messes with the style badly */
-ul.toc, ul.toc>ul, ul.toc ul>ul {
-  margin: 0 0 0 1.5em;
 }
 
 table {
@@ -108,29 +61,30 @@ td.reference {
 }
 
 
-table.header {
+table.header, table#rfc\.headerblock {
   width: 100%;
 }
-table.header td {
+table.header td, table#rfc\.headerblock td {
   border: none;
   background-color: transparent;
   color: black;
+  padding: 0;
 }
 .filename {
+  display: block;
   color: rgb(119, 119, 119);
-  font-size: 23px;
-  font-weight: normal;
-  height: auto;
-  line-height: 100%;
-}
-#rfc\.abstract+p {
   font-size: 20px;
-  font-weight: 300;
-  line-height: 130%;
+  font-weight: normal;
+  line-height: 100%;
+  margin: 10px 0 32px;
+}
+#rfc\.abstract+p, #rfc\.abstract p {
+  font-size: 20px;
+  line-height: 28px;
 }
 
-samp, tt, code, pre {
-  font: 11pt consolas, monospace;
+samp, tt, code, pre, span.tt {
+  font: 13.5px Consolas, monospace;
   font-size-adjust: none;
 }
 pre {
@@ -140,13 +94,15 @@ pre {
   padding: 5px;
   margin: 5px;
 }
-.figure {
+.figure, caption {
   font-style: italic;
   margin: 0 1.5em;
+  text-align: left;
 }
 
 address {
-  margin: 10px 0 0;
+  margin: 16px 2px;
+  line-height: 20px;
 }
 .vcard {
   font-style: normal;
@@ -154,8 +110,8 @@ address {
 .vcardline {
   display: block;
 }
-.vcardline .fn {
-  font-weight: bold;
+.vcardline .fn, address b {
+  font-weight: normal;
 }
 .vcardline .hidden {
   display: none;
@@ -195,6 +151,9 @@ hr {
   border: 0;
   border-top: 1px solid #eee;
 }
+hr.noprint {
+  display: none;
+}
 
 a {
   text-decoration: none;
@@ -206,15 +165,59 @@ a[href]:hover {
   background-color: #eee;
 }
 
-ol, ul, li, p {
+p, ol, ul, li {
   padding: 0;
-  margin: 0.5em 0 0.5em 2em;
 }
-li, p {
-  margin-left: 0;
+p {
+  margin: 0.5em 0;
+}
+ol, ul {
+  margin: 0.2em 0 0.2em 2em;
+}
+li {
+  margin: 0.2em 0;
 }
 address {
   font-style: normal;
+}
+
+ul.toc ul {
+  margin: 0 0 0 2em;
+}
+ul.toc li {
+  list-style: none;
+  margin: 0;
+}
+
+@media screen and (min-width: 924px) {
+  body {
+    padding-right: 350px;
+  }
+  body>ul.toc, body>#rfc\.toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 500px);
+    width: 300px;
+    z-index: 1;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  body>#rfc\.toc {
+    top: 55px;
+  }
+  body>ul.toc {
+    top: 100px;
+  }
+
+  ul.toc {
+    margin: 0 0 0 4px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+  ul.toc ul {
+    margin-left: 1.2em;
+  }
 }
 
 .github-fork-ribbon-wrapper {
@@ -274,6 +277,7 @@ address {
     position: fixed;
   }
   /*]]>*/</style>
+  <meta name="viewport" content="initial-scale=1.0">
 
 
   <link href="#rfc.toc" rel="Contents">
@@ -891,7 +895,7 @@ BF           -- Start indefinite-length map
 </tr>
 </tbody>
 </table>
-<p id="rfc.section.3.3.p.3">An encoder MUST NOT encode False as the two-byte sequence of 0xf814, MUST NOT encode True as the two-byte sequence of 0xf815, MUST NOT encode Null as the two-byte sequence of 0xf816, and MUST NOT encode Undefined value as the two-byte sequence of 0xf817.  A decoder MUST treat these two-byte sequences as an error.  Similar prohibitions apply to the unassigned simple values as well.</p>
+<p id="rfc.section.3.3.p.3">An encoder MUST NOT issue two-byte sequences that start with 0xf8 (major type = 7, additional information = 24) and continue with a byte less than 0x20 (32 decimal).  Such sequences are not well-formed.  (This implies that an encoder cannot encode false, true, null, or undefined in two-byte sequences, only the one-byte variants of these are well-formed.)</p>
 <p id="rfc.section.3.3.p.4">The 5-bit values of 25, 26, and 27 are for 16-bit, 32-bit, and 64-bit IEEE 754 binary floating-point values <a href="#IEEE.754.2008" class="xref">[IEEE.754.2008]</a>.  These floating-point values are encoded in the additional bytes of the appropriate size.  (See <a href="#half-precision" class="xref">Appendix D</a> for some information about 16-bit floating point.)</p>
 <h1 id="rfc.section.3.4">
 <a href="#rfc.section.3.4">3.4.</a> <a href="#tags" id="tags">Optional Tagging of Items</a>
@@ -1199,7 +1203,7 @@ C5             -- Tag 5
 <p id="rfc.section.4.7.p.2">If multiple types of keys are to be used, consideration should be given to how these types would be represented in the specific programming environments that are to be used.  For example, in JavaScript Maps <a href="#ECMA262" class="xref">[ECMA262]</a>, a key of integer 1 cannot be distinguished from a key of floating point 1.0. This means that, if integer keys are used, the protocol needs to avoid use of floating-point keys the values of which happen to be integer numbers in the same map.</p>
 <p id="rfc.section.4.7.p.3">Decoders that deliver data items nested within a CBOR data item immediately on decoding them (&#8220;streaming decoders&#8221;) often do not keep the state that is necessary to ascertain uniqueness of a key in a map.  Similarly, an encoder that can start encoding data items before the enclosing data item is completely available (&#8220;streaming encoder&#8221;) may want to reduce its overhead significantly by relying on its data source to maintain uniqueness.</p>
 <p id="rfc.section.4.7.p.4">A CBOR-based protocol should make an intentional decision about what to do when a receiving application does see multiple identical keys in a map.  The resulting rule in the protocol should respect the CBOR data model: it cannot prescribe a specific handling of the entries with the identical keys, except that it might have a rule that having identical keys in a map indicates a malformed map and that the decoder has to stop with an error. Duplicate keys are also prohibited by CBOR decoders that are using strict mode (<a href="#strict-mode" class="xref">Section 4.11</a>).</p>
-<p id="rfc.section.4.7.p.5">The CBOR data model for maps does not allow ascribing semantics to the order of the key/value pairs in the map representation.  Thus, a CBOR-based protocol MUST NOT specify that changing the key/value pair order in a map would change the semantics, except to specify that some, orders are disallowed, for example where they would not meet the requirements of a deterministic encoding (<a href="#det-enc" class="xref">Section 4.10</a>. Timing, cache usage, and other side channels are not considered part of the semantics.  <a id="_20_cabo" class="info">[_20_cabo]<span class="info">I don&#8217;t understand this last sentence.  Can we leave it out?</span></a></p>
+<p id="rfc.section.4.7.p.5">The CBOR data model for maps does not allow ascribing semantics to the order of the key/value pairs in the map representation.  Thus, a CBOR-based protocol MUST NOT specify that changing the key/value pair order in a map would change the semantics, except to specify that some, orders are disallowed, for example where they would not meet the requirements of a deterministic encoding (<a href="#det-enc" class="xref">Section 4.10</a>.  (Any secondary effects of map ordering sich as on timing, cache usage, and other potential side channels are not considered part of the semantics but may be enough reason on its own to go for a deterministic encoding format.)</p>
 <p id="rfc.section.4.7.p.6">Applications for constrained devices that have maps with 24 or fewer frequently used keys should consider using small integers (and those with up to 48 frequently used keys should consider also using small negative integers) because the keys can then be encoded in a single byte.</p>
 <h1 id="rfc.section.4.7.1">
 <a href="#rfc.section.4.7.1">4.7.1.</a> <a href="#equivalence-of-keys" id="equivalence-of-keys">Equivalence of Keys</a>
@@ -1843,10 +1847,6 @@ Author/Change Controller:
 <td class="left">0xf0</td>
 </tr>
 <tr>
-<td class="left">simple(24)</td>
-<td class="left">0xf818</td>
-</tr>
-<tr>
 <td class="left">simple(255)</td>
 <td class="left">0xf8ff</td>
 </tr>
@@ -2262,6 +2262,7 @@ well_formed (breakable = false) {
     case 4: for (i = 0; i &lt; val; i++) well_formed(); break;
     case 5: for (i = 0; i &lt; val*2; i++) well_formed(); break;
     case 6: well_formed(); break;     // 1 embedded data item
+    case 7: if (ai == 24 &amp;&amp; val &lt; 32) fail(); // bad simple
   }
   return mt;                    // finite data item
 }
@@ -2478,6 +2479,5 @@ def decode_half(half):
   </address>
 </div>
 
-  <div class="github-fork-ribbon-wrapper"><div class="github-fork-ribbon"><a href="https://github.com/cbor-wg/CBORbis">Fork me on GitHub</a></div></div>
 </body>
 </html>

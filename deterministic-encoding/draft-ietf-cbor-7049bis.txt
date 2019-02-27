@@ -862,12 +862,12 @@ Internet-Draft                    CBOR                     February 2019
 
                           Table 2: Simple Values
 
-   An encoder MUST NOT encode False as the two-byte sequence of 0xf814,
-   MUST NOT encode True as the two-byte sequence of 0xf815, MUST NOT
-   encode Null as the two-byte sequence of 0xf816, and MUST NOT encode
-   Undefined value as the two-byte sequence of 0xf817.  A decoder MUST
-   treat these two-byte sequences as an error.  Similar prohibitions
-   apply to the unassigned simple values as well.
+   An encoder MUST NOT issue two-byte sequences that start with 0xf8
+   (major type = 7, additional information = 24) and continue with a
+   byte less than 0x20 (32 decimal).  Such sequences are not well-
+   formed.  (This implies that an encoder cannot encode false, true,
+   null, or undefined in two-byte sequences, only the one-byte variants
+   of these are well-formed.)
 
    The 5-bit values of 25, 26, and 27 are for 16-bit, 32-bit, and 64-bit
    IEEE 754 binary floating-point values [IEEE.754.2008].  These
@@ -1598,9 +1598,11 @@ Internet-Draft                    CBOR                     February 2019
    CBOR-based protocol MUST NOT specify that changing the key/value pair
    order in a map would change the semantics, except to specify that
    some, orders are disallowed, for example where they would not meet
-   the requirements of a deterministic encoding (Section 4.10.  Timing,
-   cache usage, and other side channels are not considered part of the
-   semantics.
+   the requirements of a deterministic encoding (Section 4.10.  (Any
+   secondary effects of map ordering sich as on timing, cache usage, and
+   other potential side channels are not considered part of the
+   semantics but may be enough reason on its own to go for a
+   deterministic encoding format.)
 
    Applications for constrained devices that have maps with 24 or fewer
    frequently used keys should consider using small integers (and those
@@ -1616,8 +1618,6 @@ Internet-Draft                    CBOR                     February 2019
    At the generic data model level, numerically equivalent integer and
    floating point values are distinct from each other, as they are from
    the various big numbers (Tags 2 to 5).  Similarly, text strings are
-   distinct from byte strings, even if composed of the same bytes.  A
-
 
 
 
@@ -1626,6 +1626,7 @@ Bormann & Hoffman        Expires August 31, 2019               [Page 29]
 Internet-Draft                    CBOR                     February 2019
 
 
+   distinct from byte strings, even if composed of the same bytes.  A
    tagged value is distinct from an untagged value or from a value
    tagged with a different tag.
 
@@ -1673,7 +1674,6 @@ Internet-Draft                    CBOR                     February 2019
 
    Some constrained decoders may be limited in their ability to decode
    non-preferred serializations: For example, if only integers below
-   1_000_000_000 are expected in an application, the decoder may leave
 
 
 
@@ -1682,6 +1682,7 @@ Bormann & Hoffman        Expires August 31, 2019               [Page 30]
 Internet-Draft                    CBOR                     February 2019
 
 
+   1_000_000_000 are expected in an application, the decoder may leave
    out the code that would be needed to decode 64-bit arguments in
    integers.  An encoder that always uses preferred serialization
    ("preferred encoder") interoperates with this decoder for the numbers
@@ -1729,7 +1730,6 @@ Internet-Draft                    CBOR                     February 2019
 
       *  0 to 23 and -1 to -24 MUST be expressed in the same byte as the
          major type;
-
 
 
 
@@ -2762,8 +2762,6 @@ Internet-Draft                    CBOR                     February 2019
    |                              |                                    |
    | simple(16)                   | 0xf0                               |
    |                              |                                    |
-   | simple(24)                   | 0xf818                             |
-   |                              |                                    |
    | simple(255)                  | 0xf8ff                             |
    |                              |                                    |
    | 0("2013-03-21T20:04:00Z")    | 0xc074323031332d30332d32315432303a |
@@ -2794,6 +2792,8 @@ Internet-Draft                    CBOR                     February 2019
    |                              |                                    |
    | "\u00fc"                     | 0x62c3bc                           |
    |                              |                                    |
+   | "\u6c34"                     | 0x63e6b0b4                         |
+   |                              |                                    |
 
 
 
@@ -2802,8 +2802,6 @@ Bormann & Hoffman        Expires August 31, 2019               [Page 50]
 Internet-Draft                    CBOR                     February 2019
 
 
-   | "\u6c34"                     | 0x63e6b0b4                         |
-   |                              |                                    |
    | "\ud800\udd51"               | 0x64f0908591                       |
    |                              |                                    |
    | []                           | 0x80                               |
@@ -2850,6 +2848,8 @@ Internet-Draft                    CBOR                     February 2019
    | {_ "a": 1, "b": [_ 2, 3]}    | 0xbf61610161629f0203ffff           |
    |                              |                                    |
    | ["a", {_ "b": "c"}]          | 0x826161bf61626163ff               |
+   |                              |                                    |
+   | {_ "Fun": true, "Amt": -2}   | 0xbf6346756ef563416d7421ff         |
 
 
 
@@ -2858,8 +2858,6 @@ Bormann & Hoffman        Expires August 31, 2019               [Page 51]
 Internet-Draft                    CBOR                     February 2019
 
 
-   |                              |                                    |
-   | {_ "Fun": true, "Amt": -2}   | 0xbf6346756ef563416d7421ff         |
    +------------------------------+------------------------------------+
 
                Table 4: Examples of Encoded CBOR Data Items
@@ -2906,6 +2904,8 @@ Appendix B.  Jump Table
    | 0x59       | byte string (two-byte uint16_t for n, and then n     |
    |            | bytes follow)                                        |
    |            |                                                      |
+   | 0x5a       | byte string (four-byte uint32_t for n, and then n    |
+   |            | bytes follow)                                        |
 
 
 
@@ -2914,8 +2914,6 @@ Bormann & Hoffman        Expires August 31, 2019               [Page 52]
 Internet-Draft                    CBOR                     February 2019
 
 
-   | 0x5a       | byte string (four-byte uint32_t for n, and then n    |
-   |            | bytes follow)                                        |
    |            |                                                      |
    | 0x5b       | byte string (eight-byte uint64_t for n, and then n   |
    |            | bytes follow)                                        |
@@ -2962,6 +2960,8 @@ Internet-Draft                    CBOR                     February 2019
    |            | data items follow)                                   |
    |            |                                                      |
    | 0xb9       | map (two-byte uint16_t for n, and then n pairs of    |
+   |            | data items follow)                                   |
+   |            |                                                      |
 
 
 
@@ -2970,8 +2970,6 @@ Bormann & Hoffman        Expires August 31, 2019               [Page 53]
 Internet-Draft                    CBOR                     February 2019
 
 
-   |            | data items follow)                                   |
-   |            |                                                      |
    | 0xba       | map (four-byte uint32_t for n, and then n pairs of   |
    |            | data items follow)                                   |
    |            |                                                      |
@@ -3018,6 +3016,8 @@ Internet-Draft                    CBOR                     February 2019
    | 0xf8       | (simple value, one byte follows)                     |
    |            |                                                      |
    | 0xf9       | Half-Precision Float (two-byte IEEE 754)             |
+   |            |                                                      |
+   | 0xfa       | Single-Precision Float (four-byte IEEE 754)          |
 
 
 
@@ -3026,8 +3026,6 @@ Bormann & Hoffman        Expires August 31, 2019               [Page 54]
 Internet-Draft                    CBOR                     February 2019
 
 
-   |            |                                                      |
-   | 0xfa       | Single-Precision Float (four-byte IEEE 754)          |
    |            |                                                      |
    | 0xfb       | Double-Precision Float (eight-byte IEEE 754)         |
    |            |                                                      |
@@ -3077,6 +3075,8 @@ Appendix C.  Pseudocode
 
 
 
+
+
 Bormann & Hoffman        Expires August 31, 2019               [Page 55]
 
 Internet-Draft                    CBOR                     February 2019
@@ -3103,6 +3103,7 @@ Internet-Draft                    CBOR                     February 2019
        case 4: for (i = 0; i < val; i++) well_formed(); break;
        case 5: for (i = 0; i < val*2; i++) well_formed(); break;
        case 6: well_formed(); break;     // 1 embedded data item
+       case 7: if (ai == 24 && val < 32) fail(); // bad simple
      }
      return mt;                    // finite data item
    }
@@ -3127,9 +3128,8 @@ Internet-Draft                    CBOR                     February 2019
 
               Figure 1: Pseudocode for Well-Formedness Check
 
-   Note that the remaining complexity of a complete CBOR decoder is
-   about presenting data that has been decoded to the application in an
-   appropriate form.
+
+
 
 
 
@@ -3137,6 +3137,10 @@ Bormann & Hoffman        Expires August 31, 2019               [Page 56]
 
 Internet-Draft                    CBOR                     February 2019
 
+
+   Note that the remaining complexity of a complete CBOR decoder is
+   about presenting data that has been decoded to the application in an
+   appropriate form.
 
    Major types 0 and 1 are designed in such a way that they can be
    encoded in C from a signed integer without actually doing an if-then-
@@ -3174,10 +3178,6 @@ Appendix D.  Half-Precision
    is in Figure 4; this code assumes that the 2-byte value has already
    been decoded as an (unsigned short) integer in network byte order (as
    would be done by the pseudocode in Appendix C).
-
-
-
-
 
 
 
