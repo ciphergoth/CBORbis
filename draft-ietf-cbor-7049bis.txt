@@ -986,8 +986,8 @@ Internet-Draft                    CBOR                      October 2019
    | Tag      | Data     | Semantics                                   |
    | Number   | Item     |                                             |
    +----------+----------+---------------------------------------------+
-   | 0        | text     | Standard date/time string; see Section      |
-   |          | string   | 3.4.2                                       |
+   | 0        | text     | Standard date/time string; see              |
+   |          | string   | Section 3.4.2                               |
    |          |          |                                             |
    | 1        | multiple | Epoch-based date/time; see Section 3.4.3    |
    |          |          |                                             |
@@ -3091,8 +3091,8 @@ Internet-Draft                    CBOR                      October 2019
    | 0xbf       | map, pairs of data items follow, terminated by       |
    |            | "break"                                              |
    |            |                                                      |
-   | 0xc0       | Text-based date/time (data item follows; see Section |
-   |            | 3.4.2)                                               |
+   | 0xc0       | Text-based date/time (data item follows; see         |
+   |            | Section 3.4.2)                                       |
    |            |                                                      |
    | 0xc1       | Epoch-based date/time (data item follows; see        |
    |            | Section 3.4.3)                                       |
@@ -3104,13 +3104,13 @@ Internet-Draft                    CBOR                      October 2019
    | 0xc4       | Decimal Fraction (data item "array" follows; see     |
    |            | Section 3.4.5)                                       |
    |            |                                                      |
-   | 0xc5       | Bigfloat (data item "array" follows; see Section     |
-   |            | 3.4.5)                                               |
+   | 0xc5       | Bigfloat (data item "array" follows; see             |
+   |            | Section 3.4.5)                                       |
    |            |                                                      |
    | 0xc6..0xd4 | (tagged item)                                        |
    |            |                                                      |
-   | 0xd5..0xd7 | Expected Conversion (data item follows; see Section  |
-   |            | 3.4.6.2)                                             |
+   | 0xd5..0xd7 | Expected Conversion (data item follows; see          |
+   |            | Section 3.4.6.2)                                     |
    |            |                                                      |
    | 0xd8..0xdb | (more tagged items, 1/2/4/8 bytes and then a data    |
    |            | item follow)                                         |
