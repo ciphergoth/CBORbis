@@ -1397,8 +1397,8 @@ C5             -- Tag 5
 <p></p>
 
 <ul>
-<li>JSON numbers without fractional parts (integer numbers) are represented as integers (major types 0 and 1, possibly major type 6 tag number 2 and 3), choosing the shortest form; integers longer than an implementation-defined threshold (which is usually either 32 or 64 bits) may instead be represented as floating-point values.  (If the JSON was generated from a JavaScript implementation, its precision is already limited to 53 bits maximum.)</li>
-<li>Numbers with fractional parts are represented as floating-point values.  Preferably, the shortest exact floating-point representation is used; for instance, 1.5 is represented in a 16-bit floating-point value (not all implementations will be capable of efficiently finding the minimum form, though).  There may be an implementation-defined limit to the precision that will affect the precision of the represented values. Decimal representation should only be used if that is specified in a protocol.</li>
+<li>JSON numbers without fractional parts (integer numbers) are represented as integers (major types 0 and 1, possibly major type 6 tag number 2 and 3), choosing the shortest form; integers longer than an implementation-defined threshold may instead be represented as floating-point values.  The default range that is represented as integer is -2**53+1..2**53-1 (fully exploiting the range for exact integers in the binary64 representation often used for decoding JSON <a href="#RFC7493" class="xref">[RFC7493]</a>), implementations may choose -2**32..2**32-1 or -2**64..2**64-1 (fully using the integer ranges available in CBOR with uint32_t or uint64_t, respectively) or even -2**31..2**31-1 or -2**63..2**63-1 (using popular ranges for two&#8217;s complement signed integers).  (If the JSON was generated from a JavaScript implementation, its precision is already limited to 53 bits maximum.)</li>
+<li>Numbers with fractional parts are represented as floating-point values, performing the decimal-to-binary conversion based on the precision provided by IEEE 754 binary64.  Then, when encoding in CBOR, the preferred serialization uses the shortest floating-point representation exactly representing this conversion result; for instance, 1.5 is represented in a 16-bit floating-point value (not all implementations will be capable of efficiently finding the minimum form, though).  Instead of using the default binary64 precision, there may be an implementation-defined limit to the precision of the conversion that will affect the precision of the represented values. Decimal representation should only be used on the CBOR side if that is specified in a protocol.</li>
 </ul>
 <p id="rfc.section.6.2.p.3">CBOR has been designed to generally provide a more compact encoding than JSON.  One implementation strategy that might come to mind is to perform a JSON-to-CBOR encoding in place in a single buffer.  This strategy would need to carefully consider a number of pathological cases, such as that some strings represented with no or very few escapes and longer (or much longer) than 255 bytes may expand when encoded as UTF-8 strings in CBOR.  Similarly, a few of the binary floating-point representations might cause expansion from some short decimal representations (1.1, 1e9) in JSON.  This may be hard to get right, and any ensuing vulnerabilities may be exploited by an attacker.</p>
 <h1 id="rfc.section.7">
@@ -1705,6 +1705,11 @@ Author/Change Controller:
 <td class="reference"><b id="RFC7228">[RFC7228]</b></td>
 <td class="top">
 <a>Bormann, C.</a>, <a>Ersue, M.</a> and <a>A. Keranen</a>, "<a href="https://tools.ietf.org/html/rfc7228">Terminology for Constrained-Node Networks</a>", RFC 7228, DOI 10.17487/RFC7228, May 2014.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7493">[RFC7493]</b></td>
+<td class="top">
+<a>Bray, T.</a>, "<a href="https://tools.ietf.org/html/rfc7493">The I-JSON Message Format</a>", RFC 7493, DOI 10.17487/RFC7493, March 2015.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC8259">[RFC8259]</b></td>

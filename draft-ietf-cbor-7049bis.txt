@@ -134,16 +134,16 @@ Internet-Draft                    CBOR                      October 2019
      6.2.  Converting from JSON to CBOR  . . . . . . . . . . . . . .  39
    7.  Future Evolution of CBOR  . . . . . . . . . . . . . . . . . .  40
      7.1.  Extension Points  . . . . . . . . . . . . . . . . . . . .  41
-     7.2.  Curating the Additional Information Space . . . . . . . .  41
+     7.2.  Curating the Additional Information Space . . . . . . . .  42
    8.  Diagnostic Notation . . . . . . . . . . . . . . . . . . . . .  42
      8.1.  Encoding Indicators . . . . . . . . . . . . . . . . . . .  43
-   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  43
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  44
      9.1.  Simple Values Registry  . . . . . . . . . . . . . . . . .  44
      9.2.  Tags Registry . . . . . . . . . . . . . . . . . . . . . .  44
-     9.3.  Media Type ("MIME Type")  . . . . . . . . . . . . . . . .  44
+     9.3.  Media Type ("MIME Type")  . . . . . . . . . . . . . . . .  45
      9.4.  CoAP Content-Format . . . . . . . . . . . . . . . . . . .  45
      9.5.  The +cbor Structured Syntax Suffix Registration . . . . .  46
-   10. Security Considerations . . . . . . . . . . . . . . . . . . .  46
+   10. Security Considerations . . . . . . . . . . . . . . . . . . .  47
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  48
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  48
      11.2.  Informative References . . . . . . . . . . . . . . . . .  50
@@ -2186,21 +2186,30 @@ Bormann & Hoffman        Expires April 15, 2020                [Page 39]
 Internet-Draft                    CBOR                      October 2019
 
 
-      than an implementation-defined threshold (which is usually either
-      32 or 64 bits) may instead be represented as floating-point
-      values.  (If the JSON was generated from a JavaScript
-      implementation, its precision is already limited to 53 bits
-      maximum.)
+      than an implementation-defined threshold may instead be
+      represented as floating-point values.  The default range that is
+      represented as integer is -2**53+1..2**53-1 (fully exploiting the
+      range for exact integers in the binary64 representation often used
+      for decoding JSON [RFC7493]), implementations may choose
+      -2**32..2**32-1 or -2**64..2**64-1 (fully using the integer ranges
+      available in CBOR with uint32_t or uint64_t, respectively) or even
+      -2**31..2**31-1 or -2**63..2**63-1 (using popular ranges for two's
+      complement signed integers).  (If the JSON was generated from a
+      JavaScript implementation, its precision is already limited to 53
+      bits maximum.)
 
    o  Numbers with fractional parts are represented as floating-point
-      values.  Preferably, the shortest exact floating-point
-      representation is used; for instance, 1.5 is represented in a
-      16-bit floating-point value (not all implementations will be
-      capable of efficiently finding the minimum form, though).  There
-      may be an implementation-defined limit to the precision that will
-      affect the precision of the represented values.  Decimal
-      representation should only be used if that is specified in a
-      protocol.
+      values, performing the decimal-to-binary conversion based on the
+      precision provided by IEEE 754 binary64.  Then, when encoding in
+      CBOR, the preferred serialization uses the shortest floating-point
+      representation exactly representing this conversion result; for
+      instance, 1.5 is represented in a 16-bit floating-point value (not
+      all implementations will be capable of efficiently finding the
+      minimum form, though).  Instead of using the default binary64
+      precision, there may be an implementation-defined limit to the
+      precision of the conversion that will affect the precision of the
+      represented values.  Decimal representation should only be used on
+      the CBOR side if that is specified in a protocol.
 
    CBOR has been designed to generally provide a more compact encoding
    than JSON.  One implementation strategy that might come to mind is to
@@ -2225,6 +2234,14 @@ Internet-Draft                    CBOR                      October 2019
    For protocols that will use CBOR, CBOR provides some useful
    mechanisms to facilitate their evolution.  Best practices for this
    are well known, particularly from JSON format development of JSON-
+
+
+
+Bormann & Hoffman        Expires April 15, 2020                [Page 40]
+
+Internet-Draft                    CBOR                      October 2019
+
+
    based protocols.  Therefore, such best practices are outside the
    scope of this specification.
 
@@ -2234,14 +2251,6 @@ Internet-Draft                    CBOR                      October 2019
    Since a successful protocol may live for decades, CBOR needs to be
    designed for decades of use and evolution.  This section provides
    some guidance for the evolution of CBOR.  It is necessarily more
-
-
-
-Bormann & Hoffman        Expires April 15, 2020                [Page 40]
-
-Internet-Draft                    CBOR                      October 2019
-
-
    subjective than other parts of this document.  It is also necessarily
    incomplete, lest it turn into a textbook on protocol development.
 
@@ -2282,21 +2291,19 @@ Internet-Draft                    CBOR                      October 2019
       decoding, so allocating codepoints to this space is a major step.
       There are also very few codepoints left.
 
-7.2.  Curating the Additional Information Space
-
-   The human mind is sometimes drawn to filling in little perceived gaps
-   to make something neat.  We expect the remaining gaps in the
-   codepoint space for the additional information values to be an
-   attractor for new ideas, just because they are there.
-
-
-
 
 
 Bormann & Hoffman        Expires April 15, 2020                [Page 41]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+7.2.  Curating the Additional Information Space
+
+   The human mind is sometimes drawn to filling in little perceived gaps
+   to make something neat.  We expect the remaining gaps in the
+   codepoint space for the additional information values to be an
+   attractor for new ideas, just because they are there.
 
    The present specification does not manage the additional information
    codepoint space by an IANA registry.  Instead, allocations out of
@@ -2340,19 +2347,18 @@ Internet-Draft                    CBOR                      October 2019
    tag, followed by the item in parentheses; for instance, an RFC 3339
    (ISO 8601) date could be notated as:
 
-      0("2013-03-21T20:04:00Z")
-
-   or the equivalent relative time as
-
-      1(1363896240)
-
-
 
 
 Bormann & Hoffman        Expires April 15, 2020                [Page 42]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+      0("2013-03-21T20:04:00Z")
+
+   or the equivalent relative time as
+
+      1(1363896240)
 
    Byte strings are notated in one of the base encodings, without
    padding, enclosed in single quotes, prefixed by >h< for base16, >b32<
@@ -2396,12 +2402,6 @@ Internet-Draft                    CBOR                      October 2019
    As a special case, byte and text strings of indefinite length can be
    notated in the form (_ h'0123', h'4567') and (_ "foo", "bar").
 
-9.  IANA Considerations
-
-   IANA has created two registries for new CBOR values.  The registries
-   are separate, that is, not under an umbrella registry, and follow the
-   rules in [RFC8126].  IANA has also assigned a new MIME media type and
-
 
 
 
@@ -2410,6 +2410,11 @@ Bormann & Hoffman        Expires April 15, 2020                [Page 43]
 Internet-Draft                    CBOR                      October 2019
 
 
+9.  IANA Considerations
+
+   IANA has created two registries for new CBOR values.  The registries
+   are separate, that is, not under an umbrella registry, and follow the
+   rules in [RFC8126].  IANA has also assigned a new MIME media type and
    an associated Constrained Application Protocol (CoAP) Content-Format
    entry.
 
@@ -2451,12 +2456,7 @@ Internet-Draft                    CBOR                      October 2019
    o  Description of semantics (URL) - This description is optional; the
       URL can point to something like an Internet-Draft or a web page.
 
-9.3.  Media Type ("MIME Type")
 
-   The Internet media type [RFC6838] for a single encoded CBOR data item
-   is application/cbor.
-
-   Type name: application
 
 
 
@@ -2465,6 +2465,13 @@ Bormann & Hoffman        Expires April 15, 2020                [Page 44]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+9.3.  Media Type ("MIME Type")
+
+   The Internet media type [RFC6838] for a single encoded CBOR data item
+   is application/cbor.
+
+   Type name: application
 
    Subtype name: cbor
 
@@ -2508,19 +2515,16 @@ Internet-Draft                    CBOR                      October 2019
 
    Encoding: -
 
-   Id: 60
-
-   Reference: [RFCthis]
-
-
-
-
 
 
 Bormann & Hoffman        Expires April 15, 2020                [Page 45]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   Id: 60
+
+   Reference: [RFCthis]
 
 9.5.  The +cbor Structured Syntax Suffix Registration
 
@@ -2562,13 +2566,9 @@ Internet-Draft                    CBOR                      October 2019
      The Apps Area Working Group.
      The IESG has change control over this registration.
 
-10.  Security Considerations
 
-   A network-facing application can exhibit vulnerabilities in its
-   processing logic for incoming data.  Complex parsers are well known
-   as a likely source of such vulnerabilities, such as the ability to
-   remotely crash a node, or even remotely execute arbitrary code on it.
-   CBOR attempts to narrow the opportunities for introducing such
+
+
 
 
 
@@ -2578,6 +2578,13 @@ Bormann & Hoffman        Expires April 15, 2020                [Page 46]
 Internet-Draft                    CBOR                      October 2019
 
 
+10.  Security Considerations
+
+   A network-facing application can exhibit vulnerabilities in its
+   processing logic for incoming data.  Complex parsers are well known
+   as a likely source of such vulnerabilities, such as the ability to
+   remotely crash a node, or even remotely execute arbitrary code on it.
+   CBOR attempts to narrow the opportunities for introducing such
    vulnerabilities by reducing parser complexity, by giving the entire
    range of encodable values a meaning where possible.
 
@@ -2619,13 +2626,6 @@ Internet-Draft                    CBOR                      October 2019
    The input check itself may consume resources.  This is usually linear
    in the size of the input, which means that an attacker has to spend
    resources that are commensurate to the resources spent by the
-   defender on input validation.  Processing for arbitrary-precision
-   numbers may exceed linear effort.  Also, some hash-table
-   implementations that are used by decoders to build in-memory
-   representations of maps can be attacked to spend quadratic effort,
-   unless a secret key is employed (see Section 7 of [SIPHASH]).  Such
-   superlinear efforts can be employed by an attacker to exhaust
-   resources at or before the input validator; they therefore need to be
 
 
 
@@ -2634,6 +2634,13 @@ Bormann & Hoffman        Expires April 15, 2020                [Page 47]
 Internet-Draft                    CBOR                      October 2019
 
 
+   defender on input validation.  Processing for arbitrary-precision
+   numbers may exceed linear effort.  Also, some hash-table
+   implementations that are used by decoders to build in-memory
+   representations of maps can be attacked to spend quadratic effort,
+   unless a secret key is employed (see Section 7 of [SIPHASH]).  Such
+   superlinear efforts can be employed by an attacker to exhaust
+   resources at or before the input validator; they therefore need to be
    avoided in a CBOR decoder implementation.  Note that Tag number
    definitions and their implementations can add security considerations
    of this kind; this should then be discussed in the security
@@ -2672,14 +2679,7 @@ Internet-Draft                    CBOR                      October 2019
 
 11.1.  Normative References
 
-   [ECMA262]  Ecma International, "ECMAScript 2018 Language
-              Specification", ECMA Standard ECMA-262, 9th Edition, June
-              2018, <https://www.ecma-
-              international.org/publications/files/ECMA-ST/Ecma-
-              262.pdf>.
 
-   [IEEE754]  IEEE, "IEEE Standard for Floating-Point Arithmetic", IEEE
-              Std 754-2008.
 
 
 
@@ -2689,6 +2689,15 @@ Bormann & Hoffman        Expires April 15, 2020                [Page 48]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   [ECMA262]  Ecma International, "ECMAScript 2018 Language
+              Specification", ECMA Standard ECMA-262, 9th Edition, June
+              2018, <https://www.ecma-
+              international.org/publications/files/ECMA-ST/Ecma-
+              262.pdf>.
+
+   [IEEE754]  IEEE, "IEEE Standard for Floating-Point Arithmetic", IEEE
+              Std 754-2008.
 
    [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part One: Format of Internet Message
@@ -2730,21 +2739,18 @@ Internet-Draft                    CBOR                      October 2019
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [TIME_T]   The Open Group Base Specifications, "Vol. 1: Base
-              Definitions, Issue 7", Section 4.15 'Seconds Since the
-              Epoch', IEEE Std 1003.1, 2013 Edition, 2013,
-              <http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/
-              V1_chap04.html#tag_04_15>.
-
-
-
-
 
 
 Bormann & Hoffman        Expires April 15, 2020                [Page 49]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   [TIME_T]   The Open Group Base Specifications, "Vol. 1: Base
+              Definitions, Issue 7", Section 4.15 'Seconds Since the
+              Epoch', IEEE Std 1003.1, 2013 Edition, 2013,
+              <http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/
+              V1_chap04.html#tag_04_15>.
 
 11.2.  Informative References
 
@@ -2786,6 +2792,16 @@ Internet-Draft                    CBOR                      October 2019
               RFC 6838, DOI 10.17487/RFC6838, January 2013,
               <https://www.rfc-editor.org/info/rfc6838>.
 
+
+
+
+
+
+Bormann & Hoffman        Expires April 15, 2020                [Page 50]
+
+Internet-Draft                    CBOR                      October 2019
+
+
    [RFC7049]  Bormann, C. and P. Hoffman, "Concise Binary Object
               Representation (CBOR)", RFC 7049, DOI 10.17487/RFC7049,
               October 2013, <https://www.rfc-editor.org/info/rfc7049>.
@@ -2795,12 +2811,9 @@ Internet-Draft                    CBOR                      October 2019
               DOI 10.17487/RFC7228, May 2014,
               <https://www.rfc-editor.org/info/rfc7228>.
 
-
-
-Bormann & Hoffman        Expires April 15, 2020                [Page 50]
-
-Internet-Draft                    CBOR                      October 2019
-
+   [RFC7493]  Bray, T., Ed., "The I-JSON Message Format", RFC 7493,
+              DOI 10.17487/RFC7493, March 2015,
+              <https://www.rfc-editor.org/info/rfc7493>.
 
    [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", STD 90, RFC 8259,
@@ -2814,19 +2827,6 @@ Internet-Draft                    CBOR                      October 2019
    [YAML]     Ben-Kiki, O., Evans, C., and I. Net, "YAML Ain't Markup
               Language (YAML[TM]) Version 1.2", 3rd Edition, October
               2009, <http://www.yaml.org/spec/1.2/spec.html>.
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
