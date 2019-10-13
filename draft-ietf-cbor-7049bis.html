@@ -1180,9 +1180,9 @@ C5             -- Tag 5
 <a href="#rfc.section.4">4.</a> <a href="#serialization-considerations" id="serialization-considerations">Serialization Considerations</a>
 </h1>
 <h1 id="rfc.section.4.1">
-<a href="#rfc.section.4.1">4.1.</a> <a href="#preferred-serialization" id="preferred-serialization">Preferred Serialization</a>
+<a href="#rfc.section.4.1">4.1.</a> <a href="#preferred" id="preferred">Preferred Serialization</a>
 </h1>
-<p id="rfc.section.4.1.p.1">For some values at the data model level, CBOR provides multiple serializations.  For many applications, it is desirable that an encoder always chooses a preferred serialization; however, the present specification does not put the burden of enforcing this preference on either encoder or decoder.</p>
+<p id="rfc.section.4.1.p.1">For some values at the data model level, CBOR provides multiple serializations.  For many applications, it is desirable that an encoder always chooses a preferred serialization (preferred encoding); however, the present specification does not put the burden of enforcing this preference on either encoder or decoder.</p>
 <p id="rfc.section.4.1.p.2">Some constrained decoders may be limited in their ability to decode non-preferred serializations:  For example, if only integers below 1_000_000_000 are expected in an application, the decoder may leave out the code that would be needed to decode 64-bit arguments in integers.  An encoder that always uses preferred serialization (&#8220;preferred encoder&#8221;) interoperates with this decoder for the numbers that can occur in this application.  More generally speaking, it therefore can be said that a preferred encoder is more universally interoperable (and also less wasteful) than one that, say, always uses 64-bit integers.</p>
 <p id="rfc.section.4.1.p.3">Similarly, a constrained encoder may be limited in the variety of representation variants it supports in such a way that it does not emit preferred serializations (&#8220;variant encoder&#8221;): Say, it could be designed to always use the 32-bit variant for an integer that it encodes even if a short representation is available (again, assuming that there is no application need for integers that can only be represented with the 64-bit variant).  A decoder that does not rely on only ever receiving preferred serializations (&#8220;variation-tolerant decoder&#8221;) can there be said to be more universally interoperable (it might very well optimize for the case of receiving preferred serializations, though).  Full implementations of CBOR decoders are by definition variation-tolerant; the distinction is only relevant if a constrained implementation of a CBOR decoder meets a variant encoder.</p>
 <p id="rfc.section.4.1.p.4">The preferred serialization always uses the shortest form of representing the argument (<a href="#encoding" class="xref">Section 3</a>)); it also uses the shortest floating-point encoding that preserves the value being encoded (see <a href="#numbers" class="xref">Section 5.5</a>).  Definite length encoding is preferred whenever the length is known at the time the serialization of the item starts.</p>
@@ -1197,13 +1197,15 @@ C5             -- Tag 5
 <p></p>
 
 <ul>
-<li>Arguments (see <a href="#encoding" class="xref">Section 3</a>) for integers, lengths in major types 2 through 5, and tags MUST be as short as possible. In particular:  <ul>
+<li>Preferred serialization MUST be used.  In particular, this means that arguments (see <a href="#encoding" class="xref">Section 3</a>) for integers, lengths in major types 2 through 5, and tags MUST be as short as possible, for instance:  <ul>
 <li>0 to 23 and -1 to -24 MUST be expressed in the same byte as the major type;</li>
 <li>24 to 255 and -25 to -256 MUST be expressed only with an additional uint8_t;</li>
 <li>256 to 65535 and -257 to -65536 MUST be expressed only with an additional uint16_t;</li>
 <li>65536 to 4294967295 and -65537 to -4294967296 MUST be expressed only with an additional uint32_t.</li>
 </ul>
+<p> Floating point values also MUST use the shortest form that preserves the value, e.g. 1.5 is encoded as 0xf93e00 and 1000000.5 as 0xfa49742408.</p>
 </li>
+<li>Indefinite-length items MUST NOT appear. They can be encoded as definite-length items instead.</li>
 <li>The keys in every map MUST be sorted in the bytewise lexicographic order of their deterministic encodings. For example, the following keys are sorted correctly:  <ol>
 <li>10, encoded as 0x0a.</li>
 <li>100, encoded as 0x1864.</li>
@@ -1215,7 +1217,6 @@ C5             -- Tag 5
 <li>false, encoded as 0xf4.</li>
 </ol>
 </li>
-<li>Indefinite-length items MUST NOT appear. They can be encoded as definite-length items instead.</li>
 </ul>
 <h1 id="rfc.section.4.2.2">
 <a href="#rfc.section.4.2.2">4.2.2.</a> <a href="#additional-deterministic-encoding-considerations" id="additional-deterministic-encoding-considerations">Additional Deterministic Encoding Considerations</a>
@@ -1260,7 +1261,7 @@ C5             -- Tag 5
 <li>&#8220;aa&#8221;, encoded as 0x626161.</li>
 <li>[100], encoded as 0x811864.</li>
 </ol>
-<p id="rfc.section.4.2.3.p.6">(Although <a href="#RFC7049" class="xref">[RFC7049]</a> used the term &#8220;Canonical CBOR&#8221; for its form of requirements on deterministic encoding, this document avoids this term because &#8220;canonicalization&#8221; is often associated with specific uses of deterministic encoding only.  The terms are essentially exchangeable, however, and the set of core requirements in this document could also be called &#8220;Canonical CBOR&#8221;, while the length-first-ordered version of that could be called &#8220;Old Canonical CBOR&#8221;.)</p>
+<p id="rfc.section.4.2.3.p.6">(Although <a href="#RFC7049" class="xref">[RFC7049]</a> used the term &#8220;Canonical CBOR&#8221; for its form of requirements on deterministic encoding, this document avoids this term because &#8220;canonicalization&#8221; is often associated with specific uses of deterministic encoding only.  The terms are essentially interchangeable, however, and the set of core requirements in this document could also be called &#8220;Canonical CBOR&#8221;, while the length-first-ordered version of that could be called &#8220;Old Canonical CBOR&#8221;.)</p>
 <h1 id="rfc.section.5">
 <a href="#rfc.section.5">5.</a> <a href="#creating-cbor-based-protocols" id="creating-cbor-based-protocols">Creating CBOR-Based Protocols</a>
 </h1>

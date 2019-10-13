@@ -118,8 +118,8 @@ Internet-Draft                    CBOR                      October 2019
      4.2.  Deterministically Encoded CBOR  . . . . . . . . . . . . .  26
        4.2.1.  Core Deterministic Encoding Requirements  . . . . . .  26
        4.2.2.  Additional Deterministic Encoding Considerations  . .  27
-       4.2.3.  Length-first map key ordering . . . . . . . . . . . .  28
-   5.  Creating CBOR-Based Protocols . . . . . . . . . . . . . . . .  29
+       4.2.3.  Length-first map key ordering . . . . . . . . . . . .  29
+   5.  Creating CBOR-Based Protocols . . . . . . . . . . . . . . . .  30
      5.1.  CBOR in Streaming Applications  . . . . . . . . . . . . .  30
      5.2.  Generic Encoders and Decoders . . . . . . . . . . . . . .  31
      5.3.  Invalid Items . . . . . . . . . . . . . . . . . . . . . .  31
@@ -1380,9 +1380,9 @@ Internet-Draft                    CBOR                      October 2019
 
    For some values at the data model level, CBOR provides multiple
    serializations.  For many applications, it is desirable that an
-   encoder always chooses a preferred serialization; however, the
-   present specification does not put the burden of enforcing this
-   preference on either encoder or decoder.
+   encoder always chooses a preferred serialization (preferred
+   encoding); however, the present specification does not put the burden
+   of enforcing this preference on either encoder or decoder.
 
    Some constrained decoders may be limited in their ability to decode
    non-preferred serializations: For example, if only integers below
@@ -1438,8 +1438,10 @@ Internet-Draft                    CBOR                      October 2019
    A CBOR encoding satisfies the "core deterministic encoding
    requirements" if it satisfies the following restrictions:
 
-   o  Arguments (see Section 3) for integers, lengths in major types 2
-      through 5, and tags MUST be as short as possible.  In particular:
+   o  Preferred serialization MUST be used.  In particular, this means
+      that arguments (see Section 3) for integers, lengths in major
+      types 2 through 5, and tags MUST be as short as possible, for
+      instance:
 
       *  0 to 23 and -1 to -24 MUST be expressed in the same byte as the
          major type;
@@ -1447,8 +1449,6 @@ Internet-Draft                    CBOR                      October 2019
       *  24 to 255 and -25 to -256 MUST be expressed only with an
          additional uint8_t;
 
-      *  256 to 65535 and -257 to -65536 MUST be expressed only with an
-         additional uint16_t;
 
 
 
@@ -1458,8 +1458,18 @@ Bormann & Hoffman        Expires April 15, 2020                [Page 26]
 Internet-Draft                    CBOR                      October 2019
 
 
+      *  256 to 65535 and -257 to -65536 MUST be expressed only with an
+         additional uint16_t;
+
       *  65536 to 4294967295 and -65537 to -4294967296 MUST be expressed
          only with an additional uint32_t.
+
+      Floating point values also MUST use the shortest form that
+      preserves the value, e.g. 1.5 is encoded as 0xf93e00 and 1000000.5
+      as 0xfa49742408.
+
+   o  Indefinite-length items MUST NOT appear.  They can be encoded as
+      definite-length items instead.
 
    o  The keys in every map MUST be sorted in the bytewise lexicographic
       order of their deterministic encodings.  For example, the
@@ -1481,9 +1491,6 @@ Internet-Draft                    CBOR                      October 2019
 
       8.  false, encoded as 0xf4.
 
-   o  Indefinite-length items MUST NOT appear.  They can be encoded as
-      definite-length items instead.
-
 4.2.2.  Additional Deterministic Encoding Considerations
 
    If a protocol allows for IEEE floats, then additional deterministic
@@ -1499,13 +1506,6 @@ Internet-Draft                    CBOR                      October 2019
    many representations for NaN.  If NaN is an allowed value, it must
    always be represented as 0xf97e00.
 
-   CBOR tags present additional considerations for deterministic
-   encoding.  The absence or presence of tags in a deterministic format
-   is determined by the optionality of the tags in the protocol.  In a
-   CBOR-based protocol that allows optional tagging anywhere, the
-   deterministic format must not allow them.  In a protocol that
-   requires tags in certain places, the tag needs to appear in the
-   deterministic format.  A CBOR-based protocol that uses deterministic
 
 
 
@@ -1514,6 +1514,13 @@ Bormann & Hoffman        Expires April 15, 2020                [Page 27]
 Internet-Draft                    CBOR                      October 2019
 
 
+   CBOR tags present additional considerations for deterministic
+   encoding.  The absence or presence of tags in a deterministic format
+   is determined by the optionality of the tags in the protocol.  In a
+   CBOR-based protocol that allows optional tagging anywhere, the
+   deterministic format must not allow them.  In a protocol that
+   requires tags in certain places, the tag needs to appear in the
+   deterministic format.  A CBOR-based protocol that uses deterministic
    encoding might instead say that all tags that appear in a message
    must be retained regardless of whether they are optional.
 
@@ -1553,14 +1560,7 @@ Internet-Draft                    CBOR                      October 2019
       needs to either require that the tag is present or require that
       it's absent, not allow either one.
 
-4.2.3.  Length-first map key ordering
 
-   The core deterministic encoding requirements sort map keys in a
-   different order from the one suggested by Section 3.9 of [RFC7049]
-   (called "Canonical CBOR" there).  Protocols that need to be
-   compatible with [RFC7049]'s order can instead be specified in terms
-   of this specification's "length-first core deterministic encoding
-   requirements":
 
 
 
@@ -1569,6 +1569,15 @@ Bormann & Hoffman        Expires April 15, 2020                [Page 28]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+4.2.3.  Length-first map key ordering
+
+   The core deterministic encoding requirements sort map keys in a
+   different order from the one suggested by Section 3.9 of [RFC7049]
+   (called "Canonical CBOR" there).  Protocols that need to be
+   compatible with [RFC7049]'s order can instead be specified in terms
+   of this specification's "length-first core deterministic encoding
+   requirements":
 
    A CBOR encoding satisfies the "length-first core deterministic
    encoding requirements" if it satisfies the core deterministic
@@ -1604,9 +1613,18 @@ Internet-Draft                    CBOR                      October 2019
    requirements on deterministic encoding, this document avoids this
    term because "canonicalization" is often associated with specific
    uses of deterministic encoding only.  The terms are essentially
-   exchangeable, however, and the set of core requirements in this
+   interchangeable, however, and the set of core requirements in this
    document could also be called "Canonical CBOR", while the length-
    first-ordered version of that could be called "Old Canonical CBOR".)
+
+
+
+
+
+Bormann & Hoffman        Expires April 15, 2020                [Page 29]
+
+Internet-Draft                    CBOR                      October 2019
+
 
 5.  Creating CBOR-Based Protocols
 
@@ -1618,14 +1636,6 @@ Internet-Draft                    CBOR                      October 2019
    Of course, in real-world implementations, the encoder and the decoder
    will have a shared view of what should be in a CBOR data item.  For
    example, an agreed-to format might be "the item is an array whose
-
-
-
-Bormann & Hoffman        Expires April 15, 2020                [Page 29]
-
-Internet-Draft                    CBOR                      October 2019
-
-
    first value is a UTF-8 string, second value is an integer, and
    subsequent values are zero or more floating-point numbers" or "the
    item is a map that has byte strings for keys and contains at least
@@ -1665,22 +1675,19 @@ Internet-Draft                    CBOR                      October 2019
    already be decoded, or even parts of a byte string that hasn't
    completely arrived yet.
 
-   Note that some applications and protocols will not want to use
-   indefinite-length encoding.  Using indefinite-length encoding allows
-   an encoder to not need to marshal all the data for counting, but it
-   requires a decoder to allocate increasing amounts of memory while
-   waiting for the end of the item.  This might be fine for some
-   applications but not others.
-
-
-
-
 
 
 Bormann & Hoffman        Expires April 15, 2020                [Page 30]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   Note that some applications and protocols will not want to use
+   indefinite-length encoding.  Using indefinite-length encoding allows
+   an encoder to not need to marshal all the data for counting, but it
+   requires a decoder to allocate increasing amounts of memory while
+   waiting for the end of the item.  This might be fine for some
+   applications but not others.
 
 5.2.  Generic Encoders and Decoders
 
@@ -1724,19 +1731,17 @@ Internet-Draft                    CBOR                      October 2019
 
    2.  Issue an error and stop processing altogether.
 
-   A CBOR-based protocol MUST specify which of these options its
-   decoders take, for each kind of invalid item they might encounter.
-
-   Such problems might include:
-
-
-
 
 
 Bormann & Hoffman        Expires April 15, 2020                [Page 31]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   A CBOR-based protocol MUST specify which of these options its
+   decoders take, for each kind of invalid item they might encounter.
+
+   Such problems might include:
 
    Duplicate keys in a map:  Generic decoders (Section 5.2) make data
       available to applications using the native CBOR data model.  That
@@ -1781,11 +1786,6 @@ Internet-Draft                    CBOR                      October 2019
    (as is expected of generic decoders), might ignore the tag and simply
    present the contained data item only to the application, or take some
    other type of action.
-
-
-
-
-
 
 
 
