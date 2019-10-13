@@ -1144,7 +1144,7 @@ C5             -- Tag 5
 <h1 id="rfc.section.3.4.6.1">
 <a href="#rfc.section.3.4.6.1">3.4.6.1.</a> <a href="#embedded-di" id="embedded-di">Encoded CBOR Data Item</a>
 </h1>
-<p id="rfc.section.3.4.6.1.p.1">Sometimes it is beneficial to carry an embedded CBOR data item that is not meant to be decoded immediately at the time the enclosing data item is being decoded.  Tag number 24 (CBOR data item) can be used to tag the embedded byte string as a data item encoded in CBOR format.  Contained items that aren&#8217;t byte strings are invalid.  Any contained byte string is valid, even if it encodes an invalid or ill-formed CBOR item.</p>
+<p id="rfc.section.3.4.6.1.p.1">Sometimes it is beneficial to carry an embedded CBOR data item that is not meant to be decoded immediately at the time the enclosing data item is being decoded.  Tag number 24 (CBOR data item) can be used to tag the embedded byte string as a data item encoded in CBOR format.  Contained items that aren&#8217;t byte strings are invalid.  A contained byte string is valid if it encodes a well-formed CBOR item; validity checking of the decoded CBOR item is not required for tag validity (but could be offered by a generic decoder as a special option).</p>
 <h1 id="rfc.section.3.4.6.2">
 <a href="#rfc.section.3.4.6.2">3.4.6.2.</a> <a href="#convexpect" id="convexpect">Expected Later Encoding for CBOR-to-JSON Converters</a>
 </h1>
@@ -1168,7 +1168,7 @@ C5             -- Tag 5
 <p> the string is invalid.</p>
 </li>
 <li>Tag number 35 is for regular expressions that are roughly in Perl Compatible Regular Expressions (PCRE/PCRE2) form <a href="#PCRE" class="xref">[PCRE]</a> or a version of the JavaScript regular expression syntax <a href="#ECMA262" class="xref">[ECMA262]</a>.  (Note that more specific identification may be necessary if the actual version of the specification underlying the regular expression, or more than just the text of the regular expression itself, need to be conveyed.) Any contained string value is valid.</li>
-<li>Tag number 36 is for MIME messages (including all headers), as defined in <a href="#RFC2045" class="xref">[RFC2045]</a>. A text string that isn&#8217;t a valid MIME message is invalid.</li>
+<li>Tag number 36 is for MIME messages (including all headers), as defined in <a href="#RFC2045" class="xref">[RFC2045]</a>. A text string that isn&#8217;t a valid MIME message is invalid.  (For this tag, validity checking may be particularly onerous for a generic decoder and might therefore not be offered.)</li>
 </ul>
 <p id="rfc.section.3.4.6.3.p.3">Note that tag numbers 33 and 34 differ from 21 and 22 in that the data is transported in base-encoded form for the former and in raw byte string form for the latter.</p>
 <h1 id="rfc.section.3.4.7">
