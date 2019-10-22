@@ -1115,7 +1115,7 @@ C2                        -- Tag 2
 <h1 id="rfc.section.3.4.5">
 <a href="#rfc.section.3.4.5">3.4.5.</a> <a href="#fractions" id="fractions">Decimal Fractions and Bigfloats</a>
 </h1>
-<p id="rfc.section.3.4.5.p.1">Protocols using tag number 4 extend the generic data model with data items representing arbitrary-length decimal fractions m*(10<strong>e).  Protocols using tag number 5 extend the generic data model with data items representing arbitrary-length binary fractions m*(2</strong>e). As with bignums, values of different types are not equal in the generic data model.</p>
+<p id="rfc.section.3.4.5.p.1">Protocols using tag number 4 extend the generic data model with data items representing arbitrary-length decimal fractions of the form m*(10**e).  Protocols using tag number 5 extend the generic data model with data items representing arbitrary-length binary fractions of the form m*(2**e).  As with bignums, values of different types are not equal in the generic data model.</p>
 <p id="rfc.section.3.4.5.p.2">Decimal fractions combine an integer mantissa with a base-10 scaling factor.  They are most useful if an application needs the exact representation of a decimal fraction such as 1.1 because there is no exact representation for many decimal fractions in binary floating point.</p>
 <p id="rfc.section.3.4.5.p.3">Bigfloats combine an integer mantissa with a base-2 scaling factor.  They are binary floating-point values that can exceed the range or the precision of the three IEEE 754 formats supported by CBOR (<a href="#fpnocont" class="xref">Section 3.3</a>).  Bigfloats may also be used by constrained applications that need some basic binary floating-point capability without the need for supporting IEEE 754.</p>
 <p id="rfc.section.3.4.5.p.4">A decimal fraction or a bigfloat is represented as a tagged array that contains exactly two integer numbers: an exponent e and a mantissa m.  Decimal fractions (tag number 4) use base-10 exponents; the value of a decimal fraction data item is m*(10**e).  Bigfloats (tag number 5) use base-2 exponents; the value of a bigfloat data item is m*(2**e).  The exponent e MUST be represented in an integer of major type 0 or 1, while the mantissa also can be a bignum (<a href="#bignums" class="xref">Section 3.4.4</a>).  Contained items with other structures are invalid.</p>
@@ -1712,11 +1712,6 @@ Author/Change Controller:
 <td class="reference"><b id="RFC8259">[RFC8259]</b></td>
 <td class="top">
 <a>Bray, T.</a>, "<a href="https://tools.ietf.org/html/rfc8259">The JavaScript Object Notation (JSON) Data Interchange Format</a>", STD 90, RFC 8259, DOI 10.17487/RFC8259, December 2017.</td>
-</tr>
-<tr>
-<td class="reference"><b id="RFC8618">[RFC8618]</b></td>
-<td class="top">
-<a>Dickinson, J.</a>, <a>Hague, J.</a>, <a>Dickinson, S.</a>, <a>Manderson, T.</a> and <a>J. Bond</a>, "<a href="https://tools.ietf.org/html/rfc8618">Compacted-DNS (C-DNS): A Format for DNS Packet Capture</a>", RFC 8618, DOI 10.17487/RFC8618, September 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="SIPHASH">[SIPHASH]</b></td>
@@ -2435,7 +2430,6 @@ def decode_half(half):
 <li>good JSON conversion</li>
 <li>extensibility</li>
 </ol>
-<p id="rfc.section.E.p.5">A discussion of CBOR and other formats with respect to a different set of design objectives is provided in Section 5 and Appendix C of <a href="#RFC8618" class="xref">[RFC8618]</a>.</p>
 <h1 id="rfc.appendix.E.1">
 <a href="#rfc.appendix.E.1">E.1.</a> <a href="#asn1-der-ber-and-per" id="asn1-der-ber-and-per">ASN.1 DER, BER, and PER</a>
 </h1>
