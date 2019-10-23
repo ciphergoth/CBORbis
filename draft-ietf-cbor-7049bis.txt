@@ -306,7 +306,8 @@ Internet-Draft                    CBOR                      October 2019
    Data item:  A single piece of CBOR data.  The structure of a data
       item may contain zero, one, or more nested data items.  The term
       is used both for the data item in representation format and for
-      the abstract idea that can be derived from that by a decoder.
+      the abstract idea that can be derived from that by a decoder; the
+      former can be addressed specifically by using "encoded data item".
 
    Decoder:  A process that decodes a well-formed CBOR data item and
       makes it available to an application.  Formally speaking, a
@@ -328,7 +329,6 @@ Internet-Draft                    CBOR                      October 2019
       defined in CBOR and does not include following extraneous data.
       CBOR decoders by definition only return contents from well-formed
       data items.
-
 
 
 
@@ -1942,17 +1942,17 @@ Internet-Draft                    CBOR                      October 2019
    semantics but may be enough reason on its own for a protocol to
    require a deterministic encoding format.)
 
-   Applications for constrained devices that have maps where a small
-   number of frequently used keys can be identified should consider
-   using small integers as keys; for instance, a set of 24 or fewer
-   frequent keys can be encoded in a single byte as unsigned integers,
-   up to 48 if negative integers are also used.  Less frequently
-   occurring keys can then use integers with longer encodings.
+   Applications for constrained devices that have maps with 24 or fewer
+   frequently used keys should consider using small integers (and those
+   with up to 48 frequently used keys should consider also using small
+   negative integers) because the keys can then be encoded in a single
+   byte.
 
 5.6.1.  Equivalence of Keys
 
    The specific data model applying to a CBOR data item is used to
    determine whether keys occurring in maps are duplicates or distinct.
+
 
 
 
