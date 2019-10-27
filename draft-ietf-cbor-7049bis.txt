@@ -1962,11 +1962,12 @@ Bormann & Hoffman        Expires April 29, 2020                [Page 35]
 Internet-Draft                    CBOR                      October 2019
 
 
-   Applications for constrained devices that have maps with 24 or fewer
-   frequently used keys should consider using small integers (and those
-   with up to 48 frequently used keys should consider also using small
-   negative integers) because the keys can then be encoded in a single
-   byte.
+   Applications for constrained devices that have maps where a small
+   number of frequently used keys can be identified should consider
+   using small integers as keys; for instance, a set of 24 or fewer
+   frequent keys can be encoded in a single byte as unsigned integers,
+   up to 48 if negative integers are also used.  Less frequently
+   occurring keys can then use integers with longer encodings.
 
 5.6.1.  Equivalence of Keys
 
@@ -2008,8 +2009,7 @@ Internet-Draft                    CBOR                      October 2019
    checked for duplicate map keys by that application (alternatively,
    the decoder may provide a programming interface to perform this
    service for the application).  Specific data models cannot
-   distinguish values for map keys that are equal for this purpose at
-   the generic data model level.
+
 
 
 
@@ -2017,6 +2017,9 @@ Bormann & Hoffman        Expires April 29, 2020                [Page 36]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   distinguish values for map keys that are equal for this purpose at
+   the generic data model level.
 
 5.7.  Undefined Values
 
@@ -2063,9 +2066,6 @@ Internet-Draft                    CBOR                      October 2019
    A validity-checking decoder can do one of two things when it
    encounters a tag number or simple value that it does not recognize:
 
-   o  It can report an error (and not return data).
-
-
 
 
 
@@ -2073,6 +2073,8 @@ Bormann & Hoffman        Expires April 29, 2020                [Page 37]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   o  It can report an error (and not return data).
 
    o  It can emit the unknown item (type, value, and, for tags, the
       decoded tagged data item) to the application calling the decoder,
@@ -2118,9 +2120,7 @@ Internet-Draft                    CBOR                      October 2019
 
    o  An integer (major type 0 or 1) becomes a JSON number.
 
-   o  A byte string (major type 2) that is not embedded in a tag that
-      specifies a proposed encoding is encoded in base64url without
-      padding and becomes a JSON string.
+
 
 
 
@@ -2129,6 +2129,10 @@ Bormann & Hoffman        Expires April 29, 2020                [Page 38]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   o  A byte string (major type 2) that is not embedded in a tag that
+      specifies a proposed encoding is encoded in base64url without
+      padding and becomes a JSON string.
 
    o  A UTF-8 string (major type 3) becomes a JSON string.  Note that
       JSON requires escaping certain characters ([RFC8259], Section 7):
@@ -2175,16 +2179,16 @@ Internet-Draft                    CBOR                      October 2019
    o  A byte string with an encoding hint (major type 6, tag number 21
       through 23) is encoded as described and becomes a JSON string.
 
-   o  For all other tags (major type 6, any other tag number), the
-      enclosed CBOR item is represented as a JSON value; the tag number
-      is ignored.
-
 
 
 Bormann & Hoffman        Expires April 29, 2020                [Page 39]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   o  For all other tags (major type 6, any other tag number), the
+      enclosed CBOR item is represented as a JSON value; the tag number
+      is ignored.
 
    o  Indefinite-length items are made definite before conversion.
 
@@ -2230,10 +2234,6 @@ Internet-Draft                    CBOR                      October 2019
    cases, such as that some strings represented with no or very few
    escapes and longer (or much longer) than 255 bytes may expand when
    encoded as UTF-8 strings in CBOR.  Similarly, a few of the binary
-   floating-point representations might cause expansion from some short
-   decimal representations (1.1, 1e9) in JSON.  This may be hard to get
-   right, and any ensuing vulnerabilities may be exploited by an
-   attacker.
 
 
 
@@ -2241,6 +2241,11 @@ Bormann & Hoffman        Expires April 29, 2020                [Page 40]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   floating-point representations might cause expansion from some short
+   decimal representations (1.1, 1e9) in JSON.  This may be hard to get
+   right, and any ensuing vulnerabilities may be exploited by an
+   attacker.
 
 7.  Future Evolution of CBOR
 
@@ -2285,11 +2290,6 @@ Internet-Draft                    CBOR                      October 2019
       been allocated.  Implementations receiving an unknown simple data
       item may be able to process it as such, given that the structure
       of the value is indeed simple.  The IANA registry in Section 9.1
-      is the appropriate way to address the extensibility of this
-      codepoint space.
-
-   o  the "tag" space (values in major type 6).  Again, only a small
-      part of the codepoint space has been allocated, and the space is
 
 
 
@@ -2298,6 +2298,11 @@ Bormann & Hoffman        Expires April 29, 2020                [Page 41]
 Internet-Draft                    CBOR                      October 2019
 
 
+      is the appropriate way to address the extensibility of this
+      codepoint space.
+
+   o  the "tag" space (values in major type 6).  Again, only a small
+      part of the codepoint space has been allocated, and the space is
       abundant (although the early numbers are more efficient than the
       later ones).  Implementations receiving an unknown tag number can
       choose to simply ignore it or to process it as an unknown tag
@@ -2341,11 +2346,6 @@ Internet-Draft                    CBOR                      October 2019
    Note that this truly is a diagnostic format; it is not meant to be
    parsed.  Therefore, no formal definition (as in ABNF) is given in
    this document.  (Implementers looking for a text-based format for
-   representing CBOR data items in configuration files may also want to
-   consider YAML [YAML].)
-
-   The diagnostic notation is loosely based on JSON as it is defined in
-   RFC 8259, extending it where needed.
 
 
 
@@ -2353,6 +2353,12 @@ Bormann & Hoffman        Expires April 29, 2020                [Page 42]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   representing CBOR data items in configuration files may also want to
+   consider YAML [YAML].)
+
+   The diagnostic notation is loosely based on JSON as it is defined in
+   RFC 8259, extending it where needed.
 
    The notation borrows the JSON syntax for numbers (integer and
    floating point), True (>true<), False (>false<), Null (>null<), UTF-8
@@ -2396,12 +2402,6 @@ Internet-Draft                    CBOR                      October 2019
    not interested in this information.  Encoding indicators are always
    optional.
 
-   A single underscore can be written after the opening brace of a map
-   or the opening bracket of an array to indicate that the data item was
-   represented in indefinite-length format.  For example, [_ 1, 2]
-   contains an indicator that an indefinite-length representation was
-   used to represent the data item [1, 2].
-
 
 
 
@@ -2409,6 +2409,12 @@ Bormann & Hoffman        Expires April 29, 2020                [Page 43]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   A single underscore can be written after the opening brace of a map
+   or the opening bracket of an array to indicate that the data item was
+   represented in indefinite-length format.  For example, [_ 1, 2]
+   contains an indicator that an indefinite-length representation was
+   used to represent the data item [1, 2].
 
    An underscore followed by a decimal digit n indicates that the
    preceding item (or, for arrays and maps, the item starting with the
@@ -2451,13 +2457,7 @@ Internet-Draft                    CBOR                      October 2019
    [RFC7049] are described in detail in Section 3.4, but other tags have
    already been defined.
 
-   New entries in the range 0 to 23 are assigned by Standards Action.
-   New entries in the range 24 to 255 are assigned by Specification
-   Required.  New entries in the range 256 to 18446744073709551615 are
-   assigned by First Come First Served.  The template for registration
-   requests is:
 
-   o  Data item
 
 
 
@@ -2465,6 +2465,14 @@ Bormann & Hoffman        Expires April 29, 2020                [Page 44]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   New entries in the range 0 to 23 are assigned by Standards Action.
+   New entries in the range 24 to 255 are assigned by Specification
+   Required.  New entries in the range 256 to 18446744073709551615 are
+   assigned by First Come First Served.  The template for registration
+   requests is:
+
+   o  Data item
 
    o  Semantics (short form)
 
@@ -2498,14 +2506,6 @@ Internet-Draft                    CBOR                      October 2019
 
    Applications that use this media type:  None yet, but it is expected
       that this format will be deployed in protocols and applications.
-
-
-
-
-
-
-
-
 
 
 
