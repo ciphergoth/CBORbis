@@ -315,13 +315,15 @@ ul.toc li {
 <link href="#rfc.section.5" rel="Chapter" title="5 Creating CBOR-Based Protocols">
 <link href="#rfc.section.5.1" rel="Chapter" title="5.1 CBOR in Streaming Applications">
 <link href="#rfc.section.5.2" rel="Chapter" title="5.2 Generic Encoders and Decoders">
-<link href="#rfc.section.5.3" rel="Chapter" title="5.3 Invalid Items">
-<link href="#rfc.section.5.4" rel="Chapter" title="5.4 Handling Unknown Simple Values and Tags">
+<link href="#rfc.section.5.3" rel="Chapter" title="5.3 Validity of Items">
+<link href="#rfc.section.5.3.1" rel="Chapter" title="5.3.1 Basic validity">
+<link href="#rfc.section.5.3.2" rel="Chapter" title="5.3.2 Tag validity">
+<link href="#rfc.section.5.4" rel="Chapter" title="5.4 Handling Unknown Simple Values and Tag numbers">
 <link href="#rfc.section.5.5" rel="Chapter" title="5.5 Numbers">
 <link href="#rfc.section.5.6" rel="Chapter" title="5.6 Specifying Keys for Maps">
 <link href="#rfc.section.5.6.1" rel="Chapter" title="5.6.1 Equivalence of Keys">
 <link href="#rfc.section.5.7" rel="Chapter" title="5.7 Undefined Values">
-<link href="#rfc.section.5.8" rel="Chapter" title="5.8 Validity Checking">
+<link href="#rfc.section.5.8" rel="Chapter" title="5.8 Validity Checking and Robustness">
 <link href="#rfc.section.6" rel="Chapter" title="6 Converting Data between CBOR and JSON">
 <link href="#rfc.section.6.1" rel="Chapter" title="6.1 Converting from CBOR to JSON">
 <link href="#rfc.section.6.2" rel="Chapter" title="6.2 Converting from JSON to CBOR">
@@ -487,9 +489,13 @@ ul.toc li {
 </li>
 <li>5.2.   <a href="#rfc.section.5.2">Generic Encoders and Decoders</a>
 </li>
-<li>5.3.   <a href="#rfc.section.5.3">Invalid Items</a>
+<li>5.3.   <a href="#rfc.section.5.3">Validity of Items</a>
 </li>
-<li>5.4.   <a href="#rfc.section.5.4">Handling Unknown Simple Values and Tags</a>
+<ul><li>5.3.1.   <a href="#rfc.section.5.3.1">Basic validity</a>
+</li>
+<li>5.3.2.   <a href="#rfc.section.5.3.2">Tag validity</a>
+</li>
+</ul><li>5.4.   <a href="#rfc.section.5.4">Handling Unknown Simple Values and Tag numbers</a>
 </li>
 <li>5.5.   <a href="#rfc.section.5.5">Numbers</a>
 </li>
@@ -499,7 +505,7 @@ ul.toc li {
 </li>
 </ul><li>5.7.   <a href="#rfc.section.5.7">Undefined Values</a>
 </li>
-<li>5.8.   <a href="#rfc.section.5.8">Validity Checking</a>
+<li>5.8.   <a href="#rfc.section.5.8">Validity Checking and Robustness</a>
 </li>
 </ul><li>6.   <a href="#rfc.section.6">Converting Data between CBOR and JSON</a>
 </li>
@@ -719,7 +725,7 @@ ul.toc li {
 <dt>Major type 5:</dt>
 <dd style="margin-left: 8">a map of pairs of data items. Maps are also called tables, dictionaries, hashes, or objects (in JSON).  A map is comprised of pairs of data items, each pair consisting of a key that is immediately followed by a value.  The argument is the number of <em>pairs</em> of data items in the map.  For example, a map that contains 9 pairs would have an initial byte of 0b101_01001 (major type of 5, additional information of 9 for the number of pairs) followed by the 18 remaining items. The first item is the first key, the second item is the first value, the third item is the second key, and so on.  Because items in a map come in pairs, their total number is always even:  A map that contains an odd number of items (no value data present after the last key data item) is not well-formed.  A map that has duplicate keys may be well-formed, but it is not valid, and thus it causes indeterminate decoding; see also <a href="#map-keys" class="xref">Section 5.6</a>.</dd>
 <dt>Major type 6:</dt>
-<dd style="margin-left: 8">a tagged data item (&#8220;tag&#8221;) whose tag number is the argument and whose enclosed data item is the single encoded data item that follows the head.  See <a href="#tags" class="xref">Section 3.4</a>.</dd>
+<dd style="margin-left: 8">a tagged data item (&#8220;tag&#8221;) whose tag number is the argument and whose enclosed data item (&#8220;tag content&#8221;) is the single encoded data item that follows the head.  See <a href="#tags" class="xref">Section 3.4</a>.</dd>
 <dt>Major type 7:</dt>
 <dd style="margin-left: 8">floating-point numbers and simple values, as well as the &#8220;break&#8221; stop code.  See <a href="#fpnocont" class="xref">Section 3.3</a>.</dd>
 </dl>
@@ -974,8 +980,8 @@ BF           -- Start indefinite-length map
 </h1>
 <p id="rfc.section.3.4.p.1">In CBOR, a data item can be enclosed by a tag to give it additional semantics while retaining its structure. The tag is major type 6, and represents an unsigned integer as indicated by the tag&#8217;s argument (<a href="#encoding" class="xref">Section 3</a>); the (sole) enclosed data item is carried as content data.  If a tag requires structured data, this structure is encoded into the nested data item.  The definition of a tag number usually restricts what kinds of nested data item or items are valid for tags using this tag number.</p>
 <p id="rfc.section.3.4.p.2">For example, assume that a byte string of length 12 is marked with a tag of number 2 to indicate it is a positive bignum (<a href="#bignums" class="xref">Section 3.4.4</a>).  This would be marked as 0b110_00010 (major type 6, additional information 2 for the tag number) followed by 0b010_01100 (major type 2, additional information of 12 for the length) followed by the 12 bytes of the bignum.</p>
-<p id="rfc.section.3.4.p.3">Decoders do not need to understand tags of every tag number, and tags may be of little value in applications where the implementation creating a particular CBOR data item and the implementation decoding that stream know the semantic meaning of each item in the data flow. Their primary purpose in this specification is to define common data types such as dates. A secondary purpose is to allow optional tagging when the decoder is a generic CBOR decoder that might be able to benefit from hints about the content of items.  Understanding the semantic tags is optional for a decoder; it can just jump over the initial bytes of the tag and interpret the tagged data item itself.</p>
-<p id="rfc.section.3.4.p.4">A tag applies semantics to the data item it encloses.  Thus, if tag A encloses tag B, which encloses data item C, tag A applies to the result of applying tag B on data item C.  That is, a tagged item is a data item consisting of a tag number and an enclosed value.  The content of the tagged item (the enclosed data item) is the data item (the value) that is being tagged.</p>
+<p id="rfc.section.3.4.p.3">Decoders do not need to understand tags of every tag number, and tags may be of little value in applications where the implementation creating a particular CBOR data item and the implementation decoding that stream know the semantic meaning of each item in the data flow. Their primary purpose in this specification is to define common data types such as dates. A secondary purpose is to provide conversion hints when it is foreseen that the CBOR data item needs to be translated into a different format, requiring hints about the content of items.  Understanding the semantics of tags is optional for a decoder; it can just jump over the initial bytes of the tag (that encode the tag number) and interpret the tag content itself, presenting both tag number and tag content to the application.</p>
+<p id="rfc.section.3.4.p.4">A tag applies semantics to the data item it encloses.  Thus, if tag A encloses tag B, which encloses data item C, tag A applies to the result of applying tag B on data item C.  That is, a tag is a data item consisting of a tag number and an enclosed value.  The content of the tag (the enclosed data item) is the data item (the value) that is being tagged.</p>
 <p id="rfc.section.3.4.p.5">IANA maintains a registry of tag numbers as described in <a href="#ianatags" class="xref">Section 9.2</a>.  <a href="#tagvalues" class="xref">Table 4</a> provides a list of tag numbers that were defined in <a href="#RFC7049" class="xref">[RFC7049]</a>, with definitions in the rest of this section.  Note that many other tag numbers have been defined since the publication of <a href="#RFC7049" class="xref">[RFC7049]</a>; see the registry described at <a href="#ianatags" class="xref">Section 9.2</a> for the complete list.</p>
 <div id="rfc.table.4"></div>
 <div id="tagvalues"></div>
@@ -1100,7 +1106,7 @@ BF           -- Start indefinite-length map
 <p id="rfc.section.3.4.3.p.2">The enclosed item MUST be an unsigned or negative integer (major types 0 and 1), or a floating-point number (major type 7 with additional information 25, 26, or 27). Other contained types are invalid.</p>
 <p id="rfc.section.3.4.3.p.3">Non-negative values (major type 0 and non-negative floating-point numbers) stand for time values on or after 1970-01-01T00:00Z UTC and are interpreted according to POSIX <a href="#TIME_T" class="xref">[TIME_T]</a>.  (POSIX time is also known as UNIX Epoch time.  Note that leap seconds are handled specially by POSIX time and this results in a 1 second discontinuity several times per decade.) Note that applications that require the expression of times beyond early 2106 cannot leave out support of 64-bit integers for the enclosed value.</p>
 <p id="rfc.section.3.4.3.p.4">Negative values (major type 1 and negative floating-point numbers) are interpreted as determined by the application requirements as there is no universal standard for UTC count-of-seconds time before 1970-01-01T00:00Z (this is particularly true for points in time that precede discontinuities in national calendars).  The same applies to non-finite values.</p>
-<p id="rfc.section.3.4.3.p.5">To indicate fractional seconds, floating-point values can be used within Tag number 1 instead of integer values.  Note that this generally requires binary64 support, as binary16 and binary32 provide non-zero fractions of seconds only for a short period of time around early 1970.  An application that requires Tag number 1 support may restrict the enclosed value to be an integer (or a floating-point value) only.</p>
+<p id="rfc.section.3.4.3.p.5">To indicate fractional seconds, floating-point values can be used within tag number 1 instead of integer values.  Note that this generally requires binary64 support, as binary16 and binary32 provide non-zero fractions of seconds only for a short period of time around early 1970.  An application that requires tag number 1 support may restrict the enclosed value to be an integer (or a floating-point value) only.</p>
 <h1 id="rfc.section.3.4.4">
 <a href="#rfc.section.3.4.4">3.4.4.</a> <a href="#bignums" id="bignums">Bignums</a>
 </h1>
@@ -1221,7 +1227,7 @@ C5             -- Tag 5
 <a href="#rfc.section.4.2.2">4.2.2.</a> <a href="#additional-deterministic-encoding-considerations" id="additional-deterministic-encoding-considerations">Additional Deterministic Encoding Considerations</a>
 </h1>
 <p id="rfc.section.4.2.2.p.1">If a protocol allows for IEEE floats, then additional deterministic encoding rules might need to be added.  One example rule might be to have all floats start as a 64-bit float, then do a test conversion to a 32-bit float; if the result is the same numeric value, use the shorter value and repeat the process with a test conversion to a 16-bit float. (This rule selects 16-bit float for positive and negative Infinity as well.) Although IEEE floats can represent both positive and negative zero as distinct values, the application might not distinguish these and might decide to represent all zero values with a positive sign, disallowing negative zero.  Also, there are many representations for NaN. If NaN is an allowed value, it must always be represented as 0xf97e00.</p>
-<p id="rfc.section.4.2.2.p.2">CBOR tags present additional considerations for deterministic encoding. The absence or presence of tags in a deterministic format is determined by the optionality of the tags in the protocol. In a CBOR-based protocol that allows optional tagging anywhere, the deterministic format must not allow them.  In a protocol that requires tags in certain places, the tag needs to appear in the deterministic format. A CBOR-based protocol that uses deterministic encoding might instead say that all tags that appear in a message must be retained regardless of whether they are optional.</p>
+<p id="rfc.section.4.2.2.p.2">CBOR tags present additional considerations for deterministic encoding.  If a CBOR-based protocol were to provide the same semantics for the presence and absence of a specific tag (e.g., by allowing both tag 1 data items and raw numbers in a date/time position, treating the latter as if they were tagged), the deterministic format would not allow them.  In a protocol that requires tags in certain places to obtain specific semantics, the tag needs to appear in the deterministic format as well.</p>
 <p id="rfc.section.4.2.2.p.3">Protocols that include floating, big integer, or other complex values need to define extra requirements on their deterministic encodings. For example:</p>
 <p></p>
 
@@ -1282,9 +1288,9 @@ C5             -- Tag 5
 <p id="rfc.section.5.2.p.3">Generic decoders provide ways to present well-formed CBOR values, both valid and invalid, to an application.  The diagnostic notation (<a href="#diagnostic-notation" class="xref">Section 8</a>) may be used to present well-formed CBOR values to humans.</p>
 <p id="rfc.section.5.2.p.4">Generic encoders provide an application interface that allows the application to specify any well-formed value, including simple values and tags unknown to the encoder.</p>
 <h1 id="rfc.section.5.3">
-<a href="#rfc.section.5.3">5.3.</a> <a href="#semantic-errors" id="semantic-errors">Invalid Items</a>
+<a href="#rfc.section.5.3">5.3.</a> <a href="#semantic-errors" id="semantic-errors">Validity of Items</a>
 </h1>
-<p id="rfc.section.5.3.p.1">A well-formed but invalid CBOR data item presents a problem with interpreting the data encoded in it in the CBOR data model.  A CBOR-based protocol could be specified in several layers, in which the lower layers don&#8217;t process the semantics of some of the CBOR data they forward.  These layers can&#8217;t notice the invalidity in data they don&#8217;t process and MUST forward that data as-is.  The first layer that does process the semantics of an invalid CBOR item MUST take one of two choices:</p>
+<p id="rfc.section.5.3.p.1">A well-formed but invalid CBOR data item presents a problem with interpreting the data encoded in it in the CBOR data model.  A CBOR-based protocol could be specified in several layers, in which the lower layers don&#8217;t process the semantics of some of the CBOR data they forward.  These layers can&#8217;t notice any validity errors in data they don&#8217;t process and MUST forward that data as-is.  The first layer that does process the semantics of an invalid CBOR item MUST take one of two choices:</p>
 <p></p>
 
 <ol>
@@ -1292,22 +1298,34 @@ C5             -- Tag 5
 <li>Issue an error and stop processing altogether.</li>
 </ol>
 <p id="rfc.section.5.3.p.3">A CBOR-based protocol MUST specify which of these options its decoders take, for each kind of invalid item they might encounter.</p>
-<p id="rfc.section.5.3.p.4">Such problems might include:</p>
+<p id="rfc.section.5.3.p.4">Such problems might occur at the basic validity level of CBOR or in the context of tags (tag validity).</p>
+<h1 id="rfc.section.5.3.1">
+<a href="#rfc.section.5.3.1">5.3.1.</a> <a href="#basic-validity" id="basic-validity">Basic validity</a>
+</h1>
 <p></p>
 
 <dl>
 <dt>Duplicate keys in a map:</dt>
 <dd style="margin-left: 8">Generic decoders (<a href="#generic" class="xref">Section 5.2</a>) make data available to applications using the native CBOR data model.  That data model includes maps (key-value mappings with unique keys), not multimaps (key-value mappings where multiple entries can have the same key).  Thus, a generic decoder that gets a CBOR map item that has duplicate keys will decode to a map with only one instance of that key, or it might stop processing altogether.  On the other hand, a &#8220;streaming decoder&#8221; may not even be able to notice (<a href="#map-keys" class="xref">Section 5.6</a>).</dd>
-<dt>Inadmissible type on the value enclosed by a tag:</dt>
-<dd style="margin-left: 8">Tags (<a href="#tags" class="xref">Section 3.4</a>) specify what type of data item is supposed to be enclosed by the tag; for example, the tags for positive or negative bignums are supposed to be put on byte strings. A decoder that decodes the tagged data item into a native representation (a native big integer in this example) is expected to check the type of the data item being tagged.  Even decoders that don&#8217;t have such native representations available in their environment may perform the check on those tags known to them and react appropriately.</dd>
 <dt>Invalid UTF-8 string:</dt>
 <dd style="margin-left: 8">A decoder might or might not want to verify that the sequence of bytes in a UTF-8 string (major type 3) is actually valid UTF-8 and react appropriately.</dd>
 </dl>
+<h1 id="rfc.section.5.3.2">
+<a href="#rfc.section.5.3.2">5.3.2.</a> <a href="#tag-validity" id="tag-validity">Tag validity</a>
+</h1>
+<p></p>
+
+<dl>
+<dt>Inadmissible type for tag content:</dt>
+<dd style="margin-left: 8">Tags (<a href="#tags" class="xref">Section 3.4</a>) specify what type of data item is supposed to be enclosed by the tag; for example, the tags for positive or negative bignums are supposed to be put on byte strings. A decoder that decodes the tagged data item into a native representation (a native big integer in this example) is expected to check the type of the data item being tagged.  Even decoders that don&#8217;t have such native representations available in their environment may perform the check on those tags known to them and react appropriately.</dd>
+<dt>Inadmissible value for tag content:</dt>
+<dd style="margin-left: 8">The type of data item may be admissible for a tag&#8217;s content, but the specific value may not be; e.g., a value of &#8220;yesterday&#8221; is not acceptable for the content of tag 0, even though it properly is a text string.  A decoder that normally ingests such tags into equivalent platform types might present this tag to the application in a similar way to how it would present a tag with an unknown tag number (<a href="#unknown-tags" class="xref">Section 5.4</a>).</dd>
+</dl>
 <h1 id="rfc.section.5.4">
-<a href="#rfc.section.5.4">5.4.</a> <a href="#unknown-tags" id="unknown-tags">Handling Unknown Simple Values and Tags</a>
+<a href="#rfc.section.5.4">5.4.</a> <a href="#unknown-tags" id="unknown-tags">Handling Unknown Simple Values and Tag numbers</a>
 </h1>
 <p id="rfc.section.5.4.p.1">A decoder that comes across a simple value (<a href="#fpnocont" class="xref">Section 3.3</a>) that it does not recognize, such as a value that was added to the IANA registry after the decoder was deployed or a value that the decoder chose not to implement, might issue a warning, might stop processing altogether, might handle the error by making the unknown value available to the application as such (as is expected of generic decoders), or take some other type of action.</p>
-<p id="rfc.section.5.4.p.2">A decoder that comes across a tag number (<a href="#tags" class="xref">Section 3.4</a>) that it does not recognize, such as a tag number that was added to the IANA registry after the decoder was deployed or a tag number that the decoder chose not to implement, might issue a warning, might stop processing altogether, might handle the error and present the unknown tag number together with the enclosed data item to the application (as is expected of generic decoders), might ignore the tag and simply present the contained data item only to the application, or take some other type of action.</p>
+<p id="rfc.section.5.4.p.2">A decoder that comes across a tag number (<a href="#tags" class="xref">Section 3.4</a>) that it does not recognize, such as a tag number that was added to the IANA registry after the decoder was deployed or a tag number that the decoder chose not to implement, might issue a warning, might stop processing altogether, might handle the error and present the unknown tag number together with the enclosed data item to the application (as is expected of generic decoders), or take some other type of action.</p>
 <h1 id="rfc.section.5.5">
 <a href="#rfc.section.5.5">5.5.</a> <a href="#numbers" id="numbers">Numbers</a>
 </h1>
@@ -1328,17 +1346,17 @@ C5             -- Tag 5
 <a href="#rfc.section.5.6.1">5.6.1.</a> <a href="#equivalence-of-keys" id="equivalence-of-keys">Equivalence of Keys</a>
 </h1>
 <p id="rfc.section.5.6.1.p.1">The specific data model applying to a CBOR data item is used to determine whether keys occurring in maps are duplicates or distinct.</p>
-<p id="rfc.section.5.6.1.p.2">At the generic data model level, numerically equivalent integer and floating-point values are distinct from each other, as they are from the various big numbers (Tags 2 to 5).  Similarly, text strings are distinct from byte strings, even if composed of the same bytes.  A tagged value is distinct from an untagged value or from a value tagged with a different tag.</p>
+<p id="rfc.section.5.6.1.p.2">At the generic data model level, numerically equivalent integer and floating-point values are distinct from each other, as they are from the various big numbers (Tags 2 to 5).  Similarly, text strings are distinct from byte strings, even if composed of the same bytes.  A tagged value is distinct from an untagged value or from a value tagged with a different tag number.</p>
 <p id="rfc.section.5.6.1.p.3">Within each of these groups, numeric values are distinct unless they are numerically equal (specifically, -0.0 is equal to 0.0); for the purpose of map key equivalence, NaN (not a number) values are equivalent if they have the same significand after zero-extending both significands at the right to 64 bits.</p>
 <p id="rfc.section.5.6.1.p.4">(Byte and text) strings are compared byte by byte, arrays element by element, and are equal if they have the same number of bytes/elements and the same values at the same positions.  Two maps are equal if they have the same set of pairs regardless of their order; pairs are equal if both the key and value are equal.</p>
-<p id="rfc.section.5.6.1.p.5">Tagged values are equal if both the tag number and the enclosed item are equal.  Simple values are equal if they simply have the same value.  Nothing else is equal in the generic data model, a simple value 2 is not equivalent to an integer 2 and an array is never equivalent to a map.</p>
+<p id="rfc.section.5.6.1.p.5">Tagged values are equal if both the tag number and the enclosed item are equal.  (Note that a generic decoder that provides processing for a specific tag may not be able to distinguish some semantically equivalent values, e.g. if leading zeroes occur in the content of tag 2/3 (<a href="#bignums" class="xref">Section 3.4.4</a>).) Simple values are equal if they simply have the same value.  Nothing else is equal in the generic data model, a simple value 2 is not equivalent to an integer 2 and an array is never equivalent to a map.</p>
 <p id="rfc.section.5.6.1.p.6">As discussed in <a href="#specific-data-models" class="xref">Section 2.2</a>, specific data models can make values equivalent for the purpose of comparing map keys that are distinct in the generic data model.  Note that this implies that a generic decoder may deliver a decoded map to an application that needs to be checked for duplicate map keys by that application (alternatively, the decoder may provide a programming interface to perform this service for the application).  Specific data models cannot distinguish values for map keys that are equal for this purpose at the generic data model level.</p>
 <h1 id="rfc.section.5.7">
 <a href="#rfc.section.5.7">5.7.</a> <a href="#undefined-values" id="undefined-values">Undefined Values</a>
 </h1>
 <p id="rfc.section.5.7.p.1">In some CBOR-based protocols, the simple value (<a href="#fpnocont" class="xref">Section 3.3</a>) of Undefined might be used by an encoder as a substitute for a data item with an encoding problem, in order to allow the rest of the enclosing data items to be encoded without harm.</p>
 <h1 id="rfc.section.5.8">
-<a href="#rfc.section.5.8">5.8.</a> <a href="#validity-checking" id="validity-checking">Validity Checking</a>
+<a href="#rfc.section.5.8">5.8.</a> <a href="#validity-checking" id="validity-checking">Validity Checking and Robustness</a>
 </h1>
 <p id="rfc.section.5.8.p.1">Some areas of application of CBOR do not require deterministic encoding (<a href="#det-enc" class="xref">Section 4.2</a>) but may require that different decoders reach the same (semantically equivalent) results, even in the presence of potentially malicious data.  This can be required if one application (such as a firewall or other protecting entity) makes a decision based on the data that another application, which independently decodes the data, relies on.</p>
 <p id="rfc.section.5.8.p.2">Normally, it is the responsibility of the sender to avoid ambiguously decodable data.  However, the sender might be an attacker specially making up CBOR data such that it will be interpreted differently by different decoders in an attempt to exploit that as a vulnerability.  Generic decoders used in applications where this might be a problem can help by providing a validity-checking mode in which it is also the responsibility of the generic decoder to reject invalid data. It is expected that firewalls and other security systems that decode CBOR will employ their decoders with validity checking applied.</p>
@@ -1429,7 +1447,7 @@ C5             -- Tag 5
 <p id="rfc.section.8.p.1">CBOR is a binary interchange format.  To facilitate documentation and debugging, and in particular to facilitate communication between entities cooperating in debugging, this section defines a simple human-readable diagnostic notation.  All actual interchange always happens in the binary format.</p>
 <p id="rfc.section.8.p.2">Note that this truly is a diagnostic format; it is not meant to be parsed.  Therefore, no formal definition (as in ABNF) is given in this document.  (Implementers looking for a text-based format for representing CBOR data items in configuration files may also want to consider YAML <a href="#YAML" class="xref">[YAML]</a>.)</p>
 <p id="rfc.section.8.p.3">The diagnostic notation is loosely based on JSON as it is defined in RFC 8259, extending it where needed.</p>
-<p id="rfc.section.8.p.4">The notation borrows the JSON syntax for numbers (integer and floating point), True (&gt;true&lt;), False (&gt;false&lt;), Null (&gt;null&lt;), UTF-8 strings, arrays, and maps (maps are called objects in JSON; the diagnostic notation extends JSON here by allowing any data item in the key position).  Undefined is written &gt;undefined&lt; as in JavaScript.  The non-finite floating-point numbers Infinity, -Infinity, and NaN are written exactly as in this sentence (this is also a way they can be written in JavaScript, although JSON does not allow them).  A tagged item is written as an integer number for the tag, followed by the item in parentheses; for instance, an RFC 3339 (ISO 8601) date could be notated as:</p>
+<p id="rfc.section.8.p.4">The notation borrows the JSON syntax for numbers (integer and floating point), True (&gt;true&lt;), False (&gt;false&lt;), Null (&gt;null&lt;), UTF-8 strings, arrays, and maps (maps are called objects in JSON; the diagnostic notation extends JSON here by allowing any data item in the key position).  Undefined is written &gt;undefined&lt; as in JavaScript.  The non-finite floating-point numbers Infinity, -Infinity, and NaN are written exactly as in this sentence (this is also a way they can be written in JavaScript, although JSON does not allow them).  A tag is written as an integer number for the tag number, followed by the tag content in parentheses; for instance, an RFC 3339 (ISO 8601) date could be notated as:</p>
 <p></p>
 
 <ul class="empty"><li>0(&#8220;2013-03-21T20:04:00Z&#8221;)</li></ul>
@@ -1576,7 +1594,7 @@ Author/Change Controller:
 <p id="rfc.section.10.p.3">Hostile input may be constructed to overrun buffers, overflow or underflow integer arithmetic, or cause other decoding disruption.  CBOR data items might have lengths or sizes that are intentionally extremely large or too short.  Resource exhaustion attacks might attempt to lure a decoder into allocating very big data items (strings, arrays, maps, or even arbitrary precision numbers) or exhaust the stack depth by setting up deeply nested items.  Decoders need to have appropriate resource management to mitigate these attacks.  (Items for which very large sizes are given can also attempt to exploit integer overflow vulnerabilities.)</p>
 <p id="rfc.section.10.p.4">A CBOR decoder, by definition, only accepts well-formed CBOR; this is the first step to its robustness.  Input that is not well-formed CBOR causes no further processing from the point where the lack of well-formedness was detected.  If possible, any data decoded up to this point should have no impact on the application using the CBOR decoder.</p>
 <p id="rfc.section.10.p.5">In addition to ascertaining well-formedness, a CBOR decoder might also perform validity checks on the CBOR data.  Alternatively, it can leave those checks to the application using the decoder.  This choice needs to be clearly documented in the decoder.  Beyond the validity at the CBOR level, an application also needs to ascertain that the input is in alignment with the application protocol that is serialized in CBOR.</p>
-<p id="rfc.section.10.p.6">The input check itself may consume resources.  This is usually linear in the size of the input, which means that an attacker has to spend resources that are commensurate to the resources spent by the defender on input validation.  Processing for arbitrary-precision numbers may exceed linear effort.  Also, some hash-table implementations that are used by decoders to build in-memory representations of maps can be attacked to spend quadratic effort, unless a secret key is employed (see Section 7 of <a href="#SIPHASH" class="xref">[SIPHASH]</a>).  Such superlinear efforts can be employed by an attacker to exhaust resources at or before the input validator; they therefore need to be avoided in a CBOR decoder implementation.  Note that Tag number definitions and their implementations can add security considerations of this kind; this should then be discussed in the security considerations of the Tag number definition.</p>
+<p id="rfc.section.10.p.6">The input check itself may consume resources.  This is usually linear in the size of the input, which means that an attacker has to spend resources that are commensurate to the resources spent by the defender on input validation.  Processing for arbitrary-precision numbers may exceed linear effort.  Also, some hash-table implementations that are used by decoders to build in-memory representations of maps can be attacked to spend quadratic effort, unless a secret key is employed (see Section 7 of <a href="#SIPHASH" class="xref">[SIPHASH]</a>).  Such superlinear efforts can be employed by an attacker to exhaust resources at or before the input validator; they therefore need to be avoided in a CBOR decoder implementation.  Note that tag number definitions and their implementations can add security considerations of this kind; this should then be discussed in the security considerations of the tag number definition.</p>
 <p id="rfc.section.10.p.7">CBOR encoders do not receive input directly from the network and are thus not directly attackable in the same way as CBOR decoders.  However, CBOR encoders often have an API that takes input from another level in the implementation and can be attacked through that API. The design and implementation of that API should assume the behavior of its caller may be based on hostile input or on coding mistakes. It should check inputs for buffer overruns, overflow and underflow of integer arithmetic, and other such errors that are aimed to disrupt the encoder.</p>
 <p id="rfc.section.10.p.8">Protocols should be defined in such a way that potential multiple interpretations are reliably reduced to a single interpretation.  For example, an attacker could make use of invalid input such as duplicate keys in maps, or exploit different precision in processing numbers to make one application base its decisions on a different interpretation than the one that will be used by a second application.  To facilitate consistent interpretation, encoder and decoder implementations should provide a validity checking mode of operation (<a href="#validity-checking" class="xref">Section 5.8</a>).  Note, however, that a generic decoder cannot know about all requirements that an application poses on its input data; it is therefore not relieving the application from performing its own input checking.  Also, since the set of defined tag numbers evolves, the application may employ a tag number that is not yet supported for validity checking by the generic decoder it uses.  Generic decoders therefore need to provide documentation which tag numbers they support and what validity checking they can provide for each of them as well as for basic CBOR validity (UTF-8 checking, duplicate map key checking).</p>
 <h1 id="rfc.references">
@@ -2243,7 +2261,7 @@ Author/Change Controller:
 </tr>
 <tr>
 <td class="left">0xc6..0xd4</td>
-<td class="left">(tagged item)</td>
+<td class="left">(tag)</td>
 </tr>
 <tr>
 <td class="left">0xd5..0xd7</td>
@@ -2251,7 +2269,7 @@ Author/Change Controller:
 </tr>
 <tr>
 <td class="left">0xd8..0xdb</td>
-<td class="left">(more tagged items, 1/2/4/8 bytes and then a data item follow)</td>
+<td class="left">(more tags, 1/2/4/8 bytes and then a data item follow)</td>
 </tr>
 <tr>
 <td class="left">0xe0..0xf3</td>
