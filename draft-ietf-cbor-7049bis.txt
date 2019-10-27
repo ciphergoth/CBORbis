@@ -1203,11 +1203,11 @@ Internet-Draft                    CBOR                      October 2019
 3.4.5.  Decimal Fractions and Bigfloats
 
    Protocols using tag number 4 extend the generic data model with data
-   items representing arbitrary-length decimal fractions m*(10*e).
-   Protocols using tag number 5 extend the generic data model with data
-   items representing arbitrary-length binary fractions m*(2*e).  As
-   with bignums, values of different types are not equal in the generic
-   data model.
+   items representing arbitrary-length decimal fractions of the form
+   m*(10**e).  Protocols using tag number 5 extend the generic data
+   model with data items representing arbitrary-length binary fractions
+   of the form m*(2**e).  As with bignums, values of different types are
+   not equal in the generic data model.
 
    Decimal fractions combine an integer mantissa with a base-10 scaling
    factor.  They are most useful if an application needs the exact
