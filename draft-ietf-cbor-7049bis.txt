@@ -308,7 +308,8 @@ Internet-Draft                    CBOR                      October 2019
    Data item:  A single piece of CBOR data.  The structure of a data
       item may contain zero, one, or more nested data items.  The term
       is used both for the data item in representation format and for
-      the abstract idea that can be derived from that by a decoder.
+      the abstract idea that can be derived from that by a decoder; the
+      former can be addressed specifically by using "encoded data item".
 
    Decoder:  A process that decodes a well-formed CBOR data item and
       makes it available to an application.  Formally speaking, a
@@ -328,8 +329,7 @@ Internet-Draft                    CBOR                      October 2019
       CBOR.  A well-formed data item uses the initial bytes and the byte
       strings and/or data items that are implied by their values as
       defined in CBOR and does not include following extraneous data.
-      CBOR decoders by definition only return contents from well-formed
-      data items.
+
 
 
 
@@ -337,6 +337,9 @@ Bormann & Hoffman        Expires April 29, 2020                 [Page 6]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+      CBOR decoders by definition only return contents from well-formed
+      data items.
 
    Valid:  A data item that is well-formed and also follows the semantic
       restrictions that apply to CBOR data items.
@@ -384,15 +387,14 @@ Internet-Draft                    CBOR                      October 2019
 
    In the basic (un-extended) generic data model, a data item is one of:
 
-   o  an integer in the range -2**64..2**64-1 inclusive
-
-
 
 
 Bormann & Hoffman        Expires April 29, 2020                 [Page 7]
 
 Internet-Draft                    CBOR                      October 2019
 
+
+   o  an integer in the range -2**64..2**64-1 inclusive
 
    o  a simple value, identified by a number between 0 and 255, but
       distinct from that number
@@ -440,8 +442,6 @@ Internet-Draft                    CBOR                      October 2019
 
    Further elements of the extended generic data model can be (and have
    been) defined via the IANA registries created for CBOR.  Even if such
-   an extension is unknown to a generic encoder or decoder, data items
-   using that extension can be passed to or from the application by
 
 
 
@@ -450,6 +450,8 @@ Bormann & Hoffman        Expires April 29, 2020                 [Page 8]
 Internet-Draft                    CBOR                      October 2019
 
 
+   an extension is unknown to a generic encoder or decoder, data items
+   using that extension can be passed to or from the application by
    representing them at the interface to the application within the
    basic generic data model, i.e., as generic values of a simple type or
    generic tags.
@@ -496,8 +498,6 @@ Internet-Draft                    CBOR                      October 2019
    well-formed encoded CBOR data item (this does not detract from the
    usefulness of diagnostic and recovery tools that might make available
    some information from a damaged encoded CBOR data item).
-
-
 
 
 
