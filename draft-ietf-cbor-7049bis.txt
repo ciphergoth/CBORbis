@@ -94,10 +94,10 @@ Table of Contents
        3.2.3.  Indefinite-Length Byte Strings and Text Strings . . .  16
      3.3.  Floating-Point Numbers and Values with No Content . . . .  16
      3.4.  Tagging of Items  . . . . . . . . . . . . . . . . . . . .  18
-       3.4.1.  Date and Time . . . . . . . . . . . . . . . . . . . .  21
-       3.4.2.  Standard Date/Time String . . . . . . . . . . . . . .  21
+       3.4.1.  Date and Time . . . . . . . . . . . . . . . . . . . .  20
+       3.4.2.  Standard Date/Time String . . . . . . . . . . . . . .  20
        3.4.3.  Epoch-based Date/Time . . . . . . . . . . . . . . . .  21
-       3.4.4.  Bignums . . . . . . . . . . . . . . . . . . . . . . .  22
+       3.4.4.  Bignums . . . . . . . . . . . . . . . . . . . . . . .  21
        3.4.5.  Decimal Fractions and Bigfloats . . . . . . . . . . .  22
        3.4.6.  Content Hints . . . . . . . . . . . . . . . . . . . .  24
          3.4.6.1.  Encoded CBOR Data Item  . . . . . . . . . . . . .  24
@@ -1099,29 +1099,6 @@ Internet-Draft                    CBOR                     November 2019
 
                  Table 4: Tag numbers defined in RFC 7049
 
-   Conceptually, tags are interpreted in the generic data model, not at
-   (de-)serialization time.  A small number of tags (specifically, tag
-   number 25 and tag number 29) have been registered with semantics that
-   do require processing at (de-)serialization time: The decoder needs
-   to be aware and the encoder needs to be under control of the exact
-   sequence in which data items are encoded into the CBOR data stream.
-   This means these tags cannot be implemented on top of every generic
-   CBOR encoder/decoder (which might not reflect the serialization order
-   for entries in a map at the data model level and vice versa); their
-   implementation therefore typically needs to be integrated into the
-   generic encoder/decoder.  The definition of new tags with this
-   property is NOT RECOMMENDED.
-
-
-
-
-
-
-Bormann & Hoffman          Expires May 7, 2020                 [Page 20]
-
-Internet-Draft                    CBOR                     November 2019
-
-
 3.4.1.  Date and Time
 
    Protocols using tag numbers 0 and 1 extend the generic data model
@@ -1134,6 +1111,16 @@ Internet-Draft                    CBOR                     November 2019
    of [RFC4287], representing the point in time described there.  A
    nested item of another type or that doesn't match the [RFC4287]
    format is invalid.
+
+
+
+
+
+
+Bormann & Hoffman          Expires May 7, 2020                 [Page 20]
+
+Internet-Draft                    CBOR                     November 2019
+
 
 3.4.3.  Epoch-based Date/Time
 
@@ -1170,14 +1157,6 @@ Internet-Draft                    CBOR                     November 2019
    restrict the enclosed value to be an integer (or a floating-point
    value) only.
 
-
-
-
-Bormann & Hoffman          Expires May 7, 2020                 [Page 21]
-
-Internet-Draft                    CBOR                     November 2019
-
-
 3.4.4.  Bignums
 
    Protocols using tag numbers 2 and 3 extend the generic data model
@@ -1191,6 +1170,14 @@ Internet-Draft                    CBOR                     November 2019
    as an unsigned integer n in network byte order.  Contained items of
    other types are invalid.  For tag number 2, the value of the bignum
    is n.  For tag number 3, the value of the bignum is -1 - n.  The
+
+
+
+Bormann & Hoffman          Expires May 7, 2020                 [Page 21]
+
+Internet-Draft                    CBOR                     November 2019
+
+
    preferred encoding of the byte string is to leave out any leading
    zeroes (note that this means the preferred encoding for n = 0 is the
    empty byte string, but see below).  Decoders that understand these
@@ -1225,15 +1212,6 @@ Internet-Draft                    CBOR                     November 2019
    Decimal fractions combine an integer mantissa with a base-10 scaling
    factor.  They are most useful if an application needs the exact
    representation of a decimal fraction such as 1.1 because there is no
-
-
-
-
-Bormann & Hoffman          Expires May 7, 2020                 [Page 22]
-
-Internet-Draft                    CBOR                     November 2019
-
-
    exact representation for many decimal fractions in binary floating
    point.
 
@@ -1248,6 +1226,14 @@ Internet-Draft                    CBOR                     November 2019
    that contains exactly two integer numbers: an exponent e and a
    mantissa m.  Decimal fractions (tag number 4) use base-10 exponents;
    the value of a decimal fraction data item is m*(10**e).  Bigfloats
+
+
+
+Bormann & Hoffman          Expires May 7, 2020                 [Page 22]
+
+Internet-Draft                    CBOR                     November 2019
+
+
    (tag number 5) use base-2 exponents; the value of a bigfloat data
    item is m*(2**e).  The exponent e MUST be represented in an integer
    of major type 0 or 1, while the mantissa also can be a bignum
@@ -1282,14 +1268,6 @@ Internet-Draft                    CBOR                     November 2019
          20       -- -1
          03       -- 3
 
-
-
-
-Bormann & Hoffman          Expires May 7, 2020                 [Page 23]
-
-Internet-Draft                    CBOR                     November 2019
-
-
    Decimal fractions and bigfloats provide no representation of
    Infinity, -Infinity, or NaN; if these are needed in place of a
    decimal fraction or bigfloat, the IEEE 754 half-precision
@@ -1299,6 +1277,18 @@ Internet-Draft                    CBOR                     November 2019
    when the exponent is small and non-negative), there is a quality-of-
    implementation expectation that the integer representation is used
    directly.
+
+
+
+
+
+
+
+
+Bormann & Hoffman          Expires May 7, 2020                 [Page 23]
+
+Internet-Draft                    CBOR                     November 2019
+
 
 3.4.6.  Content Hints
 
@@ -1338,14 +1328,6 @@ Internet-Draft                    CBOR                     November 2019
 
    These three tag numbers suggest conversions to three of the base data
    encodings defined in [RFC4648].  For base64url encoding (tag number
-
-
-
-Bormann & Hoffman          Expires May 7, 2020                 [Page 24]
-
-Internet-Draft                    CBOR                     November 2019
-
-
    21), padding is not used (see Section 3.2 of RFC 4648); that is, all
    trailing equals signs ("=") are removed from the encoded string.  For
    base64 encoding (tag number 22), padding is used as defined in RFC
@@ -1354,6 +1336,15 @@ Internet-Draft                    CBOR                     November 2019
    inclusion of any line breaks, whitespace, or other additional
    characters.  Note that, for all three tag numbers, the encoding of
    the empty byte string is the empty text string.
+
+
+
+
+
+Bormann & Hoffman          Expires May 7, 2020                 [Page 24]
+
+Internet-Draft                    CBOR                     November 2019
+
 
 3.4.6.3.  Encoded Text
 
@@ -1394,14 +1385,6 @@ Internet-Draft                    CBOR                     November 2019
 
    o  Tag number 36 is for MIME messages (including all headers), as
       defined in [RFC2045].  A text string that isn't a valid MIME
-
-
-
-Bormann & Hoffman          Expires May 7, 2020                 [Page 25]
-
-Internet-Draft                    CBOR                     November 2019
-
-
       message is invalid.  (For this tag, validity checking may be
       particularly onerous for a generic decoder and might therefore not
       be offered.)
@@ -1409,6 +1392,15 @@ Internet-Draft                    CBOR                     November 2019
    Note that tag numbers 33 and 34 differ from 21 and 22 in that the
    data is transported in base-encoded form for the former and in raw
    byte string form for the latter.
+
+
+
+
+
+Bormann & Hoffman          Expires May 7, 2020                 [Page 25]
+
+Internet-Draft                    CBOR                     November 2019
+
 
 3.4.7.  Self-Described CBOR
 
@@ -1450,14 +1442,6 @@ Internet-Draft                    CBOR                     November 2019
 
    Some constrained decoders may be limited in their ability to decode
    non-preferred serializations: For example, if only integers below
-
-
-
-Bormann & Hoffman          Expires May 7, 2020                 [Page 26]
-
-Internet-Draft                    CBOR                     November 2019
-
-
    1_000_000_000 are expected in an application, the decoder may leave
    out the code that would be needed to decode 64-bit arguments in
    integers.  An encoder that always uses preferred serialization
@@ -1466,6 +1450,13 @@ Internet-Draft                    CBOR                     November 2019
    therefore can be said that a preferred encoder is more universally
    interoperable (and also less wasteful) than one that, say, always
    uses 64-bit integers.
+
+
+
+Bormann & Hoffman          Expires May 7, 2020                 [Page 26]
+
+Internet-Draft                    CBOR                     November 2019
+
 
    Similarly, a constrained encoder may be limited in the variety of
    representation variants it supports in such a way that it does not
@@ -1505,15 +1496,6 @@ Internet-Draft                    CBOR                     November 2019
 
    o  Preferred serialization MUST be used.  In particular, this means
       that arguments (see Section 3) for integers, lengths in major
-
-
-
-
-Bormann & Hoffman          Expires May 7, 2020                 [Page 27]
-
-Internet-Draft                    CBOR                     November 2019
-
-
       types 2 through 5, and tags MUST be as short as possible, for
       instance:
 
@@ -1522,6 +1504,15 @@ Internet-Draft                    CBOR                     November 2019
 
       *  24 to 255 and -25 to -256 MUST be expressed only with an
          additional uint8_t;
+
+
+
+
+
+Bormann & Hoffman          Expires May 7, 2020                 [Page 27]
+
+Internet-Draft                    CBOR                     November 2019
+
 
       *  256 to 65535 and -257 to -65536 MUST be expressed only with an
          additional uint16_t;
@@ -1562,6 +1553,15 @@ Internet-Draft                    CBOR                     November 2019
    encoding rules might need to be added.  One example rule might be to
    have all floats start as a 64-bit float, then do a test conversion to
    a 32-bit float; if the result is the same numeric value, use the
+   shorter value and repeat the process with a test conversion to a
+   16-bit float.  (This rule selects 16-bit float for positive and
+   negative Infinity as well.)  Although IEEE floats can represent both
+   positive and negative zero as distinct values, the application might
+   not distinguish these and might decide to represent all zero values
+   with a positive sign, disallowing negative zero.
+
+   CBOR tags present additional considerations for deterministic
+   encoding.  If a CBOR-based protocol were to provide the same
 
 
 
@@ -1570,17 +1570,6 @@ Bormann & Hoffman          Expires May 7, 2020                 [Page 28]
 Internet-Draft                    CBOR                     November 2019
 
 
-   shorter value and repeat the process with a test conversion to a
-   16-bit float.  (This rule selects 16-bit float for positive and
-   negative Infinity as well.)  Although IEEE floats can represent both
-   positive and negative zero as distinct values, the application might
-   not distinguish these and might decide to represent all zero values
-   with a positive sign, disallowing negative zero.  Also, there are
-   many representations for NaN.  If NaN is an allowed value, it must
-   always be represented as 0xf97e00.
-
-   CBOR tags present additional considerations for deterministic
-   encoding.  If a CBOR-based protocol were to provide the same
    semantics for the presence and absence of a specific tag (e.g., by
    allowing both tag 1 data items and raw numbers in a date/time
    position, treating the latter as if they were tagged), the
@@ -1609,15 +1598,26 @@ Internet-Draft                    CBOR                     November 2019
 
       3.  Encode all values as 64-bit floating point.
 
-      If NaN is an allowed value, the protocol needs to pick a single
-      representation, for example 0xf97e00.
+      Rule 1 straddles the boundaries between integers and floating
+      point values, and Rule 3 does not use preferred encoding, so Rule
+      2 may be a good choice in many cases.
+
+      If NaN is an allowed value and there is no intent to support NaN
+      payloads or signaling NaNs, the protocol needs to pick a single
+      representation, for example 0xf97e00.  If that simple choice is
+      not possible, specific attention will be needed for NaN handling.
+
+      Subnormal numbers (nonzero numbers with the lowest possible
+      exponent of a given IEEE 754 number format) may be flushed to zero
+      outputs or be treated as zero inputs in some floating point
+      implementations.  A protocol's deterministic encoding may want to
+      exclude them from interchange, interchanging zero instead.
 
    o  If a protocol includes a field that can express integers with an
       absolute value of 2^64 or larger using tag numbers 2 or 3
       (Section 3.4.4), the protocol's deterministic encoding needs to
       specify whether small integers are expressed using the tag or
       major types 0 and 1.
-
 
 
 
