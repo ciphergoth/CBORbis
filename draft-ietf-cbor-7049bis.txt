@@ -6,7 +6,7 @@ Network Working Group                                         C. Bormann
 Internet-Draft                                   Universitaet Bremen TZI
 Obsoletes: 7049 (if approved)                                 P. Hoffman
 Intended status: Standards Track                                   ICANN
-Expires: May 27, 2020                                  November 24, 2019
+Expires: June 5, 2020                                  December 03, 2019
 
 
               Concise Binary Object Representation (CBOR)
@@ -53,15 +53,15 @@ Status of This Memo
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                  [Page 1]
+Bormann & Hoffman         Expires June 5, 2020                  [Page 1]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 27, 2020.
+   This Internet-Draft will expire on June 5, 2020.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                  [Page 2]
+Bormann & Hoffman         Expires June 5, 2020                  [Page 2]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
      4.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  26
@@ -165,9 +165,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                  [Page 3]
+Bormann & Hoffman         Expires June 5, 2020                  [Page 3]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  69
@@ -221,9 +221,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                  [Page 4]
+Bormann & Hoffman         Expires June 5, 2020                  [Page 4]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    2.  The code for an encoder or decoder must be able to be compact in
@@ -277,9 +277,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                  [Page 5]
+Bormann & Hoffman         Expires June 5, 2020                  [Page 5]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
        *  The format must support a form of extensibility that allows
@@ -333,9 +333,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                  [Page 6]
+Bormann & Hoffman         Expires June 5, 2020                  [Page 6]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    Valid:  A data item that is well-formed and also follows the semantic
@@ -389,9 +389,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                  [Page 7]
+Bormann & Hoffman         Expires June 5, 2020                  [Page 7]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    o  a simple value, identified by a number between 0 and 255, but
@@ -445,9 +445,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                  [Page 8]
+Bormann & Hoffman         Expires June 5, 2020                  [Page 8]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    representing them at the interface to the application within the
@@ -501,9 +501,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                  [Page 9]
+Bormann & Hoffman         Expires June 5, 2020                  [Page 9]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    The initial byte of each encoded data item contains both information
@@ -557,9 +557,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 10]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 10]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
 3.1.  Major Types
@@ -613,9 +613,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 11]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 11]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    Major type 5:  a map of pairs of data items.  Maps are also called
@@ -669,9 +669,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 12]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 12]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
      +----+-----------------------+---------------------------------+
@@ -725,9 +725,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 13]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 13]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
 3.2.2.  Indefinite-Length Arrays and Maps
@@ -781,9 +781,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 14]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 14]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    0x9f01820203820405ff
@@ -837,9 +837,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 15]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 15]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
 3.2.3.  Indefinite-Length Byte Strings and Text Strings
@@ -893,9 +893,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 16]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 16]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    +------------+------------------------------------------------------+
@@ -949,9 +949,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 17]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 17]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
                        +---------+-----------------+
@@ -1005,9 +1005,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 18]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 18]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    2, additional information of 12 for the length) followed by the 12
@@ -1061,9 +1061,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 19]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 19]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    |          |          |                                             |
@@ -1117,9 +1117,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 20]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 20]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
 3.4.1.  Date and Time
@@ -1173,9 +1173,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 21]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 21]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
 3.4.4.  Bignums
@@ -1229,9 +1229,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 22]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 22]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    exact representation for many decimal fractions in binary floating
@@ -1285,9 +1285,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 23]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 23]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    Decimal fractions and bigfloats provide no representation of
@@ -1341,9 +1341,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 24]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 24]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    21), padding is not used (see Section 3.2 of RFC 4648); that is, all
@@ -1397,9 +1397,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 25]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 25]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
       message is invalid.  (For this tag, validity checking may be
@@ -1453,9 +1453,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 26]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 26]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    encoding); however, the present specification does not put the burden
@@ -1509,9 +1509,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 27]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 27]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
 4.2.1.  Core Deterministic Encoding Requirements
@@ -1565,9 +1565,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 28]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 28]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
 4.2.2.  Additional Deterministic Encoding Considerations
@@ -1621,9 +1621,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 29]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 29]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
       If NaN is an allowed value and there is no intent to support NaN
@@ -1677,9 +1677,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 30]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 30]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    2.  -1, encoded as 0x20.
@@ -1733,9 +1733,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 31]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 31]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    This section discusses some considerations in creating CBOR-based
@@ -1789,9 +1789,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 32]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 32]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    Generic decoders provide ways to present well-formed CBOR values,
@@ -1845,9 +1845,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 33]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 33]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
 5.3.2.  Tag validity
@@ -1901,9 +1901,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 34]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 34]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    The latter approach, which is also appropriate for decoders that do
@@ -1957,9 +1957,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 35]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 35]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    the number 5.5, and 0xfa45ad9c00 for the number 5555.5, unless the
@@ -2013,9 +2013,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 36]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 36]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    the requirements of a deterministic encoding (Section 4.2).  (Any
@@ -2069,9 +2069,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 37]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 37]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    the generic data model.  Note that this implies that a generic
@@ -2125,9 +2125,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 38]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 38]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    o  A map (major type 5) becomes a JSON object.  This is possible
@@ -2181,9 +2181,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 39]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 39]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    made with respect to number representation.  In a suggested
@@ -2237,9 +2237,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 40]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 40]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
 7.  Future Evolution of CBOR
@@ -2293,9 +2293,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 41]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 41]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
       abundant (although the early numbers are more efficient than the
@@ -2349,9 +2349,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 42]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 42]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    The notation borrows the JSON syntax for numbers (integer and
@@ -2405,9 +2405,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 43]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 43]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    An underscore followed by a decimal digit n indicates that the
@@ -2461,9 +2461,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 44]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 44]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    o  Semantics (short form)
@@ -2517,9 +2517,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 45]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 45]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    Additional information:
@@ -2573,9 +2573,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 46]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 46]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    Fragment Identifier Considerations:
@@ -2629,9 +2629,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 47]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 47]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    Hostile input may be constructed to overrun buffers, overflow or
@@ -2685,9 +2685,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 48]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 48]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    underflow of integer arithmetic, and other such errors that are aimed
@@ -2741,9 +2741,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 49]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 49]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
@@ -2797,9 +2797,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 50]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 50]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    [IANA.cbor-simple-values]
@@ -2853,9 +2853,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 51]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 51]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    [SIPHASH]  Aumasson, J. and D. Bernstein, "SipHash: A Fast Short-
@@ -2909,9 +2909,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 52]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 52]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
 Appendix A.  Examples
@@ -2965,9 +2965,9 @@ Appendix A.  Examples
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 53]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 53]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    | -18446744073709551617        | 0xc349010000000000000000           |
@@ -3021,9 +3021,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 54]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 54]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    | Infinity                     | 0xfb7ff0000000000000               |
@@ -3077,9 +3077,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 55]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 55]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    | "\ud800\udd51"               | 0x64f0908591                       |
@@ -3133,9 +3133,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 56]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 56]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    +------------------------------+------------------------------------+
@@ -3189,9 +3189,9 @@ Appendix B.  Jump Table
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 57]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 57]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    |            |                                                      |
@@ -3245,9 +3245,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 58]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 58]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    | 0xba       | map (four-byte uint32_t for n, and then n pairs of   |
@@ -3301,9 +3301,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 59]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 59]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    |            |                                                      |
@@ -3357,9 +3357,9 @@ Appendix C.  Pseudocode
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 60]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 60]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    well_formed (breakable = false) {
@@ -3413,9 +3413,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 61]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 61]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    Note that the remaining complexity of a complete CBOR decoder is
@@ -3469,9 +3469,9 @@ Appendix D.  Half-Precision
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 62]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 62]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    #include <math.h>
@@ -3525,9 +3525,9 @@ Appendix E.  Comparison of Other Binary Formats to CBOR's Design
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 63]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 63]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    to cover CBOR's objectives in the priority we have assigned them.  A
@@ -3581,9 +3581,9 @@ E.2.  MessagePack
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 64]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 64]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    bytecodes are still available for extension.  Repeated requests over
@@ -3637,9 +3637,9 @@ E.5.  Conciseness on the Wire
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 65]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 65]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    +-------------+--------------------------+--------------------------+
@@ -3688,14 +3688,14 @@ Appendix G.  Well-formedness errors and examples
 
    o  Too much data: There are input bytes left that were not consumed.
       This is only an error if the application assumed that the input
-      bytes would span exexactly one data item.  Where the application
+      bytes would span exactly one data item.  Where the application
       uses the self-delimiting nature of CBOR encoding to permit
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 66]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 66]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
       additional data after the data item, as is for example done in
@@ -3749,9 +3749,9 @@ G.1.  Examples for CBOR data items that are not well-formed
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 67]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 67]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    Similarly, examples for well-formedness error kind 2 (too little
@@ -3805,9 +3805,9 @@ Internet-Draft                    CBOR                     November 2019
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 68]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 68]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
    o  Indefinite length string chunks not of the correct type: 5f 00 ff,
@@ -3861,9 +3861,9 @@ Acknowledgements
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 69]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 69]
 
-Internet-Draft                    CBOR                     November 2019
+Internet-Draft                    CBOR                     December 2019
 
 
 Authors' Addresses
@@ -3917,4 +3917,4 @@ Authors' Addresses
 
 
 
-Bormann & Hoffman         Expires May 27, 2020                 [Page 70]
+Bormann & Hoffman         Expires June 5, 2020                 [Page 70]
