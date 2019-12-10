@@ -94,18 +94,18 @@ Table of Contents
        3.2.3.  Indefinite-Length Byte Strings and Text Strings . . .  16
      3.3.  Floating-Point Numbers and Values with No Content . . . .  16
      3.4.  Tagging of Items  . . . . . . . . . . . . . . . . . . . .  18
-       3.4.1.  Date and Time . . . . . . . . . . . . . . . . . . . .  21
-       3.4.2.  Standard Date/Time String . . . . . . . . . . . . . .  21
-       3.4.3.  Epoch-based Date/Time . . . . . . . . . . . . . . . .  21
-       3.4.4.  Bignums . . . . . . . . . . . . . . . . . . . . . . .  22
-       3.4.5.  Decimal Fractions and Bigfloats . . . . . . . . . . .  22
-       3.4.6.  Content Hints . . . . . . . . . . . . . . . . . . . .  24
-         3.4.6.1.  Encoded CBOR Data Item  . . . . . . . . . . . . .  24
-         3.4.6.2.  Expected Later Encoding for CBOR-to-JSON
+       3.4.1.  Standard Date/Time String . . . . . . . . . . . . . .  21
+       3.4.2.  Epoch-based Date/Time . . . . . . . . . . . . . . . .  21
+       3.4.3.  Bignums . . . . . . . . . . . . . . . . . . . . . . .  22
+       3.4.4.  Decimal Fractions and Bigfloats . . . . . . . . . . .  22
+       3.4.5.  Content Hints . . . . . . . . . . . . . . . . . . . .  24
+         3.4.5.1.  Encoded CBOR Data Item  . . . . . . . . . . . . .  24
+         3.4.5.2.  Expected Later Encoding for CBOR-to-JSON
                    Converters  . . . . . . . . . . . . . . . . . . .  24
-         3.4.6.3.  Encoded Text  . . . . . . . . . . . . . . . . . .  25
-       3.4.7.  Self-Described CBOR . . . . . . . . . . . . . . . . .  26
+         3.4.5.3.  Encoded Text  . . . . . . . . . . . . . . . . . .  25
+       3.4.6.  Self-Described CBOR . . . . . . . . . . . . . . . . .  26
    4.  Serialization Considerations  . . . . . . . . . . . . . . . .  26
+     4.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  26
 
 
 
@@ -114,7 +114,6 @@ Bormann & Hoffman         Expires June 12, 2020                 [Page 2]
 Internet-Draft                    CBOR                     December 2019
 
 
-     4.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  26
      4.2.  Deterministically Encoded CBOR  . . . . . . . . . . . . .  27
        4.2.1.  Core Deterministic Encoding Requirements  . . . . . .  28
        4.2.2.  Additional Deterministic Encoding Considerations  . .  29
@@ -162,6 +161,7 @@ Internet-Draft                    CBOR                     December 2019
    Appendix F.  Changes from RFC 7049  . . . . . . . . . . . . . . .  66
    Appendix G.  Well-formedness errors and examples  . . . . . . . .  66
      G.1.  Examples for CBOR data items that are not well-formed . .  67
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  69
 
 
 
@@ -170,7 +170,6 @@ Bormann & Hoffman         Expires June 12, 2020                 [Page 3]
 Internet-Draft                    CBOR                     December 2019
 
 
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  69
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  70
 
 1.  Introduction
@@ -218,6 +217,7 @@ Internet-Draft                    CBOR                     December 2019
        *  There is no requirement that all data formats be uniquely
           encoded; that is, it is acceptable that the number "7" might
           be encoded in multiple different ways.
+
 
 
 
@@ -309,14 +309,14 @@ Internet-Draft                    CBOR                     December 2019
       the abstract idea that can be derived from that by a decoder; the
       former can be addressed specifically by using "encoded data item".
 
-   Decoder:  A process that decodes a well-formed CBOR data item and
-      makes it available to an application.  Formally speaking, a
+   Decoder:  A process that decodes a well-formed encoded CBOR data item
+      and makes it available to an application.  Formally speaking, a
       decoder contains a parser to break up the input using the syntax
       rules of CBOR, as well as a semantic processor to prepare the data
       in a form suitable to the application.
 
-   Encoder:  A process that generates the representation format of a
-      CBOR data item from application information.
+   Encoder:  A process that generates the (well-formed) representation
+      format of a CBOR data item from application information.
 
    Data Stream:  A sequence of zero or more data items, not further
       assembled into a larger containing data item.  The independent
@@ -356,13 +356,13 @@ Internet-Draft                    CBOR                     December 2019
    the notation familiar from the programming language C, except that
    "**" denotes exponentiation.  Similar to the "0x" notation for
    hexadecimal numbers, numbers in binary notation are prefixed with
-   "0b".  Underscores can be added to such a number solely for
-   readability, so 0b00100001 (0x21) might be written 0b001_00001 to
-   emphasize the desired interpretation of the bits in the byte; in this
-   case, it is split into three bits and five bits.  Encoded CBOR data
-   items are sometimes given in the "0x" or "0b" notation; these values
-   are first interpreted as numbers as in C and are then interpreted as
-   byte strings in network byte order, including any leading zero bytes
+   "0b".  Underscores can be added to a number solely for readability,
+   so 0b00100001 (0x21) might be written 0b001_00001 to emphasize the
+   desired interpretation of the bits in the byte; in this case, it is
+   split into three bits and five bits.  Encoded CBOR data items are
+   sometimes given in the "0x" or "0b" notation; these values are first
+   interpreted as numbers as in C and are then interpreted as byte
+   strings in network byte order, including any leading zero bytes
    expressed in the notation.
 
 2.  CBOR Data Models
@@ -482,22 +482,22 @@ Internet-Draft                    CBOR                     December 2019
    "0.0" as an integer (major type 0, Section 3.1).  However, if a
    specific data model declares that floating-point and integer
    representations of integral values are equivalent, using both map
-   keys "0" and "0.0" in a single map would be considered duplicates and
-   so invalid, and an encoder could encode integral-valued floats as
-   integers or vice versa, perhaps to save encoded bytes.
+   keys "0" and "0.0" in a single map would be considered duplicates,
+   even while encoded as different major types, and so invalid; and an
+   encoder could encode integral-valued floats as integers or vice
+   versa, perhaps to save encoded bytes.
 
 3.  Specification of the CBOR Encoding
 
    A CBOR data item (Section 2) is encoded to or decoded from a byte
    string carrying a well-formed encoded data item as described in this
-   section.  The encoding is summarized in Table 6.  An encoder MUST
-   produce only well-formed encoded data items.  A decoder MUST NOT
-   return a decoded data item when it encounters input that is not a
-   well-formed encoded CBOR data item (this does not detract from the
-   usefulness of diagnostic and recovery tools that might make available
-   some information from a damaged encoded CBOR data item).
-
-
+   section.  The encoding is summarized in Table 6, indexed by the
+   initial byte.  An encoder MUST produce only well-formed encoded data
+   items.  A decoder MUST NOT return a decoded data item when it
+   encounters input that is not a well-formed encoded CBOR data item
+   (this does not detract from the usefulness of diagnostic and recovery
+   tools that might make available some information from a damaged
+   encoded CBOR data item).
 
 
 
@@ -850,7 +850,8 @@ Internet-Draft                    CBOR                     December 2019
    definite lengths, followed by the "break" stop code (Section 3.2.1).
    The data item represented by the indefinite-length string is the
    concatenation of the chunks (i.e., the empty byte or text string,
-   respectively, if no chunk is present).
+   respectively, if no chunk is present).  (Note that zero-length
+   chunks, while not particularly useful, are permitted.)
 
    If any item between the indefinite-length string indicator
    (0b010_11111 or 0b011_11111) and the "break" stop code is not a
@@ -885,7 +886,6 @@ Internet-Draft                    CBOR                     December 2019
    meaning, as defined in Table 2.  Like the major types for integers,
    items of this major type do not carry content data; all the
    information is in the initial bytes.
-
 
 
 
@@ -999,7 +999,7 @@ Internet-Draft                    CBOR                     December 2019
    using this tag number.
 
    For example, assume that a byte string of length 12 is marked with a
-   tag of number 2 to indicate it is a positive bignum (Section 3.4.4).
+   tag of number 2 to indicate it is a positive bignum (Section 3.4.3).
    This would be marked as 0b110_00010 (major type 6, additional
    information 2 for the tag number) followed by 0b010_01100 (major type
 
@@ -1045,19 +1045,19 @@ Internet-Draft                    CBOR                     December 2019
    | Number   | Item     |                                             |
    +----------+----------+---------------------------------------------+
    | 0        | text     | Standard date/time string; see              |
-   |          | string   | Section 3.4.2                               |
+   |          | string   | Section 3.4.1                               |
    |          |          |                                             |
-   | 1        | multiple | Epoch-based date/time; see Section 3.4.3    |
+   | 1        | multiple | Epoch-based date/time; see Section 3.4.2    |
    |          |          |                                             |
-   | 2        | byte     | Positive bignum; see Section 3.4.4          |
+   | 2        | byte     | Positive bignum; see Section 3.4.3          |
    |          | string   |                                             |
    |          |          |                                             |
-   | 3        | byte     | Negative bignum; see Section 3.4.4          |
+   | 3        | byte     | Negative bignum; see Section 3.4.3          |
    |          | string   |                                             |
    |          |          |                                             |
-   | 4        | array    | Decimal fraction; see Section 3.4.5         |
+   | 4        | array    | Decimal fraction; see Section 3.4.4         |
    |          |          |                                             |
-   | 5        | array    | Bigfloat; see Section 3.4.5                 |
+   | 5        | array    | Bigfloat; see Section 3.4.4                 |
 
 
 
@@ -1068,33 +1068,33 @@ Internet-Draft                    CBOR                     December 2019
 
    |          |          |                                             |
    | 21       | multiple | Expected conversion to base64url encoding;  |
-   |          |          | see Section 3.4.6.2                         |
+   |          |          | see Section 3.4.5.2                         |
    |          |          |                                             |
    | 22       | multiple | Expected conversion to base64 encoding; see |
-   |          |          | Section 3.4.6.2                             |
+   |          |          | Section 3.4.5.2                             |
    |          |          |                                             |
    | 23       | multiple | Expected conversion to base16 encoding; see |
-   |          |          | Section 3.4.6.2                             |
+   |          |          | Section 3.4.5.2                             |
    |          |          |                                             |
-   | 24       | byte     | Encoded CBOR data item; see Section 3.4.6.1 |
+   | 24       | byte     | Encoded CBOR data item; see Section 3.4.5.1 |
    |          | string   |                                             |
    |          |          |                                             |
-   | 32       | text     | URI; see Section 3.4.6.3                    |
+   | 32       | text     | URI; see Section 3.4.5.3                    |
    |          | string   |                                             |
    |          |          |                                             |
-   | 33       | text     | base64url; see Section 3.4.6.3              |
+   | 33       | text     | base64url; see Section 3.4.5.3              |
    |          | string   |                                             |
    |          |          |                                             |
-   | 34       | text     | base64; see Section 3.4.6.3                 |
+   | 34       | text     | base64; see Section 3.4.5.3                 |
    |          | string   |                                             |
    |          |          |                                             |
-   | 35       | text     | Regular expression; see Section 3.4.6.3     |
+   | 35       | text     | Regular expression; see Section 3.4.5.3     |
    |          | string   |                                             |
    |          |          |                                             |
-   | 36       | text     | MIME message; see Section 3.4.6.3           |
+   | 36       | text     | MIME message; see Section 3.4.5.3           |
    |          | string   |                                             |
    |          |          |                                             |
-   | 55799    | multiple | Self-described CBOR; see Section 3.4.7      |
+   | 55799    | multiple | Self-described CBOR; see Section 3.4.6      |
    +----------+----------+---------------------------------------------+
 
                  Table 4: Tag numbers defined in RFC 7049
@@ -1112,8 +1112,8 @@ Internet-Draft                    CBOR                     December 2019
    generic encoder/decoder.  The definition of new tags with this
    property is NOT RECOMMENDED.
 
-
-
+   Protocols using tag numbers 0 and 1 extend the generic data model
+   (Section 2) with data items representing points in time; tag numbers
 
 
 
@@ -1122,12 +1122,10 @@ Bormann & Hoffman         Expires June 12, 2020                [Page 20]
 Internet-Draft                    CBOR                     December 2019
 
 
-3.4.1.  Date and Time
+   2 and 3, with arbitrarily sized integers; and tag numbers 4 and 5,
+   with floating point values of arbitrary size and precision.
 
-   Protocols using tag numbers 0 and 1 extend the generic data model
-   (Section 2) with data items representing points in time.
-
-3.4.2.  Standard Date/Time String
+3.4.1.  Standard Date/Time String
 
    Tag number 0 contains a text string in the standard format described
    by the "date-time" production in [RFC3339], as refined by Section 3.3
@@ -1135,7 +1133,7 @@ Internet-Draft                    CBOR                     December 2019
    nested item of another type or that doesn't match the [RFC4287]
    format is invalid.
 
-3.4.3.  Epoch-based Date/Time
+3.4.2.  Epoch-based Date/Time
 
    Tag number 1 contains a numerical value counting the number of
    seconds from 1970-01-01T00:00Z in UTC time to the represented point
@@ -1173,12 +1171,14 @@ Internet-Draft                    CBOR                     December 2019
 
 
 
+
+
 Bormann & Hoffman         Expires June 12, 2020                [Page 21]
 
 Internet-Draft                    CBOR                     December 2019
 
 
-3.4.4.  Bignums
+3.4.3.  Bignums
 
    Protocols using tag numbers 2 and 3 extend the generic data model
    (Section 2) with "bignums" representing arbitrarily sized integers.
@@ -1213,7 +1213,7 @@ Internet-Draft                    CBOR                     December 2019
       49                     -- Byte string of length 9
          010000000000000000  -- Bytes content
 
-3.4.5.  Decimal Fractions and Bigfloats
+3.4.4.  Decimal Fractions and Bigfloats
 
    Protocols using tag number 4 extend the generic data model with data
    items representing arbitrary-length decimal fractions of the form
@@ -1251,7 +1251,7 @@ Internet-Draft                    CBOR                     December 2019
    (tag number 5) use base-2 exponents; the value of a bigfloat data
    item is m*(2**e).  The exponent e MUST be represented in an integer
    of major type 0 or 1, while the mantissa also can be a bignum
-   (Section 3.4.4).  Contained items with other structures are invalid.
+   (Section 3.4.3).  Contained items with other structures are invalid.
 
    An example of a decimal fraction is that the number 273.15 could be
    represented as 0b110_00100 (major type of 6 for the tag, additional
@@ -1300,13 +1300,13 @@ Internet-Draft                    CBOR                     December 2019
    implementation expectation that the integer representation is used
    directly.
 
-3.4.6.  Content Hints
+3.4.5.  Content Hints
 
    The tags in this section are for content hints that might be used by
    generic CBOR processors.  These content hints do not extend the
    generic data model.
 
-3.4.6.1.  Encoded CBOR Data Item
+3.4.5.1.  Encoded CBOR Data Item
 
    Sometimes it is beneficial to carry an embedded CBOR data item that
    is not meant to be decoded immediately at the time the enclosing data
@@ -1317,7 +1317,7 @@ Internet-Draft                    CBOR                     December 2019
    checking of the decoded CBOR item is not required for tag validity
    (but could be offered by a generic decoder as a special option).
 
-3.4.6.2.  Expected Later Encoding for CBOR-to-JSON Converters
+3.4.5.2.  Expected Later Encoding for CBOR-to-JSON Converters
 
    Tags number 21 to 23 indicate that a byte string might require a
    specific encoding when interoperating with a text-based
@@ -1355,7 +1355,7 @@ Internet-Draft                    CBOR                     December 2019
    characters.  Note that, for all three tag numbers, the encoding of
    the empty byte string is the empty text string.
 
-3.4.6.3.  Encoded Text
+3.4.5.3.  Encoded Text
 
    Some text strings hold data that have formats widely used on the
    Internet, and sometimes those formats can be validated and presented
@@ -1414,7 +1414,7 @@ Internet-Draft                    CBOR                     December 2019
    data is transported in base-encoded form for the former and in raw
    byte string form for the latter.
 
-3.4.7.  Self-Described CBOR
+3.4.6.  Self-Described CBOR
 
    In many applications, it will be clear from the context that CBOR is
    being employed for encoding a data item.  For instance, a specific
@@ -1590,7 +1590,8 @@ Internet-Draft                    CBOR                     December 2019
    position, treating the latter as if they were tagged), the
    deterministic format would not allow them.  In a protocol that
    requires tags in certain places to obtain specific semantics, the tag
-   needs to appear in the deterministic format as well.
+   needs to appear in the deterministic format as well.  Deterministic
+   encoding considerations also apply to the content of tags.
 
    Protocols that include floating, big integer, or other complex values
    need to define extra requirements on their deterministic encodings.
@@ -1620,7 +1621,6 @@ Internet-Draft                    CBOR                     December 2019
 
 
 
-
 Bormann & Hoffman         Expires June 12, 2020                [Page 29]
 
 Internet-Draft                    CBOR                     December 2019
@@ -1639,12 +1639,12 @@ Internet-Draft                    CBOR                     December 2019
 
    o  If a protocol includes a field that can express integers with an
       absolute value of 2^64 or larger using tag numbers 2 or 3
-      (Section 3.4.4), the protocol's deterministic encoding needs to
+      (Section 3.4.3), the protocol's deterministic encoding needs to
       specify whether small integers are expressed using the tag or
       major types 0 and 1.
 
    o  A protocol might give encoders the choice of representing a URL as
-      either a text string or, using Section 3.4.6.3, tag number 32
+      either a text string or, using Section 3.4.5.3, tag number 32
       containing a text string.  This protocol's deterministic encoding
       needs to either require that the tag is present or require that
       it's absent, not allow either one.
@@ -1778,14 +1778,14 @@ Internet-Draft                    CBOR                     December 2019
    "0x62c0ae" does not contain valid UTF-8 and so is not a valid CBOR
    item.  Also, specific tags may make semantic constraints that may be
    violated, such as a bignum tag enclosing another tag, or an instance
-   of tag number 0 containing a byte string or a text string with
-   contents that do not match [RFC3339]'s "date-time" production.  There
-   is no requirement that generic encoders and decoders make unnatural
-   choices for their application interface to enable the processing of
-   invalid data.  Generic encoders and decoders are expected to forward
-   simple values and tags even if their specific codepoints are not
-   registered at the time the encoder/decoder is written (Section 5.4).
-
+   of tag number 0 containing a byte string, or containing a text string
+   with contents that do not match [RFC3339]'s "date-time" production.
+   There is no requirement that generic encoders and decoders make
+   unnatural choices for their application interface to enable the
+   processing of invalid data.  Generic encoders and decoders are
+   expected to forward simple values and tags even if their specific
+   codepoints are not registered at the time the encoder/decoder is
+   written (Section 5.4).
 
 
 
@@ -2059,7 +2059,7 @@ Internet-Draft                    CBOR                     December 2019
    are equal.  (Note that a generic decoder that provides processing for
    a specific tag may not be able to distinguish some semantically
    equivalent values, e.g. if leading zeroes occur in the content of tag
-   2/3 (Section 3.4.4).)  Simple values are equal if they simply have
+   2/3 (Section 3.4.3).)  Simple values are equal if they simply have
    the same value.  Nothing else is equal in the generic data model, a
    simple value 2 is not equivalent to an integer 2 and an array is
    never equivalent to a map.
@@ -2430,6 +2430,9 @@ Internet-Draft                    CBOR                     December 2019
    an associated Constrained Application Protocol (CoAP) Content-Format
    entry.
 
+   [To be removed by RFC editor:] IANA is requested to update these
+   registries to point to the present document instead of RFC 7049.
+
 9.1.  Simple Values Registry
 
    IANA has created the "Concise Binary Object Representation (CBOR)
@@ -2454,10 +2457,7 @@ Internet-Draft                    CBOR                     December 2019
    New entries in the range 0 to 23 are assigned by Standards Action.
    New entries in the range 24 to 255 are assigned by Specification
    Required.  New entries in the range 256 to 18446744073709551615 are
-   assigned by First Come First Served.  The template for registration
-   requests is:
 
-   o  Data item
 
 
 
@@ -2465,6 +2465,11 @@ Bormann & Hoffman         Expires June 12, 2020                [Page 44]
 
 Internet-Draft                    CBOR                     December 2019
 
+
+   assigned by First Come First Served.  The template for registration
+   requests is:
+
+   o  Data item
 
    o  Semantics (short form)
 
@@ -2498,11 +2503,6 @@ Internet-Draft                    CBOR                     December 2019
 
    Applications that use this media type:  None yet, but it is expected
       that this format will be deployed in protocols and applications.
-
-
-
-
-
 
 
 
@@ -3152,7 +3152,7 @@ Appendix B.  Jump Table
    +------------+------------------------------------------------------+
    | Byte       | Structure/Semantics                                  |
    +------------+------------------------------------------------------+
-   | 0x00..0x17 | Integer 0x00..0x17 (0..23)                           |
+   | 0x00..0x17 | Unsigned integer 0x00..0x17 (0..23)                  |
    |            |                                                      |
    | 0x18       | Unsigned integer (one-byte uint8_t follows)          |
    |            |                                                      |
@@ -3260,25 +3260,25 @@ Internet-Draft                    CBOR                     December 2019
    |            | "break"                                              |
    |            |                                                      |
    | 0xc0       | Text-based date/time (data item follows; see         |
-   |            | Section 3.4.2)                                       |
+   |            | Section 3.4.1)                                       |
    |            |                                                      |
    | 0xc1       | Epoch-based date/time (data item follows; see        |
-   |            | Section 3.4.3)                                       |
+   |            | Section 3.4.2)                                       |
    |            |                                                      |
    | 0xc2       | Positive bignum (data item "byte string" follows)    |
    |            |                                                      |
    | 0xc3       | Negative bignum (data item "byte string" follows)    |
    |            |                                                      |
    | 0xc4       | Decimal Fraction (data item "array" follows; see     |
-   |            | Section 3.4.5)                                       |
+   |            | Section 3.4.4)                                       |
    |            |                                                      |
    | 0xc5       | Bigfloat (data item "array" follows; see             |
-   |            | Section 3.4.5)                                       |
+   |            | Section 3.4.4)                                       |
    |            |                                                      |
    | 0xc6..0xd4 | (tag)                                                |
    |            |                                                      |
    | 0xd5..0xd7 | Expected Conversion (data item follows; see          |
-   |            | Section 3.4.6.2)                                     |
+   |            | Section 3.4.5.2)                                     |
    |            |                                                      |
    | 0xd8..0xdb | (more tags, 1/2/4/8 bytes and then a data item       |
    |            | follow)                                              |
