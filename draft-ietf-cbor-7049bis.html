@@ -296,15 +296,16 @@ ul.toc li {
 <link href="#rfc.section.3.2.3" rel="Chapter" title="3.2.3 Indefinite-Length Byte Strings and Text Strings">
 <link href="#rfc.section.3.3" rel="Chapter" title="3.3 Floating-Point Numbers and Values with No Content">
 <link href="#rfc.section.3.4" rel="Chapter" title="3.4 Tagging of Items">
-<link href="#rfc.section.3.4.1" rel="Chapter" title="3.4.1 Standard Date/Time String">
-<link href="#rfc.section.3.4.2" rel="Chapter" title="3.4.2 Epoch-based Date/Time">
-<link href="#rfc.section.3.4.3" rel="Chapter" title="3.4.3 Bignums">
-<link href="#rfc.section.3.4.4" rel="Chapter" title="3.4.4 Decimal Fractions and Bigfloats">
-<link href="#rfc.section.3.4.5" rel="Chapter" title="3.4.5 Content Hints">
-<link href="#rfc.section.3.4.5.1" rel="Chapter" title="3.4.5.1 Encoded CBOR Data Item">
-<link href="#rfc.section.3.4.5.2" rel="Chapter" title="3.4.5.2 Expected Later Encoding for CBOR-to-JSON Converters">
-<link href="#rfc.section.3.4.5.3" rel="Chapter" title="3.4.5.3 Encoded Text">
-<link href="#rfc.section.3.4.6" rel="Chapter" title="3.4.6 Self-Described CBOR">
+<link href="#rfc.section.3.4.1" rel="Chapter" title="3.4.1 Date and Time">
+<link href="#rfc.section.3.4.2" rel="Chapter" title="3.4.2 Standard Date/Time String">
+<link href="#rfc.section.3.4.3" rel="Chapter" title="3.4.3 Epoch-based Date/Time">
+<link href="#rfc.section.3.4.4" rel="Chapter" title="3.4.4 Bignums">
+<link href="#rfc.section.3.4.5" rel="Chapter" title="3.4.5 Decimal Fractions and Bigfloats">
+<link href="#rfc.section.3.4.6" rel="Chapter" title="3.4.6 Content Hints">
+<link href="#rfc.section.3.4.6.1" rel="Chapter" title="3.4.6.1 Encoded CBOR Data Item">
+<link href="#rfc.section.3.4.6.2" rel="Chapter" title="3.4.6.2 Expected Later Encoding for CBOR-to-JSON Converters">
+<link href="#rfc.section.3.4.6.3" rel="Chapter" title="3.4.6.3 Encoded Text">
+<link href="#rfc.section.3.4.7" rel="Chapter" title="3.4.7 Self-Described CBOR">
 <link href="#rfc.section.4" rel="Chapter" title="4 Serialization Considerations">
 <link href="#rfc.section.4.1" rel="Chapter" title="4.1 Preferred Serialization">
 <link href="#rfc.section.4.2" rel="Chapter" title="4.2 Deterministically Encoded CBOR">
@@ -362,7 +363,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Bormann, C. and P. Hoffman" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-cbor-7049bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-12-08" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-12-10" />
   <meta name="dct.abstract" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack.This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format." />
   <meta name="description" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack.This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format." />
 
@@ -390,8 +391,8 @@ ul.toc li {
 <td class="right">ICANN</td>
 </tr>
 <tr>
-<td class="left">Expires: June 10, 2020</td>
-<td class="right">December 08, 2019</td>
+<td class="left">Expires: June 12, 2020</td>
+<td class="right">December 10, 2019</td>
 </tr>
 
     	
@@ -411,7 +412,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on June 10, 2020.</p>
+<p>This Internet-Draft will expire on June 12, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -449,23 +450,25 @@ ul.toc li {
 </li>
 <li>3.4.   <a href="#rfc.section.3.4">Tagging of Items</a>
 </li>
-<ul><li>3.4.1.   <a href="#rfc.section.3.4.1">Standard Date/Time String</a>
+<ul><li>3.4.1.   <a href="#rfc.section.3.4.1">Date and Time</a>
 </li>
-<li>3.4.2.   <a href="#rfc.section.3.4.2">Epoch-based Date/Time</a>
+<li>3.4.2.   <a href="#rfc.section.3.4.2">Standard Date/Time String</a>
 </li>
-<li>3.4.3.   <a href="#rfc.section.3.4.3">Bignums</a>
+<li>3.4.3.   <a href="#rfc.section.3.4.3">Epoch-based Date/Time</a>
 </li>
-<li>3.4.4.   <a href="#rfc.section.3.4.4">Decimal Fractions and Bigfloats</a>
+<li>3.4.4.   <a href="#rfc.section.3.4.4">Bignums</a>
 </li>
-<li>3.4.5.   <a href="#rfc.section.3.4.5">Content Hints</a>
+<li>3.4.5.   <a href="#rfc.section.3.4.5">Decimal Fractions and Bigfloats</a>
 </li>
-<ul><li>3.4.5.1.   <a href="#rfc.section.3.4.5.1">Encoded CBOR Data Item</a>
+<li>3.4.6.   <a href="#rfc.section.3.4.6">Content Hints</a>
 </li>
-<li>3.4.5.2.   <a href="#rfc.section.3.4.5.2">Expected Later Encoding for CBOR-to-JSON Converters</a>
+<ul><li>3.4.6.1.   <a href="#rfc.section.3.4.6.1">Encoded CBOR Data Item</a>
 </li>
-<li>3.4.5.3.   <a href="#rfc.section.3.4.5.3">Encoded Text</a>
+<li>3.4.6.2.   <a href="#rfc.section.3.4.6.2">Expected Later Encoding for CBOR-to-JSON Converters</a>
 </li>
-</ul><li>3.4.6.   <a href="#rfc.section.3.4.6">Self-Described CBOR</a>
+<li>3.4.6.3.   <a href="#rfc.section.3.4.6.3">Encoded Text</a>
+</li>
+</ul><li>3.4.7.   <a href="#rfc.section.3.4.7">Self-Described CBOR</a>
 </li>
 </ul></ul><li>4.   <a href="#rfc.section.4">Serialization Considerations</a>
 </li>
@@ -622,9 +625,9 @@ ul.toc li {
 <dt>Data item:</dt>
 <dd style="margin-left: 8">A single piece of CBOR data.  The structure of a data item may contain zero, one, or more nested data items.  The term is used both for the data item in representation format and for the abstract idea that can be derived from that by a decoder; the former can be addressed specifically by using &#8220;encoded data item&#8221;.</dd>
 <dt>Decoder:</dt>
-<dd style="margin-left: 8">A process that decodes a well-formed encoded CBOR data item and makes it available to an application.  Formally speaking, a decoder contains a parser to break up the input using the syntax rules of CBOR, as well as a semantic processor to prepare the data in a form suitable to the application.</dd>
+<dd style="margin-left: 8">A process that decodes a well-formed CBOR data item and makes it available to an application.  Formally speaking, a decoder contains a parser to break up the input using the syntax rules of CBOR, as well as a semantic processor to prepare the data in a form suitable to the application.</dd>
 <dt>Encoder:</dt>
-<dd style="margin-left: 8">A process that generates the (well-formed) representation format of a CBOR data item from application information.</dd>
+<dd style="margin-left: 8">A process that generates the representation format of a CBOR data item from application information.</dd>
 <dt>Data Stream:</dt>
 <dd style="margin-left: 8">A sequence of zero or more data items, not further assembled into a larger containing data item.  The independent data items that make up a data stream are sometimes also referred to as &#8220;top-level data items&#8221;.</dd>
 <dt>Well-formed:</dt>
@@ -636,7 +639,7 @@ ul.toc li {
 <dt>Stream decoder:</dt>
 <dd style="margin-left: 8">A process that decodes a data stream and makes each of the data items in the sequence available to an application as they are received.</dd>
 </dl>
-<p id="rfc.section.1.2.p.5">Where bit arithmetic or data types are explained, this document uses the notation familiar from the programming language C, except that &#8220;**&#8221; denotes exponentiation.  Similar to the &#8220;0x&#8221; notation for hexadecimal numbers, numbers in binary notation are prefixed with &#8220;0b&#8221;.  Underscores can be added to a number solely for readability, so 0b00100001 (0x21) might be written 0b001_00001 to emphasize the desired interpretation of the bits in the byte; in this case, it is split into three bits and five bits.  Encoded CBOR data items are sometimes given in the &#8220;0x&#8221; or &#8220;0b&#8221; notation; these values are first interpreted as numbers as in C and are then interpreted as byte strings in network byte order, including any leading zero bytes expressed in the notation.</p>
+<p id="rfc.section.1.2.p.5">Where bit arithmetic or data types are explained, this document uses the notation familiar from the programming language C, except that &#8220;**&#8221; denotes exponentiation.  Similar to the &#8220;0x&#8221; notation for hexadecimal numbers, numbers in binary notation are prefixed with &#8220;0b&#8221;.  Underscores can be added to such a number solely for readability, so 0b00100001 (0x21) might be written 0b001_00001 to emphasize the desired interpretation of the bits in the byte; in this case, it is split into three bits and five bits.  Encoded CBOR data items are sometimes given in the &#8220;0x&#8221; or &#8220;0b&#8221; notation; these values are first interpreted as numbers as in C and are then interpreted as byte strings in network byte order, including any leading zero bytes expressed in the notation.</p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#cbor-data-models" id="cbor-data-models">CBOR Data Models</a>
 </h1>
@@ -677,11 +680,11 @@ ul.toc li {
 <a href="#rfc.section.2.2">2.2.</a> <a href="#specific-data-models" id="specific-data-models">Specific Data Models</a>
 </h1>
 <p id="rfc.section.2.2.p.1">The specific data model for a CBOR-based protocol usually subsets the extended generic data model and assigns application semantics to the data items within this subset and its components.  When documenting such specific data models, where it is desired to specify the types of data items, it is preferred to identify the types by the names they have in the generic data model (&#8220;negative integer&#8221;, &#8220;array&#8221;) instead of by referring to aspects of their CBOR representation (&#8220;major type 1&#8221;, &#8220;major type 4&#8221;).</p>
-<p id="rfc.section.2.2.p.2">Specific data models can also specify what values (including values of different types) are equivalent for the purposes of map keys and encoder freedom. For example, in the generic data model, a valid map MAY have both <samp>0</samp> and <samp>0.0</samp> as keys, and an encoder MUST NOT encode <samp>0.0</samp> as an integer (major type 0, <a href="#majortypes" class="xref">Section 3.1</a>).  However, if a specific data model declares that floating-point and integer representations of integral values are equivalent, using both map keys <samp>0</samp> and <samp>0.0</samp> in a single map would be considered duplicates, even while encoded as different major types, and so invalid; and an encoder could encode integral-valued floats as integers or vice versa, perhaps to save encoded bytes.</p>
+<p id="rfc.section.2.2.p.2">Specific data models can also specify what values (including values of different types) are equivalent for the purposes of map keys and encoder freedom. For example, in the generic data model, a valid map MAY have both <samp>0</samp> and <samp>0.0</samp> as keys, and an encoder MUST NOT encode <samp>0.0</samp> as an integer (major type 0, <a href="#majortypes" class="xref">Section 3.1</a>).  However, if a specific data model declares that floating-point and integer representations of integral values are equivalent, using both map keys <samp>0</samp> and <samp>0.0</samp> in a single map would be considered duplicates and so invalid, and an encoder could encode integral-valued floats as integers or vice versa, perhaps to save encoded bytes.</p>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#encoding" id="encoding">Specification of the CBOR Encoding</a>
 </h1>
-<p id="rfc.section.3.p.1">A CBOR data item (<a href="#cbor-data-models" class="xref">Section 2</a>) is encoded to or decoded from a byte string carrying a well-formed encoded data item as described in this section.  The encoding is summarized in <a href="#jumptable" class="xref">Table 6</a>, indexed by the initial byte.  An encoder MUST produce only well-formed encoded data items.  A decoder MUST NOT return a decoded data item when it encounters input that is not a well-formed encoded CBOR data item (this does not detract from the usefulness of diagnostic and recovery tools that might make available some information from a damaged encoded CBOR data item).</p>
+<p id="rfc.section.3.p.1">A CBOR data item (<a href="#cbor-data-models" class="xref">Section 2</a>) is encoded to or decoded from a byte string carrying a well-formed encoded data item as described in this section.  The encoding is summarized in <a href="#jumptable" class="xref">Table 6</a>.  An encoder MUST produce only well-formed encoded data items.  A decoder MUST NOT return a decoded data item when it encounters input that is not a well-formed encoded CBOR data item (this does not detract from the usefulness of diagnostic and recovery tools that might make available some information from a damaged encoded CBOR data item).</p>
 <p id="rfc.section.3.p.2">The initial byte of each encoded data item contains both information about the major type (the high-order 3 bits, described in <a href="#majortypes" class="xref">Section 3.1</a>) and additional information (the low-order 5 bits).  With a few exceptions, the additional information&#8217;s value describes how to load an unsigned integer &#8220;argument&#8221;:</p>
 <p></p>
 
@@ -870,7 +873,7 @@ BF           -- Start indefinite-length map
 <h1 id="rfc.section.3.2.3">
 <a href="#rfc.section.3.2.3">3.2.3.</a> <a href="#indefinite-length-byte-strings-and-text-strings" id="indefinite-length-byte-strings-and-text-strings">Indefinite-Length Byte Strings and Text Strings</a>
 </h1>
-<p id="rfc.section.3.2.3.p.1">Indefinite-length strings are represented by a byte containing the major type and additional information value of 31, followed by a series of zero or more byte or text strings (&#8220;chunks&#8221;) that have definite lengths, followed by the &#8220;break&#8221; stop code (<a href="#break" class="xref">Section 3.2.1</a>).  The data item represented by the indefinite-length string is the concatenation of the chunks (i.e., the empty byte or text string, respectively, if no chunk is present).  (Note that zero-length chunks, while not particularly useful, are permitted.)</p>
+<p id="rfc.section.3.2.3.p.1">Indefinite-length strings are represented by a byte containing the major type and additional information value of 31, followed by a series of zero or more byte or text strings (&#8220;chunks&#8221;) that have definite lengths, followed by the &#8220;break&#8221; stop code (<a href="#break" class="xref">Section 3.2.1</a>).  The data item represented by the indefinite-length string is the concatenation of the chunks (i.e., the empty byte or text string, respectively, if no chunk is present).</p>
 <p id="rfc.section.3.2.3.p.2">If any item between the indefinite-length string indicator (0b010_11111 or 0b011_11111) and the &#8220;break&#8221; stop code is not a definite-length string item of the same major type, the string is not well-formed.</p>
 <p id="rfc.section.3.2.3.p.3">If any definite-length text string inside an indefinite-length text string is invalid, the indefinite-length text string is invalid.  Note that this implies that the bytes of a single UTF-8 character cannot be spread between chunks: a new chunk can only be started at a character boundary.</p>
 <p id="rfc.section.3.2.3.p.4">For example, assume the sequence:</p>
@@ -973,7 +976,7 @@ BF           -- Start indefinite-length map
 <a href="#rfc.section.3.4">3.4.</a> <a href="#tags" id="tags">Tagging of Items</a>
 </h1>
 <p id="rfc.section.3.4.p.1">In CBOR, a data item can be enclosed by a tag to give it additional semantics while retaining its structure. The tag is major type 6, and represents an unsigned integer as indicated by the tag&#8217;s argument (<a href="#encoding" class="xref">Section 3</a>); the (sole) enclosed data item is carried as content data.  If a tag requires structured data, this structure is encoded into the nested data item.  The definition of a tag number usually restricts what kinds of nested data item or items are valid for tags using this tag number.</p>
-<p id="rfc.section.3.4.p.2">For example, assume that a byte string of length 12 is marked with a tag of number 2 to indicate it is a positive bignum (<a href="#bignums" class="xref">Section 3.4.3</a>).  This would be marked as 0b110_00010 (major type 6, additional information 2 for the tag number) followed by 0b010_01100 (major type 2, additional information of 12 for the length) followed by the 12 bytes of the bignum.</p>
+<p id="rfc.section.3.4.p.2">For example, assume that a byte string of length 12 is marked with a tag of number 2 to indicate it is a positive bignum (<a href="#bignums" class="xref">Section 3.4.4</a>).  This would be marked as 0b110_00010 (major type 6, additional information 2 for the tag number) followed by 0b010_01100 (major type 2, additional information of 12 for the length) followed by the 12 bytes of the bignum.</p>
 <p id="rfc.section.3.4.p.3">Decoders do not need to understand tags of every tag number, and tags may be of little value in applications where the implementation creating a particular CBOR data item and the implementation decoding that stream know the semantic meaning of each item in the data flow. Their primary purpose in this specification is to define common data types such as dates. A secondary purpose is to provide conversion hints when it is foreseen that the CBOR data item needs to be translated into a different format, requiring hints about the content of items.  Understanding the semantics of tags is optional for a decoder; it can just jump over the initial bytes of the tag (that encode the tag number) and interpret the tag content itself, presenting both tag number and tag content to the application.</p>
 <p id="rfc.section.3.4.p.4">A tag applies semantics to the data item it encloses.  Thus, if tag A encloses tag B, which encloses data item C, tag A applies to the result of applying tag B on data item C.  That is, a tag is a data item consisting of a tag number and an enclosed value.  The content of the tag (the enclosed data item) is the data item (the value) that is being tagged.</p>
 <p id="rfc.section.3.4.p.5">IANA maintains a registry of tag numbers as described in <a href="#ianatags" class="xref">Section 9.2</a>.  <a href="#tagvalues" class="xref">Table 4</a> provides a list of tag numbers that were defined in <a href="#RFC7049" class="xref">[RFC7049]</a>, with definitions in the rest of this section.  Note that many other tag numbers have been defined since the publication of <a href="#RFC7049" class="xref">[RFC7049]</a>; see the registry described at <a href="#ianatags" class="xref">Section 9.2</a> for the complete list.</p>
@@ -990,166 +993,169 @@ BF           -- Start indefinite-length map
 <tr>
 <td class="left">0</td>
 <td class="left">text string</td>
-<td class="left">Standard date/time string; see <a href="#stringdatetimesect" class="xref">Section 3.4.1</a>
+<td class="left">Standard date/time string; see <a href="#stringdatetimesect" class="xref">Section 3.4.2</a>
 </td>
 </tr>
 <tr>
 <td class="left">1</td>
 <td class="left">multiple</td>
-<td class="left">Epoch-based date/time; see <a href="#epochdatetimesect" class="xref">Section 3.4.2</a>
+<td class="left">Epoch-based date/time; see <a href="#epochdatetimesect" class="xref">Section 3.4.3</a>
 </td>
 </tr>
 <tr>
 <td class="left">2</td>
 <td class="left">byte string</td>
-<td class="left">Positive bignum; see <a href="#bignums" class="xref">Section 3.4.3</a>
+<td class="left">Positive bignum; see <a href="#bignums" class="xref">Section 3.4.4</a>
 </td>
 </tr>
 <tr>
 <td class="left">3</td>
 <td class="left">byte string</td>
-<td class="left">Negative bignum; see <a href="#bignums" class="xref">Section 3.4.3</a>
+<td class="left">Negative bignum; see <a href="#bignums" class="xref">Section 3.4.4</a>
 </td>
 </tr>
 <tr>
 <td class="left">4</td>
 <td class="left">array</td>
-<td class="left">Decimal fraction; see <a href="#fractions" class="xref">Section 3.4.4</a>
+<td class="left">Decimal fraction; see <a href="#fractions" class="xref">Section 3.4.5</a>
 </td>
 </tr>
 <tr>
 <td class="left">5</td>
 <td class="left">array</td>
-<td class="left">Bigfloat; see <a href="#fractions" class="xref">Section 3.4.4</a>
+<td class="left">Bigfloat; see <a href="#fractions" class="xref">Section 3.4.5</a>
 </td>
 </tr>
 <tr>
 <td class="left">21</td>
 <td class="left">multiple</td>
-<td class="left">Expected conversion to base64url encoding; see <a href="#convexpect" class="xref">Section 3.4.5.2</a>
+<td class="left">Expected conversion to base64url encoding; see <a href="#convexpect" class="xref">Section 3.4.6.2</a>
 </td>
 </tr>
 <tr>
 <td class="left">22</td>
 <td class="left">multiple</td>
-<td class="left">Expected conversion to base64 encoding; see <a href="#convexpect" class="xref">Section 3.4.5.2</a>
+<td class="left">Expected conversion to base64 encoding; see <a href="#convexpect" class="xref">Section 3.4.6.2</a>
 </td>
 </tr>
 <tr>
 <td class="left">23</td>
 <td class="left">multiple</td>
-<td class="left">Expected conversion to base16 encoding; see <a href="#convexpect" class="xref">Section 3.4.5.2</a>
+<td class="left">Expected conversion to base16 encoding; see <a href="#convexpect" class="xref">Section 3.4.6.2</a>
 </td>
 </tr>
 <tr>
 <td class="left">24</td>
 <td class="left">byte string</td>
-<td class="left">Encoded CBOR data item; see <a href="#embedded-di" class="xref">Section 3.4.5.1</a>
+<td class="left">Encoded CBOR data item; see <a href="#embedded-di" class="xref">Section 3.4.6.1</a>
 </td>
 </tr>
 <tr>
 <td class="left">32</td>
 <td class="left">text string</td>
-<td class="left">URI; see <a href="#encodedtext" class="xref">Section 3.4.5.3</a>
+<td class="left">URI; see <a href="#encodedtext" class="xref">Section 3.4.6.3</a>
 </td>
 </tr>
 <tr>
 <td class="left">33</td>
 <td class="left">text string</td>
-<td class="left">base64url; see <a href="#encodedtext" class="xref">Section 3.4.5.3</a>
+<td class="left">base64url; see <a href="#encodedtext" class="xref">Section 3.4.6.3</a>
 </td>
 </tr>
 <tr>
 <td class="left">34</td>
 <td class="left">text string</td>
-<td class="left">base64; see <a href="#encodedtext" class="xref">Section 3.4.5.3</a>
+<td class="left">base64; see <a href="#encodedtext" class="xref">Section 3.4.6.3</a>
 </td>
 </tr>
 <tr>
 <td class="left">35</td>
 <td class="left">text string</td>
-<td class="left">Regular expression; see <a href="#encodedtext" class="xref">Section 3.4.5.3</a>
+<td class="left">Regular expression; see <a href="#encodedtext" class="xref">Section 3.4.6.3</a>
 </td>
 </tr>
 <tr>
 <td class="left">36</td>
 <td class="left">text string</td>
-<td class="left">MIME message; see <a href="#encodedtext" class="xref">Section 3.4.5.3</a>
+<td class="left">MIME message; see <a href="#encodedtext" class="xref">Section 3.4.6.3</a>
 </td>
 </tr>
 <tr>
 <td class="left">55799</td>
 <td class="left">multiple</td>
-<td class="left">Self-described CBOR; see <a href="#self-describe" class="xref">Section 3.4.6</a>
+<td class="left">Self-described CBOR; see <a href="#self-describe" class="xref">Section 3.4.7</a>
 </td>
 </tr>
 </tbody>
 </table>
 <p id="rfc.section.3.4.p.6">Conceptually, tags are interpreted in the generic data model, not at (de-)serialization time.  A small number of tags (specifically, tag number 25 and tag number 29) have been registered with semantics that may require processing at (de-)serialization time: The decoder needs to be aware and the encoder needs to be in control of the exact sequence in which data items are encoded into the CBOR data stream.  This means these tags cannot be implemented on top of every generic CBOR encoder/decoder (which might not reflect the serialization order for entries in a map at the data model level and vice versa); their implementation therefore typically needs to be integrated into the generic encoder/decoder.  The definition of new tags with this property is NOT RECOMMENDED.</p>
-<p id="rfc.section.3.4.p.7">Protocols using tag numbers 0 and 1 extend the generic data model (<a href="#cbor-data-models" class="xref">Section 2</a>) with data items representing points in time; tag numbers 2 and 3, with arbitrarily sized integers; and tag numbers 4 and 5, with floating point values of arbitrary size and precision.</p>
 <h1 id="rfc.section.3.4.1">
-<a href="#rfc.section.3.4.1">3.4.1.</a> <a href="#stringdatetimesect" id="stringdatetimesect">Standard Date/Time String</a>
+<a href="#rfc.section.3.4.1">3.4.1.</a> <a href="#datetimesect" id="datetimesect">Date and Time</a>
 </h1>
-<p id="rfc.section.3.4.1.p.1">Tag number 0 contains a text string in the standard format described by the <samp>date-time</samp> production in <a href="#RFC3339" class="xref">[RFC3339]</a>, as refined by Section 3.3 of <a href="#RFC4287" class="xref">[RFC4287]</a>, representing the point in time described there. A nested item of another type or that doesn&#8217;t match the <a href="#RFC4287" class="xref">[RFC4287]</a> format is invalid.</p>
+<p id="rfc.section.3.4.1.p.1">Protocols using tag numbers 0 and 1 extend the generic data model (<a href="#cbor-data-models" class="xref">Section 2</a>) with data items representing points in time.</p>
 <h1 id="rfc.section.3.4.2">
-<a href="#rfc.section.3.4.2">3.4.2.</a> <a href="#epochdatetimesect" id="epochdatetimesect">Epoch-based Date/Time</a>
+<a href="#rfc.section.3.4.2">3.4.2.</a> <a href="#stringdatetimesect" id="stringdatetimesect">Standard Date/Time String</a>
 </h1>
-<p id="rfc.section.3.4.2.p.1">Tag number 1 contains a numerical value counting the number of seconds from 1970-01-01T00:00Z in UTC time to the represented point in civil time.</p>
-<p id="rfc.section.3.4.2.p.2">The enclosed item MUST be an unsigned or negative integer (major types 0 and 1), or a floating-point number (major type 7 with additional information 25, 26, or 27). Other contained types are invalid.</p>
-<p id="rfc.section.3.4.2.p.3">Non-negative values (major type 0 and non-negative floating-point numbers) stand for time values on or after 1970-01-01T00:00Z UTC and are interpreted according to POSIX <a href="#TIME_T" class="xref">[TIME_T]</a>.  (POSIX time is also known as UNIX Epoch time.  Note that leap seconds are handled specially by POSIX time and this results in a 1 second discontinuity several times per decade.) Note that applications that require the expression of times beyond early 2106 cannot leave out support of 64-bit integers for the enclosed value.</p>
-<p id="rfc.section.3.4.2.p.4">Negative values (major type 1 and negative floating-point numbers) are interpreted as determined by the application requirements as there is no universal standard for UTC count-of-seconds time before 1970-01-01T00:00Z (this is particularly true for points in time that precede discontinuities in national calendars).  The same applies to non-finite values.</p>
-<p id="rfc.section.3.4.2.p.5">To indicate fractional seconds, floating-point values can be used within tag number 1 instead of integer values.  Note that this generally requires binary64 support, as binary16 and binary32 provide non-zero fractions of seconds only for a short period of time around early 1970.  An application that requires tag number 1 support may restrict the enclosed value to be an integer (or a floating-point value) only.</p>
+<p id="rfc.section.3.4.2.p.1">Tag number 0 contains a text string in the standard format described by the <samp>date-time</samp> production in <a href="#RFC3339" class="xref">[RFC3339]</a>, as refined by Section 3.3 of <a href="#RFC4287" class="xref">[RFC4287]</a>, representing the point in time described there. A nested item of another type or that doesn&#8217;t match the <a href="#RFC4287" class="xref">[RFC4287]</a> format is invalid.</p>
 <h1 id="rfc.section.3.4.3">
-<a href="#rfc.section.3.4.3">3.4.3.</a> <a href="#bignums" id="bignums">Bignums</a>
+<a href="#rfc.section.3.4.3">3.4.3.</a> <a href="#epochdatetimesect" id="epochdatetimesect">Epoch-based Date/Time</a>
 </h1>
-<p id="rfc.section.3.4.3.p.1">Protocols using tag numbers 2 and 3 extend the generic data model (<a href="#cbor-data-models" class="xref">Section 2</a>) with &#8220;bignums&#8221; representing arbitrarily sized integers. In the generic data model, bignum values are not equal to integers from the basic data model, but specific data models can define that equivalence, and preferred encoding never makes use of bignums that also can be expressed as basic integers (see below).</p>
-<p id="rfc.section.3.4.3.p.2">Bignums are encoded as a byte string data item, which is interpreted as an unsigned integer n in network byte order.  Contained items of other types are invalid.  For tag number 2, the value of the bignum is n.  For tag number 3, the value of the bignum is -1 - n.  The preferred encoding of the byte string is to leave out any leading zeroes (note that this means the preferred encoding for n&#160;=&#160;0 is the empty byte string, but see below).  Decoders that understand these tags MUST be able to decode bignums that do have leading zeroes.  The preferred encoding of an integer that can be represented using major type 0 or 1 is to encode it this way instead of as a bignum (which means that the empty string never occurs in a bignum when using preferred encoding).  Note that this means the non-preferred choice of a bignum representation instead of a basic integer for encoding a number is not intended to have application semantics (just as the choice of a longer basic integer representation than needed, such as 0x1800 for 0x00 does not).</p>
-<p id="rfc.section.3.4.3.p.3">For example, the number 18446744073709551616 (2**64) is represented as 0b110_00010 (major type 6, tag number 2), followed by 0b010_01001 (major type 2, length 9), followed by 0x010000000000000000 (one byte 0x01 and eight bytes 0x00). In hexadecimal:</p>
+<p id="rfc.section.3.4.3.p.1">Tag number 1 contains a numerical value counting the number of seconds from 1970-01-01T00:00Z in UTC time to the represented point in civil time.</p>
+<p id="rfc.section.3.4.3.p.2">The enclosed item MUST be an unsigned or negative integer (major types 0 and 1), or a floating-point number (major type 7 with additional information 25, 26, or 27). Other contained types are invalid.</p>
+<p id="rfc.section.3.4.3.p.3">Non-negative values (major type 0 and non-negative floating-point numbers) stand for time values on or after 1970-01-01T00:00Z UTC and are interpreted according to POSIX <a href="#TIME_T" class="xref">[TIME_T]</a>.  (POSIX time is also known as UNIX Epoch time.  Note that leap seconds are handled specially by POSIX time and this results in a 1 second discontinuity several times per decade.) Note that applications that require the expression of times beyond early 2106 cannot leave out support of 64-bit integers for the enclosed value.</p>
+<p id="rfc.section.3.4.3.p.4">Negative values (major type 1 and negative floating-point numbers) are interpreted as determined by the application requirements as there is no universal standard for UTC count-of-seconds time before 1970-01-01T00:00Z (this is particularly true for points in time that precede discontinuities in national calendars).  The same applies to non-finite values.</p>
+<p id="rfc.section.3.4.3.p.5">To indicate fractional seconds, floating-point values can be used within tag number 1 instead of integer values.  Note that this generally requires binary64 support, as binary16 and binary32 provide non-zero fractions of seconds only for a short period of time around early 1970.  An application that requires tag number 1 support may restrict the enclosed value to be an integer (or a floating-point value) only.</p>
+<h1 id="rfc.section.3.4.4">
+<a href="#rfc.section.3.4.4">3.4.4.</a> <a href="#bignums" id="bignums">Bignums</a>
+</h1>
+<p id="rfc.section.3.4.4.p.1">Protocols using tag numbers 2 and 3 extend the generic data model (<a href="#cbor-data-models" class="xref">Section 2</a>) with &#8220;bignums&#8221; representing arbitrarily sized integers. In the generic data model, bignum values are not equal to integers from the basic data model, but specific data models can define that equivalence, and preferred encoding never makes use of bignums that also can be expressed as basic integers (see below).</p>
+<p id="rfc.section.3.4.4.p.2">Bignums are encoded as a byte string data item, which is interpreted as an unsigned integer n in network byte order.  Contained items of other types are invalid.  For tag number 2, the value of the bignum is n.  For tag number 3, the value of the bignum is -1 - n.  The preferred encoding of the byte string is to leave out any leading zeroes (note that this means the preferred encoding for n&#160;=&#160;0 is the empty byte string, but see below).  Decoders that understand these tags MUST be able to decode bignums that do have leading zeroes.  The preferred encoding of an integer that can be represented using major type 0 or 1 is to encode it this way instead of as a bignum (which means that the empty string never occurs in a bignum when using preferred encoding).  Note that this means the non-preferred choice of a bignum representation instead of a basic integer for encoding a number is not intended to have application semantics (just as the choice of a longer basic integer representation than needed, such as 0x1800 for 0x00 does not).</p>
+<p id="rfc.section.3.4.4.p.3">For example, the number 18446744073709551616 (2**64) is represented as 0b110_00010 (major type 6, tag number 2), followed by 0b010_01001 (major type 2, length 9), followed by 0x010000000000000000 (one byte 0x01 and eight bytes 0x00). In hexadecimal:</p>
 <pre>
 C2                        -- Tag 2
    49                     -- Byte string of length 9
       010000000000000000  -- Bytes content
 </pre>
-<h1 id="rfc.section.3.4.4">
-<a href="#rfc.section.3.4.4">3.4.4.</a> <a href="#fractions" id="fractions">Decimal Fractions and Bigfloats</a>
+<h1 id="rfc.section.3.4.5">
+<a href="#rfc.section.3.4.5">3.4.5.</a> <a href="#fractions" id="fractions">Decimal Fractions and Bigfloats</a>
 </h1>
-<p id="rfc.section.3.4.4.p.1">Protocols using tag number 4 extend the generic data model with data items representing arbitrary-length decimal fractions of the form m*(10**e).  Protocols using tag number 5 extend the generic data model with data items representing arbitrary-length binary fractions of the form m*(2**e).  As with bignums, values of different types are not equal in the generic data model.</p>
-<p id="rfc.section.3.4.4.p.2">Decimal fractions combine an integer mantissa with a base-10 scaling factor.  They are most useful if an application needs the exact representation of a decimal fraction such as 1.1 because there is no exact representation for many decimal fractions in binary floating point.</p>
-<p id="rfc.section.3.4.4.p.3">Bigfloats combine an integer mantissa with a base-2 scaling factor.  They are binary floating-point values that can exceed the range or the precision of the three IEEE 754 formats supported by CBOR (<a href="#fpnocont" class="xref">Section 3.3</a>).  Bigfloats may also be used by constrained applications that need some basic binary floating-point capability without the need for supporting IEEE 754.</p>
-<p id="rfc.section.3.4.4.p.4">A decimal fraction or a bigfloat is represented as a tagged array that contains exactly two integer numbers: an exponent e and a mantissa m.  Decimal fractions (tag number 4) use base-10 exponents; the value of a decimal fraction data item is m*(10**e).  Bigfloats (tag number 5) use base-2 exponents; the value of a bigfloat data item is m*(2**e).  The exponent e MUST be represented in an integer of major type 0 or 1, while the mantissa also can be a bignum (<a href="#bignums" class="xref">Section 3.4.3</a>).  Contained items with other structures are invalid.</p>
-<p id="rfc.section.3.4.4.p.5">An example of a decimal fraction is that the number 273.15 could be represented as 0b110_00100 (major type of 6 for the tag, additional information of 4 for the number of tag), followed by 0b100_00010 (major type of 4 for the array, additional information of 2 for the length of the array), followed by 0b001_00001 (major type of 1 for the first integer, additional information of 1 for the value of -2), followed by 0b000_11001 (major type of 0 for the second integer, additional information of 25 for a two-byte value), followed by 0b0110101010110011 (27315 in two bytes).  In hexadecimal:</p>
+<p id="rfc.section.3.4.5.p.1">Protocols using tag number 4 extend the generic data model with data items representing arbitrary-length decimal fractions of the form m*(10**e).  Protocols using tag number 5 extend the generic data model with data items representing arbitrary-length binary fractions of the form m*(2**e).  As with bignums, values of different types are not equal in the generic data model.</p>
+<p id="rfc.section.3.4.5.p.2">Decimal fractions combine an integer mantissa with a base-10 scaling factor.  They are most useful if an application needs the exact representation of a decimal fraction such as 1.1 because there is no exact representation for many decimal fractions in binary floating point.</p>
+<p id="rfc.section.3.4.5.p.3">Bigfloats combine an integer mantissa with a base-2 scaling factor.  They are binary floating-point values that can exceed the range or the precision of the three IEEE 754 formats supported by CBOR (<a href="#fpnocont" class="xref">Section 3.3</a>).  Bigfloats may also be used by constrained applications that need some basic binary floating-point capability without the need for supporting IEEE 754.</p>
+<p id="rfc.section.3.4.5.p.4">A decimal fraction or a bigfloat is represented as a tagged array that contains exactly two integer numbers: an exponent e and a mantissa m.  Decimal fractions (tag number 4) use base-10 exponents; the value of a decimal fraction data item is m*(10**e).  Bigfloats (tag number 5) use base-2 exponents; the value of a bigfloat data item is m*(2**e).  The exponent e MUST be represented in an integer of major type 0 or 1, while the mantissa also can be a bignum (<a href="#bignums" class="xref">Section 3.4.4</a>).  Contained items with other structures are invalid.</p>
+<p id="rfc.section.3.4.5.p.5">An example of a decimal fraction is that the number 273.15 could be represented as 0b110_00100 (major type of 6 for the tag, additional information of 4 for the number of tag), followed by 0b100_00010 (major type of 4 for the array, additional information of 2 for the length of the array), followed by 0b001_00001 (major type of 1 for the first integer, additional information of 1 for the value of -2), followed by 0b000_11001 (major type of 0 for the second integer, additional information of 25 for a two-byte value), followed by 0b0110101010110011 (27315 in two bytes).  In hexadecimal:</p>
 <pre>
 C4             -- Tag 4
    82          -- Array of length 2
       21       -- -2
       19 6ab3  -- 27315
 </pre>
-<p id="rfc.section.3.4.4.p.6">An example of a bigfloat is that the number 1.5 could be represented as 0b110_00101 (major type of 6 for the tag, additional information of 5 for the number of tag), followed by 0b100_00010 (major type of 4 for the array, additional information of 2 for the length of the array), followed by 0b001_00000 (major type of 1 for the first integer, additional information of 0 for the value of -1), followed by 0b000_00011 (major type of 0 for the second integer, additional information of 3 for the value of 3).  In hexadecimal:</p>
+<p id="rfc.section.3.4.5.p.6">An example of a bigfloat is that the number 1.5 could be represented as 0b110_00101 (major type of 6 for the tag, additional information of 5 for the number of tag), followed by 0b100_00010 (major type of 4 for the array, additional information of 2 for the length of the array), followed by 0b001_00000 (major type of 1 for the first integer, additional information of 0 for the value of -1), followed by 0b000_00011 (major type of 0 for the second integer, additional information of 3 for the value of 3).  In hexadecimal:</p>
 <pre>
 C5             -- Tag 5
    82          -- Array of length 2
       20       -- -1
       03       -- 3
 </pre>
-<p id="rfc.section.3.4.4.p.7">Decimal fractions and bigfloats provide no representation of Infinity, -Infinity, or NaN; if these are needed in place of a decimal fraction or bigfloat, the IEEE 754 half-precision representations from <a href="#fpnocont" class="xref">Section 3.3</a> can be used.  For constrained applications, where there is a choice between representing a specific number as an integer and as a decimal fraction or bigfloat (such as when the exponent is small and non-negative), there is a quality-of-implementation expectation that the integer representation is used directly.</p>
-<h1 id="rfc.section.3.4.5">
-<a href="#rfc.section.3.4.5">3.4.5.</a> <a href="#content-hints" id="content-hints">Content Hints</a>
+<p id="rfc.section.3.4.5.p.7">Decimal fractions and bigfloats provide no representation of Infinity, -Infinity, or NaN; if these are needed in place of a decimal fraction or bigfloat, the IEEE 754 half-precision representations from <a href="#fpnocont" class="xref">Section 3.3</a> can be used.  For constrained applications, where there is a choice between representing a specific number as an integer and as a decimal fraction or bigfloat (such as when the exponent is small and non-negative), there is a quality-of-implementation expectation that the integer representation is used directly.</p>
+<h1 id="rfc.section.3.4.6">
+<a href="#rfc.section.3.4.6">3.4.6.</a> <a href="#content-hints" id="content-hints">Content Hints</a>
 </h1>
-<p id="rfc.section.3.4.5.p.1">The tags in this section are for content hints that might be used by generic CBOR processors. These content hints do not extend the generic data model.</p>
-<h1 id="rfc.section.3.4.5.1">
-<a href="#rfc.section.3.4.5.1">3.4.5.1.</a> <a href="#embedded-di" id="embedded-di">Encoded CBOR Data Item</a>
+<p id="rfc.section.3.4.6.p.1">The tags in this section are for content hints that might be used by generic CBOR processors. These content hints do not extend the generic data model.</p>
+<h1 id="rfc.section.3.4.6.1">
+<a href="#rfc.section.3.4.6.1">3.4.6.1.</a> <a href="#embedded-di" id="embedded-di">Encoded CBOR Data Item</a>
 </h1>
-<p id="rfc.section.3.4.5.1.p.1">Sometimes it is beneficial to carry an embedded CBOR data item that is not meant to be decoded immediately at the time the enclosing data item is being decoded.  Tag number 24 (CBOR data item) can be used to tag the embedded byte string as a data item encoded in CBOR format.  Contained items that aren&#8217;t byte strings are invalid.  A contained byte string is valid if it encodes a well-formed CBOR item; validity checking of the decoded CBOR item is not required for tag validity (but could be offered by a generic decoder as a special option).</p>
-<h1 id="rfc.section.3.4.5.2">
-<a href="#rfc.section.3.4.5.2">3.4.5.2.</a> <a href="#convexpect" id="convexpect">Expected Later Encoding for CBOR-to-JSON Converters</a>
+<p id="rfc.section.3.4.6.1.p.1">Sometimes it is beneficial to carry an embedded CBOR data item that is not meant to be decoded immediately at the time the enclosing data item is being decoded.  Tag number 24 (CBOR data item) can be used to tag the embedded byte string as a data item encoded in CBOR format.  Contained items that aren&#8217;t byte strings are invalid.  A contained byte string is valid if it encodes a well-formed CBOR item; validity checking of the decoded CBOR item is not required for tag validity (but could be offered by a generic decoder as a special option).</p>
+<h1 id="rfc.section.3.4.6.2">
+<a href="#rfc.section.3.4.6.2">3.4.6.2.</a> <a href="#convexpect" id="convexpect">Expected Later Encoding for CBOR-to-JSON Converters</a>
 </h1>
-<p id="rfc.section.3.4.5.2.p.1">Tags number 21 to 23 indicate that a byte string might require a specific encoding when interoperating with a text-based representation.  These tags are useful when an encoder knows that the byte string data it is writing is likely to be later converted to a particular JSON-based usage. That usage specifies that some strings are encoded as base64, base64url, and so on. The encoder uses byte strings instead of doing the encoding itself to reduce the message size, to reduce the code size of the encoder, or both.  The encoder does not know whether or not the converter will be generic, and therefore wants to say what it believes is the proper way to convert binary strings to JSON.</p>
-<p id="rfc.section.3.4.5.2.p.2">The data item tagged can be a byte string or any other data item.  In the latter case, the tag applies to all of the byte string data items contained in the data item, except for those contained in a nested data item tagged with an expected conversion.</p>
-<p id="rfc.section.3.4.5.2.p.3">These three tag numbers suggest conversions to three of the base data encodings defined in <a href="#RFC4648" class="xref">[RFC4648]</a>.  For base64url encoding (tag number 21), padding is not used (see Section 3.2 of RFC 4648); that is, all trailing equals signs (&#8220;=&#8221;) are removed from the encoded string.  For base64 encoding (tag number 22), padding is used as defined in RFC 4648.  For both base64url and base64, padding bits are set to zero (see Section 3.5 of RFC 4648), and encoding is performed without the inclusion of any line breaks, whitespace, or other additional characters.  Note that, for all three tag numbers, the encoding of the empty byte string is the empty text string.</p>
-<h1 id="rfc.section.3.4.5.3">
-<a href="#rfc.section.3.4.5.3">3.4.5.3.</a> <a href="#encodedtext" id="encodedtext">Encoded Text</a>
+<p id="rfc.section.3.4.6.2.p.1">Tags number 21 to 23 indicate that a byte string might require a specific encoding when interoperating with a text-based representation.  These tags are useful when an encoder knows that the byte string data it is writing is likely to be later converted to a particular JSON-based usage. That usage specifies that some strings are encoded as base64, base64url, and so on. The encoder uses byte strings instead of doing the encoding itself to reduce the message size, to reduce the code size of the encoder, or both.  The encoder does not know whether or not the converter will be generic, and therefore wants to say what it believes is the proper way to convert binary strings to JSON.</p>
+<p id="rfc.section.3.4.6.2.p.2">The data item tagged can be a byte string or any other data item.  In the latter case, the tag applies to all of the byte string data items contained in the data item, except for those contained in a nested data item tagged with an expected conversion.</p>
+<p id="rfc.section.3.4.6.2.p.3">These three tag numbers suggest conversions to three of the base data encodings defined in <a href="#RFC4648" class="xref">[RFC4648]</a>.  For base64url encoding (tag number 21), padding is not used (see Section 3.2 of RFC 4648); that is, all trailing equals signs (&#8220;=&#8221;) are removed from the encoded string.  For base64 encoding (tag number 22), padding is used as defined in RFC 4648.  For both base64url and base64, padding bits are set to zero (see Section 3.5 of RFC 4648), and encoding is performed without the inclusion of any line breaks, whitespace, or other additional characters.  Note that, for all three tag numbers, the encoding of the empty byte string is the empty text string.</p>
+<h1 id="rfc.section.3.4.6.3">
+<a href="#rfc.section.3.4.6.3">3.4.6.3.</a> <a href="#encodedtext" id="encodedtext">Encoded Text</a>
 </h1>
-<p id="rfc.section.3.4.5.3.p.1">Some text strings hold data that have formats widely used on the Internet, and sometimes those formats can be validated and presented to the application in appropriate form by the decoder. There are tags for some of these formats. As with tag numbers 21 to 23, if these tags are applied to an item other than a text string, they apply to all text string data items it contains.</p>
+<p id="rfc.section.3.4.6.3.p.1">Some text strings hold data that have formats widely used on the Internet, and sometimes those formats can be validated and presented to the application in appropriate form by the decoder. There are tags for some of these formats. As with tag numbers 21 to 23, if these tags are applied to an item other than a text string, they apply to all text string data items it contains.</p>
 <p></p>
 
 <ul>
@@ -1165,14 +1171,14 @@ C5             -- Tag 5
 <li>Tag number 35 is for regular expressions that are roughly in Perl Compatible Regular Expressions (PCRE/PCRE2) form <a href="#PCRE" class="xref">[PCRE]</a> or a version of the JavaScript regular expression syntax <a href="#ECMA262" class="xref">[ECMA262]</a>.  (Note that more specific identification may be necessary if the actual version of the specification underlying the regular expression, or more than just the text of the regular expression itself, need to be conveyed.) Any contained string value is valid.</li>
 <li>Tag number 36 is for MIME messages (including all headers), as defined in <a href="#RFC2045" class="xref">[RFC2045]</a>. A text string that isn&#8217;t a valid MIME message is invalid.  (For this tag, validity checking may be particularly onerous for a generic decoder and might therefore not be offered.  Note that many MIME messages are general binary data and can therefore not be represented in a text string; <a href="#IANA.cbor-tags" class="xref">[IANA.cbor-tags]</a> lists a registration for tag number 257 that is similar to tag number 36 but is used with an enclosed byte string.)</li>
 </ul>
-<p id="rfc.section.3.4.5.3.p.3">Note that tag numbers 33 and 34 differ from 21 and 22 in that the data is transported in base-encoded form for the former and in raw byte string form for the latter.</p>
-<h1 id="rfc.section.3.4.6">
-<a href="#rfc.section.3.4.6">3.4.6.</a> <a href="#self-describe" id="self-describe">Self-Described CBOR</a>
+<p id="rfc.section.3.4.6.3.p.3">Note that tag numbers 33 and 34 differ from 21 and 22 in that the data is transported in base-encoded form for the former and in raw byte string form for the latter.</p>
+<h1 id="rfc.section.3.4.7">
+<a href="#rfc.section.3.4.7">3.4.7.</a> <a href="#self-describe" id="self-describe">Self-Described CBOR</a>
 </h1>
-<p id="rfc.section.3.4.6.p.1">In many applications, it will be clear from the context that CBOR is being employed for encoding a data item.  For instance, a specific protocol might specify the use of CBOR, or a media type is indicated that specifies its use.  However, there may be applications where such context information is not available, such as when CBOR data is stored in a file that does not have disambiguating metadata.  Here, it may help to have some distinguishing characteristics for the data itself.</p>
-<p id="rfc.section.3.4.6.p.2">Tag number 55799 is defined for this purpose.  It does not impart any special semantics on the data item that it encloses; that is, the semantics of a data item enclosed in tag number 55799 is exactly identical to the semantics of the data item itself.</p>
-<p id="rfc.section.3.4.6.p.3">The serialization of this tag&#8217;s head is 0xd9d9f7, which does not appear to be in use as a distinguishing mark for any frequently used file types.  In particular, 0xd9d9f7 is not a valid start of a Unicode text in any Unicode encoding if it is followed by a valid CBOR data item.</p>
-<p id="rfc.section.3.4.6.p.4">For instance, a decoder might be able to decode both CBOR and JSON. Such a decoder would need to mechanically distinguish the two formats. An easy way for an encoder to help the decoder would be to tag the entire CBOR item with tag number 55799, the serialization of which will never be found at the beginning of a JSON text.</p>
+<p id="rfc.section.3.4.7.p.1">In many applications, it will be clear from the context that CBOR is being employed for encoding a data item.  For instance, a specific protocol might specify the use of CBOR, or a media type is indicated that specifies its use.  However, there may be applications where such context information is not available, such as when CBOR data is stored in a file that does not have disambiguating metadata.  Here, it may help to have some distinguishing characteristics for the data itself.</p>
+<p id="rfc.section.3.4.7.p.2">Tag number 55799 is defined for this purpose.  It does not impart any special semantics on the data item that it encloses; that is, the semantics of a data item enclosed in tag number 55799 is exactly identical to the semantics of the data item itself.</p>
+<p id="rfc.section.3.4.7.p.3">The serialization of this tag&#8217;s head is 0xd9d9f7, which does not appear to be in use as a distinguishing mark for any frequently used file types.  In particular, 0xd9d9f7 is not a valid start of a Unicode text in any Unicode encoding if it is followed by a valid CBOR data item.</p>
+<p id="rfc.section.3.4.7.p.4">For instance, a decoder might be able to decode both CBOR and JSON. Such a decoder would need to mechanically distinguish the two formats. An easy way for an encoder to help the decoder would be to tag the entire CBOR item with tag number 55799, the serialization of which will never be found at the beginning of a JSON text.</p>
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#serialization-considerations" id="serialization-considerations">Serialization Considerations</a>
 </h1>
@@ -1219,7 +1225,7 @@ C5             -- Tag 5
 <a href="#rfc.section.4.2.2">4.2.2.</a> <a href="#additional-deterministic-encoding-considerations" id="additional-deterministic-encoding-considerations">Additional Deterministic Encoding Considerations</a>
 </h1>
 <p id="rfc.section.4.2.2.p.1">If a protocol allows for IEEE floats, then additional deterministic encoding rules might need to be added.  One example rule might be to have all floats start as a 64-bit float, then do a test conversion to a 32-bit float; if the result is the same numeric value, use the shorter value and repeat the process with a test conversion to a 16-bit float. (This rule selects 16-bit float for positive and negative Infinity as well.) Although IEEE floats can represent both positive and negative zero as distinct values, the application might not distinguish these and might decide to represent all zero values with a positive sign, disallowing negative zero.</p>
-<p id="rfc.section.4.2.2.p.2">CBOR tags present additional considerations for deterministic encoding.  If a CBOR-based protocol were to provide the same semantics for the presence and absence of a specific tag (e.g., by allowing both tag 1 data items and raw numbers in a date/time position, treating the latter as if they were tagged), the deterministic format would not allow them.  In a protocol that requires tags in certain places to obtain specific semantics, the tag needs to appear in the deterministic format as well.  Deterministic encoding considerations also apply to the content of tags.</p>
+<p id="rfc.section.4.2.2.p.2">CBOR tags present additional considerations for deterministic encoding.  If a CBOR-based protocol were to provide the same semantics for the presence and absence of a specific tag (e.g., by allowing both tag 1 data items and raw numbers in a date/time position, treating the latter as if they were tagged), the deterministic format would not allow them.  In a protocol that requires tags in certain places to obtain specific semantics, the tag needs to appear in the deterministic format as well.</p>
 <p id="rfc.section.4.2.2.p.3">Protocols that include floating, big integer, or other complex values need to define extra requirements on their deterministic encodings. For example:</p>
 <p></p>
 
@@ -1231,8 +1237,8 @@ C5             -- Tag 5
 </ol>
 <p> Rule 1 straddles the boundaries between integers and floating point values, and Rule 3 does not use preferred encoding, so Rule 2 may be a good choice in many cases.  </p>
 <br><br> If NaN is an allowed value and there is no intent to support NaN payloads or signaling NaNs, the protocol needs to pick a single representation, for example 0xf97e00.  If that simple choice is not possible, specific attention will be needed for NaN handling.  <br><br> Subnormal numbers (nonzero numbers with the lowest possible exponent of a given IEEE 754 number format) may be flushed to zero outputs or be treated as zero inputs in some floating point implementations.  A protocol&#8217;s deterministic encoding may want to exclude them from interchange, interchanging zero instead.</li>
-<li>If a protocol includes a field that can express integers with an absolute value of 2^64 or larger using tag numbers 2 or 3 (<a href="#bignums" class="xref">Section 3.4.3</a>), the protocol&#8217;s deterministic encoding needs to specify whether small integers are expressed using the tag or major types 0 and 1.</li>
-<li>A protocol might give encoders the choice of representing a URL as either a text string or, using <a href="#encodedtext" class="xref">Section 3.4.5.3</a>, tag number 32 containing a text string. This protocol&#8217;s deterministic encoding needs to either require that the tag is present or require that it&#8217;s absent, not allow either one.</li>
+<li>If a protocol includes a field that can express integers with an absolute value of 2^64 or larger using tag numbers 2 or 3 (<a href="#bignums" class="xref">Section 3.4.4</a>), the protocol&#8217;s deterministic encoding needs to specify whether small integers are expressed using the tag or major types 0 and 1.</li>
+<li>A protocol might give encoders the choice of representing a URL as either a text string or, using <a href="#encodedtext" class="xref">Section 3.4.6.3</a>, tag number 32 containing a text string. This protocol&#8217;s deterministic encoding needs to either require that the tag is present or require that it&#8217;s absent, not allow either one.</li>
 </ul>
 <h1 id="rfc.section.4.2.3">
 <a href="#rfc.section.4.2.3">4.2.3.</a> <a href="#length-first-map-key-ordering" id="length-first-map-key-ordering">Length-first map key ordering</a>
@@ -1276,7 +1282,7 @@ C5             -- Tag 5
 <a href="#rfc.section.5.2">5.2.</a> <a href="#generic" id="generic">Generic Encoders and Decoders</a>
 </h1>
 <p id="rfc.section.5.2.p.1">A generic CBOR decoder can decode all well-formed CBOR data and present them to an application.  See <a href="#pseudocode" class="xref">Appendix C</a>.</p>
-<p id="rfc.section.5.2.p.2">Even though CBOR attempts to minimize these cases, not all well-formed CBOR data is valid: for example, the encoded text string <samp>0x62c0ae</samp> does not contain valid UTF-8 and so is not a valid CBOR item.  Also, specific tags may make semantic constraints that may be violated, such as a bignum tag enclosing another tag, or an instance of tag number 0 containing a byte string, or containing a text string with contents that do not match <a href="#RFC3339" class="xref">[RFC3339]</a>&#8217;s <samp>date-time</samp> production.  There is no requirement that generic encoders and decoders make unnatural choices for their application interface to enable the processing of invalid data.  Generic encoders and decoders are expected to forward simple values and tags even if their specific codepoints are not registered at the time the encoder/decoder is written (<a href="#validity-checking" class="xref">Section 5.4</a>).</p>
+<p id="rfc.section.5.2.p.2">Even though CBOR attempts to minimize these cases, not all well-formed CBOR data is valid: for example, the encoded text string <samp>0x62c0ae</samp> does not contain valid UTF-8 and so is not a valid CBOR item.  Also, specific tags may make semantic constraints that may be violated, such as a bignum tag enclosing another tag, or an instance of tag number 0 containing a byte string or a text string with contents that do not match <a href="#RFC3339" class="xref">[RFC3339]</a>&#8217;s <samp>date-time</samp> production.  There is no requirement that generic encoders and decoders make unnatural choices for their application interface to enable the processing of invalid data.  Generic encoders and decoders are expected to forward simple values and tags even if their specific codepoints are not registered at the time the encoder/decoder is written (<a href="#validity-checking" class="xref">Section 5.4</a>).</p>
 <p id="rfc.section.5.2.p.3">Generic decoders provide ways to present well-formed CBOR values, both valid and invalid, to an application.  The diagnostic notation (<a href="#diagnostic-notation" class="xref">Section 8</a>) may be used to present well-formed CBOR values to humans.</p>
 <p id="rfc.section.5.2.p.4">Generic encoders provide an application interface that allows the application to specify any well-formed value, including simple values and tags unknown to the encoder.</p>
 <h1 id="rfc.section.5.3">
@@ -1352,7 +1358,7 @@ C5             -- Tag 5
 <p id="rfc.section.5.6.1.p.2">At the generic data model level, numerically equivalent integer and floating-point values are distinct from each other, as they are from the various big numbers (Tags 2 to 5).  Similarly, text strings are distinct from byte strings, even if composed of the same bytes.  A tagged value is distinct from an untagged value or from a value tagged with a different tag number.</p>
 <p id="rfc.section.5.6.1.p.3">Within each of these groups, numeric values are distinct unless they are numerically equal (specifically, -0.0 is equal to 0.0); for the purpose of map key equivalence, NaN (not a number) values are equivalent if they have the same significand after zero-extending both significands at the right to 64 bits.</p>
 <p id="rfc.section.5.6.1.p.4">(Byte and text) strings are compared byte by byte, arrays element by element, and are equal if they have the same number of bytes/elements and the same values at the same positions.  Two maps are equal if they have the same set of pairs regardless of their order; pairs are equal if both the key and value are equal.</p>
-<p id="rfc.section.5.6.1.p.5">Tagged values are equal if both the tag number and the enclosed item are equal.  (Note that a generic decoder that provides processing for a specific tag may not be able to distinguish some semantically equivalent values, e.g. if leading zeroes occur in the content of tag 2/3 (<a href="#bignums" class="xref">Section 3.4.3</a>).) Simple values are equal if they simply have the same value.  Nothing else is equal in the generic data model, a simple value 2 is not equivalent to an integer 2 and an array is never equivalent to a map.</p>
+<p id="rfc.section.5.6.1.p.5">Tagged values are equal if both the tag number and the enclosed item are equal.  (Note that a generic decoder that provides processing for a specific tag may not be able to distinguish some semantically equivalent values, e.g. if leading zeroes occur in the content of tag 2/3 (<a href="#bignums" class="xref">Section 3.4.4</a>).) Simple values are equal if they simply have the same value.  Nothing else is equal in the generic data model, a simple value 2 is not equivalent to an integer 2 and an array is never equivalent to a map.</p>
 <p id="rfc.section.5.6.1.p.6">As discussed in <a href="#specific-data-models" class="xref">Section 2.2</a>, specific data models can make values equivalent for the purpose of comparing map keys that are distinct in the generic data model.  Note that this implies that a generic decoder may deliver a decoded map to an application that needs to be checked for duplicate map keys by that application (alternatively, the decoder may provide a programming interface to perform this service for the application).  Specific data models cannot distinguish values for map keys that are equal for this purpose at the generic data model level.</p>
 <h1 id="rfc.section.5.7">
 <a href="#rfc.section.5.7">5.7.</a> <a href="#undefined-values" id="undefined-values">Undefined Values</a>
@@ -1449,7 +1455,6 @@ C5             -- Tag 5
 <a href="#rfc.section.9">9.</a> <a href="#ianacons" id="ianacons">IANA Considerations</a>
 </h1>
 <p id="rfc.section.9.p.1">IANA has created two registries for new CBOR values. The registries are separate, that is, not under an umbrella registry, and follow the rules in <a href="#RFC8126" class="xref">[RFC8126]</a>. IANA has also assigned a new MIME media type and an associated Constrained Application Protocol (CoAP) Content-Format entry.</p>
-<p id="rfc.section.9.p.2">[To be removed by RFC editor:] IANA is requested to update these registries to point to the present document instead of RFC 7049.</p>
 <h1 id="rfc.section.9.1">
 <a href="#rfc.section.9.1">9.1.</a> <a href="#ianasimple" id="ianasimple">Simple Values Registry</a>
 </h1>
@@ -2082,7 +2087,7 @@ Author/Change Controller:
 <tbody>
 <tr>
 <td class="left">0x00..0x17</td>
-<td class="left">Unsigned integer 0x00..0x17 (0..23)</td>
+<td class="left">Integer 0x00..0x17 (0..23)</td>
 </tr>
 <tr>
 <td class="left">0x18</td>
@@ -2218,11 +2223,11 @@ Author/Change Controller:
 </tr>
 <tr>
 <td class="left">0xc0</td>
-<td class="left">Text-based date/time (data item follows; see <a href="#stringdatetimesect" class="xref">Section 3.4.1</a>)</td>
+<td class="left">Text-based date/time (data item follows; see <a href="#stringdatetimesect" class="xref">Section 3.4.2</a>)</td>
 </tr>
 <tr>
 <td class="left">0xc1</td>
-<td class="left">Epoch-based date/time (data item follows; see <a href="#epochdatetimesect" class="xref">Section 3.4.2</a>)</td>
+<td class="left">Epoch-based date/time (data item follows; see <a href="#epochdatetimesect" class="xref">Section 3.4.3</a>)</td>
 </tr>
 <tr>
 <td class="left">0xc2</td>
@@ -2234,11 +2239,11 @@ Author/Change Controller:
 </tr>
 <tr>
 <td class="left">0xc4</td>
-<td class="left">Decimal Fraction (data item &#8220;array&#8221; follows; see <a href="#fractions" class="xref">Section 3.4.4</a>)</td>
+<td class="left">Decimal Fraction (data item &#8220;array&#8221; follows; see <a href="#fractions" class="xref">Section 3.4.5</a>)</td>
 </tr>
 <tr>
 <td class="left">0xc5</td>
-<td class="left">Bigfloat (data item &#8220;array&#8221; follows; see <a href="#fractions" class="xref">Section 3.4.4</a>)</td>
+<td class="left">Bigfloat (data item &#8220;array&#8221; follows; see <a href="#fractions" class="xref">Section 3.4.5</a>)</td>
 </tr>
 <tr>
 <td class="left">0xc6..0xd4</td>
@@ -2246,7 +2251,7 @@ Author/Change Controller:
 </tr>
 <tr>
 <td class="left">0xd5..0xd7</td>
-<td class="left">Expected Conversion (data item follows; see <a href="#convexpect" class="xref">Section 3.4.5.2</a>)</td>
+<td class="left">Expected Conversion (data item follows; see <a href="#convexpect" class="xref">Section 3.4.6.2</a>)</td>
 </tr>
 <tr>
 <td class="left">0xd8..0xdb</td>
@@ -2542,6 +2547,7 @@ def decode_half(half):
 <li>End of input in a head: 18, 19, 1a, 1b, 19 01, 1a 01 02, 1b 01 02 03 04 05 06 07, 38, 58, 78, 98, 9a 01 ff 00, b8, d8, f8, f9 00, fa 00 00, fb 00 00 00</li>
 <li>Definite length strings with short data: 41, 61, 5a ff ff ff ff 00, 5b ff ff ff ff ff ff ff ff 01 02 03, 7a ff ff ff ff 00, 7b 7f ff ff ff ff ff ff ff 01 02 03</li>
 <li>Definite length maps and arrays not closed with enough items: 81, 81 81 81 81 81 81 81 81 81, 82 00, a1, a2 01 02, a1 00, a2 00 00 00</li>
+<li>Tag number not followed by tag content: c0</li>
 <li>Indefinite length strings not closed by a break stop code: 5f 41 00, 7f 61 00</li>
 <li>Indefinite length maps and arrays not closed by a break stop code: 9f, 9f 01 02, bf, bf 01 02 01 02, 81 9f, 9f 80 00, 9f 9f 9f 9f 9f ff ff ff ff, 9f 81 9f 81 9f 9f ff ff ff</li>
 </ul>
