@@ -357,12 +357,12 @@ ul.toc li {
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.36.0 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.37.2 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Bormann, C. and P. Hoffman" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-cbor-7049bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-12-07" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-12-18" />
   <meta name="dct.abstract" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack.This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format." />
   <meta name="description" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack.This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format." />
 
@@ -390,8 +390,8 @@ ul.toc li {
 <td class="right">ICANN</td>
 </tr>
 <tr>
-<td class="left">Expires: June 9, 2020</td>
-<td class="right">December 07, 2019</td>
+<td class="left">Expires: June 20, 2020</td>
+<td class="right">December 18, 2019</td>
 </tr>
 
     	
@@ -411,7 +411,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on June 9, 2020.</p>
+<p>This Internet-Draft will expire on June 20, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -622,9 +622,9 @@ ul.toc li {
 <dt>Data item:</dt>
 <dd style="margin-left: 8">A single piece of CBOR data.  The structure of a data item may contain zero, one, or more nested data items.  The term is used both for the data item in representation format and for the abstract idea that can be derived from that by a decoder; the former can be addressed specifically by using &#8220;encoded data item&#8221;.</dd>
 <dt>Decoder:</dt>
-<dd style="margin-left: 8">A process that decodes a well-formed CBOR data item and makes it available to an application.  Formally speaking, a decoder contains a parser to break up the input using the syntax rules of CBOR, as well as a semantic processor to prepare the data in a form suitable to the application.</dd>
+<dd style="margin-left: 8">A process that decodes a well-formed encoded CBOR data item and makes it available to an application.  Formally speaking, a decoder contains a parser to break up the input using the syntax rules of CBOR, as well as a semantic processor to prepare the data in a form suitable to the application.</dd>
 <dt>Encoder:</dt>
-<dd style="margin-left: 8">A process that generates the representation format of a CBOR data item from application information.</dd>
+<dd style="margin-left: 8">A process that generates the (well-formed) representation format of a CBOR data item from application information.</dd>
 <dt>Data Stream:</dt>
 <dd style="margin-left: 8">A sequence of zero or more data items, not further assembled into a larger containing data item.  The independent data items that make up a data stream are sometimes also referred to as &#8220;top-level data items&#8221;.</dd>
 <dt>Well-formed:</dt>
@@ -677,7 +677,7 @@ ul.toc li {
 <a href="#rfc.section.2.2">2.2.</a> <a href="#specific-data-models" id="specific-data-models">Specific Data Models</a>
 </h1>
 <p id="rfc.section.2.2.p.1">The specific data model for a CBOR-based protocol usually subsets the extended generic data model and assigns application semantics to the data items within this subset and its components.  When documenting such specific data models, where it is desired to specify the types of data items, it is preferred to identify the types by the names they have in the generic data model (&#8220;negative integer&#8221;, &#8220;array&#8221;) instead of by referring to aspects of their CBOR representation (&#8220;major type 1&#8221;, &#8220;major type 4&#8221;).</p>
-<p id="rfc.section.2.2.p.2">Specific data models can also specify what values (including values of different types) are equivalent for the purposes of map keys and encoder freedom. For example, in the generic data model, a valid map MAY have both <samp>0</samp> and <samp>0.0</samp> as keys, and an encoder MUST NOT encode <samp>0.0</samp> as an integer (major type 0, <a href="#majortypes" class="xref">Section 3.1</a>).  However, if a specific data model declares that floating-point and integer representations of integral values are equivalent, using both map keys <samp>0</samp> and <samp>0.0</samp> in a single map would be considered duplicates and so invalid, and an encoder could encode integral-valued floats as integers or vice versa, perhaps to save encoded bytes.</p>
+<p id="rfc.section.2.2.p.2">Specific data models can also specify what values (including values of different types) are equivalent for the purposes of map keys and encoder freedom. For example, in the generic data model, a valid map MAY have both <samp>0</samp> and <samp>0.0</samp> as keys, and an encoder MUST NOT encode <samp>0.0</samp> as an integer (major type 0, <a href="#majortypes" class="xref">Section 3.1</a>).  However, if a specific data model declares that floating-point and integer representations of integral values are equivalent, using both map keys <samp>0</samp> and <samp>0.0</samp> in a single map would be considered duplicates, even while encoded as different major types, and so invalid; and an encoder could encode integral-valued floats as integers or vice versa, perhaps to save encoded bytes.</p>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#encoding" id="encoding">Specification of the CBOR Encoding</a>
 </h1>
@@ -870,7 +870,7 @@ BF           -- Start indefinite-length map
 <h1 id="rfc.section.3.2.3">
 <a href="#rfc.section.3.2.3">3.2.3.</a> <a href="#indefinite-length-byte-strings-and-text-strings" id="indefinite-length-byte-strings-and-text-strings">Indefinite-Length Byte Strings and Text Strings</a>
 </h1>
-<p id="rfc.section.3.2.3.p.1">Indefinite-length strings are represented by a byte containing the major type and additional information value of 31, followed by a series of zero or more byte or text strings (&#8220;chunks&#8221;) that have definite lengths, followed by the &#8220;break&#8221; stop code (<a href="#break" class="xref">Section 3.2.1</a>).  The data item represented by the indefinite-length string is the concatenation of the chunks (i.e., the empty byte or text string, respectively, if no chunk is present).</p>
+<p id="rfc.section.3.2.3.p.1">Indefinite-length strings are represented by a byte containing the major type and additional information value of 31, followed by a series of zero or more byte or text strings (&#8220;chunks&#8221;) that have definite lengths, followed by the &#8220;break&#8221; stop code (<a href="#break" class="xref">Section 3.2.1</a>).  The data item represented by the indefinite-length string is the concatenation of the chunks (i.e., the empty byte or text string, respectively, if no chunk is present).  (Note that zero-length chunks, while not particularly useful, are permitted.)</p>
 <p id="rfc.section.3.2.3.p.2">If any item between the indefinite-length string indicator (0b010_11111 or 0b011_11111) and the &#8220;break&#8221; stop code is not a definite-length string item of the same major type, the string is not well-formed.</p>
 <p id="rfc.section.3.2.3.p.3">If any definite-length text string inside an indefinite-length text string is invalid, the indefinite-length text string is invalid.  Note that this implies that the bytes of a single UTF-8 character cannot be spread between chunks: a new chunk can only be started at a character boundary.</p>
 <p id="rfc.section.3.2.3.p.4">For example, assume the sequence:</p>
