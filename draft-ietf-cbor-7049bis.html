@@ -21,7 +21,7 @@ This revision formally obsoletes RFC 7049, while keeping full compatibility
 of the interchange format from RFC 7049.
 It does not create a new version of the format. 
     " name="description">
-<meta content="xml2rfc 2.37.2" name="generator">
+<meta content="xml2rfc 2.37.3" name="generator">
 <meta content="parser, decoder, encoder, binary format, data interchange format, JSON" name="keyword">
 <meta content="draft-ietf-cbor-7049bis-latest" name="ietf.draft">
 <link href="draft-ietf-cbor-7049bis.xml" rel="alternate" type="application/rfc+xml">
@@ -827,11 +827,11 @@ table.left {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CBOR</td>
-<td class="right">December 2019</td>
+<td class="right">January 2020</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann &amp; Hoffman</td>
-<td class="center">Expires 20 June 2020</td>
+<td class="center">Expires 14 July 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -847,12 +847,12 @@ table.left {
 <a href="https://www.rfc-editor.org/rfc/rfc7049" class="eref">7049</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2019-12-18" class="published">18 December 2019</time>
+<time datetime="2020-01-11" class="published">11 January 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-06-20">20 June 2020</time></dd>
+<dd class="expires"><time datetime="2020-07-14">14 July 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -915,7 +915,7 @@ targeted at becoming an Internet Standard.<a href="#section-note.1-2" class="pil
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 June 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 July 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -924,7 +924,7 @@ targeted at becoming an Internet Standard.<a href="#section-note.1-2" class="pil
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2019 IETF Trust and the persons identified as the
+            Copyright (c) 2020 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -950,256 +950,256 @@ targeted at becoming an Internet Standard.<a href="#section-note.1-2" class="pil
 <li class="toc ulEmpty" id="section-toc.1-1.1.2.1">
                 <p id="section-toc.1-1.1.2.1.1"><a href="#section-1.1" class="xref">1.1</a>.  <a href="#name-objectives" class="xref">Objectives</a><a href="#section-toc.1-1.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.1.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.1.2.2">
                 <p id="section-toc.1-1.1.2.2.1"><a href="#section-1.2" class="xref">1.2</a>.  <a href="#name-terminology" class="xref">Terminology</a><a href="#section-toc.1-1.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.2">
+<li class="toc ulEmpty" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-cbor-data-models" class="xref">CBOR Data Models</a><a href="#section-toc.1-1.2.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.2.2.1">
                 <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-extended-generic-data-model" class="xref">Extended Generic Data Models</a><a href="#section-toc.1-1.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.2.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.2.2.2">
                 <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="xref">2.2</a>.  <a href="#name-specific-data-models" class="xref">Specific Data Models</a><a href="#section-toc.1-1.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.3">
+<li class="toc ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-specification-of-the-cbor-e" class="xref">Specification of the CBOR Encoding</a><a href="#section-toc.1-1.3.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-major-types" class="xref">Major Types</a><a href="#section-toc.1-1.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.3.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-indefinite-lengths-for-some" class="xref">Indefinite Lengths for Some Major Types</a><a href="#section-toc.1-1.3.2.2.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.3.2.2.2.1">
                     <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="xref">3.2.1</a>.  <a href="#name-the-break-stop-code" class="xref">The "break" Stop Code</a><a href="#section-toc.1-1.3.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-toc.1-1.3.2.2.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.2.2.2">
                     <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="xref">3.2.2</a>.  <a href="#name-indefinite-length-arrays-an" class="xref">Indefinite-Length Arrays and Maps</a><a href="#section-toc.1-1.3.2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-toc.1-1.3.2.2.2.3">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.2.2.3">
                     <p id="section-toc.1-1.3.2.2.2.3.1"><a href="#section-3.2.3" class="xref">3.2.3</a>.  <a href="#name-indefinite-length-byte-stri" class="xref">Indefinite-Length Byte Strings and Text Strings</a><a href="#section-toc.1-1.3.2.2.2.3.1" class="pilcrow">¶</a></p>
 </li>
-                </ul>
+</ul>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.3.2.3">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.3">
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-floating-point-numbers-and-" class="xref">Floating-Point Numbers and Values with No Content</a><a href="#section-toc.1-1.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.3.2.4">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.4">
                 <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-tagging-of-items" class="xref">Tagging of Items</a><a href="#section-toc.1-1.3.2.4.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.1">
                     <p id="section-toc.1-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="xref">3.4.1</a>.  <a href="#name-standard-date-time-string" class="xref">Standard Date/Time String</a><a href="#section-toc.1-1.3.2.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.2">
                     <p id="section-toc.1-1.3.2.4.2.2.1"><a href="#section-3.4.2" class="xref">3.4.2</a>.  <a href="#name-epoch-based-date-time" class="xref">Epoch-based Date/Time</a><a href="#section-toc.1-1.3.2.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.3">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.3">
                     <p id="section-toc.1-1.3.2.4.2.3.1"><a href="#section-3.4.3" class="xref">3.4.3</a>.  <a href="#name-bignums" class="xref">Bignums</a><a href="#section-toc.1-1.3.2.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.4">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.4">
                     <p id="section-toc.1-1.3.2.4.2.4.1"><a href="#section-3.4.4" class="xref">3.4.4</a>.  <a href="#name-decimal-fractions-and-bigfl" class="xref">Decimal Fractions and Bigfloats</a><a href="#section-toc.1-1.3.2.4.2.4.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.5">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.5">
                     <p id="section-toc.1-1.3.2.4.2.5.1"><a href="#section-3.4.5" class="xref">3.4.5</a>.  <a href="#name-content-hints" class="xref">Content Hints</a><a href="#section-toc.1-1.3.2.4.2.5.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.5.2.1">
                         <p id="section-toc.1-1.3.2.4.2.5.2.1.1"><a href="#section-3.4.5.1" class="xref">3.4.5.1</a>.  <a href="#name-encoded-cbor-data-item" class="xref">Encoded CBOR Data Item</a><a href="#section-toc.1-1.3.2.4.2.5.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                      <li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.5.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.5.2.2">
                         <p id="section-toc.1-1.3.2.4.2.5.2.2.1"><a href="#section-3.4.5.2" class="xref">3.4.5.2</a>.  <a href="#name-expected-later-encoding-for" class="xref">Expected Later Encoding for CBOR-to-JSON Converters</a><a href="#section-toc.1-1.3.2.4.2.5.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                      <li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.5.2.3">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.5.2.3">
                         <p id="section-toc.1-1.3.2.4.2.5.2.3.1"><a href="#section-3.4.5.3" class="xref">3.4.5.3</a>.  <a href="#name-encoded-text" class="xref">Encoded Text</a><a href="#section-toc.1-1.3.2.4.2.5.2.3.1" class="pilcrow">¶</a></p>
 </li>
-                    </ul>
+</ul>
 </li>
-                  <li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.6">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.4.2.6">
                     <p id="section-toc.1-1.3.2.4.2.6.1"><a href="#section-3.4.6" class="xref">3.4.6</a>.  <a href="#name-self-described-cbor" class="xref">Self-Described CBOR</a><a href="#section-toc.1-1.3.2.4.2.6.1" class="pilcrow">¶</a></p>
 </li>
-                </ul>
+</ul>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.4">
+<li class="toc ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-serialization-consideration" class="xref">Serialization Considerations</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-preferred-serialization" class="xref">Preferred Serialization</a><a href="#section-toc.1-1.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.4.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.2">
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-deterministically-encoded-c" class="xref">Deterministically Encoded CBOR</a><a href="#section-toc.1-1.4.2.2.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.4.2.2.2.1">
                     <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="xref">4.2.1</a>.  <a href="#name-core-deterministic-encoding" class="xref">Core Deterministic Encoding Requirements</a><a href="#section-toc.1-1.4.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-toc.1-1.4.2.2.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.2.2.2">
                     <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="xref">4.2.2</a>.  <a href="#name-additional-deterministic-en" class="xref">Additional Deterministic Encoding Considerations</a><a href="#section-toc.1-1.4.2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-toc.1-1.4.2.2.2.3">
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.2.2.3">
                     <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="xref">4.2.3</a>.  <a href="#name-length-first-map-key-orderi" class="xref">Length-first map key ordering</a><a href="#section-toc.1-1.4.2.2.2.3.1" class="pilcrow">¶</a></p>
 </li>
-                </ul>
+</ul>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.5">
+<li class="toc ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-creating-cbor-based-protoco" class="xref">Creating CBOR-Based Protocols</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.5.2.1">
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-cbor-in-streaming-applicati" class="xref">CBOR in Streaming Applications</a><a href="#section-toc.1-1.5.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.5.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.5.2.2">
                 <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="xref">5.2</a>.  <a href="#name-generic-encoders-and-decode" class="xref">Generic Encoders and Decoders</a><a href="#section-toc.1-1.5.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.5.2.3">
+<li class="toc ulEmpty" id="section-toc.1-1.5.2.3">
                 <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="xref">5.3</a>.  <a href="#name-validity-of-items" class="xref">Validity of Items</a><a href="#section-toc.1-1.5.2.3.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.5.2.3.2.1">
                     <p id="section-toc.1-1.5.2.3.2.1.1"><a href="#section-5.3.1" class="xref">5.3.1</a>.  <a href="#name-basic-validity" class="xref">Basic validity</a><a href="#section-toc.1-1.5.2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-toc.1-1.5.2.3.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.5.2.3.2.2">
                     <p id="section-toc.1-1.5.2.3.2.2.1"><a href="#section-5.3.2" class="xref">5.3.2</a>.  <a href="#name-tag-validity" class="xref">Tag validity</a><a href="#section-toc.1-1.5.2.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                </ul>
+</ul>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.5.2.4">
+<li class="toc ulEmpty" id="section-toc.1-1.5.2.4">
                 <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="xref">5.4</a>.  <a href="#name-validity-and-evolution" class="xref">Validity and Evolution</a><a href="#section-toc.1-1.5.2.4.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.5.2.5">
+<li class="toc ulEmpty" id="section-toc.1-1.5.2.5">
                 <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="xref">5.5</a>.  <a href="#name-numbers" class="xref">Numbers</a><a href="#section-toc.1-1.5.2.5.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.5.2.6">
+<li class="toc ulEmpty" id="section-toc.1-1.5.2.6">
                 <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="xref">5.6</a>.  <a href="#name-specifying-keys-for-maps" class="xref">Specifying Keys for Maps</a><a href="#section-toc.1-1.5.2.6.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.5.2.6.2.1">
                     <p id="section-toc.1-1.5.2.6.2.1.1"><a href="#section-5.6.1" class="xref">5.6.1</a>.  <a href="#name-equivalence-of-keys" class="xref">Equivalence of Keys</a><a href="#section-toc.1-1.5.2.6.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                </ul>
+</ul>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.5.2.7">
+<li class="toc ulEmpty" id="section-toc.1-1.5.2.7">
                 <p id="section-toc.1-1.5.2.7.1"><a href="#section-5.7" class="xref">5.7</a>.  <a href="#name-undefined-values" class="xref">Undefined Values</a><a href="#section-toc.1-1.5.2.7.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.6">
+<li class="toc ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-converting-data-between-cbo" class="xref">Converting Data between CBOR and JSON</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.6.2.1">
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-converting-from-cbor-to-jso" class="xref">Converting from CBOR to JSON</a><a href="#section-toc.1-1.6.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.6.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.6.2.2">
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-converting-from-json-to-cbo" class="xref">Converting from JSON to CBOR</a><a href="#section-toc.1-1.6.2.2.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.7">
+<li class="toc ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-future-evolution-of-cbor" class="xref">Future Evolution of CBOR</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.7.2.1">
                 <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-extension-points" class="xref">Extension Points</a><a href="#section-toc.1-1.7.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.7.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.7.2.2">
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-curating-the-additional-inf" class="xref">Curating the Additional Information Space</a><a href="#section-toc.1-1.7.2.2.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.8">
+<li class="toc ulEmpty" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-diagnostic-notation" class="xref">Diagnostic Notation</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.8.2.1">
                 <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="xref">8.1</a>.  <a href="#name-encoding-indicators" class="xref">Encoding Indicators</a><a href="#section-toc.1-1.8.2.1.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.9">
+<li class="toc ulEmpty" id="section-toc.1-1.9">
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.9.2.1">
                 <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="xref">9.1</a>.  <a href="#name-simple-values-registry" class="xref">Simple Values Registry</a><a href="#section-toc.1-1.9.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.9.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.9.2.2">
                 <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="xref">9.2</a>.  <a href="#name-tags-registry" class="xref">Tags Registry</a><a href="#section-toc.1-1.9.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.9.2.3">
+<li class="toc ulEmpty" id="section-toc.1-1.9.2.3">
                 <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="xref">9.3</a>.  <a href="#name-media-type-mime-type" class="xref">Media Type ("MIME Type")</a><a href="#section-toc.1-1.9.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.9.2.4">
+<li class="toc ulEmpty" id="section-toc.1-1.9.2.4">
                 <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="xref">9.4</a>.  <a href="#name-coap-content-format" class="xref">CoAP Content-Format</a><a href="#section-toc.1-1.9.2.4.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.9.2.5">
+<li class="toc ulEmpty" id="section-toc.1-1.9.2.5">
                 <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="xref">9.5</a>.  <a href="#name-the-cbor-structured-syntax-" class="xref">The +cbor Structured Syntax Suffix Registration</a><a href="#section-toc.1-1.9.2.5.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.10">
+<li class="toc ulEmpty" id="section-toc.1-1.10">
             <p id="section-toc.1-1.10.1"><a href="#section-10" class="xref">10</a>. <a href="#name-security-considerations" class="xref">Security Considerations</a><a href="#section-toc.1-1.10.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.11">
+<li class="toc ulEmpty" id="section-toc.1-1.11">
             <p id="section-toc.1-1.11.1"><a href="#section-11" class="xref">11</a>. <a href="#name-references" class="xref">References</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.11.2.1">
                 <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="xref">11.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.11.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.11.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.11.2.2">
                 <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="xref">11.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a><a href="#section-toc.1-1.11.2.2.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.12">
+<li class="toc ulEmpty" id="section-toc.1-1.12">
             <p id="section-toc.1-1.12.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-examples" class="xref">Examples</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.13">
+<li class="toc ulEmpty" id="section-toc.1-1.13">
             <p id="section-toc.1-1.13.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-jump-table" class="xref">Jump Table</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.14">
+<li class="toc ulEmpty" id="section-toc.1-1.14">
             <p id="section-toc.1-1.14.1"><a href="#section-appendix.c" class="xref">Appendix C</a>.  <a href="#name-pseudocode" class="xref">Pseudocode</a><a href="#section-toc.1-1.14.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.15">
+<li class="toc ulEmpty" id="section-toc.1-1.15">
             <p id="section-toc.1-1.15.1"><a href="#section-appendix.d" class="xref">Appendix D</a>.  <a href="#name-half-precision" class="xref">Half-Precision</a><a href="#section-toc.1-1.15.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.16">
+<li class="toc ulEmpty" id="section-toc.1-1.16">
             <p id="section-toc.1-1.16.1"><a href="#section-appendix.e" class="xref">Appendix E</a>.  <a href="#name-comparison-of-other-binary-" class="xref">Comparison of Other Binary Formats to CBOR's Design Objectives</a><a href="#section-toc.1-1.16.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.16.2.1">
                 <p id="section-toc.1-1.16.2.1.1"><a href="#section-e.1" class="xref">E.1</a>.  <a href="#name-asn1-der-ber-and-per" class="xref">ASN.1 DER, BER, and PER</a><a href="#section-toc.1-1.16.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.16.2.2">
+<li class="toc ulEmpty" id="section-toc.1-1.16.2.2">
                 <p id="section-toc.1-1.16.2.2.1"><a href="#section-e.2" class="xref">E.2</a>.  <a href="#name-messagepack" class="xref">MessagePack</a><a href="#section-toc.1-1.16.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.16.2.3">
+<li class="toc ulEmpty" id="section-toc.1-1.16.2.3">
                 <p id="section-toc.1-1.16.2.3.1"><a href="#section-e.3" class="xref">E.3</a>.  <a href="#name-bson" class="xref">BSON</a><a href="#section-toc.1-1.16.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.16.2.4">
+<li class="toc ulEmpty" id="section-toc.1-1.16.2.4">
                 <p id="section-toc.1-1.16.2.4.1"><a href="#section-e.4" class="xref">E.4</a>.  <a href="#name-msdtp-rfc-713" class="xref">MSDTP: RFC 713</a><a href="#section-toc.1-1.16.2.4.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-toc.1-1.16.2.5">
+<li class="toc ulEmpty" id="section-toc.1-1.16.2.5">
                 <p id="section-toc.1-1.16.2.5.1"><a href="#section-e.5" class="xref">E.5</a>.  <a href="#name-conciseness-on-the-wire" class="xref">Conciseness on the Wire</a><a href="#section-toc.1-1.16.2.5.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.17">
+<li class="toc ulEmpty" id="section-toc.1-1.17">
             <p id="section-toc.1-1.17.1"><a href="#section-appendix.f" class="xref">Appendix F</a>.  <a href="#name-changes-from-rfc-7049" class="xref">Changes from RFC 7049</a><a href="#section-toc.1-1.17.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.18">
+<li class="toc ulEmpty" id="section-toc.1-1.18">
             <p id="section-toc.1-1.18.1"><a href="#section-appendix.g" class="xref">Appendix G</a>.  <a href="#name-well-formedness-errors-and-" class="xref">Well-formedness errors and examples</a><a href="#section-toc.1-1.18.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.18.2.1">
                 <p id="section-toc.1-1.18.2.1.1"><a href="#section-g.1" class="xref">G.1</a>.  <a href="#name-examples-for-cbor-data-item" class="xref">Examples for CBOR data items that are not well-formed</a><a href="#section-toc.1-1.18.2.1.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.19">
+<li class="toc ulEmpty" id="section-toc.1-1.19">
             <p id="section-toc.1-1.19.1"><a href="#section-appendix.h" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.19.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="toc ulEmpty" id="section-toc.1-1.20">
+<li class="toc ulEmpty" id="section-toc.1-1.20">
             <p id="section-toc.1-1.20.1"><a href="#section-appendix.i" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.20.1" class="pilcrow">¶</a></p>
 </li>
-        </ul>
+</ul>
 </nav>
 </section>
 </div>
@@ -1248,13 +1248,13 @@ of binary byte strings.  The structures supported are limited to
 arrays and trees; loops and lattice-style graphs are not
 supported.<a href="#section-1.1-2.1.2.1" class="pilcrow">¶</a>
 </li>
-              <li id="section-1.1-2.1.2.2">There is no requirement that all data formats be uniquely
+<li id="section-1.1-2.1.2.2">There is no requirement that all data formats be uniquely
 encoded; that is, it is acceptable that the number "7" might be
 encoded in multiple different ways.<a href="#section-1.1-2.1.2.2" class="pilcrow">¶</a>
 </li>
-            </ul>
+</ul>
 </li>
-          <li id="section-1.1-2.2">
+<li id="section-1.1-2.2">
             <p id="section-1.1-2.2.1">The code for an encoder or decoder must be able to be compact in
 order to support systems with very limited memory, processor power,
 and instruction sets.<a href="#section-1.1-2.2.1" class="pilcrow">¶</a></p>
@@ -1263,20 +1263,20 @@ and instruction sets.<a href="#section-1.1-2.2.1" class="pilcrow">¶</a></p>
 small amount of code (for example, in class 1 constrained nodes
 as defined in <span>[<a href="#RFC7228" class="xref">RFC7228</a>]</span>).<a href="#section-1.1-2.2.2.1" class="pilcrow">¶</a>
 </li>
-              <li id="section-1.1-2.2.2.2">The format should use contemporary machine representations of
+<li id="section-1.1-2.2.2.2">The format should use contemporary machine representations of
 data (for example, not requiring binary-to-decimal conversion).<a href="#section-1.1-2.2.2.2" class="pilcrow">¶</a>
 </li>
-            </ul>
+</ul>
 </li>
-          <li id="section-1.1-2.3">
+<li id="section-1.1-2.3">
             <p id="section-1.1-2.3.1">Data must be able to be decoded without a schema description.<a href="#section-1.1-2.3.1" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-1.1-2.3.2.1">Similar to JSON, encoded data should be self-describing so that
 a generic decoder can be written.<a href="#section-1.1-2.3.2.1" class="pilcrow">¶</a>
 </li>
-            </ul>
+</ul>
 </li>
-          <li id="section-1.1-2.4">
+<li id="section-1.1-2.4">
             <p id="section-1.1-2.4.1">The serialization must be reasonably compact, but data compactness
 is secondary to code compactness for the encoder and decoder.<a href="#section-1.1-2.4.1" class="pilcrow">¶</a></p>
 <ul>
@@ -1285,9 +1285,9 @@ and by implementation complexity maintaining a lower bound.
 Using either general compression schemes or extensive
 bit-fiddling violates the complexity goals.<a href="#section-1.1-2.4.2.1" class="pilcrow">¶</a>
 </li>
-            </ul>
+</ul>
 </li>
-          <li id="section-1.1-2.5">
+<li id="section-1.1-2.5">
             <p id="section-1.1-2.5.1">The format must be applicable to both constrained nodes and
 high-volume applications.<a href="#section-1.1-2.5.1" class="pilcrow">¶</a></p>
 <ul>
@@ -1296,9 +1296,9 @@ encoding and decoding.  This is relevant both for constrained
 nodes and for potential usage in applications with a very high
 volume of data.<a href="#section-1.1-2.5.2.1" class="pilcrow">¶</a>
 </li>
-            </ul>
+</ul>
 </li>
-          <li id="section-1.1-2.6">
+<li id="section-1.1-2.6">
             <p id="section-1.1-2.6.1">The format must support all JSON data types for conversion to and
 from JSON.<a href="#section-1.1-2.6.1" class="pilcrow">¶</a></p>
 <ul>
@@ -1307,24 +1307,24 @@ data represented is within the capabilities of JSON.  It must be
 possible to define a unidirectional mapping towards JSON for all
 types of data.<a href="#section-1.1-2.6.2.1" class="pilcrow">¶</a>
 </li>
-            </ul>
+</ul>
 </li>
-          <li id="section-1.1-2.7">
+<li id="section-1.1-2.7">
             <p id="section-1.1-2.7.1">The format must be extensible, and the extended data must be
 decodable by earlier decoders.<a href="#section-1.1-2.7.1" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-1.1-2.7.2.1">The format is designed for decades of use.<a href="#section-1.1-2.7.2.1" class="pilcrow">¶</a>
 </li>
-              <li id="section-1.1-2.7.2.2">The format must support a form of extensibility that allows
+<li id="section-1.1-2.7.2.2">The format must support a form of extensibility that allows
 fallback so that a decoder that does not understand an extension
 can still decode the message.<a href="#section-1.1-2.7.2.2" class="pilcrow">¶</a>
 </li>
-              <li id="section-1.1-2.7.2.3">The format must be able to be extended in the future by later
+<li id="section-1.1-2.7.2.3">The format must be able to be extended in the future by later
 IETF standards.<a href="#section-1.1-2.7.2.3" class="pilcrow">¶</a>
 </li>
-            </ul>
+</ul>
 </li>
-        </ol>
+</ol>
 </section>
 </div>
 <div id="terminology">
@@ -1343,7 +1343,7 @@ is, most significant byte first, also known as "big-endian").<a href="#section-1
 <p id="section-1.2-3">This specification makes use of the following terminology:<a href="#section-1.2-3" class="pilcrow">¶</a></p>
 <dl class="dlParallel" id="section-1.2-4">
           <dt id="section-1.2-4.1">Data item:</dt>
-          <dd id="section-1.2-4.2">
+<dd id="section-1.2-4.2">
   A single piece of CBOR data.  The structure of a data item may
 contain zero, one, or more nested data items.  The term is used both
 for the data item in representation format and for the abstract idea
@@ -1351,7 +1351,7 @@ that can be derived from that by a decoder; the former can be
 addressed specifically by using "encoded data item".<a href="#section-1.2-4.2" class="pilcrow">¶</a>
 </dd>
 <dt id="section-1.2-4.3">Decoder:</dt>
-          <dd id="section-1.2-4.4">
+<dd id="section-1.2-4.4">
   A process that decodes a well-formed encoded CBOR data item and makes it available to an
 application.  Formally speaking, a decoder contains a parser to
 break up the input using the syntax rules of CBOR, as well as a
@@ -1359,19 +1359,19 @@ semantic processor to prepare the data in a form suitable to the
 application.<a href="#section-1.2-4.4" class="pilcrow">¶</a>
 </dd>
 <dt id="section-1.2-4.5">Encoder:</dt>
-          <dd id="section-1.2-4.6">
+<dd id="section-1.2-4.6">
   A process that generates the (well-formed) representation format of a CBOR data
 item from application information.<a href="#section-1.2-4.6" class="pilcrow">¶</a>
 </dd>
 <dt id="section-1.2-4.7">Data Stream:</dt>
-          <dd id="section-1.2-4.8">
+<dd id="section-1.2-4.8">
   A sequence of zero or more data items, not further assembled into a
 larger containing data item.  The independent data items that make
 up a data stream are sometimes also referred to as "top-level data
 items".<a href="#section-1.2-4.8" class="pilcrow">¶</a>
 </dd>
 <dt id="section-1.2-4.9">Well-formed:</dt>
-          <dd id="section-1.2-4.10">
+<dd id="section-1.2-4.10">
   A data item that follows the syntactic structure of CBOR.  A
 well-formed data item uses the initial bytes and the byte strings
 and/or data items that are implied by their values as defined in
@@ -1379,12 +1379,12 @@ CBOR and does not include following extraneous data. CBOR decoders
 by definition only return contents from well-formed data items.<a href="#section-1.2-4.10" class="pilcrow">¶</a>
 </dd>
 <dt id="section-1.2-4.11">Valid:</dt>
-          <dd id="section-1.2-4.12">
+<dd id="section-1.2-4.12">
   A data item that is well-formed and also follows the semantic
 restrictions that apply to CBOR data items.<a href="#section-1.2-4.12" class="pilcrow">¶</a>
 </dd>
 <dt id="section-1.2-4.13">Expected:</dt>
-          <dd id="section-1.2-4.14">
+<dd id="section-1.2-4.14">
   Besides its normal English meaning, the term "expected" is used to
 describe requirements beyond CBOR validity that an application has
 on its input data.  Well-formed (processable at all), valid (checked
@@ -1392,7 +1392,7 @@ by a validity-checking generic decoder), and expected (checked by the
 application) form a hierarchy of layers of acceptability.<a href="#section-1.2-4.14" class="pilcrow">¶</a>
 </dd>
 <dt id="section-1.2-4.15">Stream decoder:</dt>
-          <dd id="section-1.2-4.16">
+<dd id="section-1.2-4.16">
   A process that decodes a data stream and makes each of the data
 items in the sequence available to an application as they are
 received.<a href="#section-1.2-4.16" class="pilcrow">¶</a>
@@ -1435,25 +1435,25 @@ will provide their own application-specific encoders and/or decoders.<a href="#s
 <ul>
 <li id="section-2-4.1">an integer in the range -2**64..2**64-1 inclusive<a href="#section-2-4.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-4.2">a simple value, identified by a number
+<li id="section-2-4.2">a simple value, identified by a number
 between 0 and 255, but distinct from that number<a href="#section-2-4.2" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-4.3">a floating-point value, distinct from an integer, out of the set
+<li id="section-2-4.3">a floating-point value, distinct from an integer, out of the set
 representable by IEEE 754 binary64 (including non-finites) <span>[<a href="#IEEE754" class="xref">IEEE754</a>]</span><a href="#section-2-4.3" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-4.4">a sequence of zero or more bytes ("byte string")<a href="#section-2-4.4" class="pilcrow">¶</a>
+<li id="section-2-4.4">a sequence of zero or more bytes ("byte string")<a href="#section-2-4.4" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-4.5">a sequence of zero or more Unicode code points ("text string")<a href="#section-2-4.5" class="pilcrow">¶</a>
+<li id="section-2-4.5">a sequence of zero or more Unicode code points ("text string")<a href="#section-2-4.5" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-4.6">a sequence of zero or more data items ("array")<a href="#section-2-4.6" class="pilcrow">¶</a>
+<li id="section-2-4.6">a sequence of zero or more data items ("array")<a href="#section-2-4.6" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-4.7">a mapping (mathematical function) from zero or more data items
+<li id="section-2-4.7">a mapping (mathematical function) from zero or more data items
 ("keys") each to a data item ("values"), ("map")<a href="#section-2-4.7" class="pilcrow">¶</a>
 </li>
-        <li id="section-2-4.8">a tagged data item ("tag"), comprising a tag number (an integer in
+<li id="section-2-4.8">a tagged data item ("tag"), comprising a tag number (an integer in
 the range 0..2**64-1) and a tagged value (a data item)<a href="#section-2-4.8" class="pilcrow">¶</a>
 </li>
-      </ul>
+</ul>
 <p id="section-2-5">Note that integer and floating-point values are distinct in this
 model, even if they have the same numeric value.<a href="#section-2-5" class="pilcrow">¶</a></p>
 <p id="section-2-6">Also note that serialization variants, such as the number of bytes of the
@@ -1473,13 +1473,13 @@ of a number of simple values and tag numbers right in this document, such as:<a 
 <li id="section-2.1-2.1">
             <code>false</code>, <code>true</code>, <code>null</code>, and <code>undefined</code> (simple values identified by 20..23)<a href="#section-2.1-2.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-2.1-2.2">integer and floating-point values with a larger range and precision
+<li id="section-2.1-2.2">integer and floating-point values with a larger range and precision
 than the above (tag numbers 2 to 5)<a href="#section-2.1-2.2" class="pilcrow">¶</a>
 </li>
-          <li id="section-2.1-2.3">application data types such as a point in time or an RFC 3339
+<li id="section-2.1-2.3">application data types such as a point in time or an RFC 3339
 date/time string (tag numbers 1, 0)<a href="#section-2.1-2.3" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 <p id="section-2.1-3">Further elements of the extended generic data model can be (and have
 been) defined via the IANA registries created for CBOR.  Even if such
 an extension is unknown to a generic encoder or decoder, data items
@@ -1543,11 +1543,11 @@ With a few exceptions, the additional information's value
 describes how to load an unsigned integer "argument":<a href="#section-3-2" class="pilcrow">¶</a></p>
 <dl class="dlParallel" id="section-3-3">
         <dt id="section-3-3.1">Less than 24:</dt>
-        <dd id="section-3-3.2">
+<dd id="section-3-3.2">
   The argument's value is the value of the additional information.<a href="#section-3-3.2" class="pilcrow">¶</a>
 </dd>
 <dt id="section-3-3.3">24, 25, 26, or 27:</dt>
-        <dd id="section-3-3.4">
+<dd id="section-3-3.4">
   The argument's value is held in the following 1, 2, 4, or 8 bytes,
 respectively, in network byte order.  For major type 7 and
 additional information value 25, 26, 27, these bytes are not used as
@@ -1555,12 +1555,12 @@ an integer argument, but as a floating-point value (see
 <a href="#fpnocont" class="xref">Section 3.3</a>).<a href="#section-3-3.4" class="pilcrow">¶</a>
 </dd>
 <dt id="section-3-3.5">28, 29, 30:</dt>
-        <dd id="section-3-3.6">
+<dd id="section-3-3.6">
   These values are reserved for future additions to the CBOR format.
 In the present version of CBOR, the encoded item is not well-formed.<a href="#section-3-3.6" class="pilcrow">¶</a>
 </dd>
 <dt id="section-3-3.7">31:</dt>
-        <dd id="section-3-3.8">
+<dd id="section-3-3.8">
   No argument value is derived.
 If the major type is 0, 1, or 6, the encoded item is not
 well-formed.  For major types 2 to 5, the item's length is
@@ -1598,7 +1598,7 @@ initial byte and following bytes for more compact code (see
 other bytes associated with the type.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <dl class="dlParallel" id="section-3.1-2">
           <dt id="section-3.1-2.1">Major type 0:</dt>
-          <dd id="section-3.1-2.2">
+<dd id="section-3.1-2.2">
   an integer in the range 0..2**64-1 inclusive.  The value of the
 encoded item is the argument itself.  For example, the
 integer 10 is denoted as the one byte 0b000_01010 (major type 0,
@@ -1607,14 +1607,14 @@ additional information 10).  The integer 500 would be 0b000_11001
 0x01f4, which is 500 in decimal.<a href="#section-3.1-2.2" class="pilcrow">¶</a>
 </dd>
 <dt id="section-3.1-2.3">Major type 1:</dt>
-          <dd id="section-3.1-2.4">
+<dd id="section-3.1-2.4">
   a negative integer in the range -2**64..-1 inclusive.  The value of
 the item is -1 minus the argument.  For example, the integer
 -500 would be 0b001_11001 (major type 1, additional information 25)
 followed by the two bytes 0x01f3, which is 499 in decimal.<a href="#section-3.1-2.4" class="pilcrow">¶</a>
 </dd>
 <dt id="section-3.1-2.5">Major type 2:</dt>
-          <dd id="section-3.1-2.6">
+<dd id="section-3.1-2.6">
   a byte string.  The number of bytes in the string is equal to the
 argument.  For example, a byte
 string whose length is 5 would have an initial byte of 0b010_00101
@@ -1626,7 +1626,7 @@ bytes 0x01f4 for a length of 500, followed by 500 bytes of binary
 content.<a href="#section-3.1-2.6" class="pilcrow">¶</a>
 </dd>
 <dt id="section-3.1-2.7">Major type 3:</dt>
-          <dd id="section-3.1-2.8">
+<dd id="section-3.1-2.8">
   a text string (<a href="#cbor-data-models" class="xref">Section 2</a>), encoded as UTF-8
 (<span>[<a href="#RFC3629" class="xref">RFC3629</a>]</span>). The number of bytes in the string is equal to the
 argument.  A string containing an invalid UTF-8 sequence is
@@ -1641,7 +1641,7 @@ characters "\" and "n") or as 0x5c7530303061 (the characters "\",
 "u", "0", "0", "0", and "a").<a href="#section-3.1-2.8" class="pilcrow">¶</a>
 </dd>
 <dt id="section-3.1-2.9">Major type 4:</dt>
-          <dd id="section-3.1-2.10">
+<dd id="section-3.1-2.10">
   an array of data items.  Arrays are also called lists, sequences, or
 tuples.  The argument is the number of data items in the
 array.  Items in an
@@ -1651,7 +1651,7 @@ that contains 10 items of any type would have an initial byte of
 length) followed by the 10 remaining items.<a href="#section-3.1-2.10" class="pilcrow">¶</a>
 </dd>
 <dt id="section-3.1-2.11">Major type 5:</dt>
-          <dd id="section-3.1-2.12">
+<dd id="section-3.1-2.12">
   a map of pairs of data items. Maps are also called tables,
 dictionaries, hashes, or objects (in JSON).  A map is comprised of
 pairs of data items, each pair consisting of a key that is
@@ -1669,13 +1669,13 @@ well-formed, but it is not valid, and thus it causes indeterminate
 decoding; see also <a href="#map-keys" class="xref">Section 5.6</a>.<a href="#section-3.1-2.12" class="pilcrow">¶</a>
 </dd>
 <dt id="section-3.1-2.13">Major type 6:</dt>
-          <dd id="section-3.1-2.14">
+<dd id="section-3.1-2.14">
   a tagged data item ("tag") whose tag number is the argument and
 whose enclosed data item ("tag content") is the single encoded data item that follows the head.
 See <a href="#tags" class="xref">Section 3.4</a>.<a href="#section-3.1-2.14" class="pilcrow">¶</a>
 </dd>
 <dt id="section-3.1-2.15">Major type 7:</dt>
-          <dd id="section-3.1-2.16">
+<dd id="section-3.1-2.16">
   floating-point numbers and simple values, as well as the "break"
 stop code.  See <a href="#fpnocont" class="xref">Section 3.3</a>.<a href="#section-3.1-2.16" class="pilcrow">¶</a>
 </dd>
@@ -2441,24 +2441,24 @@ string data items it contains.<a href="#section-3.4.5.3-1" class="pilcrow">¶</a
 <li id="section-3.4.5.3-2.1">Tag number 32 is for URIs, as defined in <span>[<a href="#RFC3986" class="xref">RFC3986</a>]</span>.  If the text string
 doesn't match the <code>URI-reference</code> production, the string is invalid.<a href="#section-3.4.5.3-2.1" class="pilcrow">¶</a>
 </li>
-              <li id="section-3.4.5.3-2.2">
+<li id="section-3.4.5.3-2.2">
                 <p id="section-3.4.5.3-2.2.1">Tag numbers 33 and 34 are for base64url- and base64-encoded text strings,
 as defined in <span>[<a href="#RFC4648" class="xref">RFC4648</a>]</span>.  If any of:<a href="#section-3.4.5.3-2.2.1" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-3.4.5.3-2.2.2.1">the encoded text string contains non-alphabet characters or only 1
 character in the last block of 4, or<a href="#section-3.4.5.3-2.2.2.1" class="pilcrow">¶</a>
 </li>
-                  <li id="section-3.4.5.3-2.2.2.2">the padding bits in a 2- or 3-character block are not 0, or<a href="#section-3.4.5.3-2.2.2.2" class="pilcrow">¶</a>
+<li id="section-3.4.5.3-2.2.2.2">the padding bits in a 2- or 3-character block are not 0, or<a href="#section-3.4.5.3-2.2.2.2" class="pilcrow">¶</a>
 </li>
-                  <li id="section-3.4.5.3-2.2.2.3">the base64 encoding has the wrong number of padding characters, or<a href="#section-3.4.5.3-2.2.2.3" class="pilcrow">¶</a>
+<li id="section-3.4.5.3-2.2.2.3">the base64 encoding has the wrong number of padding characters, or<a href="#section-3.4.5.3-2.2.2.3" class="pilcrow">¶</a>
 </li>
-                  <li id="section-3.4.5.3-2.2.2.4">the base64url encoding has padding characters,<a href="#section-3.4.5.3-2.2.2.4" class="pilcrow">¶</a>
+<li id="section-3.4.5.3-2.2.2.4">the base64url encoding has padding characters,<a href="#section-3.4.5.3-2.2.2.4" class="pilcrow">¶</a>
 </li>
-                </ul>
+</ul>
 <p id="section-3.4.5.3-2.2.3">
 the string is invalid.<a href="#section-3.4.5.3-2.2.3" class="pilcrow">¶</a></p>
 </li>
-              <li id="section-3.4.5.3-2.3">Tag number 35 is for regular expressions that are roughly in Perl
+<li id="section-3.4.5.3-2.3">Tag number 35 is for regular expressions that are roughly in Perl
 Compatible Regular Expressions (PCRE/PCRE2) form <span>[<a href="#PCRE" class="xref">PCRE</a>]</span> or a
 version of the JavaScript regular expression syntax <span>[<a href="#ECMA262" class="xref">ECMA262</a>]</span>.
 (Note that more specific identification may be necessary if the
@@ -2466,7 +2466,7 @@ actual version of the specification underlying the regular
 expression, or more than just the text of the regular expression
 itself, need to be conveyed.) Any contained string value is valid.<a href="#section-3.4.5.3-2.3" class="pilcrow">¶</a>
 </li>
-              <li id="section-3.4.5.3-2.4">Tag number 36 is for MIME messages (including all headers), as defined in
+<li id="section-3.4.5.3-2.4">Tag number 36 is for MIME messages (including all headers), as defined in
 <span>[<a href="#RFC2045" class="xref">RFC2045</a>]</span>. A text string that isn't a valid MIME message is
 invalid.  (For this tag, validity checking
 may be particularly onerous for a generic decoder and might
@@ -2475,7 +2475,7 @@ binary data and can therefore not be represented in a text string;
 <span>[<a href="#IANA.cbor-tags" class="xref">IANA.cbor-tags</a>]</span> lists a registration for tag number 257 that is
 similar to tag number 36 but is used with an enclosed byte string.)<a href="#section-3.4.5.3-2.4" class="pilcrow">¶</a>
 </li>
-            </ul>
+</ul>
 <p id="section-3.4.5.3-3">Note that tag numbers 33 and 34 differ from 21 and 22 in that the data is
 transported in base-encoded form for the former and in raw byte string
 form for the latter.<a href="#section-3.4.5.3-3" class="pilcrow">¶</a></p>
@@ -2556,7 +2556,7 @@ Full implementations of CBOR decoders are by definition
 variation-tolerant; the distinction is only relevant if a constrained
 implementation of a CBOR decoder meets a variant encoder.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.1-4">The preferred serialization always uses the shortest form of
-representing the argument (<a href="#encoding" class="xref">Section 3</a>)); it also uses the shortest
+representing the argument (<a href="#encoding" class="xref">Section 3</a>); it also uses the shortest
 floating-point encoding that preserves the value being encoded (see
 <a href="#numbers" class="xref">Section 5.5</a>).
 Definite length encoding is preferred whenever the length is known at
@@ -2591,48 +2591,48 @@ that arguments (see <a href="#encoding" class="xref">Section 3</a>) for integers
 <li id="section-4.2.1-2.1.2.1">0 to 23 and -1 to -24 MUST be expressed in the same byte as the
 major type;<a href="#section-4.2.1-2.1.2.1" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.1-2.1.2.2">24 to 255 and -25 to -256 MUST be expressed only with an
+<li id="section-4.2.1-2.1.2.2">24 to 255 and -25 to -256 MUST be expressed only with an
 additional uint8_t;<a href="#section-4.2.1-2.1.2.2" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.1-2.1.2.3">256 to 65535 and -257 to -65536 MUST be expressed only with an
+<li id="section-4.2.1-2.1.2.3">256 to 65535 and -257 to -65536 MUST be expressed only with an
 additional uint16_t;<a href="#section-4.2.1-2.1.2.3" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.1-2.1.2.4">65536 to 4294967295 and -65537 to -4294967296 MUST be expressed
+<li id="section-4.2.1-2.1.2.4">65536 to 4294967295 and -65537 to -4294967296 MUST be expressed
 only with an additional uint32_t.<a href="#section-4.2.1-2.1.2.4" class="pilcrow">¶</a>
 </li>
-              </ul>
+</ul>
 <p id="section-4.2.1-2.1.3">
 Floating point values also MUST use the shortest form that preserves
 the value, e.g. 1.5 is encoded as 0xf93e00 and 1000000.5 as
 0xfa49742408.<a href="#section-4.2.1-2.1.3" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-4.2.1-2.2">Indefinite-length items MUST NOT appear. They can be encoded as
+<li id="section-4.2.1-2.2">Indefinite-length items MUST NOT appear. They can be encoded as
 definite-length items instead.<a href="#section-4.2.1-2.2" class="pilcrow">¶</a>
 </li>
-            <li id="section-4.2.1-2.3">
+<li id="section-4.2.1-2.3">
               <p id="section-4.2.1-2.3.1">The keys in every map MUST be sorted in the bytewise lexicographic
 order of their deterministic encodings. For example, the following keys
 are sorted correctly:<a href="#section-4.2.1-2.3.1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal" id="section-4.2.1-2.3.2">
                 <li id="section-4.2.1-2.3.2.1">10, encoded as 0x0a.<a href="#section-4.2.1-2.3.2.1" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.1-2.3.2.2">100, encoded as 0x1864.<a href="#section-4.2.1-2.3.2.2" class="pilcrow">¶</a>
+<li id="section-4.2.1-2.3.2.2">100, encoded as 0x1864.<a href="#section-4.2.1-2.3.2.2" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.1-2.3.2.3">-1, encoded as 0x20.<a href="#section-4.2.1-2.3.2.3" class="pilcrow">¶</a>
+<li id="section-4.2.1-2.3.2.3">-1, encoded as 0x20.<a href="#section-4.2.1-2.3.2.3" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.1-2.3.2.4">"z", encoded as 0x617a.<a href="#section-4.2.1-2.3.2.4" class="pilcrow">¶</a>
+<li id="section-4.2.1-2.3.2.4">"z", encoded as 0x617a.<a href="#section-4.2.1-2.3.2.4" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.1-2.3.2.5">"aa", encoded as 0x626161.<a href="#section-4.2.1-2.3.2.5" class="pilcrow">¶</a>
+<li id="section-4.2.1-2.3.2.5">"aa", encoded as 0x626161.<a href="#section-4.2.1-2.3.2.5" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.1-2.3.2.6">[100], encoded as 0x811864.<a href="#section-4.2.1-2.3.2.6" class="pilcrow">¶</a>
+<li id="section-4.2.1-2.3.2.6">[100], encoded as 0x811864.<a href="#section-4.2.1-2.3.2.6" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.1-2.3.2.7">[-1], encoded as 0x8120.<a href="#section-4.2.1-2.3.2.7" class="pilcrow">¶</a>
+<li id="section-4.2.1-2.3.2.7">[-1], encoded as 0x8120.<a href="#section-4.2.1-2.3.2.7" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.1-2.3.2.8">false, encoded as 0xf4.<a href="#section-4.2.1-2.3.2.8" class="pilcrow">¶</a>
+<li id="section-4.2.1-2.3.2.8">false, encoded as 0xf4.<a href="#section-4.2.1-2.3.2.8" class="pilcrow">¶</a>
 </li>
-              </ol>
+</ol>
 </li>
-          </ul>
+</ul>
 </section>
 </div>
 <div id="additional-deterministic-encoding-considerations">
@@ -2673,13 +2673,13 @@ or 0xfb3ff0000000000000. Three sensible rules for this are:<a href="#section-4.2
 types 0 and 1, and other values as the smallest of 16-, 32-, or
 64-bit floating point that accurately represents the value,<a href="#section-4.2.2-4.1.2.1" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.2-4.1.2.2">Encode all values as the smallest of 16-, 32-, or 64-bit floating
+<li id="section-4.2.2-4.1.2.2">Encode all values as the smallest of 16-, 32-, or 64-bit floating
 point that accurately represents the value, even for integral
 values, or<a href="#section-4.2.2-4.1.2.2" class="pilcrow">¶</a>
 </li>
-                <li id="section-4.2.2-4.1.2.3">Encode all values as 64-bit floating point.<a href="#section-4.2.2-4.1.2.3" class="pilcrow">¶</a>
+<li id="section-4.2.2-4.1.2.3">Encode all values as 64-bit floating point.<a href="#section-4.2.2-4.1.2.3" class="pilcrow">¶</a>
 </li>
-              </ol>
+</ol>
 <p id="section-4.2.2-4.1.3">
 Rule 1 straddles the boundaries between integers and floating point
 values, and Rule 3 does not use preferred encoding, so Rule 2 may be
@@ -2696,19 +2696,19 @@ be treated as zero inputs in some floating point implementations.  A
 protocol's deterministic encoding may want to exclude them from
 interchange, interchanging zero instead.<a href="#section-4.2.2-4.1.5" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-4.2.2-4.2">If a protocol includes a field that can express integers with an
+<li id="section-4.2.2-4.2">If a protocol includes a field that can express integers with an
 absolute value of
 2^64 or larger using tag numbers 2 or 3 (<a href="#bignums" class="xref">Section 3.4.3</a>), the protocol's deterministic encoding
 needs to specify whether small integers are expressed using the tag
 or major types 0 and 1.<a href="#section-4.2.2-4.2" class="pilcrow">¶</a>
 </li>
-            <li id="section-4.2.2-4.3">A protocol might give encoders the choice of representing a URL as
+<li id="section-4.2.2-4.3">A protocol might give encoders the choice of representing a URL as
 either a text string or, using <a href="#encodedtext" class="xref">Section 3.4.5.3</a>, tag number 32 containing a
 text string. This protocol's deterministic encoding needs to either
 require that the tag is present or require that it's absent, not
 allow either one.<a href="#section-4.2.2-4.3" class="pilcrow">¶</a>
 </li>
-          </ul>
+</ul>
 </section>
 </div>
 <div id="length-first-map-key-ordering">
@@ -2728,30 +2728,30 @@ except that the keys in every map MUST be sorted such that:<a href="#section-4.2
 <ol start="1" type="1" class="normal" id="section-4.2.3-3">
             <li id="section-4.2.3-3.1">If two keys have different lengths, the shorter one sorts earlier;<a href="#section-4.2.3-3.1" class="pilcrow">¶</a>
 </li>
-            <li id="section-4.2.3-3.2">If two keys have the same length, the one with the lower value in
+<li id="section-4.2.3-3.2">If two keys have the same length, the one with the lower value in
 (byte-wise) lexical order sorts earlier.<a href="#section-4.2.3-3.2" class="pilcrow">¶</a>
 </li>
-          </ol>
+</ol>
 <p id="section-4.2.3-4">For example, under the length-first core deterministic encoding
 requirements, the following keys are sorted correctly:<a href="#section-4.2.3-4" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal" id="section-4.2.3-5">
             <li id="section-4.2.3-5.1">10, encoded as 0x0a.<a href="#section-4.2.3-5.1" class="pilcrow">¶</a>
 </li>
-            <li id="section-4.2.3-5.2">-1, encoded as 0x20.<a href="#section-4.2.3-5.2" class="pilcrow">¶</a>
+<li id="section-4.2.3-5.2">-1, encoded as 0x20.<a href="#section-4.2.3-5.2" class="pilcrow">¶</a>
 </li>
-            <li id="section-4.2.3-5.3">false, encoded as 0xf4.<a href="#section-4.2.3-5.3" class="pilcrow">¶</a>
+<li id="section-4.2.3-5.3">false, encoded as 0xf4.<a href="#section-4.2.3-5.3" class="pilcrow">¶</a>
 </li>
-            <li id="section-4.2.3-5.4">100, encoded as 0x1864.<a href="#section-4.2.3-5.4" class="pilcrow">¶</a>
+<li id="section-4.2.3-5.4">100, encoded as 0x1864.<a href="#section-4.2.3-5.4" class="pilcrow">¶</a>
 </li>
-            <li id="section-4.2.3-5.5">"z", encoded as 0x617a.<a href="#section-4.2.3-5.5" class="pilcrow">¶</a>
+<li id="section-4.2.3-5.5">"z", encoded as 0x617a.<a href="#section-4.2.3-5.5" class="pilcrow">¶</a>
 </li>
-            <li id="section-4.2.3-5.6">[-1], encoded as 0x8120.<a href="#section-4.2.3-5.6" class="pilcrow">¶</a>
+<li id="section-4.2.3-5.6">[-1], encoded as 0x8120.<a href="#section-4.2.3-5.6" class="pilcrow">¶</a>
 </li>
-            <li id="section-4.2.3-5.7">"aa", encoded as 0x626161.<a href="#section-4.2.3-5.7" class="pilcrow">¶</a>
+<li id="section-4.2.3-5.7">"aa", encoded as 0x626161.<a href="#section-4.2.3-5.7" class="pilcrow">¶</a>
 </li>
-            <li id="section-4.2.3-5.8">[100], encoded as 0x811864.<a href="#section-4.2.3-5.8" class="pilcrow">¶</a>
+<li id="section-4.2.3-5.8">[100], encoded as 0x811864.<a href="#section-4.2.3-5.8" class="pilcrow">¶</a>
 </li>
-          </ol>
+</ol>
 <p id="section-4.2.3-6">(Although <span>[<a href="#RFC7049" class="xref">RFC7049</a>]</span> used the term "Canonical CBOR" for its form of
 requirements on deterministic encoding, this document avoids this term
 because "canonicalization" is often associated with specific uses of deterministic
@@ -2868,9 +2868,9 @@ choices:<a href="#section-5.3-1" class="pilcrow">¶</a></p>
           <li id="section-5.3-2.1">Replace the problematic item with an error marker and continue with
 the next item, or<a href="#section-5.3-2.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-5.3-2.2">Issue an error and stop processing altogether.<a href="#section-5.3-2.2" class="pilcrow">¶</a>
+<li id="section-5.3-2.2">Issue an error and stop processing altogether.<a href="#section-5.3-2.2" class="pilcrow">¶</a>
 </li>
-        </ol>
+</ol>
 <p id="section-5.3-3">A CBOR-based protocol MUST specify which of these options its decoders
 take, for each kind of invalid item they might encounter.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 <p id="section-5.3-4">Such problems might occur at the basic validity level of CBOR or in
@@ -2883,7 +2883,7 @@ the context of tags (tag validity).<a href="#section-5.3-4" class="pilcrow">¶</
 <p id="section-5.3.1-1">Two kinds of validity errors can occur in the basic generic data model:<a href="#section-5.3.1-1" class="pilcrow">¶</a></p>
 <dl class="dlParallel" id="section-5.3.1-2">
             <dt id="section-5.3.1-2.1">Duplicate keys in a map:</dt>
-            <dd id="section-5.3.1-2.2">
+<dd id="section-5.3.1-2.2">
   Generic decoders (<a href="#generic" class="xref">Section 5.2</a>) make data available to applications
 using the native CBOR data model.  That data model includes maps
 (key-value mappings with unique keys), not multimaps (key-value
@@ -2894,7 +2894,7 @@ stop processing altogether.  On the other hand, a "streaming
 decoder" may not even be able to notice (<a href="#map-keys" class="xref">Section 5.6</a>).<a href="#section-5.3.1-2.2" class="pilcrow">¶</a>
 </dd>
 <dt id="section-5.3.1-2.3">Invalid UTF-8 string:</dt>
-            <dd id="section-5.3.1-2.4">
+<dd id="section-5.3.1-2.4">
   A decoder might or might not want to verify that the sequence of
 bytes in a UTF-8 string (major type 3) is actually valid UTF-8 and
 react appropriately.<a href="#section-5.3.1-2.4" class="pilcrow">¶</a>
@@ -2911,7 +2911,7 @@ react appropriately.<a href="#section-5.3.1-2.4" class="pilcrow">¶</a>
 to the basic generic data model:<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
 <dl class="dlParallel" id="section-5.3.2-2">
             <dt id="section-5.3.2-2.1">Inadmissible type for tag content:</dt>
-            <dd id="section-5.3.2-2.2">
+<dd id="section-5.3.2-2.2">
   Tags (<a href="#tags" class="xref">Section 3.4</a>) specify what type of data item is supposed to be
 enclosed by
 the tag; for example, the tags for positive or negative bignums are
@@ -2923,7 +2923,7 @@ representations available in their environment may perform the check
 on those tags known to them and react appropriately.<a href="#section-5.3.2-2.2" class="pilcrow">¶</a>
 </dd>
 <dt id="section-5.3.2-2.3">Inadmissible value for tag content:</dt>
-            <dd id="section-5.3.2-2.4">
+<dd id="section-5.3.2-2.4">
   The type of data item may be admissible for a tag's content, but the
 specific value may not be; e.g., a value of "yesterday" is not
 acceptable for the content of tag 0, even though it properly is a
@@ -2959,12 +2959,12 @@ is not a validity error per se.  This kind of error is more likely
 to be raised by a decoder that would be performing validity checking
 if this were a known case.<a href="#section-5.4-3.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-5.4-3.2">It can emit the unknown item (type, value, and, for tags, the
+<li id="section-5.4-3.2">It can emit the unknown item (type, value, and, for tags, the
 decoded tagged data item) to the application calling the decoder,
 with an indication that the decoder did not recognize that tag
 number or simple value.<a href="#section-5.4-3.2" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 <p id="section-5.4-4">The latter approach, which is also appropriate for decoders that do
 not support validity checking, provides forward compatibility with
 newly registered tags and simple values without the requirement to
@@ -3154,19 +3154,19 @@ as a JSON null.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-6.1-2.1">An integer (major type 0 or 1) becomes a JSON number.<a href="#section-6.1-2.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.2">A byte string (major type 2) that is not embedded in a tag that
+<li id="section-6.1-2.2">A byte string (major type 2) that is not embedded in a tag that
 specifies a proposed encoding is encoded in base64url without
 padding and becomes a JSON string.<a href="#section-6.1-2.2" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.3">A UTF-8 string (major type 3) becomes a JSON string.  Note that JSON
+<li id="section-6.1-2.3">A UTF-8 string (major type 3) becomes a JSON string.  Note that JSON
 requires escaping certain characters (<span>[<a href="#RFC8259" class="xref">RFC8259</a>]</span>, Section 7):
 quotation mark (U+0022), reverse solidus (U+005C), and the "C0
 control characters" (U+0000 through U+001F).  All other characters
 are copied unchanged into the JSON UTF-8 string.<a href="#section-6.1-2.3" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.4">An array (major type 4) becomes a JSON array.<a href="#section-6.1-2.4" class="pilcrow">¶</a>
+<li id="section-6.1-2.4">An array (major type 4) becomes a JSON array.<a href="#section-6.1-2.4" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.5">A map (major type 5) becomes a JSON object.  This is possible
+<li id="section-6.1-2.5">A map (major type 5) becomes a JSON object.  This is possible
 directly only if all keys are UTF-8 strings.  A converter might also
 convert other keys into UTF-8 strings (such as by converting
 integers into strings containing their decimal representation);
@@ -3175,38 +3175,38 @@ Note also that, if tags on UTF-8 strings are ignored as proposed
 below, this will cause a key
 collision if the tags are different but the strings are the same.<a href="#section-6.1-2.5" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.6">False (major type 7, additional information 20) becomes a JSON
+<li id="section-6.1-2.6">False (major type 7, additional information 20) becomes a JSON
 false.<a href="#section-6.1-2.6" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.7">True (major type 7, additional information 21) becomes a JSON true.<a href="#section-6.1-2.7" class="pilcrow">¶</a>
+<li id="section-6.1-2.7">True (major type 7, additional information 21) becomes a JSON true.<a href="#section-6.1-2.7" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.8">Null (major type 7, additional information 22) becomes a JSON null.<a href="#section-6.1-2.8" class="pilcrow">¶</a>
+<li id="section-6.1-2.8">Null (major type 7, additional information 22) becomes a JSON null.<a href="#section-6.1-2.8" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.9">A floating-point value (major type 7, additional information 25
+<li id="section-6.1-2.9">A floating-point value (major type 7, additional information 25
 through 27) becomes a JSON number if it is finite (that is, it can
 be represented in a JSON number); if the value is non-finite (NaN,
 or positive or negative Infinity), it is represented by the
 substitute value.<a href="#section-6.1-2.9" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.10">Any other simple value (major type 7, any additional information
+<li id="section-6.1-2.10">Any other simple value (major type 7, any additional information
 value not yet discussed) is represented by the substitute value.<a href="#section-6.1-2.10" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.11">A bignum (major type 6, tag number 2 or 3) is represented by encoding
+<li id="section-6.1-2.11">A bignum (major type 6, tag number 2 or 3) is represented by encoding
 its byte string in base64url without padding and becomes a JSON
 string.  For tag number 3 (negative bignum), a "~" (ASCII tilde) is
 inserted before the base-encoded value. (The conversion to a binary
 blob instead of a number is to prevent a likely numeric overflow for
 the JSON decoder.)<a href="#section-6.1-2.11" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.12">A byte string with an encoding hint (major type 6, tag number 21
+<li id="section-6.1-2.12">A byte string with an encoding hint (major type 6, tag number 21
 through 23) is encoded as described and becomes a JSON string.<a href="#section-6.1-2.12" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.13">For all other tags (major type 6, any other tag number), the enclosed
+<li id="section-6.1-2.13">For all other tags (major type 6, any other tag number), the enclosed
 CBOR item is represented as a JSON value; the tag number is ignored.<a href="#section-6.1-2.13" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.1-2.14">Indefinite-length items are made definite before conversion.<a href="#section-6.1-2.14" class="pilcrow">¶</a>
+<li id="section-6.1-2.14">Indefinite-length items are made definite before conversion.<a href="#section-6.1-2.14" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 </section>
 </div>
 <div id="converting-from-json-to-cbor">
@@ -3237,7 +3237,7 @@ signed integers).
 the JSON was generated from a JavaScript implementation, its
 precision is already limited to 53 bits maximum.)<a href="#section-6.2-2.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-6.2-2.2">Numbers with fractional parts are represented as floating-point
+<li id="section-6.2-2.2">Numbers with fractional parts are represented as floating-point
 values, performing the decimal-to-binary conversion based on the
 precision provided by IEEE 754 binary64.  Then, when encoding in
 CBOR, the preferred serialization uses the shortest floating-point
@@ -3250,7 +3250,7 @@ precision of the conversion that will affect the precision of the
 represented values. Decimal representation should only be used on
 the CBOR side if that is specified in a protocol.<a href="#section-6.2-2.2" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 <p id="section-6.2-3">CBOR has been designed to generally provide a more compact encoding
 than JSON.  One implementation strategy that might come to mind is to
 perform a JSON-to-CBOR encoding in place in a single buffer.  This
@@ -3313,7 +3313,7 @@ the value is indeed simple. The IANA registry in
 <a href="#ianasimple" class="xref">Section 9.1</a> is the appropriate way to address the
 extensibility of this codepoint space.<a href="#section-7.1-4.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-7.1-4.2">the "tag" space (values in major type 6).  Again, only a small part
+<li id="section-7.1-4.2">the "tag" space (values in major type 6).  Again, only a small part
 of the codepoint space has been allocated, and the space is abundant
 (although the early numbers are more efficient than the later ones).
 Implementations receiving an unknown tag number can choose to simply ignore
@@ -3321,12 +3321,12 @@ it or to process it as an unknown tag number wrapping the enclosed data
 item. The IANA registry in <a href="#ianatags" class="xref">Section 9.2</a> is the appropriate way to
 address the extensibility of this codepoint space.<a href="#section-7.1-4.2" class="pilcrow">¶</a>
 </li>
-          <li id="section-7.1-4.3">the "additional information" space.  An implementation receiving an
+<li id="section-7.1-4.3">the "additional information" space.  An implementation receiving an
 unknown additional information value has no way to continue decoding,
 so allocating codepoints to this space is a major step.  There are
 also very few codepoints left.<a href="#section-7.1-4.3" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 </section>
 </div>
 <div id="curating">
@@ -3384,12 +3384,12 @@ notated as:<a href="#section-8-4" class="pilcrow">¶</a></p>
 <ul class="ulEmpty">
 <li class="ulEmpty" id="section-8-5.1">0("2013-03-21T20:04:00Z")<a href="#section-8-5.1" class="pilcrow">¶</a>
 </li>
-      </ul>
+</ul>
 <p id="section-8-6">or the equivalent relative time as<a href="#section-8-6" class="pilcrow">¶</a></p>
 <ul class="ulEmpty">
 <li class="ulEmpty" id="section-8-7.1">1(1363896240)<a href="#section-8-7.1" class="pilcrow">¶</a>
 </li>
-      </ul>
+</ul>
 <p id="section-8-8">Byte strings are notated in one of the base encodings, without
 padding, enclosed in single quotes, prefixed by &gt;h&lt; for base16,
 &gt;b32&lt; for base32, &gt;h32&lt; for base32hex, &gt;b64&lt; for base64 or
@@ -3478,18 +3478,18 @@ requests is:<a href="#section-9.2-2" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-9.2-3.1">Data item<a href="#section-9.2-3.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-9.2-3.2">Semantics (short form)<a href="#section-9.2-3.2" class="pilcrow">¶</a>
+<li id="section-9.2-3.2">Semantics (short form)<a href="#section-9.2-3.2" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 <p id="section-9.2-4">In addition, First Come First Served requests should include:<a href="#section-9.2-4" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-9.2-5.1">Point of contact<a href="#section-9.2-5.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-9.2-5.2">Description of semantics (URL) - This description is
+<li id="section-9.2-5.2">Description of semantics (URL) - This description is
 optional; the URL can point to something like an Internet-Draft or a
 web page.<a href="#section-9.2-5.2" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 </section>
 </div>
 <div id="media-type-mime-type">
@@ -3504,11 +3504,11 @@ web page.<a href="#section-9.2-5.2" class="pilcrow">¶</a>
 <p id="section-9.3-5">Optional parameters: n/a<a href="#section-9.3-5" class="pilcrow">¶</a></p>
 <dl class="dlParallel" id="section-9.3-6">
           <dt id="section-9.3-6.1">Encoding considerations:</dt>
-          <dd id="section-9.3-6.2">
+<dd id="section-9.3-6.2">
   binary<a href="#section-9.3-6.2" class="pilcrow">¶</a>
 </dd>
 <dt id="section-9.3-6.3">Security considerations:</dt>
-          <dd id="section-9.3-6.4">
+<dd id="section-9.3-6.4">
   See <a href="#securitycons" class="xref">Section 10</a> of this document<a href="#section-9.3-6.4" class="pilcrow">¶</a>
 </dd>
 </dl>
@@ -3516,7 +3516,7 @@ web page.<a href="#section-9.2-5.2" class="pilcrow">¶</a>
 <p id="section-9.3-8">Published specification: This document<a href="#section-9.3-8" class="pilcrow">¶</a></p>
 <dl class="dlParallel" id="section-9.3-9">
           <dt id="section-9.3-9.1">Applications that use this media type:</dt>
-          <dd id="section-9.3-9.2">
+<dd id="section-9.3-9.2">
   None yet, but it is expected that this format will be deployed
 in protocols and applications.<a href="#section-9.3-9.2" class="pilcrow">¶</a>
 </dd>
@@ -3590,7 +3590,7 @@ Fragment Identifier Considerations:
 </div>
 <dl class="dlParallel" id="section-9.5-7">
           <dt id="section-9.5-7.1">Security Considerations:</dt>
-          <dd id="section-9.5-7.2">
+<dd id="section-9.5-7.2">
   See <a href="#securitycons" class="xref">Section 10</a> of this document<a href="#section-9.5-7.2" class="pilcrow">¶</a>
 </dd>
 </dl>
@@ -3704,40 +3704,40 @@ key checking).<a href="#section-10-8" class="pilcrow">¶</a></p>
         </h3>
 <dl class="references">
 <dt id="ECMA262">[ECMA262]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Ecma International</span>, <span class="refTitle">"ECMAScript 2018 Language Specification"</span>, <span class="seriesInfo">ECMA Standard ECMA-262, 9th Edition</span>, <time datetime="2018-06">June 2018</time>, <span>&lt;<a href="https://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf">https://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf</a>&gt;</span>. </dd>
 <dt id="IEEE754">[IEEE754]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">IEEE</span>, <span class="refTitle">"IEEE Standard for Floating-Point Arithmetic"</span>, <span class="seriesInfo">IEEE Std 754-2008</span>, <time></time>. </dd>
 <dt id="RFC2045">[RFC2045]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Freed, N.</span><span class="refAuthor"> and N. Borenstein</span>, <span class="refTitle">"Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies"</span>, <span class="seriesInfo">RFC 2045</span>, <span class="seriesInfo">DOI 10.17487/RFC2045</span>, <time datetime="1996-11">November 1996</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2045">https://www.rfc-editor.org/info/rfc2045</a>&gt;</span>. </dd>
 <dt id="RFC2119">[RFC2119]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dt id="RFC3339">[RFC3339]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Klyne, G.</span><span class="refAuthor"> and C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3339">https://www.rfc-editor.org/info/rfc3339</a>&gt;</span>. </dd>
 <dt id="RFC3629">[RFC3629]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Yergeau, F.</span>, <span class="refTitle">"UTF-8, a transformation format of ISO 10646"</span>, <span class="seriesInfo">STD 63</span>, <span class="seriesInfo">RFC 3629</span>, <span class="seriesInfo">DOI 10.17487/RFC3629</span>, <time datetime="2003-11">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3629">https://www.rfc-editor.org/info/rfc3629</a>&gt;</span>. </dd>
 <dt id="RFC3986">[RFC3986]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Berners-Lee, T.</span><span class="refAuthor">, Fielding, R.</span><span class="refAuthor">, and L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986">https://www.rfc-editor.org/info/rfc3986</a>&gt;</span>. </dd>
 <dt id="RFC4287">[RFC4287]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Nottingham, M., Ed.</span><span class="refAuthor"> and R. Sayre, Ed.</span>, <span class="refTitle">"The Atom Syndication Format"</span>, <span class="seriesInfo">RFC 4287</span>, <span class="seriesInfo">DOI 10.17487/RFC4287</span>, <time datetime="2005-12">December 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4287">https://www.rfc-editor.org/info/rfc4287</a>&gt;</span>. </dd>
 <dt id="RFC4648">[RFC4648]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"The Base16, Base32, and Base64 Data Encodings"</span>, <span class="seriesInfo">RFC 4648</span>, <span class="seriesInfo">DOI 10.17487/RFC4648</span>, <time datetime="2006-10">October 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4648">https://www.rfc-editor.org/info/rfc4648</a>&gt;</span>. </dd>
 <dt id="RFC8126">[RFC8126]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Cotton, M.</span><span class="refAuthor">, Leiba, B.</span><span class="refAuthor">, and T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <time datetime="2017-06">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8126">https://www.rfc-editor.org/info/rfc8126</a>&gt;</span>. </dd>
 <dt id="RFC8174">[RFC8174]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
 <dt id="TIME_T">[TIME_T]</dt>
-      <dd>
+<dd>
 <span class="refAuthor">The Open Group Base Specifications</span>, <span class="refTitle">"Vol. 1: Base Definitions, Issue 7"</span>, <span class="seriesInfo">2013 Edition</span>, <span class="seriesInfo">IEEE Std 1003.1</span>, <span class="seriesInfo">Section 4.15 'Seconds Since the Epoch'</span>, <time datetime="2013">2013</time>, <span>&lt;<a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_15">http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_15</a>&gt;</span>. </dd>
 </dl>
 </section>
@@ -3747,52 +3747,52 @@ key checking).<a href="#section-10-8" class="pilcrow">¶</a></p>
         </h3>
 <dl class="references">
 <dt id="ASN.1">[ASN.1]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">International Telecommunication Union</span>, <span class="refTitle">"Information Technology -- ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)"</span>, <span class="seriesInfo">ITU-T Recommendation X.690</span>, <time datetime="1994">1994</time>. </dd>
 <dt id="BSON">[BSON]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Various</span>, <span class="refTitle">"BSON - Binary JSON"</span>, <time datetime="2013">2013</time>, <span>&lt;<a href="http://bsonspec.org/">http://bsonspec.org/</a>&gt;</span>. </dd>
 <dt id="I-D.ietf-cbor-sequence">[I-D.ietf-cbor-sequence]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Sequences"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-sequence-02</span>, <time datetime="2019-09-25">25 September 2019</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-ietf-cbor-sequence-02.txt">http://www.ietf.org/internet-drafts/draft-ietf-cbor-sequence-02.txt</a>&gt;</span>. </dd>
 <dt id="IANA.cbor-simple-values">[IANA.cbor-simple-values]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Simple Values"</span>, <time></time>, <span>&lt;<a href="http://www.iana.org/assignments/cbor-simple-values">http://www.iana.org/assignments/cbor-simple-values</a>&gt;</span>. </dd>
 <dt id="IANA.cbor-tags">[IANA.cbor-tags]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Tags"</span>, <time></time>, <span>&lt;<a href="http://www.iana.org/assignments/cbor-tags">http://www.iana.org/assignments/cbor-tags</a>&gt;</span>. </dd>
 <dt id="MessagePack">[MessagePack]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Furuhashi, S.</span>, <span class="refTitle">"MessagePack"</span>, <time datetime="2013">2013</time>, <span>&lt;<a href="http://msgpack.org/">http://msgpack.org/</a>&gt;</span>. </dd>
 <dt id="PCRE">[PCRE]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Ho, A.</span>, <span class="refTitle">"PCRE - Perl Compatible Regular Expressions"</span>, <time datetime="2018">2018</time>, <span>&lt;<a href="http://www.pcre.org/">http://www.pcre.org/</a>&gt;</span>. </dd>
 <dt id="RFC0713">[RFC0713]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Haverty, J.</span>, <span class="refTitle">"MSDTP-Message Services Data Transmission Protocol"</span>, <span class="seriesInfo">RFC 713</span>, <span class="seriesInfo">DOI 10.17487/RFC0713</span>, <time datetime="1976-04">April 1976</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc713">https://www.rfc-editor.org/info/rfc713</a>&gt;</span>. </dd>
 <dt id="RFC6838">[RFC6838]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Freed, N.</span><span class="refAuthor">, Klensin, J.</span><span class="refAuthor">, and T. Hansen</span>, <span class="refTitle">"Media Type Specifications and Registration Procedures"</span>, <span class="seriesInfo">BCP 13</span>, <span class="seriesInfo">RFC 6838</span>, <span class="seriesInfo">DOI 10.17487/RFC6838</span>, <time datetime="2013-01">January 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6838">https://www.rfc-editor.org/info/rfc6838</a>&gt;</span>. </dd>
 <dt id="RFC7049">[RFC7049]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Bormann, C.</span><span class="refAuthor"> and P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">RFC 7049</span>, <span class="seriesInfo">DOI 10.17487/RFC7049</span>, <time datetime="2013-10">October 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7049">https://www.rfc-editor.org/info/rfc7049</a>&gt;</span>. </dd>
 <dt id="RFC7228">[RFC7228]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Bormann, C.</span><span class="refAuthor">, Ersue, M.</span><span class="refAuthor">, and A. Keranen</span>, <span class="refTitle">"Terminology for Constrained-Node Networks"</span>, <span class="seriesInfo">RFC 7228</span>, <span class="seriesInfo">DOI 10.17487/RFC7228</span>, <time datetime="2014-05">May 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7228">https://www.rfc-editor.org/info/rfc7228</a>&gt;</span>. </dd>
 <dt id="RFC7493">[RFC7493]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The I-JSON Message Format"</span>, <span class="seriesInfo">RFC 7493</span>, <span class="seriesInfo">DOI 10.17487/RFC7493</span>, <time datetime="2015-03">March 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7493">https://www.rfc-editor.org/info/rfc7493</a>&gt;</span>. </dd>
 <dt id="RFC8259">[RFC8259]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">RFC 8259</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <time datetime="2017-12">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </dd>
 <dt id="RFC8618">[RFC8618]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Dickinson, J.</span><span class="refAuthor">, Hague, J.</span><span class="refAuthor">, Dickinson, S.</span><span class="refAuthor">, Manderson, T.</span><span class="refAuthor">, and J. Bond</span>, <span class="refTitle">"Compacted-DNS (C-DNS): A Format for DNS Packet Capture"</span>, <span class="seriesInfo">RFC 8618</span>, <span class="seriesInfo">DOI 10.17487/RFC8618</span>, <time datetime="2019-09">September 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8618">https://www.rfc-editor.org/info/rfc8618</a>&gt;</span>. </dd>
 <dt id="SIPHASH">[SIPHASH]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Aumasson, J.</span><span class="refAuthor"> and D. Bernstein</span>, <span class="refTitle">"SipHash: A Fast Short-Input PRF"</span>, <span class="seriesInfo">DOI 10.1007/978-3-642-34931-7_28</span>, <span class="seriesInfo">Lecture Notes in Computer Science pp. 489-508</span>, <time datetime="2012">2012</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-642-34931-7_28">https://doi.org/10.1007/978-3-642-34931-7_28</a>&gt;</span>. </dd>
 <dt id="YAML">[YAML]</dt>
-      <dd>
+<dd>
 <span class="refAuthor">Ben-Kiki, O.</span><span class="refAuthor">, Evans, C.</span><span class="refAuthor">, and I.d. Net</span>, <span class="refTitle">"YAML Ain't Markup Language (YAML[TM]) Version 1.2"</span>, <span class="seriesInfo">3rd Edition</span>, <time datetime="2009-10">October 2009</time>, <span>&lt;<a href="http://www.yaml.org/spec/1.2/spec.html">http://www.yaml.org/spec/1.2/spec.html</a>&gt;</span>. </dd>
 </dl>
 </section>
@@ -4408,23 +4408,23 @@ pseudocode in <a href="#pseudo" class="xref">Figure 1</a>.  The data is well-for
 <ul>
 <li id="section-appendix.c-2.1">the pseudocode does not "fail";<a href="#section-appendix.c-2.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.c-2.2">after execution of the pseudocode, no bytes are left in the input
+<li id="section-appendix.c-2.2">after execution of the pseudocode, no bytes are left in the input
 (except in streaming applications)<a href="#section-appendix.c-2.2" class="pilcrow">¶</a>
 </li>
-      </ul>
+</ul>
 <p id="section-appendix.c-3">The pseudocode has the following prerequisites:<a href="#section-appendix.c-3" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-appendix.c-4.1">take(n) reads n bytes from the input data and returns them as a byte
 string.  If n bytes are no longer available, take(n) fails.<a href="#section-appendix.c-4.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.c-4.2">uint() converts a byte string into an unsigned integer by
+<li id="section-appendix.c-4.2">uint() converts a byte string into an unsigned integer by
 interpreting the byte string in network byte order.<a href="#section-appendix.c-4.2" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.c-4.3">Arithmetic works as in C.<a href="#section-appendix.c-4.3" class="pilcrow">¶</a>
+<li id="section-appendix.c-4.3">Arithmetic works as in C.<a href="#section-appendix.c-4.3" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.c-4.4">All variables are unsigned integers of sufficient range.<a href="#section-appendix.c-4.4" class="pilcrow">¶</a>
+<li id="section-appendix.c-4.4">All variables are unsigned integers of sufficient range.<a href="#section-appendix.c-4.4" class="pilcrow">¶</a>
 </li>
-      </ul>
+</ul>
 <p id="section-appendix.c-5">Note that <code>well_formed</code> returns the major type for well-formed
 definite length items, but 0 for an indefinite length item (or -1 for
 a break stop code, only if <code>breakable</code> is set).  This is used in
@@ -4603,19 +4603,19 @@ brief recap of the objectives from <a href="#objectives" class="xref">Section 1.
         <li id="section-appendix.e-4.1">unambiguous encoding of most common data formats from Internet
   standards<a href="#section-appendix.e-4.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.e-4.2">code compactness for encoder or decoder<a href="#section-appendix.e-4.2" class="pilcrow">¶</a>
+<li id="section-appendix.e-4.2">code compactness for encoder or decoder<a href="#section-appendix.e-4.2" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.e-4.3">no schema description needed<a href="#section-appendix.e-4.3" class="pilcrow">¶</a>
+<li id="section-appendix.e-4.3">no schema description needed<a href="#section-appendix.e-4.3" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.e-4.4">reasonably compact serialization<a href="#section-appendix.e-4.4" class="pilcrow">¶</a>
+<li id="section-appendix.e-4.4">reasonably compact serialization<a href="#section-appendix.e-4.4" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.e-4.5">applicability to constrained and unconstrained applications<a href="#section-appendix.e-4.5" class="pilcrow">¶</a>
+<li id="section-appendix.e-4.5">applicability to constrained and unconstrained applications<a href="#section-appendix.e-4.5" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.e-4.6">good JSON conversion<a href="#section-appendix.e-4.6" class="pilcrow">¶</a>
+<li id="section-appendix.e-4.6">good JSON conversion<a href="#section-appendix.e-4.6" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.e-4.7">extensibility<a href="#section-appendix.e-4.7" class="pilcrow">¶</a>
+<li id="section-appendix.e-4.7">extensibility<a href="#section-appendix.e-4.7" class="pilcrow">¶</a>
 </li>
-      </ol>
+</ol>
 <p id="section-appendix.e-5">A discussion of CBOR and other formats with respect to a different set
 of design objectives is provided in Section 5 and Appendix C of
 <span>[<a href="#RFC8618" class="xref">RFC8618</a>]</span>.<a href="#section-appendix.e-5" class="pilcrow">¶</a></p>
@@ -4754,15 +4754,15 @@ significant differences.<a href="#section-appendix.f-1" class="pilcrow">¶</a></
 <ul>
 <li id="section-appendix.f-2.1">Updated reference for [RFC4627] to <span>[<a href="#RFC8259" class="xref">RFC8259</a>]</span> in many places<a href="#section-appendix.f-2.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.f-2.2">Updated reference for [CNN-TERMS] to <span>[<a href="#RFC7228" class="xref">RFC7228</a>]</span><a href="#section-appendix.f-2.2" class="pilcrow">¶</a>
+<li id="section-appendix.f-2.2">Updated reference for [CNN-TERMS] to <span>[<a href="#RFC7228" class="xref">RFC7228</a>]</span><a href="#section-appendix.f-2.2" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.f-2.3">Added a comment to the last example in Section 2.2.1 (added "Second value")<a href="#section-appendix.f-2.3" class="pilcrow">¶</a>
+<li id="section-appendix.f-2.3">Added a comment to the last example in Section 2.2.1 (added "Second value")<a href="#section-appendix.f-2.3" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.f-2.4">Fixed a bug in the example in Section 2.4.2 ("29" -&gt; "49")<a href="#section-appendix.f-2.4" class="pilcrow">¶</a>
+<li id="section-appendix.f-2.4">Fixed a bug in the example in Section 2.4.2 ("29" -&gt; "49")<a href="#section-appendix.f-2.4" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.f-2.5">Fixed a bug in the last paragraph of Section 3.6 ("0b000_11101" -&gt; "0b000_11001")<a href="#section-appendix.f-2.5" class="pilcrow">¶</a>
+<li id="section-appendix.f-2.5">Fixed a bug in the last paragraph of Section 3.6 ("0b000_11101" -&gt; "0b000_11001")<a href="#section-appendix.f-2.5" class="pilcrow">¶</a>
 </li>
-      </ul>
+</ul>
 </section>
 </div>
 <div id="well-formedness-errors-and-examples">
@@ -4781,7 +4781,7 @@ additional data after the data item, as is for example done in CBOR
 sequences <span>[<a href="#I-D.ietf-cbor-sequence" class="xref">I-D.ietf-cbor-sequence</a>]</span>, the CBOR decoder can simply
 indicate what part of the input has not been consumed.<a href="#section-appendix.g-2.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.g-2.2">Too little data: The input data available would need additional
+<li id="section-appendix.g-2.2">Too little data: The input data available would need additional
 bytes added at their end for a complete CBOR data item.  This may
 indicate the input is truncated; it is also a common error when
 trying to decode random data as CBOR.  For some
@@ -4792,11 +4792,11 @@ these applications may have an upper limit for how much additional
 data can show up; here the decoder may be able to indicate that the
 encoded CBOR data item cannot be completed within this limit.<a href="#section-appendix.g-2.2" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.g-2.3">Syntax error: The input data are not consistent with the
+<li id="section-appendix.g-2.3">Syntax error: The input data are not consistent with the
 requirements of the CBOR encoding, and this cannot be remedied by
 adding (or removing) data at the end.<a href="#section-appendix.g-2.3" class="pilcrow">¶</a>
 </li>
-      </ul>
+</ul>
 <p id="section-appendix.g-3">In <a href="#pseudocode" class="xref">Appendix C</a>, errors of the first kind are addressed in the first
 paragraph/bullet list (requiring "no bytes are left"), and errors of
 the second kind are addressed in the second paragraph/bullet list
@@ -4806,19 +4806,19 @@ fail(), in order:<a href="#section-appendix.g-3" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-appendix.g-4.1">a reserved value is used for additional information (28, 29, 30)<a href="#section-appendix.g-4.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.g-4.2">major type 7, additional information 24, value &lt; 32 (incorrect or
+<li id="section-appendix.g-4.2">major type 7, additional information 24, value &lt; 32 (incorrect or
 incorrectly encoded simple type)<a href="#section-appendix.g-4.2" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.g-4.3">incorrect substructure of indefinite length byte/text string (may
+<li id="section-appendix.g-4.3">incorrect substructure of indefinite length byte/text string (may
 only contain definite length strings of the same major type)<a href="#section-appendix.g-4.3" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.g-4.4">break stop code (mt=7, ai=31) occurs in a value position of a map or
+<li id="section-appendix.g-4.4">break stop code (mt=7, ai=31) occurs in a value position of a map or
 except at a position directly in an indefinite length item where
 also another enclosed data item could occur<a href="#section-appendix.g-4.4" class="pilcrow">¶</a>
 </li>
-        <li id="section-appendix.g-4.5">additional information 31 used with major type 0, 1, or 6<a href="#section-appendix.g-4.5" class="pilcrow">¶</a>
+<li id="section-appendix.g-4.5">additional information 31 used with major type 0, 1, or 6<a href="#section-appendix.g-4.5" class="pilcrow">¶</a>
 </li>
-      </ul>
+</ul>
 <div id="examples-for-cbor-data-items-that-are-not-well-formed">
 <section id="section-g.1">
         <h2 id="name-examples-for-cbor-data-item">
@@ -4843,22 +4843,22 @@ counted or should have been ended by a break stop code.<a href="#section-g.1-4" 
 04 05 06 07, 38, 58, 78, 98, 9a 01 ff 00, b8, d8, f8, f9 00, fa 00
 00, fb 00 00 00<a href="#section-g.1-5.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-g.1-5.2">Definite length strings with short data: 41, 61, 5a ff ff ff ff 00,
+<li id="section-g.1-5.2">Definite length strings with short data: 41, 61, 5a ff ff ff ff 00,
 5b ff ff ff ff ff ff ff ff 01 02 03, 7a ff ff ff ff 00, 7b 7f ff ff
 ff ff ff ff ff 01 02 03<a href="#section-g.1-5.2" class="pilcrow">¶</a>
 </li>
-          <li id="section-g.1-5.3">Definite length maps and arrays not closed with enough items: 81, 81
+<li id="section-g.1-5.3">Definite length maps and arrays not closed with enough items: 81, 81
 81 81 81 81 81 81 81 81, 82 00, a1, a2 01 02, a1 00, a2 00 00 00<a href="#section-g.1-5.3" class="pilcrow">¶</a>
 </li>
-          <li id="section-g.1-5.4">Tag number not followed by tag content: c0<a href="#section-g.1-5.4" class="pilcrow">¶</a>
+<li id="section-g.1-5.4">Tag number not followed by tag content: c0<a href="#section-g.1-5.4" class="pilcrow">¶</a>
 </li>
-          <li id="section-g.1-5.5">Indefinite length strings not closed by a break stop code: 5f 41 00, 7f 61 00<a href="#section-g.1-5.5" class="pilcrow">¶</a>
+<li id="section-g.1-5.5">Indefinite length strings not closed by a break stop code: 5f 41 00, 7f 61 00<a href="#section-g.1-5.5" class="pilcrow">¶</a>
 </li>
-          <li id="section-g.1-5.6">Indefinite length maps and arrays not closed by a break stop code:
+<li id="section-g.1-5.6">Indefinite length maps and arrays not closed by a break stop code:
 9f, 9f 01 02, bf, bf 01 02 01 02, 81 9f, 9f 80 00, 9f 9f 9f 9f 9f ff
 ff ff ff, 9f 81 9f 81 9f 9f ff ff ff<a href="#section-g.1-5.6" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 <p id="section-g.1-6">A few examples for the five subkinds of well-formedness error kind 3
 (syntax error) are shown below.<a href="#section-g.1-6" class="pilcrow">¶</a></p>
 <p id="section-g.1-7">Subkind 1:<a href="#section-g.1-7" class="pilcrow">¶</a></p>
@@ -4866,39 +4866,39 @@ ff ff ff, 9f 81 9f 81 9f 9f ff ff ff<a href="#section-g.1-5.6" class="pilcrow">�
 <li id="section-g.1-8.1">Reserved additional information values: 1c, 1d, 1e, 3c, 3d, 3e, 5c,
 5d, 5e, 7c, 7d, 7e, 9c, 9d, 9e, bc, bd, be, dc, dd, de, fc, fd, fe,<a href="#section-g.1-8.1" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 <p id="section-g.1-9">Subkind 2:<a href="#section-g.1-9" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-g.1-10.1">Reserved two-byte encodings of simple types: f8 00, f8 01, f8 18, f8 1f<a href="#section-g.1-10.1" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 <p id="section-g.1-11">Subkind 3:<a href="#section-g.1-11" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-g.1-12.1">Indefinite length string chunks not of the correct type: 5f 00 ff,
 5f 21 ff, 5f 61 00 ff, 5f 80 ff, 5f a0 ff, 5f c0 00 ff, 5f e0 ff, 7f
 41 00 ff<a href="#section-g.1-12.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-g.1-12.2">Indefinite length string chunks not definite length:
+<li id="section-g.1-12.2">Indefinite length string chunks not definite length:
 5f 5f 41 00 ff ff, 7f 7f 61 00 ff ff<a href="#section-g.1-12.2" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 <p id="section-g.1-13">Subkind 4:<a href="#section-g.1-13" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-g.1-14.1">Break occurring on its own outside of an indefinite length item: ff<a href="#section-g.1-14.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-g.1-14.2">Break occurring in a definite length array or map or a tag: 81 ff,
+<li id="section-g.1-14.2">Break occurring in a definite length array or map or a tag: 81 ff,
 82 00 ff, a1 ff, a1 ff 00, a1 00 ff, a2 00 00 ff, 9f 81 ff, 9f 82 9f
 81 9f 9f ff ff ff ff<a href="#section-g.1-14.2" class="pilcrow">¶</a>
 </li>
-          <li id="section-g.1-14.3">Break in indefinite length map would lead to odd number of items
+<li id="section-g.1-14.3">Break in indefinite length map would lead to odd number of items
 (break in a value position): bf 00 ff, bf 00 00 00 ff<a href="#section-g.1-14.3" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 <p id="section-g.1-15">Subkind 5:<a href="#section-g.1-15" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-g.1-16.1">Major type 0, 1, 6 with additional information 31: 1f, 3f, df<a href="#section-g.1-16.1" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 </section>
 </div>
 </section>
