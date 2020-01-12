@@ -999,9 +999,9 @@ Internet-Draft                    CBOR                      January 2020
    using this tag number.
 
    For example, assume that a byte string of length 12 is marked with a
-   tag of number 2 to indicate it is a positive bignum (Section 3.4.3).
-   This would be marked as 0b110_00010 (major type 6, additional
-   information 2 for the tag number) followed by 0b010_01100 (major type
+   tag of number 2 to indicate it is a positive "bignum"
+   (Section 3.4.3).  This would be marked as 0b110_00010 (major type 6,
+   additional information 2 for the tag number) followed by 0b010_01100
 
 
 
@@ -1010,8 +1010,8 @@ Bormann & Hoffman         Expires July 15, 2020                [Page 18]
 Internet-Draft                    CBOR                      January 2020
 
 
-   2, additional information of 12 for the length) followed by the 12
-   bytes of the bignum.
+   (major type 2, additional information of 12 for the length) followed
+   by the 12 bytes of the bignum.
 
    Decoders do not need to understand tags of every tag number, and tags
    may be of little value in applications where the implementation
@@ -1181,9 +1181,9 @@ Internet-Draft                    CBOR                      January 2020
 3.4.3.  Bignums
 
    Protocols using tag numbers 2 and 3 extend the generic data model
-   (Section 2) with "bignums" representing arbitrarily sized integers.
-   In the generic data model, bignum values are not equal to integers
-   from the basic data model, but specific data models can define that
+   (Section 2) with bignums representing arbitrarily sized integers.  In
+   the generic data model, bignum values are not equal to integers from
+   the basic data model, but specific data models can define that
    equivalence, and preferred encoding never makes use of bignums that
    also can be expressed as basic integers (see below).
 
@@ -1237,7 +1237,7 @@ Internet-Draft                    CBOR                      January 2020
    exact representation for many decimal fractions in binary floating-
    point representations.
 
-   Bigfloats combine an integer mantissa with a base-2 scaling factor.
+   "Bigfloats" combine an integer mantissa with a base-2 scaling factor.
    They are binary floating-point values that can exceed the range or
    the precision of the three IEEE 754 formats supported by CBOR
    (Section 3.3).  Bigfloats may also be used by constrained
