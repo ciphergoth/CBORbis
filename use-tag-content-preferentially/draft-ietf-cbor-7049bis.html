@@ -654,7 +654,7 @@ ul.toc li {
 <li>a sequence of zero or more Unicode code points (&#8220;text string&#8221;)</li>
 <li>a sequence of zero or more data items (&#8220;array&#8221;)</li>
 <li>a mapping (mathematical function) from zero or more data items (&#8220;keys&#8221;) each to a data item (&#8220;values&#8221;), (&#8220;map&#8221;)</li>
-<li>a tagged data item (&#8220;tag&#8221;), comprising a tag number (an integer in the range 0..2**64-1) and a tagged value (a data item)</li>
+<li>a tagged data item (&#8220;tag&#8221;), comprising a tag number (an integer in the range 0..2**64-1) and the tag content (a data item)</li>
 </ul>
 <p id="rfc.section.2.p.5">Note that integer and floating-point values are distinct in this model, even if they have the same numeric value.</p>
 <p id="rfc.section.2.p.6">Also note that serialization variants, such as the number of bytes of the encoded floating-point value, or the choice of one of the ways in which an integer, the length of a text or byte string, the number of elements in an array or pairs in a map, or a tag number, (collectively &#8220;the argument&#8221;, see <a href="#encoding" class="xref">Section 3</a>) can be encoded, are not visible at the generic data model level.</p>
@@ -1170,7 +1170,7 @@ C5             -- Tag 5
 <a href="#rfc.section.3.4.6">3.4.6.</a> <a href="#self-describe" id="self-describe">Self-Described CBOR</a>
 </h1>
 <p id="rfc.section.3.4.6.p.1">In many applications, it will be clear from the context that CBOR is being employed for encoding a data item.  For instance, a specific protocol might specify the use of CBOR, or a media type is indicated that specifies its use.  However, there may be applications where such context information is not available, such as when CBOR data is stored in a file that does not have disambiguating metadata.  Here, it may help to have some distinguishing characteristics for the data itself.</p>
-<p id="rfc.section.3.4.6.p.2">Tag number 55799 is defined for this purpose.  It does not impart any special semantics on the data item that it encloses; that is, the semantics of the tag content enclosed in tag number 55799 is exactly identical to the semantics of the data item itself.</p>
+<p id="rfc.section.3.4.6.p.2">Tag number 55799 is defined for this purpose.  It does not impart any special semantics on the data item that it encloses; that is, the semantics of the tag content enclosed in tag number 55799 is exactly identical to the semantics of the tag content itself.</p>
 <p id="rfc.section.3.4.6.p.3">The serialization of this tag&#8217;s head is 0xd9d9f7, which does not appear to be in use as a distinguishing mark for any frequently used file types.  In particular, 0xd9d9f7 is not a valid start of a Unicode text in any Unicode encoding if it is followed by a valid CBOR data item.</p>
 <p id="rfc.section.3.4.6.p.4">For instance, a decoder might be able to decode both CBOR and JSON. Such a decoder would need to mechanically distinguish the two formats. An easy way for an encoder to help the decoder would be to tag the entire CBOR item with tag number 55799, the serialization of which will never be found at the beginning of a JSON text.</p>
 <h1 id="rfc.section.4">
@@ -1412,7 +1412,7 @@ C5             -- Tag 5
 
 <ul>
 <li>the &#8220;simple&#8221; space (values in major type 7).  Of the 24 efficient (and 224 slightly less efficient) values, only a small number have been allocated.  Implementations receiving an unknown simple data item may be able to process it as such, given that the structure of the value is indeed simple. The IANA registry in <a href="#ianasimple" class="xref">Section 9.1</a> is the appropriate way to address the extensibility of this codepoint space.</li>
-<li>the &#8220;tag&#8221; space (values in major type 6).  Again, only a small part of the codepoint space has been allocated, and the space is abundant (although the early numbers are more efficient than the later ones).  Implementations receiving an unknown tag number can choose to simply ignore it or to process it as an unknown tag number wrapping the enclosed tag content. The IANA registry in <a href="#ianatags" class="xref">Section 9.2</a> is the appropriate way to address the extensibility of this codepoint space.</li>
+<li>the &#8220;tag&#8221; space (values in major type 6).  Again, only a small part of the codepoint space has been allocated, and the space is abundant (although the early numbers are more efficient than the later ones).  Implementations receiving an unknown tag number can choose to simply ignore it (process just the enclosed tag content) or to process it as an unknown tag number wrapping the tag content. The IANA registry in <a href="#ianatags" class="xref">Section 9.2</a> is the appropriate way to address the extensibility of this codepoint space.</li>
 <li>the &#8220;additional information&#8221; space.  An implementation receiving an unknown additional information value has no way to continue decoding, so allocating codepoints to this space is a major step.  There are also very few codepoints left.</li>
 </ul>
 <h1 id="rfc.section.7.2">
