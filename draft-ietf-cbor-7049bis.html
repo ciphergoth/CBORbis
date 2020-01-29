@@ -294,6 +294,7 @@ ul.toc li {
 <link href="#rfc.section.3.2.1" rel="Chapter" title="3.2.1 The &#8220;break&#8221; Stop Code">
 <link href="#rfc.section.3.2.2" rel="Chapter" title="3.2.2 Indefinite-Length Arrays and Maps">
 <link href="#rfc.section.3.2.3" rel="Chapter" title="3.2.3 Indefinite-Length Byte Strings and Text Strings">
+<link href="#rfc.section.3.2.4" rel="Chapter" title="3.2.4 Summary of indefinite-length use of major types">
 <link href="#rfc.section.3.3" rel="Chapter" title="3.3 Floating-Point Numbers and Values with No Content">
 <link href="#rfc.section.3.4" rel="Chapter" title="3.4 Tagging of Items">
 <link href="#rfc.section.3.4.1" rel="Chapter" title="3.4.1 Standard Date/Time String">
@@ -362,7 +363,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Bormann, C. and P. Hoffman" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-cbor-7049bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2020-01-15" />
+  <meta name="dct.issued" scheme="ISO8601" content="2020-01-29" />
   <meta name="dct.abstract" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack.This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format." />
   <meta name="description" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack.This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format." />
 
@@ -390,8 +391,8 @@ ul.toc li {
 <td class="right">ICANN</td>
 </tr>
 <tr>
-<td class="left">Expires: July 18, 2020</td>
-<td class="right">January 15, 2020</td>
+<td class="left">Expires: August 1, 2020</td>
+<td class="right">January 29, 2020</td>
 </tr>
 
     	
@@ -411,7 +412,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on July 18, 2020.</p>
+<p>This Internet-Draft will expire on August 1, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2020 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -444,6 +445,8 @@ ul.toc li {
 <li>3.2.2.   <a href="#rfc.section.3.2.2">Indefinite-Length Arrays and Maps</a>
 </li>
 <li>3.2.3.   <a href="#rfc.section.3.2.3">Indefinite-Length Byte Strings and Text Strings</a>
+</li>
+<li>3.2.4.   <a href="#rfc.section.3.2.4">Summary of indefinite-length use of major types</a>
 </li>
 </ul><li>3.3.   <a href="#rfc.section.3.3">Floating-Point Numbers and Values with No Content</a>
 </li>
@@ -681,7 +684,7 @@ ul.toc li {
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#encoding" id="encoding">Specification of the CBOR Encoding</a>
 </h1>
-<p id="rfc.section.3.p.1">A CBOR data item (<a href="#cbor-data-models" class="xref">Section 2</a>) is encoded to or decoded from a byte string carrying a well-formed encoded data item as described in this section.  The encoding is summarized in <a href="#jumptable" class="xref">Table 6</a>, indexed by the initial byte.  An encoder MUST produce only well-formed encoded data items.  A decoder MUST NOT return a decoded data item when it encounters input that is not a well-formed encoded CBOR data item (this does not detract from the usefulness of diagnostic and recovery tools that might make available some information from a damaged encoded CBOR data item).</p>
+<p id="rfc.section.3.p.1">A CBOR data item (<a href="#cbor-data-models" class="xref">Section 2</a>) is encoded to or decoded from a byte string carrying a well-formed encoded data item as described in this section.  The encoding is summarized in <a href="#jumptable" class="xref">Table 7</a>, indexed by the initial byte.  An encoder MUST produce only well-formed encoded data items.  A decoder MUST NOT return a decoded data item when it encounters input that is not a well-formed encoded CBOR data item (this does not detract from the usefulness of diagnostic and recovery tools that might make available some information from a damaged encoded CBOR data item).</p>
 <p id="rfc.section.3.p.2">The initial byte of each encoded data item contains both information about the major type (the high-order 3 bits, described in <a href="#majortypes" class="xref">Section 3.1</a>) and additional information (the low-order 5 bits).  With a few exceptions, the additional information&#8217;s value describes how to load an unsigned integer &#8220;argument&#8221;:</p>
 <p></p>
 
@@ -698,7 +701,7 @@ ul.toc li {
 <p id="rfc.section.3.p.4">The initial byte and any additional bytes consumed to construct the argument are collectively referred to as the &#8220;head&#8221; of the data item.</p>
 <p id="rfc.section.3.p.5">The meaning of this argument depends on the major type.  For example, in major type 0, the argument is the value of the data item itself (and in major type 1 the value of the data item is computed from the argument); in major type 2 and 3 it gives the length of the string data in bytes that follows; and in major types 4 and 5 it is used to determine the number of data items enclosed.</p>
 <p id="rfc.section.3.p.6">If the encoded sequence of bytes ends before the end of a data item, that item is not well-formed. If the encoded sequence of bytes still has bytes remaining after the outermost encoded item is decoded, that encoding is not a single well-formed CBOR item; depending on the application, the decoder may either treat the encoding as not well-formed or just identify the start of the remaining bytes to the application.</p>
-<p id="rfc.section.3.p.7">A CBOR decoder implementation can be based on a jump table with all 256 defined values for the initial byte (<a href="#jumptable" class="xref">Table 6</a>).  A decoder in a constrained implementation can instead use the structure of the initial byte and following bytes for more compact code (see <a href="#pseudocode" class="xref">Appendix C</a> for a rough impression of how this could look).</p>
+<p id="rfc.section.3.p.7">A CBOR decoder implementation can be based on a jump table with all 256 defined values for the initial byte (<a href="#jumptable" class="xref">Table 7</a>).  A decoder in a constrained implementation can instead use the structure of the initial byte and following bytes for more compact code (see <a href="#pseudocode" class="xref">Appendix C</a> for a rough impression of how this could look).</p>
 <h1 id="rfc.section.3.1">
 <a href="#rfc.section.3.1">3.1.</a> <a href="#majortypes" id="majortypes">Major Types</a>
 </h1>
@@ -723,13 +726,13 @@ ul.toc li {
 <dt>Major type 7:</dt>
 <dd style="margin-left: 8">floating-point numbers and simple values, as well as the &#8220;break&#8221; stop code.  See <a href="#fpnocont" class="xref">Section 3.3</a>.</dd>
 </dl>
-<p id="rfc.section.3.1.p.3">These eight major types lead to a simple table showing which of the 256 possible values for the initial byte of a data item are used (<a href="#jumptable" class="xref">Table 6</a>).</p>
+<p id="rfc.section.3.1.p.3">These eight major types lead to a simple table showing which of the 256 possible values for the initial byte of a data item are used (<a href="#jumptable" class="xref">Table 7</a>).</p>
 <p id="rfc.section.3.1.p.4">In major types 6 and 7, many of the possible values are reserved for future specification. See <a href="#ianacons" class="xref">Section 9</a> for more information on these values.</p>
 <p><a href="#major-type-table" class="xref">Table 1</a> summarizes the major types defined by CBOR, ignoring the next section for now.  The number N in this table stands for the argument, mt for the major type.</p>
 <div id="rfc.table.1"></div>
 <div id="major-type-table"></div>
 <table cellpadding="3" cellspacing="0" class="tt full center">
-<caption>Overview over CBOR major types (definite length encoded)</caption>
+<caption>Overview over the definite-length use of CBOR major types (mt = major type, N = argument)</caption>
 <thead><tr>
 <th class="left">mt</th>
 <th class="left">Meaning</th>
@@ -884,11 +887,67 @@ BF           -- Start indefinite-length map
    FF           -- "break"
 </pre>
 <p id="rfc.section.3.2.3.p.6">After decoding, this results in a single byte string with seven bytes: 0xaabbccddeeff99.</p>
+<h1 id="rfc.section.3.2.4">
+<a href="#rfc.section.3.2.4">3.2.4.</a> <a href="#summary-of-indefinite-length-use-of-major-types" id="summary-of-indefinite-length-use-of-major-types">Summary of indefinite-length use of major types</a>
+</h1>
+<p><a href="#major-type-indef-table" class="xref">Table 2</a> summarizes the major types defined by CBOR as used for indefinite length encoding (with additional information set to 31).  mt stands for the major type.</p>
+<div id="rfc.table.2"></div>
+<div id="major-type-indef-table"></div>
+<table cellpadding="3" cellspacing="0" class="tt full center">
+<caption>Overview over the indefinite-length use of CBOR major types (mt = major type, additional information = 31)</caption>
+<thead><tr>
+<th class="left">mt</th>
+<th class="left">Meaning</th>
+<th class="left">enclosed up to &#8220;break&#8221; stop code</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="left">0</td>
+<td class="left">(not well-formed)</td>
+<td class="left">-</td>
+</tr>
+<tr>
+<td class="left">1</td>
+<td class="left">(not well-formed)</td>
+<td class="left">-</td>
+</tr>
+<tr>
+<td class="left">2</td>
+<td class="left">byte string</td>
+<td class="left">definite-length byte strings</td>
+</tr>
+<tr>
+<td class="left">3</td>
+<td class="left">text string</td>
+<td class="left">definite-length text strings</td>
+</tr>
+<tr>
+<td class="left">4</td>
+<td class="left">array</td>
+<td class="left">data items (elements)</td>
+</tr>
+<tr>
+<td class="left">5</td>
+<td class="left">map</td>
+<td class="left">data items (key/value pairs)</td>
+</tr>
+<tr>
+<td class="left">6</td>
+<td class="left">(not well-formed)</td>
+<td class="left">-</td>
+</tr>
+<tr>
+<td class="left">7</td>
+<td class="left">&#8220;break&#8221; stop code</td>
+<td class="left">-</td>
+</tr>
+</tbody>
+</table>
 <h1 id="rfc.section.3.3">
 <a href="#rfc.section.3.3">3.3.</a> <a href="#fpnocont" id="fpnocont">Floating-Point Numbers and Values with No Content</a>
 </h1>
-<p id="rfc.section.3.3.p.1">Major type 7 is for two types of data: floating-point numbers and &#8220;simple values&#8221; that do not need any content.  Each value of the 5-bit additional information in the initial byte has its own separate meaning, as defined in <a href="#fpnoconttbl" class="xref">Table 2</a>.  Like the major types for integers, items of this major type do not carry content data; all the information is in the initial bytes.</p>
-<div id="rfc.table.2"></div>
+<p id="rfc.section.3.3.p.1">Major type 7 is for two types of data: floating-point numbers and &#8220;simple values&#8221; that do not need any content.  Each value of the 5-bit additional information in the initial byte has its own separate meaning, as defined in <a href="#fpnoconttbl" class="xref">Table 3</a>.  Like the major types for integers, items of this major type do not carry content data; all the information is in the initial bytes.</p>
+<div id="rfc.table.3"></div>
 <div id="fpnoconttbl"></div>
 <table cellpadding="3" cellspacing="0" class="tt full center">
 <caption>Values for Additional Information in Major Type 7</caption>
@@ -927,8 +986,8 @@ BF           -- Start indefinite-length map
 </tr>
 </tbody>
 </table>
-<p id="rfc.section.3.3.p.2">As with all other major types, the 5-bit value 24 signifies a single-byte extension: it is followed by an additional byte to represent the simple value. (To minimize confusion, only the values 32 to 255 are used.)  This maintains the structure of the initial bytes: as for the other major types, the length of these always depends on the additional information in the first byte. <a href="#fpnoconttbl2" class="xref">Table 3</a> lists the values assigned and available for simple types.</p>
-<div id="rfc.table.3"></div>
+<p id="rfc.section.3.3.p.2">As with all other major types, the 5-bit value 24 signifies a single-byte extension: it is followed by an additional byte to represent the simple value. (To minimize confusion, only the values 32 to 255 are used.)  This maintains the structure of the initial bytes: as for the other major types, the length of these always depends on the additional information in the first byte. <a href="#fpnoconttbl2" class="xref">Table 4</a> lists the values assigned and available for simple types.</p>
+<div id="rfc.table.4"></div>
 <div id="fpnoconttbl2"></div>
 <table cellpadding="3" cellspacing="0" class="tt full center">
 <caption>Simple Values</caption>
@@ -972,12 +1031,12 @@ BF           -- Start indefinite-length map
 <h1 id="rfc.section.3.4">
 <a href="#rfc.section.3.4">3.4.</a> <a href="#tags" id="tags">Tagging of Items</a>
 </h1>
-<p id="rfc.section.3.4.p.1">In CBOR, a data item can be enclosed by a tag to give it additional semantics while retaining its structure. The tag is major type 6, and represents an unsigned integer as indicated by the tag&#8217;s argument (<a href="#encoding" class="xref">Section 3</a>); the (sole) enclosed data item is carried as content data.  If a tag requires structured data, this structure is encoded into the nested data item.  The definition of a tag number usually restricts what kinds of nested data item or items are valid for tags using this tag number.</p>
+<p id="rfc.section.3.4.p.1">In CBOR, a data item can be enclosed by a tag to give it additional semantics. The tag is major type 6, and represents an unsigned integer as indicated by the tag&#8217;s argument (<a href="#encoding" class="xref">Section 3</a>); the (sole) enclosed data item is carried as content data.  If a tag requires structured data, this structure is encoded into the nested data item.  The definition of a tag number usually restricts what kinds of nested data item or items are valid for tags using this tag number.  We use the term &#8220;tag&#8221; for the entire data item consisting of both a tag number and the enclosed value, calling the latter &#8220;tag content&#8221;: the tag content is the data item that is being tagged.</p>
 <p id="rfc.section.3.4.p.2">For example, assume that a byte string of length 12 is marked with a tag of number 2 to indicate it is a positive &#8220;bignum&#8221; (<a href="#bignums" class="xref">Section 3.4.3</a>).  This would be marked as 0b110_00010 (major type 6, additional information 2 for the tag number) followed by 0b010_01100 (major type 2, additional information of 12 for the length) followed by the 12 bytes of the bignum.</p>
-<p id="rfc.section.3.4.p.3">Decoders do not need to understand tags of every tag number, and tags may be of little value in applications where the implementation creating a particular CBOR data item and the implementation decoding that stream know the semantic meaning of each item in the data flow. Their primary purpose in this specification is to define common data types such as dates. A secondary purpose is to provide conversion hints when it is foreseen that the CBOR data item needs to be translated into a different format, requiring hints about the content of items.  Understanding the semantics of tags is optional for a decoder; it can just jump over the initial bytes of the tag (that encode the tag number) and interpret the tag content itself, presenting both tag number and tag content to the application.</p>
-<p id="rfc.section.3.4.p.4">A tag applies semantics to the data item it encloses.  Thus, if tag A encloses tag B, which encloses data item C, tag A applies to the result of applying tag B on data item C.  A tag is a data item consisting of both a tag number and an enclosed value called the &#8220;tag content&#8221;: the tag content is the data item that is being tagged.</p>
-<p id="rfc.section.3.4.p.5">IANA maintains a registry of tag numbers as described in <a href="#ianatags" class="xref">Section 9.2</a>.  <a href="#tagvalues" class="xref">Table 4</a> provides a list of tag numbers that were defined in <a href="#RFC7049" class="xref">[RFC7049]</a>, with definitions in the rest of this section.  Note that many other tag numbers have been defined since the publication of <a href="#RFC7049" class="xref">[RFC7049]</a>; see the registry described at <a href="#ianatags" class="xref">Section 9.2</a> for the complete list.</p>
-<div id="rfc.table.4"></div>
+<p id="rfc.section.3.4.p.3">Decoders do not need to understand tags of every tag number, and tags may be of little value in applications where the implementation creating a particular CBOR data item and the implementation decoding that stream know the semantic meaning of each item in the data flow. Their primary purpose in this specification is to define common data types such as dates. A secondary purpose is to provide conversion hints when it is foreseen that the CBOR data item needs to be translated into a different format, requiring hints about the content of items.  Understanding the semantics of tags is optional for a decoder; it can simply present both the tag number and the tag content to the application, without interpreting the additional semantics of the tag.</p>
+<p id="rfc.section.3.4.p.4">A tag applies semantics to the data item it encloses.  Tags can nest:  If tag A encloses tag B, which encloses data item C, tag A applies to the result of applying tag B on data item C.</p>
+<p id="rfc.section.3.4.p.5">IANA maintains a registry of tag numbers as described in <a href="#ianatags" class="xref">Section 9.2</a>.  <a href="#tagvalues" class="xref">Table 5</a> provides a list of tag numbers that were defined in <a href="#RFC7049" class="xref">[RFC7049]</a>, with definitions in the rest of this section.  Note that many other tag numbers have been defined since the publication of <a href="#RFC7049" class="xref">[RFC7049]</a>; see the registry described at <a href="#ianatags" class="xref">Section 9.2</a> for the complete list.</p>
+<div id="rfc.table.5"></div>
 <div id="tagvalues"></div>
 <table cellpadding="3" cellspacing="0" class="tt full center">
 <caption>Tag numbers defined in RFC 7049</caption>
@@ -1102,8 +1161,8 @@ BF           -- Start indefinite-length map
 <h1 id="rfc.section.3.4.3">
 <a href="#rfc.section.3.4.3">3.4.3.</a> <a href="#bignums" id="bignums">Bignums</a>
 </h1>
-<p id="rfc.section.3.4.3.p.1">Protocols using tag numbers 2 and 3 extend the generic data model (<a href="#cbor-data-models" class="xref">Section 2</a>) with &#8220;bignums&#8221; representing arbitrarily sized integers. In the generic data model, bignum values are not equal to integers from the basic data model, but specific data models can define that equivalence, and preferred encoding never makes use of bignums that also can be expressed as basic integers (see below).</p>
-<p id="rfc.section.3.4.3.p.2">Bignums are encoded as a byte string data item, which is interpreted as an unsigned integer n in network byte order.  Contained items of other types are invalid.  For tag number 2, the value of the bignum is n.  For tag number 3, the value of the bignum is -1 - n.  The preferred encoding of the byte string is to leave out any leading zeroes (note that this means the preferred encoding for n&#160;=&#160;0 is the empty byte string, but see below).  Decoders that understand these tags MUST be able to decode bignums that do have leading zeroes.  The preferred encoding of an integer that can be represented using major type 0 or 1 is to encode it this way instead of as a bignum (which means that the empty string never occurs in a bignum when using preferred encoding).  Note that this means the non-preferred choice of a bignum representation instead of a basic integer for encoding a number is not intended to have application semantics (just as the choice of a longer basic integer representation than needed, such as 0x1800 for 0x00 does not).</p>
+<p id="rfc.section.3.4.3.p.1">Protocols using tag numbers 2 and 3 extend the generic data model (<a href="#cbor-data-models" class="xref">Section 2</a>) with &#8220;bignums&#8221; representing arbitrarily sized integers. In the generic data model, bignum values are not equal to integers from the basic data model, but specific data models can define that equivalence, and preferred serialization (<a href="#preferred" class="xref">Section 4.1</a>) never makes use of bignums that also can be expressed as basic integers (see below).</p>
+<p id="rfc.section.3.4.3.p.2">Bignums are encoded as a byte string data item, which is interpreted as an unsigned integer n in network byte order.  Contained items of other types are invalid.  For tag number 2, the value of the bignum is n.  For tag number 3, the value of the bignum is -1 - n.  The preferred serialization of the byte string is to leave out any leading zeroes (note that this means the preferred serialization for n&#160;=&#160;0 is the empty byte string, but see below).  Decoders that understand these tags MUST be able to decode bignums that do have leading zeroes.  The preferred serialization of an integer that can be represented using major type 0 or 1 is to encode it this way instead of as a bignum (which means that the empty string never occurs in a bignum when using preferred serialization).  Note that this means the non-preferred choice of a bignum representation instead of a basic integer for encoding a number is not intended to have application semantics (just as the choice of a longer basic integer representation than needed, such as 0x1800 for 0x00 does not).</p>
 <p id="rfc.section.3.4.3.p.3">For example, the number 18446744073709551616 (2**64) is represented as 0b110_00010 (major type 6, tag number 2), followed by 0b010_01001 (major type 2, length 9), followed by 0x010000000000000000 (one byte 0x01 and eight bytes 0x00). In hexadecimal:</p>
 <pre>
 C2                        -- Tag 2
@@ -1145,7 +1204,7 @@ C5             -- Tag 5
 </h1>
 <p id="rfc.section.3.4.5.2.p.1">Tags number 21 to 23 indicate that a byte string might require a specific encoding when interoperating with a text-based representation.  These tags are useful when an encoder knows that the byte string data it is writing is likely to be later converted to a particular JSON-based usage. That usage specifies that some strings are encoded as base64, base64url, and so on. The encoder uses byte strings instead of doing the encoding itself to reduce the message size, to reduce the code size of the encoder, or both.  The encoder does not know whether or not the converter will be generic, and therefore wants to say what it believes is the proper way to convert binary strings to JSON.</p>
 <p id="rfc.section.3.4.5.2.p.2">The data item tagged can be a byte string or any other data item.  In the latter case, the tag applies to all of the byte string data items contained in the data item, except for those contained in a nested data item tagged with an expected conversion.</p>
-<p id="rfc.section.3.4.5.2.p.3">These three tag numbers suggest conversions to three of the base data encodings defined in <a href="#RFC4648" class="xref">[RFC4648]</a>.  For base64url encoding (tag number 21), padding is not used (see Section 3.2 of RFC 4648); that is, all trailing equals signs (&#8220;=&#8221;) are removed from the encoded string.  For base64 encoding (tag number 22), padding is used as defined in RFC 4648.  For both base64url and base64, padding bits are set to zero (see Section 3.5 of RFC 4648), and encoding is performed without the inclusion of any line breaks, whitespace, or other additional characters.  Note that, for all three tag numbers, the encoding of the empty byte string is the empty text string.</p>
+<p id="rfc.section.3.4.5.2.p.3">These three tag numbers suggest conversions to three of the base data encodings defined in <a href="#RFC4648" class="xref">[RFC4648]</a>.   Tag number 21 suggests conversion to base64url encoding (Section 5 of RFC 4648), where padding is not used (see Section 3.2 of RFC 4648); that is, all trailing equals signs (&#8220;=&#8221;) are removed from the encoded string.  Tag number 22 suggests conversion to classical base64 encoding (Section 4 of RFC 4648), with padding as defined in RFC 4648.  For both base64url and base64, padding bits are set to zero (see Section 3.5 of RFC 4648), and encoding is performed without the inclusion of any line breaks, whitespace, or other additional characters.  Tag number 23 suggests conversion to base16 (hex) encoding, with uppercase alphabetics (see Section 8 of RFC 4648).  Note that, for all three tag numbers, the encoding of the empty byte string is the empty text string.</p>
 <h1 id="rfc.section.3.4.5.3">
 <a href="#rfc.section.3.4.5.3">3.4.5.3.</a> <a href="#encodedtext" id="encodedtext">Encoded Text</a>
 </h1>
@@ -1154,7 +1213,7 @@ C5             -- Tag 5
 
 <ul>
 <li>Tag number 32 is for URIs, as defined in <a href="#RFC3986" class="xref">[RFC3986]</a>.  If the text string doesn&#8217;t match the <samp>URI-reference</samp> production, the string is invalid.</li>
-<li>Tag numbers 33 and 34 are for base64url- and base64-encoded text strings, as defined in <a href="#RFC4648" class="xref">[RFC4648]</a>.  If any of: <ul>
+<li>Tag numbers 33 and 34 are for base64url- and base64-encoded text strings, respectively, as defined in <a href="#RFC4648" class="xref">[RFC4648]</a>.  If any of: <ul>
 <li>the encoded text string contains non-alphabet characters or only 1 character in the last block of 4, or</li>
 <li>the padding bits in a 2- or 3-character block are not 0, or</li>
 <li>the base64 encoding has the wrong number of padding characters, or</li>
@@ -1180,9 +1239,11 @@ C5             -- Tag 5
 <a href="#rfc.section.4.1">4.1.</a> <a href="#preferred" id="preferred">Preferred Serialization</a>
 </h1>
 <p id="rfc.section.4.1.p.1">For some values at the data model level, CBOR provides multiple serializations.  For many applications, it is desirable that an encoder always chooses a preferred serialization (preferred encoding); however, the present specification does not put the burden of enforcing this preference on either encoder or decoder.</p>
-<p id="rfc.section.4.1.p.2">Some constrained decoders may be limited in their ability to decode non-preferred serializations:  For example, if only integers below 1_000_000_000 are expected in an application, the decoder may leave out the code that would be needed to decode 64-bit arguments in integers.  An encoder that always uses preferred serialization (&#8220;preferred encoder&#8221;) interoperates with this decoder for the numbers that can occur in this application.  More generally speaking, it therefore can be said that a preferred encoder is more universally interoperable (and also less wasteful) than one that, say, always uses 64-bit integers.</p>
+<p id="rfc.section.4.1.p.2">Some constrained decoders may be limited in their ability to decode non-preferred serializations:  For example, if only integers below 1_000_000_000 (one billion) are expected in an application, the decoder may leave out the code that would be needed to decode 64-bit arguments in integers.  An encoder that always uses preferred serialization (&#8220;preferred encoder&#8221;) interoperates with this decoder for the numbers that can occur in this application.  More generally speaking, it therefore can be said that a preferred encoder is more universally interoperable (and also less wasteful) than one that, say, always uses 64-bit integers.</p>
 <p id="rfc.section.4.1.p.3">Similarly, a constrained encoder may be limited in the variety of representation variants it supports in such a way that it does not emit preferred serializations (&#8220;variant encoder&#8221;): Say, it could be designed to always use the 32-bit variant for an integer that it encodes even if a short representation is available (again, assuming that there is no application need for integers that can only be represented with the 64-bit variant).  A decoder that does not rely on only ever receiving preferred serializations (&#8220;variation-tolerant decoder&#8221;) can there be said to be more universally interoperable (it might very well optimize for the case of receiving preferred serializations, though).  Full implementations of CBOR decoders are by definition variation-tolerant; the distinction is only relevant if a constrained implementation of a CBOR decoder meets a variant encoder.</p>
-<p id="rfc.section.4.1.p.4">The preferred serialization always uses the shortest form of representing the argument (<a href="#encoding" class="xref">Section 3</a>); it also uses the shortest floating-point encoding that preserves the value being encoded (see <a href="#numbers" class="xref">Section 5.5</a>).  Definite length encoding is preferred whenever the length is known at the time the serialization of the item starts.</p>
+<p id="rfc.section.4.1.p.4">The preferred serialization always uses the shortest form of representing the argument (<a href="#encoding" class="xref">Section 3</a>); it also uses the shortest floating-point encoding that preserves the value being encoded.</p>
+<p id="rfc.section.4.1.p.5">The preferred serialization for a floating-point value is the shortest floating-point encoding that preserves its value, e.g., 0xf94580 for the number 5.5, and 0xfa45ad9c00 for the number 5555.5.  For NaN values, a shorter encoding is preferred if zero-padding the shorter significand towards the right reconstitutes the original NaN value (for many applications, the single NaN encoding 0xf97e00 will suffice).</p>
+<p id="rfc.section.4.1.p.6">Definite length encoding is preferred whenever the length is known at the time the serialization of the item starts.</p>
 <h1 id="rfc.section.4.2">
 <a href="#rfc.section.4.2">4.2.</a> <a href="#det-enc" id="det-enc">Deterministically Encoded CBOR</a>
 </h1>
@@ -1200,7 +1261,7 @@ C5             -- Tag 5
 <li>256 to 65535 and -257 to -65536 MUST be expressed only with an additional uint16_t;</li>
 <li>65536 to 4294967295 and -65537 to -4294967296 MUST be expressed only with an additional uint32_t.</li>
 </ul>
-<p> floating-point values also MUST use the shortest form that preserves the value, e.g. 1.5 is encoded as 0xf93e00 and 1000000.5 as 0xfa49742408.</p>
+<p> Floating-point values also MUST use the shortest form that preserves the value, e.g. 1.5 is encoded as 0xf93e00 and 1000000.5 as 0xfa49742408.  (One implementation of this is to have all floats start as a 64-bit float, then do a test conversion to a 32-bit float; if the result is the same numeric value, use the shorter form and repeat the process with a test conversion to a 16-bit float.  This also works to select 16-bit float for positive and negative Infinity as well.)</p>
 </li>
 <li>Indefinite-length items MUST NOT appear. They can be encoded as definite-length items instead.</li>
 <li>The keys in every map MUST be sorted in the bytewise lexicographic order of their deterministic encodings. For example, the following keys are sorted correctly:  <ol>
@@ -1218,21 +1279,22 @@ C5             -- Tag 5
 <h1 id="rfc.section.4.2.2">
 <a href="#rfc.section.4.2.2">4.2.2.</a> <a href="#additional-deterministic-encoding-considerations" id="additional-deterministic-encoding-considerations">Additional Deterministic Encoding Considerations</a>
 </h1>
-<p id="rfc.section.4.2.2.p.1">If a protocol allows for IEEE floats, then additional deterministic encoding rules might need to be added.  One example rule might be to have all floats start as a 64-bit float, then do a test conversion to a 32-bit float; if the result is the same numeric value, use the shorter value and repeat the process with a test conversion to a 16-bit float. (This rule selects 16-bit float for positive and negative Infinity as well.) Although IEEE floats can represent both positive and negative zero as distinct values, the application might not distinguish these and might decide to represent all zero values with a positive sign, disallowing negative zero.</p>
-<p id="rfc.section.4.2.2.p.2">CBOR tags present additional considerations for deterministic encoding.  If a CBOR-based protocol were to provide the same semantics for the presence and absence of a specific tag (e.g., by allowing both tag 1 data items and raw numbers in a date/time position, treating the latter as if they were tagged), the deterministic format would not allow them.  In a protocol that requires tags in certain places to obtain specific semantics, the tag needs to appear in the deterministic format as well.  Deterministic encoding considerations also apply to the content of tags.</p>
-<p id="rfc.section.4.2.2.p.3">Protocols that include floating-point, big integer, or other complex values need to define extra requirements on their deterministic encodings. For example:</p>
+<p id="rfc.section.4.2.2.p.1">Protocols that include floating-point, big integer, or other complex values need to define extra requirements on their deterministic encodings.</p>
+<p id="rfc.section.4.2.2.p.2">CBOR tags present additional considerations for deterministic encoding.  If a CBOR-based protocol were to provide the same semantics for the presence and absence of a specific tag (e.g., by allowing both tag 1 data items and raw numbers in a date/time position, treating the latter as if they were tagged), the deterministic format would not allow the presence of the tag, based on the &#8220;shortest form&#8221; principle.  For examle, a protocol might give encoders the choice of representing a URL as either a text string or, using <a href="#encodedtext" class="xref">Section 3.4.5.3</a>, tag number 32 containing a text string. This protocol&#8217;s deterministic encoding needs to either require that the tag is present or require that it is absent, not allow either one.</p>
+<p id="rfc.section.4.2.2.p.3">In a protocol that does require tags in certain places to obtain specific semantics, the tag needs to appear in the deterministic format as well.  Deterministic encoding considerations also apply to the content of tags.</p>
+<p id="rfc.section.4.2.2.p.4">Deterministic encoding considerations for numeric values include:</p>
 <p></p>
 
 <ul>
-<li>If a protocol includes a field that can express floating-point values (<a href="#fpnocont" class="xref">Section 3.3</a>), the protocol&#8217;s deterministic encoding needs to specify whether the integer 1.0 is encoded as 0x01, 0xf93c00, 0xfa3f800000, or 0xfb3ff0000000000000. Three sensible rules for this are: <ol>
-<li>Encode integral values that fit in 64 bits as values from major types 0 and 1, and other values as the smallest of 16-, 32-, or 64-bit floating-point representations that accurately represents the value,</li>
-<li>Encode all values as the smallest of 16-, 32-, or 64-bit floating-point representations that accurately represents the value, even for integral values, or</li>
+<li>If a protocol allows for floating-point values, then additional deterministic encoding rules might need to be added.  Although IEEE floating-point values can represent both positive and negative zero as distinct values, the application might not distinguish these and might decide to represent all zero values with a positive sign, disallowing negative zero.  (The application may also want to restrict the precision of floating point values in such a way that there is never a need to represent 64-bit &#8212; or even 32-bit &#8212; floats.)</li>
+<li>If a protocol includes a field that can express floating-point values (<a href="#fpnocont" class="xref">Section 3.3</a>), with a specific data model that declares integer and floating-point values to be interchangeable, the protocol&#8217;s deterministic encoding needs to specify whether the integer 1.0 is encoded as 0x01, 0xf93c00, 0xfa3f800000, or 0xfb3ff0000000000000. Example rules for this are: <ol>
+<li>Encode integral values that fit in 64 bits as values from major types 0 and 1, and other values as the preferred (smallest of 16-, 32-, or 64-bit) floating-point representation that accurately represents the value,</li>
+<li>Encode all values as the preferred floating-point representation that accurately represents the value, even for integral values, or</li>
 <li>Encode all values as 64-bit floating-point representations.</li>
 </ol>
-<p> Rule 1 straddles the boundaries between integers and floating-point values, and Rule 3 does not use preferred encoding, so Rule 2 may be a good choice in many cases.  </p>
+<p> Rule 1 straddles the boundaries between integers and floating-point values, and Rule 3 does not use preferred serialization, so Rule 2 may be a good choice in many cases.  </p>
 <br><br> If NaN is an allowed value and there is no intent to support NaN payloads or signaling NaNs, the protocol needs to pick a single representation, for example 0xf97e00.  If that simple choice is not possible, specific attention will be needed for NaN handling.  <br><br> Subnormal numbers (nonzero numbers with the lowest possible exponent of a given IEEE 754 number format) may be flushed to zero outputs or be treated as zero inputs in some floating-point implementations.  A protocol&#8217;s deterministic encoding may want to exclude them from interchange, interchanging zero instead.</li>
-<li>If a protocol includes a field that can express integers with an absolute value of 2^64 or larger using tag numbers 2 or 3 (<a href="#bignums" class="xref">Section 3.4.3</a>), the protocol&#8217;s deterministic encoding needs to specify whether small integers are expressed using the tag or major types 0 and 1.</li>
-<li>A protocol might give encoders the choice of representing a URL as either a text string or, using <a href="#encodedtext" class="xref">Section 3.4.5.3</a>, tag number 32 containing a text string. This protocol&#8217;s deterministic encoding needs to either require that the tag is present or require that it&#8217;s absent, not allow either one.</li>
+<li>If a protocol includes a field that can express integers with an absolute value of 2^64 or larger using tag numbers 2 or 3 (<a href="#bignums" class="xref">Section 3.4.3</a>), the protocol&#8217;s deterministic encoding needs to specify whether small integers are expressed using the tag or major types 0 and 1.  Preferred serialization uses the latter choice, which is therefore recommended.</li>
 </ul>
 <h1 id="rfc.section.4.2.3">
 <a href="#rfc.section.4.2.3">4.2.3.</a> <a href="#length-first-map-key-ordering" id="length-first-map-key-ordering">Length-first map key ordering</a>
@@ -1265,7 +1327,7 @@ C5             -- Tag 5
 <p id="rfc.section.5.p.1">Data formats such as CBOR are often used in environments where there is no format negotiation. A specific design goal of CBOR is to not need any included or assumed schema: a decoder can take a CBOR item and decode it with no other knowledge.</p>
 <p id="rfc.section.5.p.2">Of course, in real-world implementations, the encoder and the decoder will have a shared view of what should be in a CBOR data item.  For example, an agreed-to format might be &#8220;the item is an array whose first value is a UTF-8 string, second value is an integer, and subsequent values are zero or more floating-point numbers&#8221; or &#8220;the item is a map that has byte strings for keys and contains at least one pair whose key is 0xab01&#8221;.</p>
 <p id="rfc.section.5.p.3">CBOR-based protocols MUST specify how their decoders handle invalid and other unexpected data.  CBOR-based protocols MAY specify that they treat arbitrary valid data as unexpected.  Encoders for CBOR-based protocols MUST produce only valid items, that is, the protocol cannot be designed to make use of invalid items.  An encoder can be capable of encoding as many or as few types of values as is required by the protocol in which it is used; a decoder can be capable of understanding as many or as few types of values as is required by the protocols in which it is used. This lack of restrictions allows CBOR to be used in extremely constrained environments.</p>
-<p id="rfc.section.5.p.4">This section discusses some considerations in creating CBOR-based protocols.  With few exceptions, it is advisory only and explicitly excludes any language from BCP 14 other than words that could be interpreted as &#8220;MAY&#8221; in the sense of BCP 14.  The exceptions aim at facilitating interoperability of CBOR-based protocols while making use of a wide variety of both generic and application-specific encoders and decoders.</p>
+<p id="rfc.section.5.p.4">The rest of this section discusses some considerations in creating CBOR-based protocols.  With few exceptions, it is advisory only and explicitly excludes any language from BCP 14 other than words that could be interpreted as &#8220;MAY&#8221; in the sense of BCP 14.  The exceptions aim at facilitating interoperability of CBOR-based protocols while making use of a wide variety of both generic and application-specific encoders and decoders.</p>
 <h1 id="rfc.section.5.1">
 <a href="#rfc.section.5.1">5.1.</a> <a href="#cbor-in-streaming-applications" id="cbor-in-streaming-applications">CBOR in Streaming Applications</a>
 </h1>
@@ -1332,18 +1394,17 @@ C5             -- Tag 5
 <h1 id="rfc.section.5.5">
 <a href="#rfc.section.5.5">5.5.</a> <a href="#numbers" id="numbers">Numbers</a>
 </h1>
-<p id="rfc.section.5.5.p.1">CBOR-based protocols should take into account that different language environments pose different restrictions on the range and precision of numbers that are representable.  For example, the JavaScript number system treats all numbers as floating-point values, which may result in silent loss of precision in decoding integers with more than 53 significant bits.  A protocol that uses numbers should define its expectations on the handling of non-trivial numbers in decoders and receiving applications.</p>
+<p id="rfc.section.5.5.p.1">CBOR-based protocols should take into account that different language environments pose different restrictions on the range and precision of numbers that are representable.  For example, the basic JavaScript number system treats all numbers as floating-point values, which may result in silent loss of precision in decoding integers with more than 53 significant bits.  A protocol that uses numbers should define its expectations on the handling of non-trivial numbers in decoders and receiving applications.</p>
 <p id="rfc.section.5.5.p.2">A CBOR-based protocol that includes floating-point numbers can restrict which of the three formats (half-precision, single-precision, and double-precision) are to be supported.  For an integer-only application, a protocol may want to completely exclude the use of floating-point values.</p>
-<p id="rfc.section.5.5.p.3">A CBOR-based protocol designed for compactness may want to exclude specific integer encodings that are longer than necessary for the application, such as to save the need to implement 64-bit integers.  There is an expectation that encoders will use the most compact integer representation that can represent a given value.  However, a compact application should accept values that use a longer-than-needed encoding (such as encoding &#8220;0&#8221; as 0b000_11001 followed by two bytes of 0x00) as long as the application can decode an integer of the given size.</p>
-<p id="rfc.section.5.5.p.4">The preferred encoding for a floating-point value is the shortest floating-point encoding that preserves its value, e.g., 0xf94580 for the number 5.5, and 0xfa45ad9c00 for the number 5555.5, unless the CBOR-based protocol specifically excludes the use of the shorter floating-point encodings.  For NaN values, a shorter encoding is preferred if zero-padding the shorter significand towards the right reconstitutes the original NaN value (for many applications, the single NaN encoding 0xf97e00 will suffice).</p>
+<p id="rfc.section.5.5.p.3">A CBOR-based protocol designed for compactness may want to exclude specific integer encodings that are longer than necessary for the application, such as to save the need to implement 64-bit integers.  There is an expectation that encoders will use the most compact integer representation that can represent a given value.  However, a compact application that does not require deterministic encoding should accept values that use a longer-than-needed encoding (such as encoding &#8220;0&#8221; as 0b000_11001 followed by two bytes of 0x00) as long as the application can decode an integer of the given size.  Similar considerations apply to floating-point values; decoding both preferred serializations and longer-than-needed ones is recommended.</p>
 <h1 id="rfc.section.5.6">
 <a href="#rfc.section.5.6">5.6.</a> <a href="#map-keys" id="map-keys">Specifying Keys for Maps</a>
 </h1>
-<p id="rfc.section.5.6.p.1">The encoding and decoding applications need to agree on what types of keys are going to be used in maps.  In applications that need to interwork with JSON-based applications, keys probably should be limited to UTF-8 strings only; otherwise, there has to be a specified mapping from the other CBOR types to Unicode characters, and this often leads to implementation errors.  In applications where keys are numeric in nature and numeric ordering of keys is important to the application, directly using the numbers for the keys is useful.</p>
+<p id="rfc.section.5.6.p.1">The encoding and decoding applications need to agree on what types of keys are going to be used in maps.  In applications that need to interwork with JSON-based applications, limiting keys to text strings only simplifies conversion; otherwise, there has to be a specified mapping from the other CBOR types to text strings, and this often leads to implementation errors.  In applications where keys are numeric in nature and numeric ordering of keys is important to the application, directly using the numbers for the keys is useful.</p>
 <p id="rfc.section.5.6.p.2">If multiple types of keys are to be used, consideration should be given to how these types would be represented in the specific programming environments that are to be used.  For example, in JavaScript Maps <a href="#ECMA262" class="xref">[ECMA262]</a>, a key of integer 1 cannot be distinguished from a key of floating-point 1.0. This means that, if integer keys are used, the protocol needs to avoid use of floating-point keys the values of which happen to be integer numbers in the same map.</p>
 <p id="rfc.section.5.6.p.3">Decoders that deliver data items nested within a CBOR data item immediately on decoding them (&#8220;streaming decoders&#8221;) often do not keep the state that is necessary to ascertain uniqueness of a key in a map.  Similarly, an encoder that can start encoding data items before the enclosing data item is completely available (&#8220;streaming encoder&#8221;) may want to reduce its overhead significantly by relying on its data source to maintain uniqueness.</p>
 <p id="rfc.section.5.6.p.4">A CBOR-based protocol MUST define what to do when a receiving application does see multiple identical keys in a map.  The resulting rule in the protocol MUST respect the CBOR data model: it cannot prescribe a specific handling of the entries with the identical keys, except that it might have a rule that having identical keys in a map indicates a malformed map and that the decoder has to stop with an error. Duplicate keys are also prohibited by CBOR decoders that enforce validity (<a href="#validity-checking" class="xref">Section 5.4</a>).</p>
-<p id="rfc.section.5.6.p.5">The CBOR data model for maps does not allow ascribing semantics to the order of the key/value pairs in the map representation.  Thus, a CBOR-based protocol MUST NOT specify that changing the key/value pair order in a map would change the semantics, except to specify that some, orders are disallowed, for example where they would not meet the requirements of a deterministic encoding (<a href="#det-enc" class="xref">Section 4.2</a>).  (Any secondary effects of map ordering such as on timing, cache usage, and other potential side channels are not considered part of the semantics but may be enough reason on its own for a protocol to require a deterministic encoding format.)</p>
+<p id="rfc.section.5.6.p.5">The CBOR data model for maps does not allow ascribing semantics to the order of the key/value pairs in the map representation.  Thus, a CBOR-based protocol MUST NOT specify that changing the key/value pair order in a map would change the semantics, except to specify that some orders are disallowed, for example where they would not meet the requirements of a deterministic encoding (<a href="#det-enc" class="xref">Section 4.2</a>).  (Any secondary effects of map ordering such as on timing, cache usage, and other potential side channels are not considered part of the semantics but may be enough reason on their own for a protocol to require a deterministic encoding format.)</p>
 <p id="rfc.section.5.6.p.6">Applications for constrained devices that have maps where a small number of frequently used keys can be identified should consider using small integers as keys; for instance, a set of 24 or fewer frequent keys can be encoded in a single byte as unsigned integers, up to 48 if negative integers are also used.  Less frequently occurring keys can then use integers with longer encodings.</p>
 <h1 id="rfc.section.5.6.1">
 <a href="#rfc.section.5.6.1">5.6.1.</a> <a href="#equivalence-of-keys" id="equivalence-of-keys">Equivalence of Keys</a>
@@ -1444,7 +1505,7 @@ C5             -- Tag 5
 <p id="rfc.section.8.1.p.2">The convention for encoding indicators is that anything starting with an underscore and all following characters that are alphanumeric or underscore, is an encoding indicator, and can be ignored by anyone not interested in this information.  Encoding indicators are always optional.</p>
 <p id="rfc.section.8.1.p.3">A single underscore can be written after the opening brace of a map or the opening bracket of an array to indicate that the data item was represented in indefinite-length format.  For example, [_ 1, 2] contains an indicator that an indefinite-length representation was used to represent the data item [1, 2].</p>
 <p id="rfc.section.8.1.p.4">An underscore followed by a decimal digit n indicates that the preceding item (or, for arrays and maps, the item starting with the preceding bracket or brace) was encoded with an additional information value of 24+n.  For example, 1.5_1 is a half-precision floating-point number, while 1.5_3 is encoded as double precision.  This encoding indicator is not shown in <a href="#examples" class="xref">Appendix A</a>.  (Note that the encoding indicator &#8220;_&#8221; is thus an abbreviation of the full form &#8220;_7&#8221;, which is not used.)</p>
-<p id="rfc.section.8.1.p.5">As a special case, byte and text strings of indefinite length can be notated in the form (_ h&#8217;0123&#8217;, h&#8217;4567&#8217;) and (_ &#8220;foo&#8221;, &#8220;bar&#8221;).</p>
+<p id="rfc.section.8.1.p.5">Byte and text strings of indefinite length can be notated in the form (_ h&#8217;0123&#8217;, h&#8217;4567&#8217;) and (_ &#8220;foo&#8221;, &#8220;bar&#8221;).</p>
 <h1 id="rfc.section.9">
 <a href="#rfc.section.9">9.</a> <a href="#ianacons" id="ianacons">IANA Considerations</a>
 </h1>
@@ -1453,7 +1514,7 @@ C5             -- Tag 5
 <h1 id="rfc.section.9.1">
 <a href="#rfc.section.9.1">9.1.</a> <a href="#ianasimple" id="ianasimple">Simple Values Registry</a>
 </h1>
-<p id="rfc.section.9.1.p.1">IANA has created the &#8220;Concise Binary Object Representation (CBOR) Simple Values&#8221; registry at <a href="#IANA.cbor-simple-values" class="xref">[IANA.cbor-simple-values]</a>. The initial values are shown in <a href="#fpnoconttbl2" class="xref">Table 3</a>.</p>
+<p id="rfc.section.9.1.p.1">IANA has created the &#8220;Concise Binary Object Representation (CBOR) Simple Values&#8221; registry at <a href="#IANA.cbor-simple-values" class="xref">[IANA.cbor-simple-values]</a>. The initial values are shown in <a href="#fpnoconttbl2" class="xref">Table 4</a>.</p>
 <p id="rfc.section.9.1.p.2">New entries in the range 0 to 19 are assigned by Standards Action.  It is suggested that these Standards Actions allocate values starting with the number 16 in order to reserve the lower numbers for contiguous blocks (if any).</p>
 <p id="rfc.section.9.1.p.3">New entries in the range 32 to 255 are assigned by Specification Required.</p>
 <h1 id="rfc.section.9.2">
@@ -1521,10 +1582,11 @@ Change controller:
 <h1 id="rfc.section.9.4">
 <a href="#rfc.section.9.4">9.4.</a> <a href="#coap-content-format" id="coap-content-format">CoAP Content-Format</a>
 </h1>
-<p id="rfc.section.9.4.p.1">Media Type: application/cbor</p>
-<p id="rfc.section.9.4.p.2">Encoding: -</p>
-<p id="rfc.section.9.4.p.3">Id: 60</p>
-<p id="rfc.section.9.4.p.4">Reference: [RFCthis]</p>
+<p id="rfc.section.9.4.p.1">The CoAP Content-Format for CBOR is defined in <a href="#IANA.core-parameters" class="xref">[IANA.core-parameters]</a>:</p>
+<p id="rfc.section.9.4.p.2">Media Type: application/cbor</p>
+<p id="rfc.section.9.4.p.3">Encoding: -</p>
+<p id="rfc.section.9.4.p.4">Id: 60</p>
+<p id="rfc.section.9.4.p.5">Reference: [RFCthis]</p>
 <h1 id="rfc.section.9.5">
 <a href="#rfc.section.9.5">9.5.</a> <a href="#the-cbor-structured-syntax-suffix-registration" id="the-cbor-structured-syntax-suffix-registration">The +cbor Structured Syntax Suffix Registration</a>
 </h1>
@@ -1673,6 +1735,11 @@ Author/Change Controller:
 <a>IANA</a>, "<a href="http://www.iana.org/assignments/cbor-tags">Concise Binary Object Representation (CBOR) Tags</a>"</td>
 </tr>
 <tr>
+<td class="reference"><b id="IANA.core-parameters">[IANA.core-parameters]</b></td>
+<td class="top">
+<a>IANA</a>, "<a href="http://www.iana.org/assignments/core-parameters">Constrained RESTful Environments (CoRE) Parameters</a>"</td>
+</tr>
+<tr>
 <td class="reference"><b id="MessagePack">[MessagePack]</b></td>
 <td class="top">
 <a>Furuhashi, S.</a>, "<a href="http://msgpack.org/">MessagePack</a>", 2013.</td>
@@ -1732,7 +1799,7 @@ Author/Change Controller:
 <a href="#rfc.appendix.A">Appendix A.</a> <a href="#examples" id="examples">Examples</a>
 </h1>
 <p id="rfc.section.A.p.1">The following table provides some CBOR-encoded values in hexadecimal (right column), together with diagnostic notation for these values (left column).  Note that the string &#8220;\u00fc&#8221; is one form of diagnostic notation for a UTF-8 string containing the single Unicode character U+00FC, LATIN SMALL LETTER U WITH DIAERESIS (u umlaut).  Similarly, &#8220;\u6c34&#8221; is a UTF-8 string in diagnostic notation with a single character U+6C34 (CJK UNIFIED IDEOGRAPH-6C34, often representing &#8220;water&#8221;), and &#8220;\ud800\udd51&#8221; is a UTF-8 string in diagnostic notation with a single character U+10151 (GREEK ACROPHONIC ATTIC FIFTY STATERS).  (Note that all these single-character strings could also be represented in native UTF-8 in diagnostic notation, just not in an ASCII-only specification like the present one.)  In the diagnostic notation provided for bignums, their intended numeric value is shown as a decimal number (such as 18446744073709551616) instead of showing a tagged byte string (such as 2(h&#8217;010000000000000000&#8217;)).</p>
-<div id="rfc.table.5"></div>
+<div id="rfc.table.6"></div>
 <div id="table_examples"></div>
 <table cellpadding="3" cellspacing="0" class="tt full center">
 <caption>Examples of Encoded CBOR Data Items</caption>
@@ -2071,7 +2138,7 @@ Author/Change Controller:
 <a href="#rfc.appendix.B">Appendix B.</a> <a href="#jump-table" id="jump-table">Jump Table</a>
 </h1>
 <p id="rfc.section.B.p.1">For brevity, this jump table does not show initial bytes that are reserved for future extension. It also only shows a selection of the initial bytes that can be used for optional features.  (All unsigned integers are in network byte order.)</p>
-<div id="rfc.table.6"></div>
+<div id="rfc.table.7"></div>
 <div id="jumptable"></div>
 <table cellpadding="3" cellspacing="0" class="tt full center">
 <caption>Jump Table for Initial Byte</caption>
@@ -2456,8 +2523,8 @@ def decode_half(half):
 <h1 id="rfc.appendix.E.5">
 <a href="#rfc.appendix.E.5">E.5.</a> <a href="#conciseness-on-the-wire" id="conciseness-on-the-wire">Conciseness on the Wire</a>
 </h1>
-<p id="rfc.section.E.5.p.1">While CBOR&#8217;s design objective of code compactness for encoders and decoders is a higher priority than its objective of conciseness on the wire, many people focus on the wire size. <a href="#concise" class="xref">Table 7</a> shows some encoding examples for the simple nested array [1, [2, 3]]; where some form of indefinite-length encoding is supported by the encoding, [_&#160;1, [2, 3]] (indefinite length on the outer array) is also shown.</p>
-<div id="rfc.table.7"></div>
+<p id="rfc.section.E.5.p.1">While CBOR&#8217;s design objective of code compactness for encoders and decoders is a higher priority than its objective of conciseness on the wire, many people focus on the wire size. <a href="#concise" class="xref">Table 8</a> shows some encoding examples for the simple nested array [1, [2, 3]]; where some form of indefinite-length encoding is supported by the encoding, [_&#160;1, [2, 3]] (indefinite length on the outer array) is also shown.</p>
+<div id="rfc.table.8"></div>
 <div id="concise"></div>
 <table cellpadding="3" cellspacing="0" class="tt full center">
 <caption>Examples for Different Levels of Conciseness</caption>
