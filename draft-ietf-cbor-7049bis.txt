@@ -352,6 +352,10 @@ Internet-Draft                    CBOR                      January 2020
       of the data items in the sequence available to an application as
       they are received.
 
+   Terms and concepts for floating-point values such as Infinity, NaN
+   (not a number), negative zero, and subnormal are defined in
+   [IEEE754].
+
    Where bit arithmetic or data types are explained, this document uses
    the notation familiar from the programming language C, except that
    "**" denotes exponentiation.  Similar to the "0x" notation for
@@ -382,10 +386,6 @@ Internet-Draft                    CBOR                      January 2020
    many applications will provide their own application-specific
    encoders and/or decoders.
 
-   In the basic (un-extended) generic data model, a data item is one of:
-
-   *  an integer in the range -2**64..2**64-1 inclusive
-
 
 
 
@@ -393,6 +393,10 @@ Bormann & Hoffman        Expires August 1, 2020                 [Page 7]
 
 Internet-Draft                    CBOR                      January 2020
 
+
+   In the basic (un-extended) generic data model, a data item is one of:
+
+   *  an integer in the range -2**64..2**64-1 inclusive
 
    *  a simple value, identified by a number between 0 and 255, but
       distinct from that number
@@ -438,10 +442,6 @@ Internet-Draft                    CBOR                      January 2020
    *  application data types such as a point in time or an RFC 3339
       date/time string (tag numbers 1, 0)
 
-   Further elements of the extended generic data model can be (and have
-   been) defined via the IANA registries created for CBOR.  Even if such
-   an extension is unknown to a generic encoder or decoder, data items
-   using that extension can be passed to or from the application by
 
 
 
@@ -450,6 +450,10 @@ Bormann & Hoffman        Expires August 1, 2020                 [Page 8]
 Internet-Draft                    CBOR                      January 2020
 
 
+   Further elements of the extended generic data model can be (and have
+   been) defined via the IANA registries created for CBOR.  Even if such
+   an extension is unknown to a generic encoder or decoder, data items
+   using that extension can be passed to or from the application by
    representing them at the interface to the application within the
    basic generic data model, i.e., as generic values of a simple type or
    generic tags.
@@ -494,10 +498,6 @@ Internet-Draft                    CBOR                      January 2020
    section.  The encoding is summarized in Table 7, indexed by the
    initial byte.  An encoder MUST produce only well-formed encoded data
    items.  A decoder MUST NOT return a decoded data item when it
-   encounters input that is not a well-formed encoded CBOR data item
-   (this does not detract from the usefulness of diagnostic and recovery
-   tools that might make available some information from a damaged
-   encoded CBOR data item).
 
 
 
@@ -505,6 +505,11 @@ Bormann & Hoffman        Expires August 1, 2020                 [Page 9]
 
 Internet-Draft                    CBOR                      January 2020
 
+
+   encounters input that is not a well-formed encoded CBOR data item
+   (this does not detract from the usefulness of diagnostic and recovery
+   tools that might make available some information from a damaged
+   encoded CBOR data item).
 
    The initial byte of each encoded data item contains both information
    about the major type (the high-order 3 bits, described in
@@ -549,11 +554,6 @@ Internet-Draft                    CBOR                      January 2020
    formed or just identify the start of the remaining bytes to the
    application.
 
-   A CBOR decoder implementation can be based on a jump table with all
-   256 defined values for the initial byte (Table 7).  A decoder in a
-   constrained implementation can instead use the structure of the
-   initial byte and following bytes for more compact code (see
-   Appendix C for a rough impression of how this could look).
 
 
 
@@ -561,6 +561,12 @@ Bormann & Hoffman        Expires August 1, 2020                [Page 10]
 
 Internet-Draft                    CBOR                      January 2020
 
+
+   A CBOR decoder implementation can be based on a jump table with all
+   256 defined values for the initial byte (Table 7).  A decoder in a
+   constrained implementation can instead use the structure of the
+   initial byte and following bytes for more compact code (see
+   Appendix C for a rough impression of how this could look).
 
 3.1.  Major Types
 
@@ -604,12 +610,6 @@ Internet-Draft                    CBOR                      January 2020
 
    Major type 4:  an array of data items.  Arrays are also called lists,
       sequences, or tuples.  The argument is the number of data items in
-      the array.  Items in an array do not need to all be of the same
-      type.  For example, an array that contains 10 items of any type
-      would have an initial byte of 0b100_01010 (major type of 4,
-      additional information of 10 for the length) followed by the 10
-      remaining items.
-
 
 
 
@@ -617,6 +617,12 @@ Bormann & Hoffman        Expires August 1, 2020                [Page 11]
 
 Internet-Draft                    CBOR                      January 2020
 
+
+      the array.  Items in an array do not need to all be of the same
+      type.  For example, an array that contains 10 items of any type
+      would have an initial byte of 0b100_01010 (major type of 4,
+      additional information of 10 for the length) followed by the 10
+      remaining items.
 
    Major type 5:  a map of pairs of data items.  Maps are also called
       tables, dictionaries, hashes, or objects (in JSON).  A map is
@@ -652,12 +658,6 @@ Internet-Draft                    CBOR                      January 2020
    Table 1 summarizes the major types defined by CBOR, ignoring the next
    section for now.  The number N in this table stands for the argument,
    mt for the major type.
-
-
-
-
-
-
 
 
 
@@ -1644,17 +1644,13 @@ Internet-Draft                    CBOR                      January 2020
 
 4.2.2.  Additional Deterministic Encoding Considerations
 
-   Protocols that include floating-point, big integer, or other complex
-   values need to define extra requirements on their deterministic
-   encodings.
-
    CBOR tags present additional considerations for deterministic
    encoding.  If a CBOR-based protocol were to provide the same
    semantics for the presence and absence of a specific tag (e.g., by
    allowing both tag 1 data items and raw numbers in a date/time
    position, treating the latter as if they were tagged), the
    deterministic format would not allow the presence of the tag, based
-   on the "shortest form" principle.  For examle, a protocol might give
+   on the "shortest form" principle.  For example, a protocol might give
    encoders the choice of representing a URL as either a text string or,
    using Section 3.4.5.3, tag number 32 containing a text string.  This
    protocol's deterministic encoding needs to either require that the
@@ -1665,15 +1661,19 @@ Internet-Draft                    CBOR                      January 2020
    format as well.  Deterministic encoding considerations also apply to
    the content of tags.
 
-   Deterministic encoding considerations for numeric values include:
+   If a protocol includes a field that can express integers with an
+   absolute value of 2^64 or larger using tag numbers 2 or 3
+   (Section 3.4.3), the protocol's deterministic encoding needs to
+   specify whether smaller integers are also expressed using these tags
+   or using major types 0 and 1.  Preferred serialization uses the
+   latter choice, which is therefore recommended.
 
-   *  If a protocol allows for floating-point values, then additional
-      deterministic encoding rules might need to be added.  Although
-      IEEE floating-point values can represent both positive and
-      negative zero as distinct values, the application might not
-      distinguish these and might decide to represent all zero values
-      with a positive sign, disallowing negative zero.  (The application
-      may also want to restrict the precision of floating point values
+   Protocols that include floating-point values, whether represented
+   using basic floating-point values (Section 3.3) or using tags (or
+   both), may need to define extra requirements on their deterministic
+   encodings, such as:
+
+
 
 
 
@@ -1682,15 +1682,20 @@ Bormann & Hoffman        Expires August 1, 2020                [Page 30]
 Internet-Draft                    CBOR                      January 2020
 
 
+   *  Although IEEE floating-point values can represent both positive
+      and negative zero as distinct values, the application might not
+      distinguish these and might decide to represent all zero values
+      with a positive sign, disallowing negative zero.  (The application
+      may also want to restrict the precision of floating point values
       in such a way that there is never a need to represent 64-bit -- or
-      even 32-bit -- floats.)
+      even 32-bit -- floating-point values.)
 
    *  If a protocol includes a field that can express floating-point
-      values (Section 3.3), with a specific data model that declares
-      integer and floating-point values to be interchangeable, the
-      protocol's deterministic encoding needs to specify whether the
-      integer 1.0 is encoded as 0x01, 0xf93c00, 0xfa3f800000, or
-      0xfb3ff0000000000000.  Example rules for this are:
+      values, with a specific data model that declares integer and
+      floating-point values to be interchangeable, the protocol's
+      deterministic encoding needs to specify whether the integer 1.0 is
+      encoded as 0x01, 0xf93c00, 0xfa3f800000, or 0xfb3ff0000000000000.
+      Example rules for this are:
 
       1.  Encode integral values that fit in 64 bits as values from
           major types 0 and 1, and other values as the preferred
@@ -1707,23 +1712,18 @@ Internet-Draft                    CBOR                      January 2020
       point values, and Rule 3 does not use preferred serialization, so
       Rule 2 may be a good choice in many cases.
 
-      If NaN is an allowed value and there is no intent to support NaN
+   *  If NaN is an allowed value and there is no intent to support NaN
       payloads or signaling NaNs, the protocol needs to pick a single
       representation, for example 0xf97e00.  If that simple choice is
       not possible, specific attention will be needed for NaN handling.
 
-      Subnormal numbers (nonzero numbers with the lowest possible
+   *  Subnormal numbers (nonzero numbers with the lowest possible
       exponent of a given IEEE 754 number format) may be flushed to zero
       outputs or be treated as zero inputs in some floating-point
       implementations.  A protocol's deterministic encoding may want to
-      exclude them from interchange, interchanging zero instead.
-
-   *  If a protocol includes a field that can express integers with an
-      absolute value of 2^64 or larger using tag numbers 2 or 3
-      (Section 3.4.3), the protocol's deterministic encoding needs to
-      specify whether small integers are expressed using the tag or
-      major types 0 and 1.  Preferred serialization uses the latter
-      choice, which is therefore recommended.
+      specifically accommodate such implementations while creating an
+      onus on other implementations, by excluding subnormal numbers from
+      interchange, interchanging zero instead.
 
 4.2.3.  Length-first map key ordering
 
