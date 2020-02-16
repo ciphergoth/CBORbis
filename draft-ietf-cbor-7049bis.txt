@@ -6,7 +6,7 @@ Network Working Group                                         C. Bormann
 Internet-Draft                                   Universitaet Bremen TZI
 Obsoletes: 7049 (if approved)                                 P. Hoffman
 Intended status: Standards Track                                   ICANN
-Expires: August 1, 2020                                 January 29, 2020
+Expires: August 19, 2020                               February 16, 2020
 
 
               Concise Binary Object Representation (CBOR)
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                 [Page 1]
+Bormann & Hoffman        Expires August 19, 2020                [Page 1]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    Internet-Drafts are draft documents valid for a maximum of six months
@@ -63,7 +63,7 @@ Internet-Draft                    CBOR                      January 2020
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 1, 2020.
+   This Internet-Draft will expire on August 19, 2020.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                 [Page 2]
+Bormann & Hoffman        Expires August 19, 2020                [Page 2]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
        3.4.6.  Self-Described CBOR . . . . . . . . . . . . . . . . .  27
@@ -165,9 +165,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                 [Page 3]
+Bormann & Hoffman        Expires August 19, 2020                [Page 3]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    Appendix G.  Well-formedness errors and examples  . . . . . . . .  67
@@ -221,9 +221,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                 [Page 4]
+Bormann & Hoffman        Expires August 19, 2020                [Page 4]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
        -  There is no requirement that all data formats be uniquely
@@ -277,9 +277,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                 [Page 5]
+Bormann & Hoffman        Expires August 19, 2020                [Page 5]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    7.  The format must be extensible, and the extended data must be
@@ -333,9 +333,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                 [Page 6]
+Bormann & Hoffman        Expires August 19, 2020                [Page 6]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
       strings and/or data items that are implied by their values as
@@ -389,9 +389,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                 [Page 7]
+Bormann & Hoffman        Expires August 19, 2020                [Page 7]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    Within environments that can represent the data items in the generic
@@ -445,9 +445,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                 [Page 8]
+Bormann & Hoffman        Expires August 19, 2020                [Page 8]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    *  "false", "true", "null", and "undefined" (simple values identified
@@ -501,9 +501,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                 [Page 9]
+Bormann & Hoffman        Expires August 19, 2020                [Page 9]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    encoder could encode integral-valued floats as integers or vice
@@ -557,9 +557,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 10]
+Bormann & Hoffman        Expires August 19, 2020               [Page 10]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    data in bytes that follows; and in major types 4 and 5 it is used to
@@ -613,9 +613,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 11]
+Bormann & Hoffman        Expires August 19, 2020               [Page 11]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
       to interpret or display human-readable text, and allows the
@@ -669,9 +669,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 12]
+Bormann & Hoffman        Expires August 19, 2020               [Page 12]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    In major types 6 and 7, many of the possible values are reserved for
@@ -725,9 +725,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 13]
+Bormann & Hoffman        Expires August 19, 2020               [Page 13]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
 3.2.1.  The "break" Stop Code
@@ -781,9 +781,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 14]
+Bormann & Hoffman        Expires August 19, 2020               [Page 14]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    0x9f018202039f0405ffff
@@ -837,9 +837,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 15]
+Bormann & Hoffman        Expires August 19, 2020               [Page 15]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    0xbf6346756ef563416d7421ff
@@ -893,9 +893,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 16]
+Bormann & Hoffman        Expires August 19, 2020               [Page 16]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
 3.2.4.  Summary of indefinite-length use of major types
@@ -949,9 +949,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 17]
+Bormann & Hoffman        Expires August 19, 2020               [Page 17]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    +------------+------------------------------------------------------+
@@ -1005,9 +1005,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 18]
+Bormann & Hoffman        Expires August 19, 2020               [Page 18]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
                        +---------+-----------------+
@@ -1061,9 +1061,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 19]
+Bormann & Hoffman        Expires August 19, 2020               [Page 19]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    (Section 3.4.3).  This would be marked as 0b110_00010 (major type 6,
@@ -1117,9 +1117,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 20]
+Bormann & Hoffman        Expires August 19, 2020               [Page 20]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    +---------+-------------+-------------------------------------------+
@@ -1173,9 +1173,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 21]
+Bormann & Hoffman        Expires August 19, 2020               [Page 21]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    may require processing at (de-)serialization time: The decoder needs
@@ -1229,9 +1229,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 22]
+Bormann & Hoffman        Expires August 19, 2020               [Page 22]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    To indicate fractional seconds, floating-point values can be used
@@ -1285,9 +1285,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 23]
+Bormann & Hoffman        Expires August 19, 2020               [Page 23]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
 3.4.4.  Decimal Fractions and Bigfloats
@@ -1341,9 +1341,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 24]
+Bormann & Hoffman        Expires August 19, 2020               [Page 24]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    of 5 for the number of tag), followed by 0b100_00010 (major type of 4
@@ -1397,9 +1397,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 25]
+Bormann & Hoffman        Expires August 19, 2020               [Page 25]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    size, to reduce the code size of the encoder, or both.  The encoder
@@ -1453,9 +1453,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 26]
+Bormann & Hoffman        Expires August 19, 2020               [Page 26]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
       -  the base64url encoding has padding characters,
@@ -1509,9 +1509,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 27]
+Bormann & Hoffman        Expires August 19, 2020               [Page 27]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    For instance, a decoder might be able to decode both CBOR and JSON.
@@ -1565,9 +1565,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 28]
+Bormann & Hoffman        Expires August 19, 2020               [Page 28]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    0xf94580 for the number 5.5, and 0xfa45ad9c00 for the number 5555.5.
@@ -1621,9 +1621,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 29]
+Bormann & Hoffman        Expires August 19, 2020               [Page 29]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
       16-bit float.  This also works to select 16-bit float for positive
@@ -1664,7 +1664,7 @@ Internet-Draft                    CBOR                      January 2020
    allowing both tag 1 data items and raw numbers in a date/time
    position, treating the latter as if they were tagged), the
    deterministic format would not allow the presence of the tag, based
-   on the "shortest form" principle.  For examle, a protocol might give
+   on the "shortest form" principle.  For example, a protocol might give
    encoders the choice of representing a URL as either a text string or,
    using Section 3.4.5.3, tag number 32 containing a text string.  This
    protocol's deterministic encoding needs to either require that the
@@ -1677,9 +1677,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 30]
+Bormann & Hoffman        Expires August 19, 2020               [Page 30]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    Deterministic encoding considerations for numeric values include:
@@ -1733,9 +1733,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 31]
+Bormann & Hoffman        Expires August 19, 2020               [Page 31]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
       specify whether small integers are expressed using the tag or
@@ -1789,9 +1789,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 32]
+Bormann & Hoffman        Expires August 19, 2020               [Page 32]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    document could also be called "Canonical CBOR", while the length-
@@ -1845,9 +1845,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 33]
+Bormann & Hoffman        Expires August 19, 2020               [Page 33]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    item to an application, such as the nested data items that could
@@ -1901,9 +1901,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 34]
+Bormann & Hoffman        Expires August 19, 2020               [Page 34]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    1.  Replace the problematic item with an error marker and continue
@@ -1957,9 +1957,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 35]
+Bormann & Hoffman        Expires August 19, 2020               [Page 35]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
       tag 0, even though it properly is a text string.  A decoder that
@@ -2013,9 +2013,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 36]
+Bormann & Hoffman        Expires August 19, 2020               [Page 36]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
 5.5.  Numbers
@@ -2069,9 +2069,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 37]
+Bormann & Hoffman        Expires August 19, 2020               [Page 37]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    Decoders that deliver data items nested within a CBOR data item
@@ -2125,9 +2125,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 38]
+Bormann & Hoffman        Expires August 19, 2020               [Page 38]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    Within each of these groups, numeric values are distinct unless they
@@ -2181,9 +2181,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 39]
+Bormann & Hoffman        Expires August 19, 2020               [Page 39]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
 6.1.  Converting from CBOR to JSON
@@ -2237,9 +2237,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 40]
+Bormann & Hoffman        Expires August 19, 2020               [Page 40]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    *  A bignum (major type 6, tag number 2 or 3) is represented by
@@ -2293,9 +2293,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 41]
+Bormann & Hoffman        Expires August 19, 2020               [Page 41]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
       represented values.  Decimal representation should only be used on
@@ -2349,9 +2349,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 42]
+Bormann & Hoffman        Expires August 19, 2020               [Page 42]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    the codepoint space large enough so that it can slowly be filled over
@@ -2405,9 +2405,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 43]
+Bormann & Hoffman        Expires August 19, 2020               [Page 43]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
 8.  Diagnostic Notation
@@ -2461,9 +2461,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 44]
+Bormann & Hoffman        Expires August 19, 2020               [Page 44]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
 8.1.  Encoding Indicators
@@ -2517,9 +2517,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 45]
+Bormann & Hoffman        Expires August 19, 2020               [Page 45]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    New entries in the range 0 to 19 are assigned by Standards Action.
@@ -2573,9 +2573,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 46]
+Bormann & Hoffman        Expires August 19, 2020               [Page 46]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    Interoperability considerations: n/a
@@ -2591,15 +2591,15 @@ Internet-Draft                    CBOR                      January 2020
      Macintosh file type code(s): n/a
 
    Person & email address to contact for further information:
-     Carsten Bormann
-     cabo@tzi.org
+     IETF CBOR Working Group <cbor@ietf.org> or
+     IETF Applications and Real-Time Area <art@ietf.org>
 
    Intended usage: COMMON
 
    Restrictions on usage: none
 
    Author:
-     Carsten Bormann <cabo@tzi.org>
+     IETF CBOR Working Group <cbor@ietf.org>
 
    Change controller:
      The IESG <iesg@ietf.org>
@@ -2629,9 +2629,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 47]
+Bormann & Hoffman        Expires August 19, 2020               [Page 47]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    Interoperability Considerations: n/a
@@ -2685,9 +2685,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 48]
+Bormann & Hoffman        Expires August 19, 2020               [Page 48]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    Hostile input may be constructed to overrun buffers, overflow or
@@ -2741,9 +2741,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 49]
+Bormann & Hoffman        Expires August 19, 2020               [Page 49]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    underflow of integer arithmetic, and other such errors that are aimed
@@ -2797,9 +2797,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 50]
+Bormann & Hoffman        Expires August 19, 2020               [Page 50]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
@@ -2853,9 +2853,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 51]
+Bormann & Hoffman        Expires August 19, 2020               [Page 51]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    [IANA.cbor-simple-values]
@@ -2909,9 +2909,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 52]
+Bormann & Hoffman        Expires August 19, 2020               [Page 52]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    [RFC8618]  Dickinson, J., Hague, J., Dickinson, S., Manderson, T.,
@@ -2965,9 +2965,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 53]
+Bormann & Hoffman        Expires August 19, 2020               [Page 53]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
 Appendix A.  Examples
@@ -3021,9 +3021,9 @@ Appendix A.  Examples
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 54]
+Bormann & Hoffman        Expires August 19, 2020               [Page 54]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    | -18446744073709551617        | 0xc349010000000000000000           |
@@ -3077,9 +3077,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 55]
+Bormann & Hoffman        Expires August 19, 2020               [Page 55]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    | Infinity                     | 0xfb7ff0000000000000               |
@@ -3133,9 +3133,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 56]
+Bormann & Hoffman        Expires August 19, 2020               [Page 56]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    | "\ud800\udd51"               | 0x64f0908591                       |
@@ -3189,9 +3189,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 57]
+Bormann & Hoffman        Expires August 19, 2020               [Page 57]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    +------------------------------+------------------------------------+
@@ -3245,9 +3245,9 @@ Appendix B.  Jump Table
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 58]
+Bormann & Hoffman        Expires August 19, 2020               [Page 58]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    |            |                                                      |
@@ -3301,9 +3301,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 59]
+Bormann & Hoffman        Expires August 19, 2020               [Page 59]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    | 0xba       | map (four-byte uint32_t for n, and then n pairs of   |
@@ -3357,9 +3357,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 60]
+Bormann & Hoffman        Expires August 19, 2020               [Page 60]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    |            |                                                      |
@@ -3413,9 +3413,9 @@ Appendix C.  Pseudocode
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 61]
+Bormann & Hoffman        Expires August 19, 2020               [Page 61]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    well_formed (breakable = false) {
@@ -3469,9 +3469,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 62]
+Bormann & Hoffman        Expires August 19, 2020               [Page 62]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    Note that the remaining complexity of a complete CBOR decoder is
@@ -3525,9 +3525,9 @@ Appendix D.  Half-Precision
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 63]
+Bormann & Hoffman        Expires August 19, 2020               [Page 63]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    #include <math.h>
@@ -3581,9 +3581,9 @@ Appendix E.  Comparison of Other Binary Formats to CBOR's Design
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 64]
+Bormann & Hoffman        Expires August 19, 2020               [Page 64]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    to cover CBOR's objectives in the priority we have assigned them.  A
@@ -3637,9 +3637,9 @@ E.2.  MessagePack
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 65]
+Bormann & Hoffman        Expires August 19, 2020               [Page 65]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    bytecodes are still available for extension.  Repeated requests over
@@ -3693,9 +3693,9 @@ E.5.  Conciseness on the Wire
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 66]
+Bormann & Hoffman        Expires August 19, 2020               [Page 66]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    +-------------+--------------------------+--------------------------+
@@ -3749,9 +3749,9 @@ Appendix G.  Well-formedness errors and examples
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 67]
+Bormann & Hoffman        Expires August 19, 2020               [Page 67]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
       additional data after the data item, as is for example done in
@@ -3805,9 +3805,9 @@ G.1.  Examples for CBOR data items that are not well-formed
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 68]
+Bormann & Hoffman        Expires August 19, 2020               [Page 68]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    Similarly, examples for well-formedness error kind 2 (too little
@@ -3861,9 +3861,9 @@ Internet-Draft                    CBOR                      January 2020
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 69]
+Bormann & Hoffman        Expires August 19, 2020               [Page 69]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
    *  Indefinite length string chunks not of the correct type: 5f 00 ff,
@@ -3917,9 +3917,9 @@ Acknowledgements
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 70]
+Bormann & Hoffman        Expires August 19, 2020               [Page 70]
 
-Internet-Draft                    CBOR                      January 2020
+Internet-Draft                    CBOR                     February 2020
 
 
 Authors' Addresses
@@ -3973,4 +3973,4 @@ Authors' Addresses
 
 
 
-Bormann & Hoffman        Expires August 1, 2020                [Page 71]
+Bormann & Hoffman        Expires August 19, 2020               [Page 71]
