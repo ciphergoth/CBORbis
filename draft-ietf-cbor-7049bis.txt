@@ -6,7 +6,7 @@ Network Working Group                                         C. Bormann
 Internet-Draft                                   Universitaet Bremen TZI
 Obsoletes: 7049 (if approved)                                 P. Hoffman
 Intended status: Standards Track                                   ICANN
-Expires: August 20, 2020                               February 17, 2020
+Expires: August 29, 2020                               February 26, 2020
 
 
               Concise Binary Object Representation (CBOR)
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Bormann & Hoffman        Expires August 20, 2020                [Page 1]
+Bormann & Hoffman        Expires August 29, 2020                [Page 1]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -63,7 +63,7 @@ Internet-Draft                    CBOR                     February 2020
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 20, 2020.
+   This Internet-Draft will expire on August 29, 2020.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Bormann & Hoffman        Expires August 20, 2020                [Page 2]
+Bormann & Hoffman        Expires August 29, 2020                [Page 2]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -130,26 +130,26 @@ Internet-Draft                    CBOR                     February 2020
      5.4.  Validity and Evolution  . . . . . . . . . . . . . . . . .  36
      5.5.  Numbers . . . . . . . . . . . . . . . . . . . . . . . . .  37
      5.6.  Specifying Keys for Maps  . . . . . . . . . . . . . . . .  37
-       5.6.1.  Equivalence of Keys . . . . . . . . . . . . . . . . .  38
-     5.7.  Undefined Values  . . . . . . . . . . . . . . . . . . . .  39
-   6.  Converting Data between CBOR and JSON . . . . . . . . . . . .  39
+       5.6.1.  Equivalence of Keys . . . . . . . . . . . . . . . . .  39
+     5.7.  Undefined Values  . . . . . . . . . . . . . . . . . . . .  40
+   6.  Converting Data between CBOR and JSON . . . . . . . . . . . .  40
      6.1.  Converting from CBOR to JSON  . . . . . . . . . . . . . .  40
      6.2.  Converting from JSON to CBOR  . . . . . . . . . . . . . .  41
    7.  Future Evolution of CBOR  . . . . . . . . . . . . . . . . . .  42
-     7.1.  Extension Points  . . . . . . . . . . . . . . . . . . . .  42
-     7.2.  Curating the Additional Information Space . . . . . . . .  43
+     7.1.  Extension Points  . . . . . . . . . . . . . . . . . . . .  43
+     7.2.  Curating the Additional Information Space . . . . . . . .  44
    8.  Diagnostic Notation . . . . . . . . . . . . . . . . . . . . .  44
      8.1.  Encoding Indicators . . . . . . . . . . . . . . . . . . .  45
-   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  45
-     9.1.  Simple Values Registry  . . . . . . . . . . . . . . . . .  45
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  46
+     9.1.  Simple Values Registry  . . . . . . . . . . . . . . . . .  46
      9.2.  Tags Registry . . . . . . . . . . . . . . . . . . . . . .  46
-     9.3.  Media Type ("MIME Type")  . . . . . . . . . . . . . . . .  46
+     9.3.  Media Type ("MIME Type")  . . . . . . . . . . . . . . . .  47
      9.4.  CoAP Content-Format . . . . . . . . . . . . . . . . . . .  47
-     9.5.  The +cbor Structured Syntax Suffix Registration . . . . .  47
-   10. Security Considerations . . . . . . . . . . . . . . . . . . .  48
+     9.5.  The +cbor Structured Syntax Suffix Registration . . . . .  48
+   10. Security Considerations . . . . . . . . . . . . . . . . . . .  49
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  50
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  50
-     11.2.  Informative References . . . . . . . . . . . . . . . . .  51
+     11.2.  Informative References . . . . . . . . . . . . . . . . .  52
    Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  54
    Appendix B.  Jump Table . . . . . . . . . . . . . . . . . . . . .  58
    Appendix C.  Pseudocode . . . . . . . . . . . . . . . . . . . . .  61
@@ -165,7 +165,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020                [Page 3]
+Bormann & Hoffman        Expires August 29, 2020                [Page 3]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -221,7 +221,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020                [Page 4]
+Bormann & Hoffman        Expires August 29, 2020                [Page 4]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -277,7 +277,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020                [Page 5]
+Bormann & Hoffman        Expires August 29, 2020                [Page 5]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -333,7 +333,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020                [Page 6]
+Bormann & Hoffman        Expires August 29, 2020                [Page 6]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -389,7 +389,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020                [Page 7]
+Bormann & Hoffman        Expires August 29, 2020                [Page 7]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -445,7 +445,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020                [Page 8]
+Bormann & Hoffman        Expires August 29, 2020                [Page 8]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -501,7 +501,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020                [Page 9]
+Bormann & Hoffman        Expires August 29, 2020                [Page 9]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -557,7 +557,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 10]
+Bormann & Hoffman        Expires August 29, 2020               [Page 10]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -613,7 +613,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 11]
+Bormann & Hoffman        Expires August 29, 2020               [Page 11]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -669,7 +669,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 12]
+Bormann & Hoffman        Expires August 29, 2020               [Page 12]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -725,7 +725,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 13]
+Bormann & Hoffman        Expires August 29, 2020               [Page 13]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -781,7 +781,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 14]
+Bormann & Hoffman        Expires August 29, 2020               [Page 14]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -837,7 +837,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 15]
+Bormann & Hoffman        Expires August 29, 2020               [Page 15]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -893,7 +893,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 16]
+Bormann & Hoffman        Expires August 29, 2020               [Page 16]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -949,7 +949,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 17]
+Bormann & Hoffman        Expires August 29, 2020               [Page 17]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1005,7 +1005,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 18]
+Bormann & Hoffman        Expires August 29, 2020               [Page 18]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1061,7 +1061,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 19]
+Bormann & Hoffman        Expires August 29, 2020               [Page 19]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1117,7 +1117,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 20]
+Bormann & Hoffman        Expires August 29, 2020               [Page 20]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1173,7 +1173,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 21]
+Bormann & Hoffman        Expires August 29, 2020               [Page 21]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1229,7 +1229,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 22]
+Bormann & Hoffman        Expires August 29, 2020               [Page 22]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1285,7 +1285,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 23]
+Bormann & Hoffman        Expires August 29, 2020               [Page 23]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1341,7 +1341,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 24]
+Bormann & Hoffman        Expires August 29, 2020               [Page 24]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1397,7 +1397,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 25]
+Bormann & Hoffman        Expires August 29, 2020               [Page 25]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1453,7 +1453,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 26]
+Bormann & Hoffman        Expires August 29, 2020               [Page 26]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1509,7 +1509,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 27]
+Bormann & Hoffman        Expires August 29, 2020               [Page 27]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1565,7 +1565,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 28]
+Bormann & Hoffman        Expires August 29, 2020               [Page 28]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1621,7 +1621,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 29]
+Bormann & Hoffman        Expires August 29, 2020               [Page 29]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1677,7 +1677,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 30]
+Bormann & Hoffman        Expires August 29, 2020               [Page 30]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1733,7 +1733,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 31]
+Bormann & Hoffman        Expires August 29, 2020               [Page 31]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1789,7 +1789,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 32]
+Bormann & Hoffman        Expires August 29, 2020               [Page 32]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1845,7 +1845,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 33]
+Bormann & Hoffman        Expires August 29, 2020               [Page 33]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1901,7 +1901,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 34]
+Bormann & Hoffman        Expires August 29, 2020               [Page 34]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -1957,7 +1957,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 35]
+Bormann & Hoffman        Expires August 29, 2020               [Page 35]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -2013,7 +2013,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 36]
+Bormann & Hoffman        Expires August 29, 2020               [Page 36]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -2051,10 +2051,10 @@ Internet-Draft                    CBOR                     February 2020
 
    The encoding and decoding applications need to agree on what types of
    keys are going to be used in maps.  In applications that need to
-   interwork with JSON-based applications, limiting keys to text strings
-   only simplifies conversion; otherwise, there has to be a specified
-   mapping from the other CBOR types to text strings, and this often
-   leads to implementation errors.  In applications where keys are
+   interwork with JSON-based applications, conversion is simplified by
+   limiting keys to text strings only; otherwise, there has to be a
+   specified mapping from the other CBOR types to text strings, and this
+   often leads to implementation errors.  In applications where keys are
    numeric in nature and numeric ordering of keys is important to the
    application, directly using the numbers for the keys is useful.
 
@@ -2069,7 +2069,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 37]
+Bormann & Hoffman        Expires August 29, 2020               [Page 37]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -2088,8 +2088,29 @@ Internet-Draft                    CBOR                     February 2020
    prescribe a specific handling of the entries with the identical keys,
    except that it might have a rule that having identical keys in a map
    indicates a malformed map and that the decoder has to stop with an
-   error.  Duplicate keys are also not accepted by CBOR decoders that
-   enforce validity (Section 5.4).
+   error.  Processing maps that exhibit entries with duplicate keys, a
+   generic decoder might:
+
+   *  not accept maps duplicate keys (that is, enforce validity for
+      maps, see also Section 5.4).  These generic decoders are
+      universally useful.  An application may still need to do perform
+      its own duplicate checking based on application rules (for
+      instance if the application equates integers and floating point
+      values in map key positions for specific maps).
+
+   *  pass all map entries to the application, including ones with
+      duplicate keys.  This requires the application to handle (check
+      against) duplicate keys, even if the application rules are
+      identical to the generic data model rules.
+
+   *  lose some entries with duplicate keys, e.g. by only delivering the
+      final (or first) entry out of the entries with the same key.  With
+      such a generic decoder, applications cannot validate key
+      uniqueness on their own; they may not be able to use such a
+      generic decoder if they do need to validate key uniqueness.  These
+      generic decoders can only be used in situations where the encoder
+      can be relied upon to always provide valid maps; this is not
+      possible if the encoder can be under control of an attacker.
 
    The CBOR data model for maps does not allow ascribing semantics to
    the order of the key/value pairs in the map representation.  Thus, a
@@ -2101,6 +2122,13 @@ Internet-Draft                    CBOR                     February 2020
    other potential side channels are not considered part of the
    semantics but may be enough reason on their own for a protocol to
    require a deterministic encoding format.)
+
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 38]
+
+Internet-Draft                    CBOR                     February 2020
+
 
    Applications for constrained devices that have maps where a small
    number of frequently used keys can be identified should consider
@@ -2120,15 +2148,6 @@ Internet-Draft                    CBOR                     February 2020
    distinct from byte strings, even if composed of the same bytes.  A
    tagged value is distinct from an untagged value or from a value
    tagged with a different tag number.
-
-
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 38]
-
-Internet-Draft                    CBOR                     February 2020
-
 
    Within each of these groups, numeric values are distinct unless they
    are numerically equal (specifically, -0.0 is equal to 0.0); for the
@@ -2158,6 +2177,15 @@ Internet-Draft                    CBOR                     February 2020
    checked for duplicate map keys by that application (alternatively,
    the decoder may provide a programming interface to perform this
    service for the application).  Specific data models cannot
+
+
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 39]
+
+Internet-Draft                    CBOR                     February 2020
+
+
    distinguish values for map keys that are equal for this purpose at
    the generic data model level.
 
@@ -2177,14 +2205,6 @@ Internet-Draft                    CBOR                     February 2020
    It is worth noting that a JSON text is a sequence of characters, not
    an encoded sequence of bytes, while a CBOR data item consists of
    bytes, not characters.
-
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 39]
-
-Internet-Draft                    CBOR                     February 2020
-
 
 6.1.  Converting from CBOR to JSON
 
@@ -2214,6 +2234,14 @@ Internet-Draft                    CBOR                     February 2020
       integers into strings containing their decimal representation);
       however, doing so introduces a danger of key collision.  Note also
       that, if tags on UTF-8 strings are ignored as proposed below, this
+
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 40]
+
+Internet-Draft                    CBOR                     February 2020
+
+
       will cause a key collision if the tags are different but the
       strings are the same.
 
@@ -2234,13 +2262,6 @@ Internet-Draft                    CBOR                     February 2020
 
    *  Any other simple value (major type 7, any additional information
       value not yet discussed) is represented by the substitute value.
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 40]
-
-Internet-Draft                    CBOR                     February 2020
-
 
    *  A bignum (major type 6, tag number 2 or 3) is represented by
       encoding its byte string in base64url without padding and becomes
@@ -2269,6 +2290,14 @@ Internet-Draft                    CBOR                     February 2020
       6 tag number 2 and 3), choosing the shortest form; integers longer
       than an implementation-defined threshold may instead be
       represented as floating-point values.  The default range that is
+
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 41]
+
+Internet-Draft                    CBOR                     February 2020
+
+
       represented as integer is -2**53+1..2**53-1 (fully exploiting the
       range for exact integers in the binary64 representation often used
       for decoding JSON [RFC7493]).  A CBOR-based protocol, or a generic
@@ -2290,14 +2319,6 @@ Internet-Draft                    CBOR                     February 2020
       minimum form, though).  Instead of using the default binary64
       precision, there may be an implementation-defined limit to the
       precision of the conversion that will affect the precision of the
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 41]
-
-Internet-Draft                    CBOR                     February 2020
-
-
       represented values.  Decimal representation should only be used on
       the CBOR side if that is specified in a protocol.
 
@@ -2324,6 +2345,15 @@ Internet-Draft                    CBOR                     February 2020
    For protocols that will use CBOR, CBOR provides some useful
    mechanisms to facilitate their evolution.  Best practices for this
    are well known, particularly from JSON format development of JSON-
+
+
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 42]
+
+Internet-Draft                    CBOR                     February 2020
+
+
    based protocols.  Therefore, such best practices are outside the
    scope of this specification.
 
@@ -2346,14 +2376,6 @@ Internet-Draft                    CBOR                     February 2020
 
    Sizing the codepoint space may be difficult because the range
    required may be hard to predict.  An attempt should be made to make
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 42]
-
-Internet-Draft                    CBOR                     February 2020
-
-
    the codepoint space large enough so that it can slowly be filled over
    the intended lifetime of the protocol.
 
@@ -2381,6 +2403,13 @@ Internet-Draft                    CBOR                     February 2020
       decoding, so allocating codepoints to this space is a major step.
       There are also very few codepoints left.  See also Section 7.2.
 
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 43]
+
+Internet-Draft                    CBOR                     February 2020
+
+
 7.2.  Curating the Additional Information Space
 
    The human mind is sometimes drawn to filling in little perceived gaps
@@ -2400,15 +2429,6 @@ Internet-Draft                    CBOR                     February 2020
    additional information value available for general allocation, and
    there should be a very good reason for allocating it before assigning
    it through an update of the present specification.
-
-
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 43]
-
-Internet-Draft                    CBOR                     February 2020
-
 
 8.  Diagnostic Notation
 
@@ -2439,6 +2459,13 @@ Internet-Draft                    CBOR                     February 2020
    number, followed by the tag content in parentheses; for instance, an
    RFC 3339 (ISO 8601) date could be notated as:
 
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 44]
+
+Internet-Draft                    CBOR                     February 2020
+
+
       0("2013-03-21T20:04:00Z")
 
    or the equivalent relative time as
@@ -2455,16 +2482,6 @@ Internet-Draft                    CBOR                     February 2020
    Unassigned simple values are given as "simple()" with the appropriate
    integer in the parentheses.  For example, "simple(42)" indicates
    major type 7, value 42.
-
-
-
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 44]
-
-Internet-Draft                    CBOR                     February 2020
-
 
 8.1.  Encoding Indicators
 
@@ -2497,6 +2514,14 @@ Internet-Draft                    CBOR                     February 2020
    Byte and text strings of indefinite length can be notated in the form
    (_ h'0123', h'4567') and (_ "foo", "bar").
 
+
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 45]
+
+Internet-Draft                    CBOR                     February 2020
+
+
 9.  IANA Considerations
 
    IANA has created two registries for new CBOR values.  The registries
@@ -2513,14 +2538,6 @@ Internet-Draft                    CBOR                     February 2020
    IANA has created the "Concise Binary Object Representation (CBOR)
    Simple Values" registry at [IANA.cbor-simple-values].  The initial
    values are shown in Table 4.
-
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 45]
-
-Internet-Draft                    CBOR                     February 2020
-
 
    New entries in the range 0 to 19 are assigned by Standards Action.
    It is suggested that these Standards Actions allocate values starting
@@ -2554,6 +2571,13 @@ Internet-Draft                    CBOR                     February 2020
    *  Description of semantics (URL) - This description is optional; the
       URL can point to something like an Internet-Draft or a web page.
 
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 46]
+
+Internet-Draft                    CBOR                     February 2020
+
+
 9.3.  Media Type ("MIME Type")
 
    The Internet media type [RFC6838] for a single encoded CBOR data item
@@ -2570,13 +2594,6 @@ Internet-Draft                    CBOR                     February 2020
    Encoding considerations:  binary
 
    Security considerations:  See Section 10 of this document
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 46]
-
-Internet-Draft                    CBOR                     February 2020
-
 
    Interoperability considerations: n/a
 
@@ -2609,6 +2626,14 @@ Internet-Draft                    CBOR                     February 2020
    The CoAP Content-Format for CBOR is defined in
    [IANA.core-parameters]:
 
+
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 47]
+
+Internet-Draft                    CBOR                     February 2020
+
+
    Media Type: application/cbor
 
    Encoding: -
@@ -2626,13 +2651,6 @@ Internet-Draft                    CBOR                     February 2020
    References: [RFCthis]
 
    Encoding Considerations: CBOR is a binary format.
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 47]
-
-Internet-Draft                    CBOR                     February 2020
-
 
    Interoperability Considerations: n/a
 
@@ -2664,6 +2682,14 @@ Internet-Draft                    CBOR                     February 2020
      The Apps Area Working Group.
      The IESG has change control over this registration.
 
+
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 48]
+
+Internet-Draft                    CBOR                     February 2020
+
+
 10.  Security Considerations
 
    A network-facing application can exhibit vulnerabilities in its
@@ -2682,13 +2708,6 @@ Internet-Draft                    CBOR                     February 2020
    checked by a firewall, has come over a secure channel such as TLS, is
    encrypted or signed, or has come from some other source that is
    presumed trusted.
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 48]
-
-Internet-Draft                    CBOR                     February 2020
-
 
    Hostile input may be constructed to overrun buffers, overflow or
    underflow integer arithmetic, or cause other decoding disruption.
@@ -2719,6 +2738,14 @@ Internet-Draft                    CBOR                     February 2020
    The input check itself may consume resources.  This is usually linear
    in the size of the input, which means that an attacker has to spend
    resources that are commensurate to the resources spent by the
+
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 49]
+
+Internet-Draft                    CBOR                     February 2020
+
+
    defender on input validation.  Processing for arbitrary-precision
    numbers may exceed linear effort.  Also, some hash-table
    implementations that are used by decoders to build in-memory
@@ -2738,14 +2765,6 @@ Internet-Draft                    CBOR                     February 2020
    API.  The design and implementation of that API should assume the
    behavior of its caller may be based on hostile input or on coding
    mistakes.  It should check inputs for buffer overruns, overflow and
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 49]
-
-Internet-Draft                    CBOR                     February 2020
-
-
    underflow of integer arithmetic, and other such errors that are aimed
    to disrupt the encoder.
 
@@ -2772,6 +2791,17 @@ Internet-Draft                    CBOR                     February 2020
 
 11.1.  Normative References
 
+
+
+
+
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 50]
+
+Internet-Draft                    CBOR                     February 2020
+
+
    [ECMA262]  Ecma International, "ECMAScript 2018 Language
               Specification", ECMA Standard ECMA-262, 9th Edition, June
               2018, <https://www.ecma-
@@ -2794,13 +2824,6 @@ Internet-Draft                    CBOR                     February 2020
    [RFC3339]  Klyne, G. and C. Newman, "Date and Time on the Internet:
               Timestamps", RFC 3339, DOI 10.17487/RFC3339, July 2002,
               <https://www.rfc-editor.org/info/rfc3339>.
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 50]
-
-Internet-Draft                    CBOR                     February 2020
-
 
    [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
               10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
@@ -2828,6 +2851,13 @@ Internet-Draft                    CBOR                     February 2020
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 51]
+
+Internet-Draft                    CBOR                     February 2020
+
+
    [TIME_T]   The Open Group Base Specifications, "Vol. 1: Base
               Definitions, Issue 7", Section 4.15 'Seconds Since the
               Epoch', IEEE Std 1003.1, 2013 Edition, 2013,
@@ -2849,14 +2879,6 @@ Internet-Draft                    CBOR                     February 2020
               Bormann, C., "Concise Binary Object Representation (CBOR)
               Sequences", draft-ietf-cbor-sequence-02 (work in
               progress), September 2019.
-
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 51]
-
-Internet-Draft                    CBOR                     February 2020
-
 
    [IANA.cbor-simple-values]
               IANA, "Concise Binary Object Representation (CBOR) Simple
@@ -2882,6 +2904,16 @@ Internet-Draft                    CBOR                     February 2020
               Protocol", RFC 713, DOI 10.17487/RFC0713, April 1976,
               <https://www.rfc-editor.org/info/rfc713>.
 
+
+
+
+
+
+Bormann & Hoffman        Expires August 29, 2020               [Page 52]
+
+Internet-Draft                    CBOR                     February 2020
+
+
    [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
               Specifications and Registration Procedures", BCP 13,
               RFC 6838, DOI 10.17487/RFC6838, January 2013,
@@ -2904,15 +2936,6 @@ Internet-Draft                    CBOR                     February 2020
               Interchange Format", STD 90, RFC 8259,
               DOI 10.17487/RFC8259, December 2017,
               <https://www.rfc-editor.org/info/rfc8259>.
-
-
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 52]
-
-Internet-Draft                    CBOR                     February 2020
-
 
    [RFC8618]  Dickinson, J., Hague, J., Dickinson, S., Manderson, T.,
               and J. Bond, "Compacted-DNS (C-DNS): A Format for DNS
@@ -2942,30 +2965,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Bormann & Hoffman        Expires August 20, 2020               [Page 53]
+Bormann & Hoffman        Expires August 29, 2020               [Page 53]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3021,7 +3021,7 @@ Appendix A.  Examples
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 54]
+Bormann & Hoffman        Expires August 29, 2020               [Page 54]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3077,7 +3077,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 55]
+Bormann & Hoffman        Expires August 29, 2020               [Page 55]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3133,7 +3133,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 56]
+Bormann & Hoffman        Expires August 29, 2020               [Page 56]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3189,7 +3189,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 57]
+Bormann & Hoffman        Expires August 29, 2020               [Page 57]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3245,7 +3245,7 @@ Appendix B.  Jump Table
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 58]
+Bormann & Hoffman        Expires August 29, 2020               [Page 58]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3301,7 +3301,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 59]
+Bormann & Hoffman        Expires August 29, 2020               [Page 59]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3357,7 +3357,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 60]
+Bormann & Hoffman        Expires August 29, 2020               [Page 60]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3413,7 +3413,7 @@ Appendix C.  Pseudocode
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 61]
+Bormann & Hoffman        Expires August 29, 2020               [Page 61]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3469,7 +3469,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 62]
+Bormann & Hoffman        Expires August 29, 2020               [Page 62]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3525,7 +3525,7 @@ Appendix D.  Half-Precision
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 63]
+Bormann & Hoffman        Expires August 29, 2020               [Page 63]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3581,7 +3581,7 @@ Appendix E.  Comparison of Other Binary Formats to CBOR's Design
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 64]
+Bormann & Hoffman        Expires August 29, 2020               [Page 64]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3637,7 +3637,7 @@ E.2.  MessagePack
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 65]
+Bormann & Hoffman        Expires August 29, 2020               [Page 65]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3693,7 +3693,7 @@ E.5.  Conciseness on the Wire
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 66]
+Bormann & Hoffman        Expires August 29, 2020               [Page 66]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3749,7 +3749,7 @@ Appendix G.  Well-formedness errors and examples
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 67]
+Bormann & Hoffman        Expires August 29, 2020               [Page 67]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3805,7 +3805,7 @@ G.1.  Examples for CBOR data items that are not well-formed
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 68]
+Bormann & Hoffman        Expires August 29, 2020               [Page 68]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3861,7 +3861,7 @@ Internet-Draft                    CBOR                     February 2020
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 69]
+Bormann & Hoffman        Expires August 29, 2020               [Page 69]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3917,7 +3917,7 @@ Acknowledgements
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 70]
+Bormann & Hoffman        Expires August 29, 2020               [Page 70]
 
 Internet-Draft                    CBOR                     February 2020
 
@@ -3973,4 +3973,4 @@ Authors' Addresses
 
 
 
-Bormann & Hoffman        Expires August 20, 2020               [Page 71]
+Bormann & Hoffman        Expires August 29, 2020               [Page 71]
