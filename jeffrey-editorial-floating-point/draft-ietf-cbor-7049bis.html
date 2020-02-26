@@ -363,7 +363,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Bormann, C. and P. Hoffman" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-cbor-7049bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2020-01-29" />
+  <meta name="dct.issued" scheme="ISO8601" content="2020-02-26" />
   <meta name="dct.abstract" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack.This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format." />
   <meta name="description" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack.This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format." />
 
@@ -391,8 +391,8 @@ ul.toc li {
 <td class="right">ICANN</td>
 </tr>
 <tr>
-<td class="left">Expires: August 1, 2020</td>
-<td class="right">January 29, 2020</td>
+<td class="left">Expires: August 29, 2020</td>
+<td class="right">February 26, 2020</td>
 </tr>
 
     	
@@ -412,7 +412,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 1, 2020.</p>
+<p>This Internet-Draft will expire on August 29, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2020 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -1191,7 +1191,7 @@ C5             -- Tag 5
       20       -- -1
       03       -- 3
 </pre>
-<p id="rfc.section.3.4.4.p.7">Decimal fractions and bigfloats provide no representation of Infinity, -Infinity, or NaN; if these are needed in place of a decimal fraction or bigfloat, the IEEE 754 half-precision representations from <a href="#fpnocont" class="xref">Section 3.3</a> can be used.  For constrained applications, where there is a choice between representing a specific number as an integer and as a decimal fraction or bigfloat (such as when the exponent is small and non-negative), there is a quality-of-implementation expectation that the integer representation is used directly.  </p>
+<p id="rfc.section.3.4.4.p.7">Decimal fractions and bigfloats provide no representation of Infinity, -Infinity, or NaN; if these are needed in place of a decimal fraction or bigfloat, the IEEE 754 half-precision representations from <a href="#fpnocont" class="xref">Section 3.3</a> can be used.</p>
 <h1 id="rfc.section.3.4.5">
 <a href="#rfc.section.3.4.5">3.4.5.</a> <a href="#content-hints" id="content-hints">Content Hints</a>
 </h1>
@@ -1297,6 +1297,7 @@ C5             -- Tag 5
 </li>
 <li>If NaN is an allowed value and there is no intent to support NaN payloads or signaling NaNs, the protocol needs to pick a single representation, for example 0xf97e00.  If that simple choice is not possible, specific attention will be needed for NaN handling.</li>
 <li>Subnormal numbers (nonzero numbers with the lowest possible exponent of a given IEEE 754 number format) may be flushed to zero outputs or be treated as zero inputs in some floating-point implementations.  A protocol&#8217;s deterministic encoding may want to specifically accommodate such implementations while creating an onus on other implementations, by excluding subnormal numbers from interchange, interchanging zero instead.</li>
+<li>The same number can be represented by different decimal fractions, by different bigfloats, and by different forms under other tags that may be defined to express numeric values. Depending on the implementation, it may not always be practical to determine whether any of these forms (or forms in the basic generic data model) are equivalent.  An application protocol that presents choices of this kind for the representation format of numbers needs to be explicit in how the formats are to be chosen for deterministic encoding.</li>
 </ul>
 <h1 id="rfc.section.4.2.3">
 <a href="#rfc.section.4.2.3">4.2.3.</a> <a href="#length-first-map-key-ordering" id="length-first-map-key-ordering">Length-first map key ordering</a>
@@ -1399,6 +1400,7 @@ C5             -- Tag 5
 <p id="rfc.section.5.5.p.1">CBOR-based protocols should take into account that different language environments pose different restrictions on the range and precision of numbers that are representable.  For example, the basic JavaScript number system treats all numbers as floating-point values, which may result in silent loss of precision in decoding integers with more than 53 significant bits.  A protocol that uses numbers should define its expectations on the handling of non-trivial numbers in decoders and receiving applications.</p>
 <p id="rfc.section.5.5.p.2">A CBOR-based protocol that includes floating-point numbers can restrict which of the three formats (half-precision, single-precision, and double-precision) are to be supported.  For an integer-only application, a protocol may want to completely exclude the use of floating-point values.</p>
 <p id="rfc.section.5.5.p.3">A CBOR-based protocol designed for compactness may want to exclude specific integer encodings that are longer than necessary for the application, such as to save the need to implement 64-bit integers.  There is an expectation that encoders will use the most compact integer representation that can represent a given value.  However, a compact application that does not require deterministic encoding should accept values that use a longer-than-needed encoding (such as encoding &#8220;0&#8221; as 0b000_11001 followed by two bytes of 0x00) as long as the application can decode an integer of the given size.  Similar considerations apply to floating-point values; decoding both preferred serializations and longer-than-needed ones is recommended.</p>
+<p id="rfc.section.5.5.p.4">CBOR-based protocols for constrained applications that provide a choice between representing a specific number as an integer and as a decimal fraction or bigfloat (such as when the exponent is small and non-negative), might express a quality-of-implementation expectation that the integer representation is used directly.</p>
 <h1 id="rfc.section.5.6">
 <a href="#rfc.section.5.6">5.6.</a> <a href="#map-keys" id="map-keys">Specifying Keys for Maps</a>
 </h1>
