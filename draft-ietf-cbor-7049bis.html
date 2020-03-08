@@ -363,7 +363,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Bormann, C. and P. Hoffman" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-cbor-7049bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2020-03-06" />
+  <meta name="dct.issued" scheme="ISO8601" content="2020-03-08" />
   <meta name="dct.abstract" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack. This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format. " />
   <meta name="description" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack. This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format. " />
 
@@ -391,8 +391,8 @@ ul.toc li {
 <td class="right">ICANN</td>
 </tr>
 <tr>
-<td class="left">Expires: September 7, 2020</td>
-<td class="right">March 06, 2020</td>
+<td class="left">Expires: September 9, 2020</td>
+<td class="right">March 08, 2020</td>
 </tr>
 
     	
@@ -413,7 +413,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on September 7, 2020.</p>
+<p>This Internet-Draft will expire on September 9, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2020 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -1534,7 +1534,7 @@ C5             -- Tag 5
 <h1 id="rfc.section.9.2">
 <a href="#rfc.section.9.2">9.2.</a> <a href="#ianatags" id="ianatags">Tags Registry</a>
 </h1>
-<p id="rfc.section.9.2.p.1">IANA has created the &#8220;Concise Binary Object Representation (CBOR) Tags&#8221; registry at <a href="#IANA.cbor-tags" class="xref">[IANA.cbor-tags]</a>.  The tags that were defined in <a href="#RFC7049" class="xref">[RFC7049]</a> are described in detail in <a href="#tags" class="xref">Section 3.4</a>, but other tags have already been defined.</p>
+<p id="rfc.section.9.2.p.1">IANA has created the &#8220;Concise Binary Object Representation (CBOR) Tags&#8221; registry at <a href="#IANA.cbor-tags" class="xref">[IANA.cbor-tags]</a>.  The tags that were defined in <a href="#RFC7049" class="xref">[RFC7049]</a> are described in detail in <a href="#tags" class="xref">Section 3.4</a>, and other tags have already been defined.</p>
 <p id="rfc.section.9.2.p.2">New entries in the range 0 to 23 are assigned by Standards Action.  New entries in the range 24 to 255 are assigned by Specification Required.  New entries in the range 256 to 18446744073709551615 are assigned by First Come First Served. The template for registration requests is:</p>
 <p></p>
 
@@ -1552,7 +1552,7 @@ C5             -- Tag 5
 <h1 id="rfc.section.9.3">
 <a href="#rfc.section.9.3">9.3.</a> <a href="#media-type-mime-type" id="media-type-mime-type">Media Type (&#8220;MIME Type&#8221;)</a>
 </h1>
-<p id="rfc.section.9.3.p.1">The Internet media type <a href="#RFC6838" class="xref">[RFC6838]</a> for a single encoded CBOR data item is application/cbor.</p>
+<p id="rfc.section.9.3.p.1">The Internet media type <a href="#RFC6838" class="xref">[RFC6838]</a> for a single encoded CBOR data item is application/cbor, as defined in <a href="#IANA.media-types" class="xref">[IANA.media-types]</a>:</p>
 <p id="rfc.section.9.3.p.2">Type name: application</p>
 <p id="rfc.section.9.3.p.3">Subtype name: cbor</p>
 <p id="rfc.section.9.3.p.4">Required parameters: n/a</p>
@@ -1572,27 +1572,31 @@ C5             -- Tag 5
 <dl>
 <dt>Applications that use this media type:</dt>
 <dd style="margin-left: 8">None yet, but it is expected that this format will be deployed in protocols and applications.</dd>
+<dt>Additional information:</dt>
+<dd style="margin-left: 8">
+<ul>
+<li>Magic number(s): n/a</li>
+<li>File extension(s): .cbor</li>
+<li>Macintosh file type code(s): n/a</li>
+</ul>
+<p> </p>
+</dd>
+<dt>Person &amp; email address to contact for further information:</dt>
+<dd style="margin-left: 8">IETF CBOR Working Group <a href="mailto:cbor@ietf.org">cbor@ietf.org</a> or IETF Applications and Real-Time Area <a href="mailto:art@ietf.org">art@ietf.org</a>
+</dd>
 </dl>
-<pre>
-Additional information:
-  Magic number(s): n/a
-  File extension(s): .cbor
-  Macintosh file type code(s): n/a
+<p id="rfc.section.9.3.p.10">Intended usage: COMMON</p>
+<p id="rfc.section.9.3.p.11">Restrictions on usage: none</p>
+<p></p>
 
-Person &amp; email address to contact for further information:
-  IETF CBOR Working Group &lt;cbor@ietf.org&gt; or
-  IETF Applications and Real-Time Area &lt;art@ietf.org&gt;
-
-Intended usage: COMMON
-
-Restrictions on usage: none
-
-Author:
-  IETF CBOR Working Group &lt;cbor@ietf.org&gt;
-
-Change controller:
-  The IESG &lt;iesg@ietf.org&gt;
-</pre>
+<dl>
+<dt>Author:</dt>
+<dd style="margin-left: 8">IETF CBOR Working Group <a href="mailto:cbor@ietf.org">cbor@ietf.org</a>
+</dd>
+<dt>Change controller:</dt>
+<dd style="margin-left: 8">The IESG <a href="mailto:iesg@ietf.org">iesg@ietf.org</a>
+</dd>
+</dl>
 <h1 id="rfc.section.9.4">
 <a href="#rfc.section.9.4">9.4.</a> <a href="#coap-content-format" id="coap-content-format">CoAP Content-Format</a>
 </h1>
@@ -1604,45 +1608,34 @@ Change controller:
 <h1 id="rfc.section.9.5">
 <a href="#rfc.section.9.5">9.5.</a> <a href="#the-cbor-structured-syntax-suffix-registration" id="the-cbor-structured-syntax-suffix-registration">The +cbor Structured Syntax Suffix Registration</a>
 </h1>
-<p id="rfc.section.9.5.p.1">Name:  Concise Binary Object Representation (CBOR)</p>
-<p id="rfc.section.9.5.p.2">+suffix: +cbor</p>
-<p id="rfc.section.9.5.p.3">References: [RFCthis]</p>
-<p id="rfc.section.9.5.p.4">Encoding Considerations: CBOR is a binary format.</p>
-<p id="rfc.section.9.5.p.5">Interoperability Considerations: n/a</p>
-<pre>
-Fragment Identifier Considerations:
-  The syntax and semantics of fragment identifiers specified for
-  +cbor SHOULD be as specified for "application/cbor".  (At
-  publication of this document, there is no fragment identification
-  syntax defined for "application/cbor".)
-
-  The syntax and semantics for fragment identifiers for a specific
-  "xxx/yyy+cbor" SHOULD be processed as follows:
-
-  For cases defined in +cbor, where the fragment identifier resolves
-  per the +cbor rules, then process as specified in +cbor.
-
-  For cases defined in +cbor, where the fragment identifier does
-  not resolve per the +cbor rules, then process as specified in
-  "xxx/yyy+cbor".
-
-  For cases not defined in +cbor, then process as specified in
-  "xxx/yyy+cbor".
-</pre>
+<p id="rfc.section.9.5.p.1">The Structured Syntax Suffix <a href="#RFC6838" class="xref">[RFC6838]</a> for media types based on a single encoded CBOR data item is +cbor, as defined in <a href="#IANA.media-type-structured-suffix" class="xref">[IANA.media-type-structured-suffix]</a>:</p>
+<p id="rfc.section.9.5.p.2">Name:  Concise Binary Object Representation (CBOR)</p>
+<p id="rfc.section.9.5.p.3">+suffix: +cbor</p>
+<p id="rfc.section.9.5.p.4">References: [RFCthis]</p>
+<p id="rfc.section.9.5.p.5">Encoding Considerations: CBOR is a binary format.</p>
+<p id="rfc.section.9.5.p.6">Interoperability Considerations: n/a</p>
 <p></p>
 
 <dl>
+<dt>Fragment Identifier Considerations:</dt>
+<dd style="margin-left: 8">The syntax and semantics of fragment identifiers specified for +cbor SHOULD be as specified for &#8220;application/cbor&#8221;.  (At publication of this document, there is no fragment identification syntax defined for &#8220;application/cbor&#8221;.)</dd>
+<dt></dt>
+<dd style="margin-left: 8">The syntax and semantics for fragment identifiers for a specific &#8220;xxx/yyy+cbor&#8221; SHOULD be processed as follows: <ul>
+<li>For cases defined in +cbor, where the fragment identifier resolves per the +cbor rules, then process as specified in +cbor.</li>
+<li>For cases defined in +cbor, where the fragment identifier does not resolve per the +cbor rules, then process as specified in &#8220;xxx/yyy+cbor&#8221;.</li>
+<li>For cases not defined in +cbor, then process as specified in &#8220;xxx/yyy+cbor&#8221;.</li>
+</ul>
+<p> </p>
+</dd>
 <dt>Security Considerations:</dt>
 <dd style="margin-left: 8">See <a href="#securitycons" class="xref">Section 10</a> of this document</dd>
+<dt>Contact:</dt>
+<dd style="margin-left: 8">IETF CBOR Working Group <a href="mailto:cbor@ietf.org">cbor@ietf.org</a> or IETF Applications and Real-Time Area <a href="mailto:art@ietf.org">art@ietf.org</a>
+</dd>
+<dt>Author/Change Controller:</dt>
+<dd style="margin-left: 8">The IESG <a href="mailto:iesg@ietf.org">iesg@ietf.org</a> <a id="RFC6838note" class="info">[RFC6838note]<span class="info">Editors&#8217; note: RFC 6838 has a template field Author/Change controller, the descriptive text of which makes clear that this is the change controller, not the author.  Go figure.  There is no separate author entry as in the media types registry.  (RFC editor: Please remove this note before publication.)</span></a>
+</dd>
 </dl>
-<pre>
-Contact:
-  Apps Area Working Group (apps-discuss@ietf.org)
-
-Author/Change Controller:
-  The Apps Area Working Group.
-  The IESG has change control over this registration.
-</pre>
 <h1 id="rfc.section.10">
 <a href="#rfc.section.10">10.</a> <a href="#securitycons" id="securitycons">Security Considerations</a>
 </h1>
@@ -1752,6 +1745,16 @@ Author/Change Controller:
 <td class="reference"><b id="IANA.core-parameters">[IANA.core-parameters]</b></td>
 <td class="top">
 <a>IANA</a>, "<a href="http://www.iana.org/assignments/core-parameters">Constrained RESTful Environments (CoRE) Parameters</a>"</td>
+</tr>
+<tr>
+<td class="reference"><b id="IANA.media-type-structured-suffix">[IANA.media-type-structured-suffix]</b></td>
+<td class="top">
+<a>IANA</a>, "<a href="http://www.iana.org/assignments/media-type-structured-suffix">Structured Syntax Suffix Registry</a>"</td>
+</tr>
+<tr>
+<td class="reference"><b id="IANA.media-types">[IANA.media-types]</b></td>
+<td class="top">
+<a>IANA</a>, "<a href="http://www.iana.org/assignments/media-types">Media Types</a>"</td>
 </tr>
 <tr>
 <td class="reference"><b id="MessagePack">[MessagePack]</b></td>
