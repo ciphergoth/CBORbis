@@ -97,15 +97,15 @@ Table of Contents
        3.2.4.  Summary of indefinite-length use of major types . . .  17
      3.3.  Floating-Point Numbers and Values with No Content . . . .  17
      3.4.  Tagging of Items  . . . . . . . . . . . . . . . . . . . .  19
-       3.4.1.  Standard Date/Time String . . . . . . . . . . . . . .  23
-       3.4.2.  Epoch-based Date/Time . . . . . . . . . . . . . . . .  23
-       3.4.3.  Bignums . . . . . . . . . . . . . . . . . . . . . . .  24
-       3.4.4.  Decimal Fractions and Bigfloats . . . . . . . . . . .  25
-       3.4.5.  Content Hints . . . . . . . . . . . . . . . . . . . .  26
-         3.4.5.1.  Encoded CBOR Data Item  . . . . . . . . . . . . .  26
+       3.4.1.  Standard Date/Time String . . . . . . . . . . . . . .  22
+       3.4.2.  Epoch-based Date/Time . . . . . . . . . . . . . . . .  22
+       3.4.3.  Bignums . . . . . . . . . . . . . . . . . . . . . . .  23
+       3.4.4.  Decimal Fractions and Bigfloats . . . . . . . . . . .  24
+       3.4.5.  Content Hints . . . . . . . . . . . . . . . . . . . .  25
+         3.4.5.1.  Encoded CBOR Data Item  . . . . . . . . . . . . .  25
          3.4.5.2.  Expected Later Encoding for CBOR-to-JSON
-                   Converters  . . . . . . . . . . . . . . . . . . .  26
-         3.4.5.3.  Encoded Text  . . . . . . . . . . . . . . . . . .  27
+                   Converters  . . . . . . . . . . . . . . . . . . .  25
+         3.4.5.3.  Encoded Text  . . . . . . . . . . . . . . . . . .  26
 
 
 
@@ -114,54 +114,54 @@ Bormann & Hoffman       Expires September 9, 2020               [Page 2]
 Internet-Draft                    CBOR                        March 2020
 
 
-       3.4.6.  Self-Described CBOR . . . . . . . . . . . . . . . . .  28
-   4.  Serialization Considerations  . . . . . . . . . . . . . . . .  29
-     4.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  29
-     4.2.  Deterministically Encoded CBOR  . . . . . . . . . . . . .  30
-       4.2.1.  Core Deterministic Encoding Requirements  . . . . . .  30
-       4.2.2.  Additional Deterministic Encoding Considerations  . .  31
-       4.2.3.  Length-first Map Key Ordering . . . . . . . . . . . .  33
-   5.  Creating CBOR-Based Protocols . . . . . . . . . . . . . . . .  34
-     5.1.  CBOR in Streaming Applications  . . . . . . . . . . . . .  35
-     5.2.  Generic Encoders and Decoders . . . . . . . . . . . . . .  35
-     5.3.  Validity of Items . . . . . . . . . . . . . . . . . . . .  36
-       5.3.1.  Basic validity  . . . . . . . . . . . . . . . . . . .  36
-       5.3.2.  Tag validity  . . . . . . . . . . . . . . . . . . . .  37
-     5.4.  Validity and Evolution  . . . . . . . . . . . . . . . . .  37
-     5.5.  Numbers . . . . . . . . . . . . . . . . . . . . . . . . .  38
-     5.6.  Specifying Keys for Maps  . . . . . . . . . . . . . . . .  39
-       5.6.1.  Equivalence of Keys . . . . . . . . . . . . . . . . .  40
-     5.7.  Undefined Values  . . . . . . . . . . . . . . . . . . . .  41
-   6.  Converting Data between CBOR and JSON . . . . . . . . . . . .  41
-     6.1.  Converting from CBOR to JSON  . . . . . . . . . . . . . .  42
-     6.2.  Converting from JSON to CBOR  . . . . . . . . . . . . . .  43
-   7.  Future Evolution of CBOR  . . . . . . . . . . . . . . . . . .  44
-     7.1.  Extension Points  . . . . . . . . . . . . . . . . . . . .  45
-     7.2.  Curating the Additional Information Space . . . . . . . .  45
-   8.  Diagnostic Notation . . . . . . . . . . . . . . . . . . . . .  46
-     8.1.  Encoding Indicators . . . . . . . . . . . . . . . . . . .  47
-   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  47
-     9.1.  Simple Values Registry  . . . . . . . . . . . . . . . . .  48
-     9.2.  Tags Registry . . . . . . . . . . . . . . . . . . . . . .  48
-     9.3.  Media Type ("MIME Type")  . . . . . . . . . . . . . . . .  48
-     9.4.  CoAP Content-Format . . . . . . . . . . . . . . . . . . .  49
-     9.5.  The +cbor Structured Syntax Suffix Registration . . . . .  50
-   10. Security Considerations . . . . . . . . . . . . . . . . . . .  50
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  52
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  52
-     11.2.  Informative References . . . . . . . . . . . . . . . . .  54
-     11.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  55
-   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  57
-   Appendix B.  Jump Table . . . . . . . . . . . . . . . . . . . . .  61
-   Appendix C.  Pseudocode . . . . . . . . . . . . . . . . . . . . .  64
-   Appendix D.  Half-Precision . . . . . . . . . . . . . . . . . . .  66
+       3.4.6.  Self-Described CBOR . . . . . . . . . . . . . . . . .  27
+   4.  Serialization Considerations  . . . . . . . . . . . . . . . .  28
+     4.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  28
+     4.2.  Deterministically Encoded CBOR  . . . . . . . . . . . . .  29
+       4.2.1.  Core Deterministic Encoding Requirements  . . . . . .  29
+       4.2.2.  Additional Deterministic Encoding Considerations  . .  30
+       4.2.3.  Length-first Map Key Ordering . . . . . . . . . . . .  32
+   5.  Creating CBOR-Based Protocols . . . . . . . . . . . . . . . .  33
+     5.1.  CBOR in Streaming Applications  . . . . . . . . . . . . .  33
+     5.2.  Generic Encoders and Decoders . . . . . . . . . . . . . .  34
+     5.3.  Validity of Items . . . . . . . . . . . . . . . . . . . .  34
+       5.3.1.  Basic validity  . . . . . . . . . . . . . . . . . . .  35
+       5.3.2.  Tag validity  . . . . . . . . . . . . . . . . . . . .  35
+     5.4.  Validity and Evolution  . . . . . . . . . . . . . . . . .  36
+     5.5.  Numbers . . . . . . . . . . . . . . . . . . . . . . . . .  37
+     5.6.  Specifying Keys for Maps  . . . . . . . . . . . . . . . .  37
+       5.6.1.  Equivalence of Keys . . . . . . . . . . . . . . . . .  39
+     5.7.  Undefined Values  . . . . . . . . . . . . . . . . . . . .  40
+   6.  Converting Data between CBOR and JSON . . . . . . . . . . . .  40
+     6.1.  Converting from CBOR to JSON  . . . . . . . . . . . . . .  40
+     6.2.  Converting from JSON to CBOR  . . . . . . . . . . . . . .  42
+   7.  Future Evolution of CBOR  . . . . . . . . . . . . . . . . . .  43
+     7.1.  Extension Points  . . . . . . . . . . . . . . . . . . . .  43
+     7.2.  Curating the Additional Information Space . . . . . . . .  44
+   8.  Diagnostic Notation . . . . . . . . . . . . . . . . . . . . .  44
+     8.1.  Encoding Indicators . . . . . . . . . . . . . . . . . . .  45
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  46
+     9.1.  Simple Values Registry  . . . . . . . . . . . . . . . . .  46
+     9.2.  Tags Registry . . . . . . . . . . . . . . . . . . . . . .  47
+     9.3.  Media Type ("MIME Type")  . . . . . . . . . . . . . . . .  47
+     9.4.  CoAP Content-Format . . . . . . . . . . . . . . . . . . .  48
+     9.5.  The +cbor Structured Syntax Suffix Registration . . . . .  48
+   10. Security Considerations . . . . . . . . . . . . . . . . . . .  49
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  51
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  51
+     11.2.  Informative References . . . . . . . . . . . . . . . . .  52
+     11.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  54
+   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  56
+   Appendix B.  Jump Table . . . . . . . . . . . . . . . . . . . . .  60
+   Appendix C.  Pseudocode . . . . . . . . . . . . . . . . . . . . .  63
+   Appendix D.  Half-Precision . . . . . . . . . . . . . . . . . . .  65
    Appendix E.  Comparison of Other Binary Formats to CBOR's Design
-                Objectives . . . . . . . . . . . . . . . . . . . . .  67
-     E.1.  ASN.1 DER, BER, and PER . . . . . . . . . . . . . . . . .  68
-     E.2.  MessagePack . . . . . . . . . . . . . . . . . . . . . . .  68
-     E.3.  BSON  . . . . . . . . . . . . . . . . . . . . . . . . . .  69
-     E.4.  MSDTP: RFC 713  . . . . . . . . . . . . . . . . . . . . .  69
-     E.5.  Conciseness on the Wire . . . . . . . . . . . . . . . . .  69
+                Objectives . . . . . . . . . . . . . . . . . . . . .  66
+     E.1.  ASN.1 DER, BER, and PER . . . . . . . . . . . . . . . . .  67
+     E.2.  MessagePack . . . . . . . . . . . . . . . . . . . . . . .  67
+     E.3.  BSON  . . . . . . . . . . . . . . . . . . . . . . . . . .  68
+     E.4.  MSDTP: RFC 713  . . . . . . . . . . . . . . . . . . . . .  68
+     E.5.  Conciseness on the Wire . . . . . . . . . . . . . . . . .  68
 
 
 
@@ -170,7 +170,7 @@ Bormann & Hoffman       Expires September 9, 2020               [Page 3]
 Internet-Draft                    CBOR                        March 2020
 
 
-   Appendix F.  Changes from RFC 7049  . . . . . . . . . . . . . . .  70
+   Appendix F.  Changes from RFC 7049  . . . . . . . . . . . . . . .  69
    Appendix G.  Well-formedness errors and examples  . . . . . . . .  70
      G.1.  Examples for CBOR data items that are not well-formed . .  71
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  73
@@ -633,12 +633,12 @@ Internet-Draft                    CBOR                        March 2020
 
    Major type 4:  an array of data items.  In other formats, arrays are
       also called lists, sequences, or tuples (a "CBOR sequence" is
-      something slightly different, though [I-D.ietf-cbor-sequence]).
-      The argument is the number of data items in the array.  Items in
-      an array do not need to all be of the same type.  For example, an
-      array that contains 10 items of any type would have an initial
-      byte of 0b100_01010 (major type of 4, additional information of 10
-      for the length) followed by the 10 remaining items.
+      something slightly different, though [RFC8742]).  The argument is
+      the number of data items in the array.  Items in an array do not
+      need to all be of the same type.  For example, an array that
+      contains 10 items of any type would have an initial byte of
+      0b100_01010 (major type of 4, additional information of 10 for the
+      length) followed by the 10 remaining items.
 
    Major type 5:  a map of pairs of data items.  Maps are also called
       tables, dictionaries, hashes, or objects (in JSON).  A map is
@@ -1045,19 +1045,19 @@ Internet-Draft                    CBOR                        March 2020
 
 3.4.  Tagging of Items
 
-   In CBOR, a data item can be enclosed by a tag to give it some
-   additional semantics, as uniquely identified by a "tag number".  The
-   tag is major type 6, its argument (Section 3) indicates the tag
-   number, and it contains a single enclosed data item, the "tag
-   content".  (If a tag requires further structure to its content, this
-   structure is provided by the enclosed data item.)  We use the term
-   "tag" for the entire data item consisting of both a tag number and
-   the tag content: the tag content is the data item that is being
-   tagged.
+   In CBOR, a data item can be enclosed by a tag to give it additional
+   semantics.  The tag is major type 6, and represents an unsigned
+   integer as indicated by the tag's argument (Section 3); the (sole)
+   enclosed data item is carried as content data.  If a tag requires
+   structured data, this structure is encoded into the nested data item.
+   The definition of a tag number usually restricts what kinds of nested
+   data item or items are valid for tags using this tag number.  We use
+   the term "tag" for the entire data item consisting of both a tag
+   number and the enclosed value, calling the latter "tag content": the
+   tag content is the data item that is being tagged.
 
    For example, assume that a byte string of length 12 is marked with a
    tag of number 2 to indicate it is a positive "bignum"
-   (Section 3.4.3).  The encoded data item would start with a byte
 
 
 
@@ -1066,37 +1066,10 @@ Bormann & Hoffman       Expires September 9, 2020              [Page 19]
 Internet-Draft                    CBOR                        March 2020
 
 
-   0b110_00010 (major type 6, additional information 2 for the tag
-   number) followed by the encoded tag content: 0b010_01100 (major type
-   2, additional information of 12 for the length) followed by the 12
-   bytes of the bignum.
-
-   The definition of a tag number describes the additional semantics
-   conveyed for tags with this tag number in the extended generic data
-   model.  These semantics may include equivalence of some tagged data
-   items with other data items, including some that can already be
-   represented in the basic generic data model.  For instance, 0xc24101,
-   a bignum the tag content of which is the byte string with the single
-   byte 0x01, is equivalent to an integer 1, which could also be encoded
-   for instance as 0x01, 0x1801, or 0x190001.  The tag definition may
-   include the definition of a preferred serialization (Section 4.1)
-   that is recommended for generic encoders; this may prefer basic
-   generic data model representations over ones that employ a tag.
-
-   The tag definition usually restricts what kinds of nested data item
-   or items are valid for such tags.  Tag definitions may restrict their
-   content to a very specific syntactic structure, as the tags defined
-   in this document do, or they may aim at a more semantically defined
-   definition of their content, as for instance tags 40 and 1040 do
-   [rfc8746]: These accept a number of different ways of representing
-   arrays.
-
-   As a matter of convention, many tags do not accept null or undefined
-   values as tag content; instead, the expectation is that a null or
-   undefined value can be used in place of the entire tag; Section 3.4.2
-   provides some further considerations for one specific tag about the
-   handling of this convention in application protocols and in mapping
-   to platform types.
+   (Section 3.4.3).  This would be marked as 0b110_00010 (major type 6,
+   additional information 2 for the tag number) followed by 0b010_01100
+   (major type 2, additional information of 12 for the length) followed
+   by the 12 bytes of the bignum.
 
    Decoders do not need to understand tags of every tag number, and tags
    may be of little value in applications where the implementation
@@ -1114,13 +1087,6 @@ Internet-Draft                    CBOR                        March 2020
    A tag applies semantics to the data item it encloses.  Tags can nest:
    If tag A encloses tag B, which encloses data item C, tag A applies to
    the result of applying tag B on data item C.
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 20]
-
-Internet-Draft                    CBOR                        March 2020
-
 
    IANA maintains a registry of tag numbers as described in Section 9.2.
    Table 5 provides a list of tag numbers that were defined in
@@ -1151,29 +1117,7 @@ Internet-Draft                    CBOR                        March 2020
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 21]
+Bormann & Hoffman       Expires September 9, 2020              [Page 20]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -1229,7 +1173,7 @@ Internet-Draft                    CBOR                        March 2020
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 22]
+Bormann & Hoffman       Expires September 9, 2020              [Page 21]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -1285,7 +1229,7 @@ Internet-Draft                    CBOR                        March 2020
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 23]
+Bormann & Hoffman       Expires September 9, 2020              [Page 22]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -1298,24 +1242,15 @@ Internet-Draft                    CBOR                        March 2020
    restrict the tag content to be an integer (or a floating-point value)
    only.
 
-   Note that platform types for date/time may include null or undefined
-   values, which may also be desirable at an application protocol level.
-   While emitting tag number 1 values with non-finite tag content values
-   (e.g., with NaN for undefined date/time values or with Infinite for
-   an expiry date that is not set) may seem an obvious way to handle
-   this, using untagged null or undefined is often a better solution.
-   Application protocol designers are encouraged to consider these cases
-   and include clear guidelines for handling them.
-
 3.4.3.  Bignums
 
    Protocols using tag numbers 2 and 3 extend the generic data model
    (Section 2) with "bignums" representing arbitrarily sized integers.
-   In the basic generic data model, bignum values are not equal to
-   integers from the same model, but the extended generic data model
-   created by this tag definition defines equivalence based on numeric
-   value, and preferred serialization (Section 4.1) never makes use of
-   bignums that also can be expressed as basic integers (see below).
+   In the generic data model, bignum values are not equal to integers
+   from the basic data model, but specific data models can define that
+   equivalence, and preferred serialization (Section 4.1) never makes
+   use of bignums that also can be expressed as basic integers (see
+   below).
 
    Bignums are encoded as a byte string data item, which is interpreted
    as an unsigned integer n in network byte order.  Contained items of
@@ -1337,21 +1272,23 @@ Internet-Draft                    CBOR                        March 2020
 
    For example, the number 18446744073709551616 (2**64) is represented
    as 0b110_00010 (major type 6, tag number 2), followed by 0b010_01001
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 24]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    (major type 2, length 9), followed by 0x010000000000000000 (one byte
    0x01 and eight bytes 0x00).  In hexadecimal:
 
    C2                        -- Tag 2
       49                     -- Byte string of length 9
          010000000000000000  -- Bytes content
+
+
+
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 23]
+
+Internet-Draft                    CBOR                        March 2020
+
 
 3.4.4.  Decimal Fractions and Bigfloats
 
@@ -1394,14 +1331,6 @@ Internet-Draft                    CBOR                        March 2020
    additional information of 25 for a two-byte value), followed by
    0b0110101010110011 (27315 in two bytes).  In hexadecimal:
 
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 25]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    C4             -- Tag 4
       82          -- Array of length 2
          21       -- -2
@@ -1409,6 +1338,14 @@ Internet-Draft                    CBOR                        March 2020
 
    An example of a bigfloat is that the number 1.5 could be represented
    as 0b110_00101 (major type of 6 for the tag, additional information
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 24]
+
+Internet-Draft                    CBOR                        March 2020
+
+
    of 5 for the number of tag), followed by 0b100_00010 (major type of 4
    for the array, additional information of 2 for the length of the
    array), followed by 0b001_00000 (major type of 1 for the first
@@ -1450,20 +1387,20 @@ Internet-Draft                    CBOR                        March 2020
    representation.  These tags are useful when an encoder knows that the
    byte string data it is writing is likely to be later converted to a
    particular JSON-based usage.  That usage specifies that some strings
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 26]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    are encoded as base64, base64url, and so on.  The encoder uses byte
    strings instead of doing the encoding itself to reduce the message
    size, to reduce the code size of the encoder, or both.  The encoder
    does not know whether or not the converter will be generic, and
    therefore wants to say what it believes is the proper way to convert
    binary strings to JSON.
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 25]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    The data item tagged can be a byte string or any other data item.  In
    the latter case, the tag applies to all of the byte string data items
@@ -1505,21 +1442,21 @@ Internet-Draft                    CBOR                        March 2020
 
       -  the padding bits in a 2- or 3-character block are not 0, or
 
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 27]
-
-Internet-Draft                    CBOR                        March 2020
-
-
       -  the base64 encoding has the wrong number of padding characters,
          or
 
       -  the base64url encoding has padding characters,
 
       the string is invalid.
+
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 26]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    *  Tag number 35 is for regular expressions that are roughly in Perl
       Compatible Regular Expressions (PCRE/PCRE2) form [PCRE] or a
@@ -1562,14 +1499,6 @@ Internet-Draft                    CBOR                        March 2020
 
    The serialization of this tag's head is 0xd9d9f7, which does not
    appear to be in use as a distinguishing mark for any frequently used
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 28]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    file types.  In particular, 0xd9d9f7 is not a valid start of a
    Unicode text in any Unicode encoding if it is followed by a valid
    CBOR data item.
@@ -1577,6 +1506,14 @@ Internet-Draft                    CBOR                        March 2020
    For instance, a decoder might be able to decode both CBOR and JSON.
    Such a decoder would need to mechanically distinguish the two
    formats.  An easy way for an encoder to help the decoder would be to
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 27]
+
+Internet-Draft                    CBOR                        March 2020
+
+
    tag the entire CBOR item with tag number 55799, the serialization of
    which will never be found at the beginning of a JSON text.
 
@@ -1616,16 +1553,6 @@ Internet-Draft                    CBOR                        March 2020
    a constrained implementation of a CBOR decoder meets a variant
    encoder.
 
-
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 29]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    The preferred serialization always uses the shortest form of
    representing the argument (Section 3); it also uses the shortest
    floating-point encoding that preserves the value being encoded.
@@ -1635,6 +1562,14 @@ Internet-Draft                    CBOR                        March 2020
    0xf94580 for the number 5.5, and 0xfa45ad9c00 for the number 5555.5.
    For NaN values, a shorter encoding is preferred if zero-padding the
    shorter significand towards the right reconstitutes the original NaN
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 28]
+
+Internet-Draft                    CBOR                        March 2020
+
+
    value (for many applications, the single NaN encoding 0xf97e00 will
    suffice).
 
@@ -1673,15 +1608,6 @@ Internet-Draft                    CBOR                        March 2020
       -  65536 to 4294967295 and -65537 to -4294967296 MUST be expressed
          only with an additional uint32_t.
 
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 30]
-
-Internet-Draft                    CBOR                        March 2020
-
-
       Floating-point values also MUST use the shortest form that
       preserves the value, e.g. 1.5 is encoded as 0xf93e00 and 1000000.5
       as 0xfa49742408.  (One implementation of this is to have all
@@ -1690,6 +1616,15 @@ Internet-Draft                    CBOR                        March 2020
       shorter form and repeat the process with a test conversion to a
       16-bit float.  This also works to select 16-bit float for positive
       and negative Infinity as well.)
+
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 29]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    *  Indefinite-length items MUST NOT appear.  They can be encoded as
       definite-length items instead.
@@ -1730,14 +1665,6 @@ Internet-Draft                    CBOR                        March 2020
 
    In a protocol that does require tags in certain places to obtain
    specific semantics, the tag needs to appear in the deterministic
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 31]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    format as well.  Deterministic encoding considerations also apply to
    the content of tags.
 
@@ -1747,6 +1674,13 @@ Internet-Draft                    CBOR                        March 2020
    specify whether smaller integers are also expressed using these tags
    or using major types 0 and 1.  Preferred serialization uses the
    latter choice, which is therefore recommended.
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 30]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    Protocols that include floating-point values, whether represented
    using basic floating-point values (Section 3.3) or using tags (or
@@ -1785,15 +1719,6 @@ Internet-Draft                    CBOR                        March 2020
 
    *  If NaN is an allowed value and there is no intent to support NaN
       payloads or signaling NaNs, the protocol needs to pick a single
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 32]
-
-Internet-Draft                    CBOR                        March 2020
-
-
       representation, typically 0xf97e00.  If that simple choice is not
       possible, specific attention will be needed for NaN handling.
 
@@ -1804,6 +1729,14 @@ Internet-Draft                    CBOR                        March 2020
       specifically accommodate such implementations while creating an
       onus on other implementations, by excluding subnormal numbers from
       interchange, interchanging zero instead.
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 31]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    *  The same number can be represented by different decimal fractions,
       by different bigfloats, and by different forms under other tags
@@ -1842,14 +1775,6 @@ Internet-Draft                    CBOR                        March 2020
 
    2.  -1, encoded as 0x20.
 
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 33]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    3.  false, encoded as 0xf4.
 
    4.  100, encoded as 0x1864.
@@ -1861,6 +1786,13 @@ Internet-Draft                    CBOR                        March 2020
    7.  "aa", encoded as 0x626161.
 
    8.  [100], encoded as 0x811864.
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 32]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    (Although [RFC7049] used the term "Canonical CBOR" for its form of
    requirements on deterministic encoding, this document avoids this
@@ -1898,14 +1830,6 @@ Internet-Draft                    CBOR                        March 2020
 
    The rest of this section discusses some considerations in creating
    CBOR-based protocols.  With few exceptions, it is advisory only and
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 34]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    explicitly excludes any language from BCP 14 other than words that
    could be interpreted as "MAY" in the sense of BCP 14.  The exceptions
    aim at facilitating interoperability of CBOR-based protocols while
@@ -1918,6 +1842,13 @@ Internet-Draft                    CBOR                        March 2020
    sequence of CBOR data items concatenated back-to-back.  In such an
    environment, the decoder immediately begins decoding a new data item
    if data is found after the end of a previous data item.
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 33]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    Not all of the bytes making up a data item may be immediately
    available to the decoder; some decoders will buffer additional data
@@ -1953,15 +1884,6 @@ Internet-Draft                    CBOR                        March 2020
    codepoints are not registered at the time the encoder/decoder is
    written (Section 5.4).
 
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 35]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    Generic decoders provide ways to present well-formed CBOR values,
    both valid and invalid, to an application.  The diagnostic notation
    (Section 8) may be used to present well-formed CBOR values to humans.
@@ -1976,6 +1898,14 @@ Internet-Draft                    CBOR                        March 2020
    interpreting the data encoded in it in the CBOR data model.  A CBOR-
    based protocol could be specified in several layers, in which the
    lower layers don't process the semantics of some of the CBOR data
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 34]
+
+Internet-Draft                    CBOR                        March 2020
+
+
    they forward.  These layers can't notice any validity errors in data
    they don't process and MUST forward that data as-is.  The first layer
    that does process the semantics of an invalid CBOR item MUST take one
@@ -2011,13 +1941,6 @@ Internet-Draft                    CBOR                        March 2020
       that the sequence of bytes in a UTF-8 string (major type 3) is
       actually valid UTF-8 and react appropriately.
 
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 36]
-
-Internet-Draft                    CBOR                        March 2020
-
-
 5.3.2.  Tag validity
 
    Two additional kinds of validity errors are introduced by adding tags
@@ -2030,6 +1953,15 @@ Internet-Draft                    CBOR                        March 2020
       decodes the tagged data item into a native representation (a
       native big integer in this example) is expected to check the type
       of the data item being tagged.  Even decoders that don't have such
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 35]
+
+Internet-Draft                    CBOR                        March 2020
+
+
       native representations available in their environment may perform
       the check on those tags known to them and react appropriately.
 
@@ -2065,15 +1997,6 @@ Internet-Draft                    CBOR                        March 2020
       with an indication that the decoder did not recognize that tag
       number or simple value.
 
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 37]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    The latter approach, which is also appropriate for decoders that do
    not support validity checking, provides forward compatibility with
    newly registered tags and simple values without the requirement to
@@ -2086,6 +2009,14 @@ Internet-Draft                    CBOR                        March 2020
    appreciable cost (in particular with duplicate detection for maps),
    support of validity checking is not a requirement placed on all CBOR
    decoders.
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 36]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    Some encoders will rely on their applications to provide input data
    in such a way that valid CBOR results from the encoder.  A generic
@@ -2122,14 +2053,6 @@ Internet-Draft                    CBOR                        March 2020
    considerations apply to floating-point values; decoding both
    preferred serializations and longer-than-needed ones is recommended.
 
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 38]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    CBOR-based protocols for constrained applications that provide a
    choice between representing a specific number as an integer and as a
    decimal fraction or bigfloat (such as when the exponent is small and
@@ -2143,6 +2066,14 @@ Internet-Draft                    CBOR                        March 2020
    interwork with JSON-based applications, conversion is simplified by
    limiting keys to text strings only; otherwise, there has to be a
    specified mapping from the other CBOR types to text strings, and this
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 37]
+
+Internet-Draft                    CBOR                        March 2020
+
+
    often leads to implementation errors.  In applications where keys are
    numeric in nature and numeric ordering of keys is important to the
    application, directly using the numbers for the keys is useful.
@@ -2179,13 +2110,6 @@ Internet-Draft                    CBOR                        March 2020
       instance if the application equates integers and floating point
       values in map key positions for specific maps).
 
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 39]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    *  Pass all map entries to the application, including ones with
       duplicate keys.  This requires the application to handle (check
       against) duplicate keys, even if the application rules are
@@ -2198,6 +2122,14 @@ Internet-Draft                    CBOR                        March 2020
       decoders as which value is returned is based on generic decoder
       implementation and the actual order of keys in the map.  In
       particular, applications cannot validate key uniqueness on their
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 38]
+
+Internet-Draft                    CBOR                        March 2020
+
+
       own as they do not necessarily see all entries; they may not be
       able to use such a generic decoder if they do need to validate key
       uniqueness.  These generic decoders can only be used in situations
@@ -2234,14 +2166,6 @@ Internet-Draft                    CBOR                        March 2020
    At the generic data model level, numerically equivalent integer and
    floating-point values are distinct from each other, as they are from
    the various big numbers (Tags 2 to 5).  Similarly, text strings are
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 40]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    distinct from byte strings, even if composed of the same bytes.  A
    tagged value is distinct from an untagged value or from a value
    tagged with a different tag number.
@@ -2254,6 +2178,14 @@ Internet-Draft                    CBOR                        March 2020
 
    (Byte and text) strings are compared byte by byte, arrays element by
    element, and are equal if they have the same number of bytes/elements
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 39]
+
+Internet-Draft                    CBOR                        March 2020
+
+
    and the same values at the same positions.  Two maps are equal if
    they have the same set of pairs regardless of their order; pairs are
    equal if both the key and value are equal.
@@ -2290,14 +2222,6 @@ Internet-Draft                    CBOR                        March 2020
    and JSON.  Implementations of converters are free to use whichever
    advice here they want.
 
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 41]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    It is worth noting that a JSON text is a sequence of characters, not
    an encoded sequence of bytes, while a CBOR data item consists of
    bytes, not characters.
@@ -2309,6 +2233,14 @@ Internet-Draft                    CBOR                        March 2020
    consider what to do in those cases.  The following non-normative
    advice deals with these by converting them to a single substitute
    value, such as a JSON null.
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 40]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    *  An integer (major type 0 or 1) becomes a JSON number.
 
@@ -2345,15 +2277,6 @@ Internet-Draft                    CBOR                        March 2020
    *  A floating-point value (major type 7, additional information 25
       through 27) becomes a JSON number if it is finite (that is, it can
       be represented in a JSON number); if the value is non-finite (NaN,
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 42]
-
-Internet-Draft                    CBOR                        March 2020
-
-
       or positive or negative Infinity), it is represented by the
       substitute value.
 
@@ -2366,6 +2289,14 @@ Internet-Draft                    CBOR                        March 2020
       tilde) is inserted before the base-encoded value.  (The conversion
       to a binary blob instead of a number is to prevent a likely
       numeric overflow for the JSON decoder.)
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 41]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    *  A byte string with an encoding hint (major type 6, tag number 21
       through 23) is encoded as described and becomes a JSON string.
@@ -2402,14 +2333,6 @@ Internet-Draft                    CBOR                        March 2020
       values, performing the decimal-to-binary conversion based on the
       precision provided by IEEE 754 binary64.  Then, when encoding in
       CBOR, the preferred serialization uses the shortest floating-point
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 43]
-
-Internet-Draft                    CBOR                        March 2020
-
-
       representation exactly representing this conversion result; for
       instance, 1.5 is represented in a 16-bit floating-point value (not
       all implementations will be capable of efficiently finding the
@@ -2423,6 +2346,14 @@ Internet-Draft                    CBOR                        March 2020
    than JSON.  One implementation strategy that might come to mind is to
    perform a JSON-to-CBOR encoding in place in a single buffer.  This
    strategy would need to carefully consider a number of pathological
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 42]
+
+Internet-Draft                    CBOR                        March 2020
+
+
    cases, such as that some strings represented with no or very few
    escapes and longer (or much longer) than 255 bytes may expand when
    encoded as UTF-8 strings in CBOR.  Similarly, a few of the binary
@@ -2454,18 +2385,6 @@ Internet-Draft                    CBOR                        March 2020
    subjective than other parts of this document.  It is also necessarily
    incomplete, lest it turn into a textbook on protocol development.
 
-
-
-
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 44]
-
-Internet-Draft                    CBOR                        March 2020
-
-
 7.1.  Extension Points
 
    In a protocol design, opportunities for evolution are often included
@@ -2483,6 +2402,14 @@ Internet-Draft                    CBOR                        March 2020
 
    *  the "simple" space (values in major type 7).  Of the 24 efficient
       (and 224 slightly less efficient) values, only a small number have
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 43]
+
+Internet-Draft                    CBOR                        March 2020
+
+
       been allocated.  Implementations receiving an unknown simple data
       item may be able to process it as such, given that the structure
       of the value is indeed simple.  The IANA registry in Section 9.1
@@ -2514,14 +2441,6 @@ Internet-Draft                    CBOR                        March 2020
    codepoint space by an IANA registry.  Instead, allocations out of
    this space can only be done by updating this specification.
 
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 45]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    For an additional information value of n >= 24, the size of the
    additional data typically is 2**(n-24) bytes.  Therefore, additional
    information values 28 and 29 should be viewed as candidates for
@@ -2538,6 +2457,14 @@ Internet-Draft                    CBOR                        March 2020
    entities cooperating in debugging, this section defines a simple
    human-readable diagnostic notation.  All actual interchange always
    happens in the binary format.
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 44]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    Note that this truly is a diagnostic format; it is not meant to be
    parsed.  Therefore, no formal definition (as in ABNF) is given in
@@ -2570,14 +2497,6 @@ Internet-Draft                    CBOR                        March 2020
    padding, enclosed in single quotes, prefixed by >h< for base16, >b32<
    for base32, >h32< for base32hex, >b64< for base64 or base64url (the
    actual encodings do not overlap, so the string remains unambiguous).
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 46]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    For example, the byte string 0x12345678 could be written h'12345678',
    b32'CI2FM6A', or b64'EjRWeA'.
 
@@ -2585,12 +2504,23 @@ Internet-Draft                    CBOR                        March 2020
    integer in the parentheses.  For example, "simple(42)" indicates
    major type 7, value 42.
 
+   A number of useful extensions to the diagnostic notation defined here
+   are provided in Appendix G of [RFC8610], "Extended Diagnostic
+   Notation" (EDN).
+
 8.1.  Encoding Indicators
 
    Sometimes it is useful to indicate in the diagnostic notation which
    of several alternative representations were actually used; for
    example, a data item written >1.5< by a diagnostic decoder might have
    been encoded as a half-, single-, or double-precision float.
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 45]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    The convention for encoding indicators is that anything starting with
    an underscore and all following characters that are alphanumeric or
@@ -2627,13 +2557,6 @@ Internet-Draft                    CBOR                        March 2020
    [To be removed by RFC editor:] IANA is requested to update these
    registries to point to the present document instead of RFC 7049.
 
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 47]
-
-Internet-Draft                    CBOR                        March 2020
-
-
 9.1.  Simple Values Registry
 
    IANA has created the "Concise Binary Object Representation (CBOR)
@@ -2647,6 +2570,13 @@ Internet-Draft                    CBOR                        March 2020
 
    New entries in the range 32 to 255 are assigned by Specification
    Required.
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 46]
+
+Internet-Draft                    CBOR                        March 2020
+
 
 9.2.  Tags Registry
 
@@ -2683,13 +2613,6 @@ Internet-Draft                    CBOR                        March 2020
 
    Required parameters: n/a
 
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 48]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    Optional parameters: n/a
 
    Encoding considerations:  binary
@@ -2702,6 +2625,14 @@ Internet-Draft                    CBOR                        March 2020
 
    Applications that use this media type:  None yet, but it is expected
       that this format will be deployed in protocols and applications.
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 47]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    Additional information:
 
@@ -2736,16 +2667,6 @@ Internet-Draft                    CBOR                        March 2020
 
    Reference: [RFCthis]
 
-
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 49]
-
-Internet-Draft                    CBOR                        March 2020
-
-
 9.5.  The +cbor Structured Syntax Suffix Registration
 
    The Structured Syntax Suffix [RFC6838] for media types based on a
@@ -2761,6 +2682,13 @@ Internet-Draft                    CBOR                        March 2020
    Encoding Considerations: CBOR is a binary format.
 
    Interoperability Considerations: n/a
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 48]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    Fragment Identifier Considerations:  The syntax and semantics of
       fragment identifiers specified for +cbor SHOULD be as specified
@@ -2794,14 +2722,6 @@ Internet-Draft                    CBOR                        March 2020
    A network-facing application can exhibit vulnerabilities in its
    processing logic for incoming data.  Complex parsers are well known
    as a likely source of such vulnerabilities, such as the ability to
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 50]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    remotely crash a node, or even remotely execute arbitrary code on it.
    CBOR attempts to narrow the opportunities for introducing such
    vulnerabilities by reducing parser complexity, by giving the entire
@@ -2818,6 +2738,14 @@ Internet-Draft                    CBOR                        March 2020
 
    Hostile input may be constructed to overrun buffers, overflow or
    underflow integer arithmetic, or cause other decoding disruption.
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 49]
+
+Internet-Draft                    CBOR                        March 2020
+
+
    CBOR data items might have lengths or sizes that are intentionally
    extremely large or too short.  Resource exhaustion attacks might
    attempt to lure a decoder into allocating very big data items
@@ -2850,14 +2778,6 @@ Internet-Draft                    CBOR                        March 2020
    implementations that are used by decoders to build in-memory
    representations of maps can be attacked to spend quadratic effort,
    unless a secret key is employed (see Section 7 of [SIPHASH]).  Such
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 51]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    superlinear efforts can be employed by an attacker to exhaust
    resources at or before the input validator; they therefore need to be
    avoided in a CBOR decoder implementation.  Note that tag number
@@ -2874,6 +2794,13 @@ Internet-Draft                    CBOR                        March 2020
    mistakes.  It should check inputs for buffer overruns, overflow and
    underflow of integer arithmetic, and other such errors that are aimed
    to disrupt the encoder.
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 50]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    Protocols should be defined in such a way that potential multiple
    interpretations are reliably reduced to a single interpretation.  For
@@ -2907,13 +2834,6 @@ Internet-Draft                    CBOR                        March 2020
    [IEEE754]  IEEE, "IEEE Standard for Floating-Point Arithmetic", IEEE
               Std 754-2008.
 
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 52]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part One: Format of Internet Message
               Bodies", RFC 2045, DOI 10.17487/RFC2045, November 1996,
@@ -2927,6 +2847,16 @@ Internet-Draft                    CBOR                        March 2020
    [RFC3339]  Klyne, G. and C. Newman, "Date and Time on the Internet:
               Timestamps", RFC 3339, DOI 10.17487/RFC3339, July 2002,
               <https://www.rfc-editor.org/info/rfc3339>.
+
+
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 51]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
               10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
@@ -2960,16 +2890,6 @@ Internet-Draft                    CBOR                        March 2020
               <http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/
               V1_chap04.html#tag_04_15>.
 
-
-
-
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 53]
-
-Internet-Draft                    CBOR                        March 2020
-
-
 11.2.  Informative References
 
    [ASN.1]    International Telecommunication Union, "Information
@@ -2981,15 +2901,18 @@ Internet-Draft                    CBOR                        March 2020
    [BSON]     Various, "BSON - Binary JSON", 2013,
               <http://bsonspec.org/>.
 
-   [I-D.ietf-cbor-sequence]
-              Bormann, C., "Concise Binary Object Representation (CBOR)
-              Sequences", draft-ietf-cbor-sequence-02 (work in
-              progress), September 2019.
-
    [IANA.cbor-simple-values]
               IANA, "Concise Binary Object Representation (CBOR) Simple
               Values",
               <http://www.iana.org/assignments/cbor-simple-values>.
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 52]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    [IANA.cbor-tags]
               IANA, "Concise Binary Object Representation (CBOR) Tags",
@@ -3019,13 +2942,6 @@ Internet-Draft                    CBOR                        March 2020
               Protocol", RFC 713, DOI 10.17487/RFC0713, April 1976,
               <https://www.rfc-editor.org/info/rfc713>.
 
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 54]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
               Specifications and Registration Procedures", BCP 13,
               RFC 6838, DOI 10.17487/RFC6838, January 2013,
@@ -3044,17 +2960,41 @@ Internet-Draft                    CBOR                        March 2020
               DOI 10.17487/RFC7493, March 2015,
               <https://www.rfc-editor.org/info/rfc7493>.
 
+
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 53]
+
+Internet-Draft                    CBOR                        March 2020
+
+
+   [RFC7991]  Hoffman, P., "The "xml2rfc" Version 3 Vocabulary",
+              RFC 7991, DOI 10.17487/RFC7991, December 2016,
+              <https://www.rfc-editor.org/info/rfc7991>.
+
    [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", STD 90, RFC 8259,
               DOI 10.17487/RFC8259, December 2017,
               <https://www.rfc-editor.org/info/rfc8259>.
+
+   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
+              Definition Language (CDDL): A Notational Convention to
+              Express Concise Binary Object Representation (CBOR) and
+              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
+              June 2019, <https://www.rfc-editor.org/info/rfc8610>.
 
    [RFC8618]  Dickinson, J., Hague, J., Dickinson, S., Manderson, T.,
               and J. Bond, "Compacted-DNS (C-DNS): A Format for DNS
               Packet Capture", RFC 8618, DOI 10.17487/RFC8618, September
               2019, <https://www.rfc-editor.org/info/rfc8618>.
 
-   [rfc8746]  Bormann, C., Ed., "Concise Binary Object Representation
+   [RFC8742]  Bormann, C., "Concise Binary Object Representation (CBOR)
+              Sequences", RFC 8742, DOI 10.17487/RFC8742, February 2020,
+              <https://www.rfc-editor.org/info/rfc8742>.
+
+   [RFC8746]  Bormann, C., Ed., "Concise Binary Object Representation
               (CBOR) Tags for Typed Arrays", RFC 8746,
               DOI 10.17487/RFC8746, February 2020,
               <https://www.rfc-editor.org/info/rfc8746>.
@@ -3075,16 +3015,16 @@ Internet-Draft                    CBOR                        March 2020
 
    [3] mailto:cbor@ietf.org
 
-
-
-Bormann & Hoffman       Expires September 9, 2020              [Page 55]
-
-Internet-Draft                    CBOR                        March 2020
-
-
    [4] mailto:iesg@ietf.org
 
    [5] mailto:cbor@ietf.org
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 54]
+
+Internet-Draft                    CBOR                        March 2020
+
 
    [6] mailto:art@ietf.org
 
@@ -3133,7 +3073,11 @@ Internet-Draft                    CBOR                        March 2020
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 56]
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 55]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3189,7 +3133,7 @@ Appendix A.  Examples
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 57]
+Bormann & Hoffman       Expires September 9, 2020              [Page 56]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3245,7 +3189,7 @@ Internet-Draft                    CBOR                        March 2020
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 58]
+Bormann & Hoffman       Expires September 9, 2020              [Page 57]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3301,7 +3245,7 @@ Internet-Draft                    CBOR                        March 2020
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 59]
+Bormann & Hoffman       Expires September 9, 2020              [Page 58]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3357,7 +3301,7 @@ Internet-Draft                    CBOR                        March 2020
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 60]
+Bormann & Hoffman       Expires September 9, 2020              [Page 59]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3413,7 +3357,7 @@ Appendix B.  Jump Table
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 61]
+Bormann & Hoffman       Expires September 9, 2020              [Page 60]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3469,7 +3413,7 @@ Internet-Draft                    CBOR                        March 2020
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 62]
+Bormann & Hoffman       Expires September 9, 2020              [Page 61]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3525,7 +3469,7 @@ Internet-Draft                    CBOR                        March 2020
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 63]
+Bormann & Hoffman       Expires September 9, 2020              [Page 62]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3581,7 +3525,7 @@ Appendix C.  Pseudocode
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 64]
+Bormann & Hoffman       Expires September 9, 2020              [Page 63]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3637,7 +3581,7 @@ Internet-Draft                    CBOR                        March 2020
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 65]
+Bormann & Hoffman       Expires September 9, 2020              [Page 64]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3693,7 +3637,7 @@ Appendix D.  Half-Precision
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 66]
+Bormann & Hoffman       Expires September 9, 2020              [Page 65]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3749,7 +3693,7 @@ Appendix E.  Comparison of Other Binary Formats to CBOR's Design
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 67]
+Bormann & Hoffman       Expires September 9, 2020              [Page 66]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3805,7 +3749,7 @@ E.2.  MessagePack
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 68]
+Bormann & Hoffman       Expires September 9, 2020              [Page 67]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3861,7 +3805,7 @@ E.5.  Conciseness on the Wire
 
 
 
-Bormann & Hoffman       Expires September 9, 2020              [Page 69]
+Bormann & Hoffman       Expires September 9, 2020              [Page 68]
 
 Internet-Draft                    CBOR                        March 2020
 
@@ -3893,17 +3837,75 @@ Appendix F.  Changes from RFC 7049
    non-authoritative.  It is meant to help reviewers see the significant
    differences.
 
-   *  Updated reference for [RFC4627] to [RFC8259] in many places
+   *  Made some use of new RFCXML functionality [RFC7991]
 
-   *  Updated reference for [CNN-TERMS] to [RFC7228]
+   *  Updated references, e.g. for [RFC4627] to [RFC8259] in many
+      places, for [CNN-TERMS] to [RFC7228]; added missing reference to
+      [IEEE754] and updated to [ECMA262]
 
-   *  Added a comment to the last example in Section 2.2.1 (added
+   *  Fixed errata: in the example in Section 2.4.2 ("29" -> "49"), and
+      in the last paragraph of Section 3.6 ("0b000_11101" ->
+      "0b000_11001")
+
+   *  Added a comment to the last example in Section 3.2.2 (added
       "Second value")
 
-   *  Fixed a bug in the example in Section 2.4.2 ("29" -> "49")
+   *  Applied numerous small editorial changes
 
-   *  Fixed a bug in the last paragraph of Section 3.6 ("0b000_11101" ->
-      "0b000_11001")
+   *  Added a few tables for illustration
+
+   *  More stringently used terminology for well-formed and valid data,
+      avoiding less well-defined alternative terms such as "syntax
+      error", "decoding error" and "strict mode" outside examples
+
+
+
+
+Bormann & Hoffman       Expires September 9, 2020              [Page 69]
+
+Internet-Draft                    CBOR                        March 2020
+
+
+   *  Streamlined terminology to talk about tags, tag numbers, and tag
+      content
+
+   *  Clarified the restrictions on tag content, in general and
+      specifically for tag 1
+
+   *  Added text about the CBOR data model and its small variations
+      (basic generic, extended generic, specific)
+
+   *  More clearly separated integers from floating-point values;
+      provided a suggestion (based on I-JSON [RFC7493]) for handling
+      these types when converting JSON to CBOR
+
+   *  Added term "preferred serialization" and defined it for various
+      kinds of data items
+
+   *  Added comment about tags with semantics that depend on
+      serialization order
+
+   *  Defined "deterministic encoding", making use of "preferred
+      serialization", and simplified the suggested map ordering for the
+      "Core Deterministic Encoding Requirements", easing implementation,
+      while keeping RFC 7049 map ordering as an alternative "length-
+      first map key ordering"; now avoiding the terms "canonical" and
+      "canonicalization"
+
+   *  Clarified map validity (handling of duplicate keys) and explained
+      the domain of applicability of certain implementation choices
+
+   *  Updated IANA considerations
+
+   *  Added security considerations
+
+   *  Clarified handling of non-well-formed simple values in text and
+      pseudocode
+
+   *  Added Appendix G, well-formedness errors and examples
+
+   *  Removed UBJSON from Appendix E, as that format has completely
+      changed since RFC 7049; added reference to [RFC8618]
 
 Appendix G.  Well-formedness errors and examples
 
@@ -3912,8 +3914,6 @@ Appendix G.  Well-formedness errors and examples
 
    *  Too much data: There are input bytes left that were not consumed.
       This is only an error if the application assumed that the input
-      bytes would span exactly one data item.  Where the application
-      uses the self-delimiting nature of CBOR encoding to permit
 
 
 
@@ -3922,9 +3922,11 @@ Bormann & Hoffman       Expires September 9, 2020              [Page 70]
 Internet-Draft                    CBOR                        March 2020
 
 
+      bytes would span exactly one data item.  Where the application
+      uses the self-delimiting nature of CBOR encoding to permit
       additional data after the data item, as is for example done in
-      CBOR sequences [I-D.ietf-cbor-sequence], the CBOR decoder can
-      simply indicate what part of the input has not been consumed.
+      CBOR sequences [RFC8742], the CBOR decoder can simply indicate
+      what part of the input has not been consumed.
 
    *  Too little data: The input data available would need additional
       bytes added at their end for a complete CBOR data item.  This may
@@ -3968,8 +3970,6 @@ G.1.  Examples for CBOR data items that are not well-formed
    well-formed.  Each example is a sequence of bytes each shown in
    hexadecimal; multiple examples in a list are separated by commas.
 
-   Examples for well-formedness error kind 1 (too much data) can easily
-   be formed by adding data to a well-formed encoded CBOR data item.
 
 
 
@@ -3977,6 +3977,9 @@ Bormann & Hoffman       Expires September 9, 2020              [Page 71]
 
 Internet-Draft                    CBOR                        March 2020
 
+
+   Examples for well-formedness error kind 1 (too much data) can easily
+   be formed by adding data to a well-formed encoded CBOR data item.
 
    Similarly, examples for well-formedness error kind 2 (too little
    data) can be formed by truncating a well-formed encoded CBOR data
@@ -4024,15 +4027,14 @@ Internet-Draft                    CBOR                        March 2020
    *  Reserved two-byte encodings of simple types: f8 00, f8 01, f8 18,
       f8 1f
 
-   Subkind 3:
-
-
 
 
 Bormann & Hoffman       Expires September 9, 2020              [Page 72]
 
 Internet-Draft                    CBOR                        March 2020
 
+
+   Subkind 3:
 
    *  Indefinite length string chunks not of the correct type: 5f 00 ff,
       5f 21 ff, 5f 61 00 ff, 5f 80 ff, 5f a0 ff, 5f c0 00 ff, 5f e0 ff,
@@ -4080,8 +4082,6 @@ Acknowledgements
    This document also incorporates suggestions made by many people,
    notably Dan Frost, James Manger, Jeffrey Yasskin, Joe Hildebrand,
    Keith Moore, Laurence Lundblade, Matthew Lepinski, Michael
-   Richardson, Nico Williams, Peter Occil, Phillip Hallam-Baker, Ray
-   Polk, Tim Bray, Tony Finch, Tony Hansen, and Yaron Sheffer.
 
 
 
@@ -4089,6 +4089,9 @@ Bormann & Hoffman       Expires September 9, 2020              [Page 73]
 
 Internet-Draft                    CBOR                        March 2020
 
+
+   Richardson, Nico Williams, Peter Occil, Phillip Hallam-Baker, Ray
+   Polk, Tim Bray, Tony Finch, Tony Hansen, and Yaron Sheffer.
 
 Editorial Comments
 
@@ -4115,9 +4118,6 @@ Authors' Addresses
    ICANN
 
    EMail: paul.hoffman@icann.org
-
-
-
 
 
 
