@@ -2678,9 +2678,9 @@ Internet-Draft                    CBOR                          May 2020
    *  Description of semantics (URL) - This description is optional; the
       URL can point to something like an Internet-Draft or a web page.
 
-
-
-
+   Applicants exercising the First Come First Served range and making a
+   suggestion for a tag number that is not representable in 32 bits
+   (i.e., larger than 4294967295) should be aware that this could reduce
 
 
 
@@ -2689,6 +2689,9 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 48]
 
 Internet-Draft                    CBOR                          May 2020
 
+
+   interoperability with implementations that do not support 64-bit
+   numbers.
 
 9.3.  Media Type ("MIME Type")
 
@@ -2733,9 +2736,6 @@ Internet-Draft                    CBOR                          May 2020
    Author:  IETF CBOR Working Group cbor@ietf.org [3]
 
    Change controller:  The IESG iesg@ietf.org [4]
-
-
-
 
 
 
@@ -2869,13 +2869,13 @@ Internet-Draft                    CBOR                          May 2020
    numbers may exceed linear effort.  Also, some hash-table
    implementations that are used by decoders to build in-memory
    representations of maps can be attacked to spend quadratic effort,
-   unless a secret key (see Section 7 of [SIPHASH]) or some other
-   mitigation is employed.  Such superlinear efforts can be exploited by
-   an attacker to exhaust resources at or before the input validator;
-   they therefore need to be avoided in a CBOR decoder implementation.
-   Note that tag number definitions and their implementations can add
-   security considerations of this kind; this should then be discussed
-   in the security considerations of the tag number definition.
+   unless a secret key is employed (see Section 7 of [SIPHASH]).  Such
+   superlinear efforts can be employed by an attacker to exhaust
+   resources at or before the input validator; they therefore need to be
+   avoided in a CBOR decoder implementation.  Note that tag number
+   definitions and their implementations can add security considerations
+   of this kind; this should then be discussed in the security
+   considerations of the tag number definition.
 
    CBOR encoders do not receive input directly from the network and are
    thus not directly attackable in the same way as CBOR decoders.
