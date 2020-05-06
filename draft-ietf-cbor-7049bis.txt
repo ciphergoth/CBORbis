@@ -104,7 +104,7 @@ Table of Contents
        3.4.5.  Content Hints . . . . . . . . . . . . . . . . . . . .  26
          3.4.5.1.  Encoded CBOR Data Item  . . . . . . . . . . . . .  26
          3.4.5.2.  Expected Later Encoding for CBOR-to-JSON
-                   Converters  . . . . . . . . . . . . . . . . . . .  26
+                   Converters  . . . . . . . . . . . . . . . . . . .  27
          3.4.5.3.  Encoded Text  . . . . . . . . . . . . . . . . . .  27
 
 
@@ -1244,6 +1244,13 @@ Internet-Draft                    CBOR                          May 2020
    generic encoder/decoder.  The definition of new tags with this
    property is NOT RECOMMENDED.
 
+   Note that IANA has allocated tag number 65535 as a convenience for
+   implementers that want a single integer to indicate either a specific
+   tag that is present or the absence of a tag [insert-reference-to-
+   draft-here].  This tag is therefore not intended to occur in actual
+   CBOR data items; implementations may want to flag such an occurrence
+   as an error.
+
    Protocols using tag numbers 0 and 1 extend the generic data model
    (Section 2) with data items representing points in time; tag numbers
    2 and 3, with arbitrarily sized integers; and tag numbers 4 and 5,
@@ -1276,19 +1283,19 @@ Internet-Draft                    CBOR                          May 2020
    expression of times beyond early 2106 cannot leave out support of
    64-bit integers for the tag content.
 
-   Negative values (major type 1 and negative floating-point numbers)
-   are interpreted as determined by the application requirements as
-   there is no universal standard for UTC count-of-seconds time before
-   1970-01-01T00:00Z (this is particularly true for points in time that
-   precede discontinuities in national calendars).  The same applies to
-   non-finite values.
-
 
 
 Bormann & Hoffman       Expires November 7, 2020               [Page 23]
 
 Internet-Draft                    CBOR                          May 2020
 
+
+   Negative values (major type 1 and negative floating-point numbers)
+   are interpreted as determined by the application requirements as
+   there is no universal standard for UTC count-of-seconds time before
+   1970-01-01T00:00Z (this is particularly true for points in time that
+   precede discontinuities in national calendars).  The same applies to
+   non-finite values.
 
    To indicate fractional seconds, floating-point values can be used
    within tag number 1 instead of integer values.  Note that this
@@ -1331,13 +1338,6 @@ Internet-Draft                    CBOR                          May 2020
    occurs in a bignum when using preferred serialization).  Note that
    this means the non-preferred choice of a bignum representation
    instead of a basic integer for encoding a number is not intended to
-   have application semantics (just as the choice of a longer basic
-   integer representation than needed, such as 0x1800 for 0x00 does
-   not).
-
-   For example, the number 18446744073709551616 (2**64) is represented
-   as 0b110_00010 (major type 6, tag number 2), followed by 0b010_01001
-
 
 
 
@@ -1346,6 +1346,12 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 24]
 Internet-Draft                    CBOR                          May 2020
 
 
+   have application semantics (just as the choice of a longer basic
+   integer representation than needed, such as 0x1800 for 0x00 does
+   not).
+
+   For example, the number 18446744073709551616 (2**64) is represented
+   as 0b110_00010 (major type 6, tag number 2), followed by 0b010_01001
    (major type 2, length 9), followed by 0x010000000000000000 (one byte
    0x01 and eight bytes 0x00).  In hexadecimal:
 
@@ -1388,12 +1394,6 @@ Internet-Draft                    CBOR                          May 2020
    represented as 0b110_00100 (major type of 6 for the tag, additional
    information of 4 for the number of tag), followed by 0b100_00010
    (major type of 4 for the array, additional information of 2 for the
-   length of the array), followed by 0b001_00001 (major type of 1 for
-   the first integer, additional information of 1 for the value of -2),
-   followed by 0b000_11001 (major type of 0 for the second integer,
-   additional information of 25 for a two-byte value), followed by
-   0b0110101010110011 (27315 in two bytes).  In hexadecimal:
-
 
 
 
@@ -1401,6 +1401,12 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 25]
 
 Internet-Draft                    CBOR                          May 2020
 
+
+   length of the array), followed by 0b001_00001 (major type of 1 for
+   the first integer, additional information of 1 for the value of -2),
+   followed by 0b000_11001 (major type of 0 for the second integer,
+   additional information of 25 for a two-byte value), followed by
+   0b0110101010110011 (27315 in two bytes).  In hexadecimal:
 
    C4             -- Tag 4
       82          -- Array of length 2
@@ -1443,13 +1449,7 @@ Internet-Draft                    CBOR                          May 2020
    checking of the decoded CBOR item is not required for tag validity
    (but could be offered by a generic decoder as a special option).
 
-3.4.5.2.  Expected Later Encoding for CBOR-to-JSON Converters
 
-   Tags number 21 to 23 indicate that a byte string might require a
-   specific encoding when interoperating with a text-based
-   representation.  These tags are useful when an encoder knows that the
-   byte string data it is writing is likely to be later converted to a
-   particular JSON-based usage.  That usage specifies that some strings
 
 
 
@@ -1458,6 +1458,13 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 26]
 Internet-Draft                    CBOR                          May 2020
 
 
+3.4.5.2.  Expected Later Encoding for CBOR-to-JSON Converters
+
+   Tags number 21 to 23 indicate that a byte string might require a
+   specific encoding when interoperating with a text-based
+   representation.  These tags are useful when an encoder knows that the
+   byte string data it is writing is likely to be later converted to a
+   particular JSON-based usage.  That usage specifies that some strings
    are encoded as base64, base64url, and so on.  The encoder uses byte
    strings instead of doing the encoding itself to reduce the message
    size, to reduce the code size of the encoder, or both.  The encoder
@@ -1500,19 +1507,17 @@ Internet-Draft                    CBOR                          May 2020
    *  Tag numbers 33 and 34 are for base64url- and base64-encoded text
       strings, respectively, as defined in [RFC4648].  If any of:
 
-      -  the encoded text string contains non-alphabet characters or
-         only 1 character in the last block of 4, or
-
-      -  the padding bits in a 2- or 3-character block are not 0, or
-
-
-
 
 
 Bormann & Hoffman       Expires November 7, 2020               [Page 27]
 
 Internet-Draft                    CBOR                          May 2020
 
+
+      -  the encoded text string contains non-alphabet characters or
+         only 1 character in the last block of 4, or
+
+      -  the padding bits in a 2- or 3-character block are not 0, or
 
       -  the base64 encoding has the wrong number of padding characters,
          or
@@ -1557,11 +1562,6 @@ Internet-Draft                    CBOR                          May 2020
 
    Tag number 55799 is defined for this purpose.  It does not impart any
    special semantics on the data item that it encloses; that is, the
-   semantics of the tag content enclosed in tag number 55799 is exactly
-   identical to the semantics of the tag content itself.
-
-   The serialization of this tag's head is 0xd9d9f7, which does not
-   appear to be in use as a distinguishing mark for any frequently used
 
 
 
@@ -1570,6 +1570,11 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 28]
 Internet-Draft                    CBOR                          May 2020
 
 
+   semantics of the tag content enclosed in tag number 55799 is exactly
+   identical to the semantics of the tag content itself.
+
+   The serialization of this tag's head is 0xd9d9f7, which does not
+   appear to be in use as a distinguishing mark for any frequently used
    file types.  In particular, 0xd9d9f7 is not a valid start of a
    Unicode text in any Unicode encoding if it is followed by a valid
    CBOR data item.
@@ -1613,11 +1618,6 @@ Internet-Draft                    CBOR                          May 2020
    might very well optimize for the case of receiving preferred
    serializations, though).  Full implementations of CBOR decoders are
    by definition variation-tolerant; the distinction is only relevant if
-   a constrained implementation of a CBOR decoder meets a variant
-   encoder.
-
-
-
 
 
 
@@ -1625,6 +1625,9 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 29]
 
 Internet-Draft                    CBOR                          May 2020
 
+
+   a constrained implementation of a CBOR decoder meets a variant
+   encoder.
 
    The preferred serialization always uses the shortest form of
    representing the argument (Section 3); it also uses the shortest
@@ -1670,9 +1673,6 @@ Internet-Draft                    CBOR                          May 2020
       -  256 to 65535 and -257 to -65536 MUST be expressed only with an
          additional uint16_t;
 
-      -  65536 to 4294967295 and -65537 to -4294967296 MUST be expressed
-         only with an additional uint32_t.
-
 
 
 
@@ -1681,6 +1681,9 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 30]
 
 Internet-Draft                    CBOR                          May 2020
 
+
+      -  65536 to 4294967295 and -65537 to -4294967296 MUST be expressed
+         only with an additional uint32_t.
 
       Floating-point values also MUST use the shortest form that
       preserves the value, e.g. 1.5 is encoded as 0xf93e00 and 1000000.5
@@ -1728,9 +1731,6 @@ Internet-Draft                    CBOR                          May 2020
    protocol's deterministic encoding needs to either require that the
    tag is present or require that it is absent, not allow either one.
 
-   In a protocol that does require tags in certain places to obtain
-   specific semantics, the tag needs to appear in the deterministic
-
 
 
 Bormann & Hoffman       Expires November 7, 2020               [Page 31]
@@ -1738,6 +1738,8 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 31]
 Internet-Draft                    CBOR                          May 2020
 
 
+   In a protocol that does require tags in certain places to obtain
+   specific semantics, the tag needs to appear in the deterministic
    format as well.  Deterministic encoding considerations also apply to
    the content of tags.
 
@@ -1783,8 +1785,6 @@ Internet-Draft                    CBOR                          May 2020
       point values, and Rule 3 does not use preferred serialization, so
       Rule 2 may be a good choice in many cases.
 
-   *  If NaN is an allowed value and there is no intent to support NaN
-      payloads or signaling NaNs, the protocol needs to pick a single
 
 
 
@@ -1794,6 +1794,8 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 32]
 Internet-Draft                    CBOR                          May 2020
 
 
+   *  If NaN is an allowed value and there is no intent to support NaN
+      payloads or signaling NaNs, the protocol needs to pick a single
       representation, typically 0xf97e00.  If that simple choice is not
       possible, specific attention will be needed for NaN handling.
 
@@ -1840,8 +1842,6 @@ Internet-Draft                    CBOR                          May 2020
 
    1.  10, encoded as 0x0a.
 
-   2.  -1, encoded as 0x20.
-
 
 
 
@@ -1849,6 +1849,8 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 33]
 
 Internet-Draft                    CBOR                          May 2020
 
+
+   2.  -1, encoded as 0x20.
 
    3.  false, encoded as 0xf4.
 
@@ -1896,8 +1898,6 @@ Internet-Draft                    CBOR                          May 2020
    protocols in which it is used.  This lack of restrictions allows CBOR
    to be used in extremely constrained environments.
 
-   The rest of this section discusses some considerations in creating
-   CBOR-based protocols.  With few exceptions, it is advisory only and
 
 
 
@@ -1906,6 +1906,8 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 34]
 Internet-Draft                    CBOR                          May 2020
 
 
+   The rest of this section discusses some considerations in creating
+   CBOR-based protocols.  With few exceptions, it is advisory only and
    explicitly excludes any language from BCP 14 other than words that
    could be interpreted as "MAY" in the sense of BCP 14.  The exceptions
    aim at facilitating interoperability of CBOR-based protocols while
@@ -1952,8 +1954,6 @@ Internet-Draft                    CBOR                          May 2020
    expected to forward simple values and tags even if their specific
    codepoints are not registered at the time the encoder/decoder is
    written (Section 5.4).
-
-
 
 
 
@@ -2678,9 +2678,9 @@ Internet-Draft                    CBOR                          May 2020
    *  Description of semantics (URL) - This description is optional; the
       URL can point to something like an Internet-Draft or a web page.
 
-   Applicants exercising the First Come First Served range and making a
-   suggestion for a tag number that is not representable in 32 bits
-   (i.e., larger than 4294967295) should be aware that this could reduce
+
+
+
 
 
 
@@ -2689,9 +2689,6 @@ Bormann & Hoffman       Expires November 7, 2020               [Page 48]
 
 Internet-Draft                    CBOR                          May 2020
 
-
-   interoperability with implementations that do not support 64-bit
-   numbers.
 
 9.3.  Media Type ("MIME Type")
 
@@ -2736,6 +2733,9 @@ Internet-Draft                    CBOR                          May 2020
    Author:  IETF CBOR Working Group cbor@ietf.org [3]
 
    Change controller:  The IESG iesg@ietf.org [4]
+
+
+
 
 
 
