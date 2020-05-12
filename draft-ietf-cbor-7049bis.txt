@@ -2678,9 +2678,9 @@ Internet-Draft                    CBOR                          May 2020
    *  Description of semantics (URL) - This description is optional; the
       URL can point to something like an Internet-Draft or a web page.
 
-
-
-
+   Applicants exercising the First Come First Served range and making a
+   suggestion for a tag number that is not representable in 32 bits
+   (i.e., larger than 4294967295) should be aware that this could reduce
 
 
 
@@ -2689,6 +2689,9 @@ Bormann & Hoffman       Expires November 13, 2020              [Page 48]
 
 Internet-Draft                    CBOR                          May 2020
 
+
+   interoperability with implementations that do not support 64-bit
+   numbers.
 
 9.3.  Media Type ("MIME Type")
 
@@ -2733,9 +2736,6 @@ Internet-Draft                    CBOR                          May 2020
    Author:  IETF CBOR Working Group cbor@ietf.org [3]
 
    Change controller:  The IESG iesg@ietf.org [4]
-
-
-
 
 
 
