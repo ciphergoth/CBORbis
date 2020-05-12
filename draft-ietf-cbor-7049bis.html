@@ -363,7 +363,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Bormann, C. and P. Hoffman" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-cbor-7049bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2020-05-06" />
+  <meta name="dct.issued" scheme="ISO8601" content="2020-05-12" />
   <meta name="dct.abstract" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack. This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format. " />
   <meta name="description" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack. This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format. " />
 
@@ -391,8 +391,8 @@ ul.toc li {
 <td class="right">ICANN</td>
 </tr>
 <tr>
-<td class="left">Expires: November 7, 2020</td>
-<td class="right">May 06, 2020</td>
+<td class="left">Expires: November 13, 2020</td>
+<td class="right">May 12, 2020</td>
 </tr>
 
     	
@@ -413,7 +413,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on November 7, 2020.</p>
+<p>This Internet-Draft will expire on November 13, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2020 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -1037,7 +1037,7 @@ BF           -- Start indefinite-length map
 <p id="rfc.section.3.4.p.1">In CBOR, a data item can be enclosed by a tag to give it some additional semantics, as uniquely identified by a &#8220;tag number&#8221;.  The tag is major type 6, its argument (<a href="#encoding" class="xref">Section 3</a>) indicates the tag number, and it contains a single enclosed data item, the &#8220;tag content&#8221;.  (If a tag requires further structure to its content, this structure is provided by the enclosed data item.) We use the term &#8220;tag&#8221; for the entire data item consisting of both a tag number and the tag content: the tag content is the data item that is being tagged.</p>
 <p id="rfc.section.3.4.p.2">For example, assume that a byte string of length 12 is marked with a tag of number 2 to indicate it is a positive &#8220;bignum&#8221; (<a href="#bignums" class="xref">Section 3.4.3</a>).  The encoded data item would start with a byte 0b110_00010 (major type 6, additional information 2 for the tag number) followed by the encoded tag content: 0b010_01100 (major type 2, additional information of 12 for the length) followed by the 12 bytes of the bignum.</p>
 <p id="rfc.section.3.4.p.3">The definition of a tag number describes the additional semantics conveyed for tags with this tag number in the extended generic data model.  These semantics may include equivalence of some tagged data items with other data items, including some that can already be represented in the basic generic data model.  For instance, 0xc24101, a bignum the tag content of which is the byte string with the single byte 0x01, is equivalent to an integer 1, which could also be encoded for instance as 0x01, 0x1801, or 0x190001.  The tag definition may include the definition of a preferred serialization (<a href="#preferred" class="xref">Section 4.1</a>) that is recommended for generic encoders; this may prefer basic generic data model representations over ones that employ a tag.</p>
-<p id="rfc.section.3.4.p.4">The tag definition usually restricts what kinds of nested data item or items are valid for such tags.  Tag definitions may restrict their content to a very specific syntactic structure, as the tags defined in this document do, or they may aim at a more semantically defined definition of their content, as for instance tags 40 and 1040 do <a href="#rfc8746" class="xref">[rfc8746]</a>: These accept a number of different ways of representing arrays.</p>
+<p id="rfc.section.3.4.p.4">The tag definition usually restricts what kinds of nested data item or items are valid for such tags.  Tag definitions may restrict their content to a very specific syntactic structure, as the tags defined in this document do, or they may aim at a more semantically defined definition of their content, as for instance tags 40 and 1040 do <a href="#RFC8746" class="xref">[RFC8746]</a>: These accept a number of different ways of representing arrays.</p>
 <p id="rfc.section.3.4.p.5">As a matter of convention, many tags do not accept null or undefined values as tag content; instead, the expectation is that a null or undefined value can be used in place of the entire tag; <a href="#epochdatetimesect" class="xref">Section 3.4.2</a> provides some further considerations for one specific tag about the handling of this convention in application protocols and in mapping to platform types.</p>
 <p id="rfc.section.3.4.p.6">Decoders do not need to understand tags of every tag number, and tags may be of little value in applications where the implementation creating a particular CBOR data item and the implementation decoding that stream know the semantic meaning of each item in the data flow. Their primary purpose in this specification is to define common data types such as dates. A secondary purpose is to provide conversion hints when it is foreseen that the CBOR data item needs to be translated into a different format, requiring hints about the content of items.  Understanding the semantics of tags is optional for a decoder; it can simply present both the tag number and the tag content to the application, without interpreting the additional semantics of the tag.</p>
 <p id="rfc.section.3.4.p.7">A tag applies semantics to the data item it encloses.  Tags can nest:  If tag A encloses tag B, which encloses data item C, tag A applies to the result of applying tag B on data item C.</p>
@@ -1151,8 +1151,7 @@ BF           -- Start indefinite-length map
 </tbody>
 </table>
 <p id="rfc.section.3.4.p.9">Conceptually, tags are interpreted in the generic data model, not at (de-)serialization time.  A small number of tags (specifically, tag number 25 and tag number 29) have been registered with semantics that may require processing at (de-)serialization time: The decoder needs to be aware and the encoder needs to be in control of the exact sequence in which data items are encoded into the CBOR data stream.  This means these tags cannot be implemented on top of every generic CBOR encoder/decoder (which might not reflect the serialization order for entries in a map at the data model level and vice versa); their implementation therefore typically needs to be integrated into the generic encoder/decoder.  The definition of new tags with this property is NOT RECOMMENDED.</p>
-<p id="rfc.section.3.4.p.10">Note that IANA has allocated tag number 65535 as a convenience for implementers that want a single integer to indicate either a specific tag that is present or the absence of a tag [insert-reference-to-draft-here].  This tag is therefore not intended to occur in actual CBOR data items; implementations may want to flag such an occurrence as an error.</p>
-<p id="rfc.section.3.4.p.11">Protocols using tag numbers 0 and 1 extend the generic data model (<a href="#cbor-data-models" class="xref">Section 2</a>) with data items representing points in time; tag numbers 2 and 3, with arbitrarily sized integers; and tag numbers 4 and 5, with floating-point values of arbitrary size and precision.</p>
+<p id="rfc.section.3.4.p.10">Protocols using tag numbers 0 and 1 extend the generic data model (<a href="#cbor-data-models" class="xref">Section 2</a>) with data items representing points in time; tag numbers 2 and 3, with arbitrarily sized integers; and tag numbers 4 and 5, with floating-point values of arbitrary size and precision.</p>
 <h1 id="rfc.section.3.4.1">
 <a href="#rfc.section.3.4.1">3.4.1.</a> <a href="#stringdatetimesect" id="stringdatetimesect">Standard Date/Time String</a>
 </h1>
@@ -1819,11 +1818,6 @@ C5             -- Tag 5
 </tr>
 <tr>
 <td class="reference"><b id="RFC8746">[RFC8746]</b></td>
-<td class="top">
-<a>Bormann, C.</a>, "<a href="https://tools.ietf.org/html/rfc8746">Concise Binary Object Representation (CBOR) Tags for Typed Arrays</a>", RFC 8746, DOI 10.17487/RFC8746, February 2020.</td>
-</tr>
-<tr>
-<td class="reference"><b id="rfc8746">[rfc8746]</b></td>
 <td class="top">
 <a>Bormann, C.</a>, "<a href="https://tools.ietf.org/html/rfc8746">Concise Binary Object Representation (CBOR) Tags for Typed Arrays</a>", RFC 8746, DOI 10.17487/RFC8746, February 2020.</td>
 </tr>
@@ -2613,7 +2607,7 @@ def decode_half(half):
 <ul>
 <li>Made some use of new RFCXML functionality <a href="#RFC7991" class="xref">[RFC7991]</a>
 </li>
-<li>Updated references, e.g. for [RFC4627] to <a href="#RFC8259" class="xref">[RFC8259]</a> in many places, for [CNN-TERMS] to <a href="#RFC7228" class="xref">[RFC7228]</a>; added missing reference to <a href="#IEEE754" class="xref">[IEEE754]</a> and updated to <a href="#ECMA262" class="xref">[ECMA262]</a>
+<li>Updated references, e.g. for RFC4627 to <a href="#RFC8259" class="xref">[RFC8259]</a> in many places, for CNN-TERMS to <a href="#RFC7228" class="xref">[RFC7228]</a>; added missing reference to <a href="#IEEE754" class="xref">[IEEE754]</a> and updated to <a href="#ECMA262" class="xref">[ECMA262]</a>
 </li>
 <li>Fixed errata: in the example in Section 2.4.2 (&#8220;29&#8221; -&gt; &#8220;49&#8221;), and in the last paragraph of Section 3.6 (&#8220;0b000_11101&#8221; -&gt; &#8220;0b000_11001&#8221;)</li>
 <li>Added a comment to the last example in <a href="#indef" class="xref">Section 3.2.2</a> (added &#8220;Second value&#8221;)</li>
