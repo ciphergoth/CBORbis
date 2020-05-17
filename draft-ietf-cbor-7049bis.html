@@ -1029,7 +1029,7 @@ BF           -- Start indefinite-length map
 </tr>
 </tbody>
 </table>
-<p id="rfc.section.3.3.p.3">An encoder MUST NOT issue two-byte sequences that start with 0xf8 (major type = 7, additional information = 24) and continue with a byte less than 0x20 (32 decimal).  Such sequences are not well-formed.  (This implies that an encoder cannot encode false, true, null, or undefined in two-byte sequences, only the one-byte variants of these are well-formed.)</p>
+<p id="rfc.section.3.3.p.3">An encoder MUST NOT issue two-byte sequences that start with 0xf8 (major type = 7, additional information = 24) and continue with a byte less than 0x20 (32 decimal).  Such sequences are not well-formed.  (This implies that an encoder cannot encode false, true, null, or undefined in two-byte sequences, only the one-byte variants of these are well-formed; more generally speaking, each simple value only has a single representation variant).</p>
 <p id="rfc.section.3.3.p.4">The 5-bit values of 25, 26, and 27 are for 16-bit, 32-bit, and 64-bit IEEE 754 binary floating-point values <a href="#IEEE754" class="xref">[IEEE754]</a>.  These floating-point values are encoded in the additional bytes of the appropriate size.  (See <a href="#half-precision" class="xref">Appendix D</a> for some information about 16-bit floating-point numbers.)</p>
 <h1 id="rfc.section.3.4">
 <a href="#rfc.section.3.4">3.4.</a> <a href="#tags" id="tags">Tagging of Items</a>

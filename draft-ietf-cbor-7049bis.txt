@@ -1035,7 +1035,8 @@ Internet-Draft                    CBOR                          May 2020
    byte less than 0x20 (32 decimal).  Such sequences are not well-
    formed.  (This implies that an encoder cannot encode false, true,
    null, or undefined in two-byte sequences, only the one-byte variants
-   of these are well-formed.)
+   of these are well-formed; more generally speaking, each simple value
+   only has a single representation variant).
 
    The 5-bit values of 25, 26, and 27 are for 16-bit, 32-bit, and 64-bit
    IEEE 754 binary floating-point values [IEEE754].  These floating-
@@ -1057,7 +1058,6 @@ Internet-Draft                    CBOR                          May 2020
 
    For example, assume that a byte string of length 12 is marked with a
    tag of number 2 to indicate it is a positive "bignum"
-   (Section 3.4.3).  The encoded data item would start with a byte
 
 
 
@@ -1066,6 +1066,7 @@ Bormann & Hoffman       Expires November 18, 2020              [Page 19]
 Internet-Draft                    CBOR                          May 2020
 
 
+   (Section 3.4.3).  The encoded data item would start with a byte
    0b110_00010 (major type 6, additional information 2 for the tag
    number) followed by the encoded tag content: 0b010_01100 (major type
    2, additional information of 12 for the length) followed by the 12
@@ -1111,9 +1112,8 @@ Internet-Draft                    CBOR                          May 2020
    content to the application, without interpreting the additional
    semantics of the tag.
 
-   A tag applies semantics to the data item it encloses.  Tags can nest:
-   If tag A encloses tag B, which encloses data item C, tag A applies to
-   the result of applying tag B on data item C.
+
+
 
 
 
@@ -1122,16 +1122,16 @@ Bormann & Hoffman       Expires November 18, 2020              [Page 20]
 Internet-Draft                    CBOR                          May 2020
 
 
+   A tag applies semantics to the data item it encloses.  Tags can nest:
+   If tag A encloses tag B, which encloses data item C, tag A applies to
+   the result of applying tag B on data item C.
+
    IANA maintains a registry of tag numbers as described in Section 9.2.
    Table 5 provides a list of tag numbers that were defined in
    [RFC7049], with definitions in the rest of this section.  Note that
    many other tag numbers have been defined since the publication of
    [RFC7049]; see the registry described at Section 9.2 for the complete
    list.
-
-
-
-
 
 
 
