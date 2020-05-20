@@ -363,7 +363,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Bormann, C. and P. Hoffman" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-cbor-7049bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2020-05-17" />
+  <meta name="dct.issued" scheme="ISO8601" content="2020-05-20" />
   <meta name="dct.abstract" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack. This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format. " />
   <meta name="description" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack. This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format. " />
 
@@ -391,8 +391,8 @@ ul.toc li {
 <td class="right">ICANN</td>
 </tr>
 <tr>
-<td class="left">Expires: November 18, 2020</td>
-<td class="right">May 17, 2020</td>
+<td class="left">Expires: November 21, 2020</td>
+<td class="right">May 20, 2020</td>
 </tr>
 
     	
@@ -413,7 +413,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on November 18, 2020.</p>
+<p>This Internet-Draft will expire on November 21, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2020 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -1492,7 +1492,7 @@ C5             -- Tag 5
 
 <ul>
 <li>the &#8220;simple&#8221; space (values in major type 7).  Of the 24 efficient (and 224 slightly less efficient) values, only a small number have been allocated.  Implementations receiving an unknown simple data item may be able to process it as such, given that the structure of the value is indeed simple. The IANA registry in <a href="#ianasimple" class="xref">Section 9.1</a> is the appropriate way to address the extensibility of this codepoint space.</li>
-<li>the &#8220;tag&#8221; space (values in major type 6).  Again, only a small part of the codepoint space has been allocated, and the space is abundant (although the early numbers are more efficient than the later ones).  Implementations receiving an unknown tag number can choose to simply ignore it (process just the enclosed tag content) or to process it as an unknown tag number wrapping the tag content. The IANA registry in <a href="#ianatags" class="xref">Section 9.2</a> is the appropriate way to address the extensibility of this codepoint space.</li>
+<li>the &#8220;tag&#8221; space (values in major type 6).  Again, only a small part of the codepoint space has been allocated, and the space is abundant (although the early numbers are more efficient than the later ones).  Implementations receiving an unknown tag number can choose to process just the enclosed tag content or, preferably, to process the tag as an unknown tag number wrapping the tag content. The IANA registry in <a href="#ianatags" class="xref">Section 9.2</a> is the appropriate way to address the extensibility of this codepoint space.</li>
 <li>the &#8220;additional information&#8221; space.  An implementation receiving an unknown additional information value has no way to continue decoding, so allocating codepoints to this space is a major step.    There are also very few codepoints left.  See also <a href="#curating" class="xref">Section 7.2</a>.</li>
 </ul>
 <h1 id="rfc.section.7.2">
