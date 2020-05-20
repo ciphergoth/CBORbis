@@ -1371,7 +1371,7 @@ C5             -- Tag 5
 
 <dl>
 <dt>Duplicate keys in a map:</dt>
-<dd style="margin-left: 8">Generic decoders (<a href="#generic" class="xref">Section 5.2</a>) make data available to applications using the native CBOR data model.  That data model includes maps (key-value mappings with unique keys), not multimaps (key-value mappings where multiple entries can have the same key).  Thus, a generic decoder that gets a CBOR map item that has duplicate keys will decode to a map with only one instance of that key, or it might stop processing altogether.  On the other hand, a &#8220;streaming decoder&#8221; may not even be able to notice (<a href="#map-keys" class="xref">Section 5.6</a>).</dd>
+<dd style="margin-left: 8">Generic decoders (<a href="#generic" class="xref">Section 5.2</a>) make data available to applications using the native CBOR data model.  That data model includes maps (key-value mappings with unique keys), not multimaps (key-value mappings where multiple entries can have the same key).  Thus, a generic decoder that gets a CBOR map item that has duplicate keys will decode to a map with only one instance of that key, or it might stop processing altogether.  On the other hand, a &#8220;streaming decoder&#8221; may not even be able to notice.  See <a href="#map-keys" class="xref">Section 5.6</a> for more discussion of keys in maps.</dd>
 <dt>Invalid UTF-8 string:</dt>
 <dd style="margin-left: 8">A decoder might or might not want to verify that the sequence of bytes in a UTF-8 string (major type 3) is actually valid UTF-8 and react appropriately.</dd>
 </dl>
