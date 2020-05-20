@@ -630,7 +630,7 @@ ul.toc li {
 <dt>Encoder:</dt>
 <dd style="margin-left: 8">A process that generates the (well-formed) representation format of a CBOR data item from application information.</dd>
 <dt>Data Stream:</dt>
-<dd style="margin-left: 8">A sequence of zero or more data items, not further assembled into a larger containing data item.  The independent data items that make up a data stream are sometimes also referred to as &#8220;top-level data items&#8221;.</dd>
+<dd style="margin-left: 8">A sequence of zero or more data items, not further assembled into a larger containing data item (see <a href="#RFC8742" class="xref">[RFC8742]</a> for one application).  The independent data items that make up a data stream are sometimes also referred to as &#8220;top-level data items&#8221;.</dd>
 <dt>Well-formed:</dt>
 <dd style="margin-left: 8">A data item that follows the syntactic structure of CBOR.  A well-formed data item uses the initial bytes and the byte strings and/or data items that are implied by their values as defined in CBOR and does not include following extraneous data. CBOR decoders by definition only return contents from well-formed data items.</dd>
 <dt>Valid:</dt>
@@ -1150,7 +1150,7 @@ BF           -- Start indefinite-length map
 </tr>
 </tbody>
 </table>
-<p id="rfc.section.3.4.p.9">Conceptually, tags are interpreted in the generic data model, not at (de-)serialization time.  A small number of tags (specifically, tag number 25 and tag number 29) have been registered with semantics that may require processing at (de-)serialization time: The decoder needs to be aware and the encoder needs to be in control of the exact sequence in which data items are encoded into the CBOR data stream.  This means these tags cannot be implemented on top of every generic CBOR encoder/decoder (which might not reflect the serialization order for entries in a map at the data model level and vice versa); their implementation therefore typically needs to be integrated into the generic encoder/decoder.  The definition of new tags with this property is NOT RECOMMENDED.</p>
+<p id="rfc.section.3.4.p.9">Conceptually, tags are interpreted in the generic data model, not at (de-)serialization time.  A small number of tags (specifically, tag number 25 and tag number 29) have been registered with semantics that may require processing at (de-)serialization time: The decoder needs to be aware and the encoder needs to be in control of the exact sequence in which data items are encoded into the CBOR data item.  This means these tags cannot be implemented on top of every generic CBOR encoder/decoder (which might not reflect the serialization order for entries in a map at the data model level and vice versa); their implementation therefore typically needs to be integrated into the generic encoder/decoder.  The definition of new tags with this property is NOT RECOMMENDED.</p>
 <p id="rfc.section.3.4.p.10">IANA allocated tag numbers 65535, 4294967295, and 18446744073709551615 (binary all-ones in 16-bit, 32-bit, and 64-bit).  These can be used as a convenience for implementers that want a single integer to indicate either that a specific tag is present, or the absence of a tag.  That allocation is described in Section 10 of <a href="#I-D.bormann-cbor-notable-tags" class="xref">[I-D.bormann-cbor-notable-tags]</a>.  These tags are not intended to occur in actual CBOR data items; implementations may flag such an occurrence as an error.</p>
 <p id="rfc.section.3.4.p.11">Protocols using tag numbers 0 and 1 extend the generic data model (<a href="#cbor-data-models" class="xref">Section 2</a>) with data items representing points in time; tag numbers 2 and 3, with arbitrarily sized integers; and tag numbers 4 and 5, with floating-point values of arbitrary size and precision.</p>
 <h1 id="rfc.section.3.4.1">
@@ -1371,7 +1371,7 @@ C5             -- Tag 5
 
 <dl>
 <dt>Duplicate keys in a map:</dt>
-<dd style="margin-left: 8">Generic decoders (<a href="#generic" class="xref">Section 5.2</a>) make data available to applications using the native CBOR data model.  That data model includes maps (key-value mappings with unique keys), not multimaps (key-value mappings where multiple entries can have the same key).  Thus, a generic decoder that gets a CBOR map item that has duplicate keys will decode to a map with only one instance of that key, or it might stop processing altogether.  On the other hand, a &#8220;streaming decoder&#8221; may not even be able to notice.  See <a href="#map-keys" class="xref">Section 5.6</a> for more discussion of keys in maps.</dd>
+<dd style="margin-left: 8">Generic decoders (<a href="#generic" class="xref">Section 5.2</a>) make data available to applications using the native CBOR data model.  That data model includes maps (key-value mappings with unique keys), not multimaps (key-value mappings where multiple entries can have the same key).  Thus, a generic decoder that gets a CBOR map item that has duplicate keys will decode to a map with only one instance of that key, or it might stop processing altogether.  On the other hand, a &#8220;streaming decoder&#8221; may not even be able to notice (<a href="#map-keys" class="xref">Section 5.6</a>).</dd>
 <dt>Invalid UTF-8 string:</dt>
 <dd style="margin-left: 8">A decoder might or might not want to verify that the sequence of bytes in a UTF-8 string (major type 3) is actually valid UTF-8 and react appropriately.</dd>
 </dl>
@@ -2550,7 +2550,7 @@ def decode_half(half):
 <a href="#rfc.appendix.E.1">E.1.</a> <a href="#asn1-der-ber-and-per" id="asn1-der-ber-and-per">ASN.1 DER, BER, and PER</a>
 </h1>
 <p><a href="#ASN.1" class="xref">[ASN.1]</a> has many serializations. In the IETF, DER and BER are the most common. The serialized output is not particularly compact for many items, and the code needed to decode numeric items can be complex on a constrained device.</p>
-<p id="rfc.section.E.1.p.2">Few (if any) IETF protocols have adopted one of the several variants of Packed Encoding Rules (PER).  There could be many reasons for this, but one that is commonly stated is that PER makes use of the schema even for parsing the surface structure of the data stream, requiring significant tool support.  There are different versions of the ASN.1 schema language in use, which has also hampered adoption.</p>
+<p id="rfc.section.E.1.p.2">Few (if any) IETF protocols have adopted one of the several variants of Packed Encoding Rules (PER).  There could be many reasons for this, but one that is commonly stated is that PER makes use of the schema even for parsing the surface structure of the data item, requiring significant tool support.  There are different versions of the ASN.1 schema language in use, which has also hampered adoption.</p>
 <h1 id="rfc.appendix.E.2">
 <a href="#rfc.appendix.E.2">E.2.</a> <a href="#messagepack" id="messagepack">MessagePack</a>
 </h1>
