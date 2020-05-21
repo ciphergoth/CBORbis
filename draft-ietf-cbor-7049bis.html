@@ -363,7 +363,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Bormann, C. and P. Hoffman" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-cbor-7049bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2020-05-20" />
+  <meta name="dct.issued" scheme="ISO8601" content="2020-05-21" />
   <meta name="dct.abstract" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack. This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format. " />
   <meta name="description" content="The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack. This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format. " />
 
@@ -391,8 +391,8 @@ ul.toc li {
 <td class="right">ICANN</td>
 </tr>
 <tr>
-<td class="left">Expires: November 21, 2020</td>
-<td class="right">May 20, 2020</td>
+<td class="left">Expires: November 22, 2020</td>
+<td class="right">May 21, 2020</td>
 </tr>
 
     	
@@ -413,7 +413,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on November 21, 2020.</p>
+<p>This Internet-Draft will expire on November 22, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2020 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -719,7 +719,7 @@ ul.toc li {
 <dt>Major type 2:</dt>
 <dd style="margin-left: 8">a byte string.  The number of bytes in the string is equal to the argument.  For example, a byte string whose length is 5 would have an initial byte of 0b010_00101 (major type 2, additional information 5 for the length), followed by 5 bytes of binary content. A byte string whose length is 500 would have 3 initial bytes of 0b010_11001 (major type 2, additional information 25 to indicate a two-byte length) followed by the two bytes 0x01f4 for a length of 500, followed by 500 bytes of binary content.</dd>
 <dt>Major type 3:</dt>
-<dd style="margin-left: 8">a text string (<a href="#cbor-data-models" class="xref">Section 2</a>), encoded as UTF-8 (<a href="#RFC3629" class="xref">[RFC3629]</a>). The number of bytes in the string is equal to the argument.  A string containing an invalid UTF-8 sequence is well-formed but invalid. This type is provided for systems that need to interpret or display human-readable text, and allows the differentiation between unstructured bytes and text that has a specified repertoire and encoding.  In contrast to formats such as JSON, the Unicode characters in this type are never escaped. Thus, a newline character (U+000A) is always represented in a string as the byte 0x0a, and never as the bytes 0x5c6e (the characters &#8220;\&#8221; and &#8220;n&#8221;) or as 0x5c7530303061 (the characters &#8220;\&#8221;, &#8220;u&#8221;, &#8220;0&#8221;, &#8220;0&#8221;, &#8220;0&#8221;, and &#8220;a&#8221;).</dd>
+<dd style="margin-left: 8">a text string (<a href="#cbor-data-models" class="xref">Section 2</a>), encoded as UTF-8 (<a href="#RFC3629" class="xref">[RFC3629]</a>). The number of bytes in the string is equal to the argument.  A string containing an invalid UTF-8 sequence is well-formed but invalid (<a href="#terminology" class="xref">Section 1.2</a>). This type is provided for systems that need to interpret or display human-readable text, and allows the differentiation between unstructured bytes and text that has a specified repertoire and encoding.  In contrast to formats such as JSON, the Unicode characters in this type are never escaped. Thus, a newline character (U+000A) is always represented in a string as the byte 0x0a, and never as the bytes 0x5c6e (the characters &#8220;\&#8221; and &#8220;n&#8221;) or as 0x5c7530303061 (the characters &#8220;\&#8221;, &#8220;u&#8221;, &#8220;0&#8221;, &#8220;0&#8221;, &#8220;0&#8221;, and &#8220;a&#8221;).</dd>
 <dt>Major type 4:</dt>
 <dd style="margin-left: 8">an array of data items.  In other formats, arrays are also called lists, sequences, or tuples (a &#8220;CBOR sequence&#8221; is something slightly different, though <a href="#RFC8742" class="xref">[RFC8742]</a>).  The argument is the number of data items in the array.  Items in an array do not need to all be of the same type.  For example, an array that contains 10 items of any type would have an initial byte of 0b100_01010 (major type of 4, additional information of 10 for the length) followed by the 10 remaining items.</dd>
 <dt>Major type 5:</dt>
@@ -1354,7 +1354,7 @@ C5             -- Tag 5
 <h1 id="rfc.section.5.3">
 <a href="#rfc.section.5.3">5.3.</a> <a href="#semantic-errors" id="semantic-errors">Validity of Items</a>
 </h1>
-<p id="rfc.section.5.3.p.1">A well-formed but invalid CBOR data item presents a problem with interpreting the data encoded in it in the CBOR data model.  A CBOR-based protocol could be specified in several layers, in which the lower layers don&#8217;t process the semantics of some of the CBOR data they forward.  These layers can&#8217;t notice any validity errors in data they don&#8217;t process and MUST forward that data as-is.  The first layer that does process the semantics of an invalid CBOR item MUST take one of two choices:</p>
+<p id="rfc.section.5.3.p.1">A well-formed but invalid CBOR data item (<a href="#terminology" class="xref">Section 1.2</a>) presents a problem with interpreting the data encoded in it in the CBOR data model.  A CBOR-based protocol could be specified in several layers, in which the lower layers don&#8217;t process the semantics of some of the CBOR data they forward.  These layers can&#8217;t notice any validity errors in data they don&#8217;t process and MUST forward that data as-is.  The first layer that does process the semantics of an invalid CBOR item MUST take one of two choices:</p>
 <p></p>
 
 <ol>
