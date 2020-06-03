@@ -131,13 +131,13 @@ Internet-Draft                    CBOR                         June 2020
      5.5.  Numbers . . . . . . . . . . . . . . . . . . . . . . . . .  38
      5.6.  Specifying Keys for Maps  . . . . . . . . . . . . . . . .  39
        5.6.1.  Equivalence of Keys . . . . . . . . . . . . . . . . .  41
-     5.7.  Undefined Values  . . . . . . . . . . . . . . . . . . . .  41
+     5.7.  Undefined Values  . . . . . . . . . . . . . . . . . . . .  42
    6.  Converting Data between CBOR and JSON . . . . . . . . . . . .  42
      6.1.  Converting from CBOR to JSON  . . . . . . . . . . . . . .  42
      6.2.  Converting from JSON to CBOR  . . . . . . . . . . . . . .  43
    7.  Future Evolution of CBOR  . . . . . . . . . . . . . . . . . .  44
      7.1.  Extension Points  . . . . . . . . . . . . . . . . . . . .  45
-     7.2.  Curating the Additional Information Space . . . . . . . .  45
+     7.2.  Curating the Additional Information Space . . . . . . . .  46
    8.  Diagnostic Notation . . . . . . . . . . . . . . . . . . . . .  46
      8.1.  Encoding Indicators . . . . . . . . . . . . . . . . . . .  47
    9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  48
@@ -1943,17 +1943,17 @@ Internet-Draft                    CBOR                         June 2020
 
 5.2.  Generic Encoders and Decoders
 
-   A generic CBOR decoder can decode all well-formed CBOR data and
-   present them to an application.  See Appendix C.
+   A generic CBOR decoder can decode all well-formed encoded CBOR data
+   items and present the data items to an application.  See Appendix C.
+   (The diagnostic notation, Section 8, may be used to present well-
+   formed CBOR values to humans.)
 
-   Even though CBOR attempts to minimize these cases, not all well-
-   formed CBOR data is valid: for example, the encoded text string
-   "0x62c0ae" does not contain valid UTF-8 and so is not a valid CBOR
-   item.  Also, specific tags may make semantic constraints that may be
-   violated, such as a bignum tag enclosing another tag, or an instance
-   of tag number 0 containing a byte string, or containing a text string
-   with contents that do not match [RFC3339]'s "date-time" production.
-   There is no requirement that generic encoders and decoders make
+   Generic CBOR encoders provide an application interface that allows
+   the application to specify any well-formed value to be encoded as a
+   CBOR data item, including simple values and tags unknown to the
+   encoder.
+
+
 
 
 
@@ -1962,19 +1962,20 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 35]
 Internet-Draft                    CBOR                         June 2020
 
 
-   unnatural choices for their application interface to enable the
-   processing of invalid data.  Generic encoders and decoders are
-   expected to forward simple values and tags even if their specific
+   Even though CBOR attempts to minimize these cases, not all well-
+   formed CBOR data is valid: for example, the encoded text string
+   "0x62c0ae" does not contain valid UTF-8 (because [RFC3629] requires
+   always using the shortest form) and so is not a valid CBOR item.
+   Also, specific tags may make semantic constraints that may be
+   violated, for instance by a bignum tag enclosing another tag, or by
+   an instance of tag number 0 containing a byte string, or containing a
+   text string with contents that do not match [RFC3339]'s "date-time"
+   production.  There is no requirement that generic encoders and
+   decoders make unnatural choices for their application interface to
+   enable the processing of invalid data.  Generic encoders and decoders
+   are expected to forward simple values and tags even if their specific
    codepoints are not registered at the time the encoder/decoder is
    written (Section 5.4).
-
-   Generic decoders provide ways to present well-formed CBOR values,
-   both valid and invalid, to an application.  The diagnostic notation
-   (Section 8) may be used to present well-formed CBOR values to humans.
-
-   Generic encoders provide an application interface that allows the
-   application to specify any well-formed value, including simple values
-   and tags unknown to the encoder.
 
 5.3.  Validity of Items
 
@@ -2009,7 +2010,6 @@ Internet-Draft                    CBOR                         June 2020
       not multimaps (key-value mappings where multiple entries can have
       the same key).  Thus, a generic decoder that gets a CBOR map item
       that has duplicate keys will decode to a map with only one
-      instance of that key, or it might stop processing altogether.  On
 
 
 
@@ -2018,6 +2018,7 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 36]
 Internet-Draft                    CBOR                         June 2020
 
 
+      instance of that key, or it might stop processing altogether.  On
       the other hand, a "streaming decoder" may not even be able to
       notice.  See Section 5.6 for more discussion of keys in maps.
 
@@ -2064,8 +2065,7 @@ Internet-Draft                    CBOR                         June 2020
 
    *  It can report an error (and not return data).  Note that this
       error is not a validity error per se.  This kind of error is more
-      likely to be raised by a decoder that would be performing validity
-      checking if this were a known case.
+
 
 
 
@@ -2073,6 +2073,9 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 37]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+      likely to be raised by a decoder that would be performing validity
+      checking if this were a known case.
 
    *  It can emit the unknown item (type, value, and, for tags, the
       decoded tagged data item) to the application calling the decoder,
@@ -2119,9 +2122,6 @@ Internet-Draft                    CBOR                         June 2020
    specific integer encodings that are longer than necessary for the
    application, such as to save the need to implement 64-bit integers.
    There is an expectation that encoders will use the most compact
-   integer representation that can represent a given value.  However, a
-   compact application that does not require deterministic encoding
-   should accept values that use a longer-than-needed encoding (such as
 
 
 
@@ -2130,6 +2130,9 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 38]
 Internet-Draft                    CBOR                         June 2020
 
 
+   integer representation that can represent a given value.  However, a
+   compact application that does not require deterministic encoding
+   should accept values that use a longer-than-needed encoding (such as
    encoding "0" as 0b000_11001 followed by two bytes of 0x00) as long as
    the application can decode an integer of the given size.  Similar
    considerations apply to floating-point values; decoding both
@@ -2174,9 +2177,6 @@ Internet-Draft                    CBOR                         June 2020
    prescribe a specific handling of the entries with the identical keys,
    except that it might have a rule that having identical keys in a map
    indicates a malformed map and that the decoder has to stop with an
-   error.  When processing maps that exhibit entries with duplicate
-   keys, a generic decoder might do one of the following:
-
 
 
 
@@ -2185,6 +2185,9 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 39]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   error.  When processing maps that exhibit entries with duplicate
+   keys, a generic decoder might do one of the following:
 
    *  Not accept maps duplicate keys (that is, enforce validity for
       maps, see also Section 5.4).  These generic decoders are
@@ -2230,9 +2233,6 @@ Internet-Draft                    CBOR                         June 2020
    number of frequently used keys can be identified should consider
    using small integers as keys; for instance, a set of 24 or fewer
    frequent keys can be encoded in a single byte as unsigned integers,
-   up to 48 if negative integers are also used.  Less frequently
-   occurring keys can then use integers with longer encodings.
-
 
 
 
@@ -2241,6 +2241,9 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 40]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   up to 48 if negative integers are also used.  Less frequently
+   occurring keys can then use integers with longer encodings.
 
 5.6.1.  Equivalence of Keys
 
@@ -2285,10 +2288,7 @@ Internet-Draft                    CBOR                         June 2020
    distinguish values for map keys that are equal for this purpose at
    the generic data model level.
 
-5.7.  Undefined Values
 
-   In some CBOR-based protocols, the simple value (Section 3.3) of
-   Undefined might be used by an encoder as a substitute for a data item
 
 
 
@@ -2298,6 +2298,10 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 41]
 Internet-Draft                    CBOR                         June 2020
 
 
+5.7.  Undefined Values
+
+   In some CBOR-based protocols, the simple value (Section 3.3) of
+   Undefined might be used by an encoder as a substitute for a data item
    with an encoding problem, in order to allow the rest of the enclosing
    data items to be encoded without harm.
 
@@ -2342,10 +2346,6 @@ Internet-Draft                    CBOR                         June 2020
       will cause a key collision if the tags are different but the
       strings are the same.
 
-   *  False (major type 7, additional information 20) becomes a JSON
-      false.
-
-
 
 
 
@@ -2353,6 +2353,9 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 42]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   *  False (major type 7, additional information 20) becomes a JSON
+      false.
 
    *  True (major type 7, additional information 21) becomes a JSON
       true.
@@ -2399,9 +2402,6 @@ Internet-Draft                    CBOR                         June 2020
       represented as integer is -2**53+1..2**53-1 (fully exploiting the
       range for exact integers in the binary64 representation often used
       for decoding JSON [RFC7493]).  A CBOR-based protocol, or a generic
-      converter implementation, may choose -2**32..2**32-1 or
-      -2**64..2**64-1 (fully using the integer ranges available in CBOR
-      with uint32_t or uint64_t, respectively) or even -2**31..2**31-1
 
 
 
@@ -2410,6 +2410,9 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 43]
 Internet-Draft                    CBOR                         June 2020
 
 
+      converter implementation, may choose -2**32..2**32-1 or
+      -2**64..2**64-1 (fully using the integer ranges available in CBOR
+      with uint32_t or uint64_t, respectively) or even -2**31..2**31-1
       or -2**63..2**63-1 (using popular ranges for two's complement
       signed integers).  (If the JSON was generated from a JavaScript
       implementation, its precision is already limited to 53 bits
@@ -2454,10 +2457,7 @@ Internet-Draft                    CBOR                         June 2020
    based protocols.  Therefore, such best practices are outside the
    scope of this specification.
 
-   However, facilitating the evolution of CBOR itself is very well
-   within its scope.  CBOR is designed to both provide a stable basis
-   for development of CBOR-based protocols and to be able to evolve.
-   Since a successful protocol may live for decades, CBOR needs to be
+
 
 
 
@@ -2466,6 +2466,10 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 44]
 Internet-Draft                    CBOR                         June 2020
 
 
+   However, facilitating the evolution of CBOR itself is very well
+   within its scope.  CBOR is designed to both provide a stable basis
+   for development of CBOR-based protocols and to be able to evolve.
+   Since a successful protocol may live for decades, CBOR needs to be
    designed for decades of use and evolution.  This section provides
    some guidance for the evolution of CBOR.  It is necessarily more
    subjective than other parts of this document.  It is also necessarily
@@ -2508,12 +2512,8 @@ Internet-Draft                    CBOR                         June 2020
       decoding, so allocating codepoints to this space is a major step.
       There are also very few codepoints left.  See also Section 7.2.
 
-7.2.  Curating the Additional Information Space
 
-   The human mind is sometimes drawn to filling in little perceived gaps
-   to make something neat.  We expect the remaining gaps in the
-   codepoint space for the additional information values to be an
-   attractor for new ideas, just because they are there.
+
 
 
 
@@ -2521,6 +2521,13 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 45]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+7.2.  Curating the Additional Information Space
+
+   The human mind is sometimes drawn to filling in little perceived gaps
+   to make something neat.  We expect the remaining gaps in the
+   codepoint space for the additional information values to be an
+   attractor for new ideas, just because they are there.
 
    The present specification does not manage the additional information
    codepoint space by an IANA registry.  Instead, allocations out of
@@ -2564,19 +2571,18 @@ Internet-Draft                    CBOR                         June 2020
    number, followed by the tag content in parentheses; for instance, an
    RFC 3339 (ISO 8601) date could be notated as:
 
-      0("2013-03-21T20:04:00Z")
-
-   or the equivalent relative time as
-
-      1(1363896240)
-
-
 
 
 Bormann & Hoffman       Expires December 5, 2020               [Page 46]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+      0("2013-03-21T20:04:00Z")
+
+   or the equivalent relative time as
+
+      1(1363896240)
 
    Byte strings are notated in one of the base encodings, without
    padding, enclosed in single quotes, prefixed by >h< for base16, >b32<
@@ -2621,18 +2627,15 @@ Internet-Draft                    CBOR                         June 2020
    encoding indicator "_" is thus an abbreviation of the full form "_7",
    which is not used.)
 
-   Byte and text strings of indefinite length can be notated in the form
-   (_ h'0123', h'4567') and (_ "foo", "bar").
-
-
-
-
 
 
 Bormann & Hoffman       Expires December 5, 2020               [Page 47]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   Byte and text strings of indefinite length can be notated in the form
+   (_ h'0123', h'4567') and (_ "foo", "bar").
 
 9.  IANA Considerations
 
@@ -2680,15 +2683,15 @@ Internet-Draft                    CBOR                         June 2020
 
    *  Point of contact
 
-   *  Description of semantics (URL) - This description is optional; the
-      URL can point to something like an Internet-Draft or a web page.
-
 
 
 Bormann & Hoffman       Expires December 5, 2020               [Page 48]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   *  Description of semantics (URL) - This description is optional; the
+      URL can point to something like an Internet-Draft or a web page.
 
    Applicants exercising the First Come First Served range and making a
    suggestion for a tag number that is not representable in 32 bits
@@ -2736,15 +2739,14 @@ Internet-Draft                    CBOR                         June 2020
 
    Restrictions on usage: none
 
-   Author:  IETF CBOR Working Group cbor@ietf.org [3]
-
-
 
 
 Bormann & Hoffman       Expires December 5, 2020               [Page 49]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   Author:  IETF CBOR Working Group cbor@ietf.org [3]
 
    Change controller:  The IESG iesg@ietf.org [4]
 
@@ -2790,9 +2792,7 @@ Internet-Draft                    CBOR                         June 2020
          resolves per the +cbor rules, then process as specified in
          +cbor.
 
-      -  For cases defined in +cbor, where the fragment identifier does
-         not resolve per the +cbor rules, then process as specified in
-         "xxx/yyy+cbor".
+
 
 
 
@@ -2801,6 +2801,10 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 50]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+      -  For cases defined in +cbor, where the fragment identifier does
+         not resolve per the +cbor rules, then process as specified in
+         "xxx/yyy+cbor".
 
       -  For cases not defined in +cbor, then process as specified in
          "xxx/yyy+cbor".
@@ -2846,10 +2850,6 @@ Internet-Draft                    CBOR                         June 2020
    the first step to its robustness.  Input that is not well-formed CBOR
    causes no further processing from the point where the lack of well-
    formedness was detected.  If possible, any data decoded up to this
-   point should have no impact on the application using the CBOR
-   decoder.
-
-
 
 
 
@@ -2857,6 +2857,9 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 51]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   point should have no impact on the application using the CBOR
+   decoder.
 
    In addition to ascertaining well-formedness, a CBOR decoder might
    also perform validity checks on the CBOR data.  Alternatively, it can
@@ -2903,9 +2906,6 @@ Internet-Draft                    CBOR                         June 2020
    cannot know about all requirements that an application poses on its
    input data; it is therefore not relieving the application from
    performing its own input checking.  Also, since the set of defined
-   tag numbers evolves, the application may employ a tag number that is
-   not yet supported for validity checking by the generic decoder it
-   uses.  Generic decoders therefore need to provide documentation which
 
 
 
@@ -2914,6 +2914,9 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 52]
 Internet-Draft                    CBOR                         June 2020
 
 
+   tag numbers evolves, the application may employ a tag number that is
+   not yet supported for validity checking by the generic decoder it
+   uses.  Generic decoders therefore need to provide documentation which
    tag numbers they support and what validity checking they can provide
    for each of them as well as for basic CBOR validity (UTF-8 checking,
    duplicate map key checking).
@@ -2958,9 +2961,6 @@ Internet-Draft                    CBOR                         June 2020
               Syndication Format", RFC 4287, DOI 10.17487/RFC4287,
               December 2005, <https://www.rfc-editor.org/info/rfc4287>.
 
-   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
-              Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
-              <https://www.rfc-editor.org/info/rfc4648>.
 
 
 
@@ -2969,6 +2969,10 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 53]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
+              Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
+              <https://www.rfc-editor.org/info/rfc4648>.
 
    [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
               Writing an IANA Considerations Section in RFCs", BCP 26,
@@ -3014,10 +3018,6 @@ Internet-Draft                    CBOR                         June 2020
               Parameters",
               <http://www.iana.org/assignments/core-parameters>.
 
-   [IANA.media-type-structured-suffix]
-              IANA, "Structured Syntax Suffix Registry",
-              <http://www.iana.org/assignments/media-type-structured-
-              suffix>.
 
 
 
@@ -3025,6 +3025,11 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 54]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   [IANA.media-type-structured-suffix]
+              IANA, "Structured Syntax Suffix Registry",
+              <http://www.iana.org/assignments/media-type-structured-
+              suffix>.
 
    [IANA.media-types]
               IANA, "Media Types",
@@ -3067,11 +3072,6 @@ Internet-Draft                    CBOR                         June 2020
               DOI 10.17487/RFC8259, December 2017,
               <https://www.rfc-editor.org/info/rfc8259>.
 
-   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
-              Definition Language (CDDL): A Notational Convention to
-              Express Concise Binary Object Representation (CBOR) and
-              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
-              June 2019, <https://www.rfc-editor.org/info/rfc8610>.
 
 
 
@@ -3081,6 +3081,12 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 55]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
+              Definition Language (CDDL): A Notational Convention to
+              Express Concise Binary Object Representation (CBOR) and
+              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
+              June 2019, <https://www.rfc-editor.org/info/rfc8610>.
 
    [RFC8618]  Dickinson, J., Hague, J., Dickinson, S., Manderson, T.,
               and J. Bond, "Compacted-DNS (C-DNS): A Format for DNS
@@ -3119,12 +3125,6 @@ Internet-Draft                    CBOR                         June 2020
    [6] mailto:art@ietf.org
 
    [7] mailto:iesg@ietf.org
-
-
-
-
-
-
 
 
 
