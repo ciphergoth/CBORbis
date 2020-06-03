@@ -1216,13 +1216,13 @@ C5             -- Tag 5
 <h1 id="rfc.section.3.4.5.3">
 <a href="#rfc.section.3.4.5.3">3.4.5.3.</a> <a href="#encodedtext" id="encodedtext">Encoded Text</a>
 </h1>
-<p id="rfc.section.3.4.5.3.p.1">Some text strings hold data that have formats widely used on the Internet, and sometimes those formats can be validated and presented to the application in appropriate form by the decoder. There are tags for some of these formats. As with tag numbers 21 to 23, if these tags are applied to an item other than a text string, they apply to all text string data items it contains.</p>
+<p id="rfc.section.3.4.5.3.p.1">Some text strings hold data that have formats widely used on the Internet, and sometimes those formats can be validated and presented to the application in appropriate form by the decoder. There are tags for some of these formats.</p>
 <p></p>
 
 <ul>
 <li>Tag number 32 is for URIs, as defined in <a href="#RFC3986" class="xref">[RFC3986]</a>.  If the text string doesn&#8217;t match the <samp>URI-reference</samp> production, the string is invalid.</li>
 <li>Tag numbers 33 and 34 are for base64url- and base64-encoded text strings, respectively, as defined in <a href="#RFC4648" class="xref">[RFC4648]</a>.  If any of: <ul>
-<li>the encoded text string contains non-alphabet characters or only 1 character in the last block of 4, or</li>
+<li>the encoded text string contains non-alphabet characters or only 1 alphabet character in the last block of 4 (where alphabet is defined by Section 5 of <a href="#RFC4648" class="xref">[RFC4648]</a> for tag number 33 and Section 4 of <a href="#RFC4648" class="xref">[RFC4648]</a> for tag number 34), or</li>
 <li>the padding bits in a 2- or 3-character block are not 0, or</li>
 <li>the base64 encoding has the wrong number of padding characters, or</li>
 <li>the base64url encoding has padding characters,</li>
@@ -1486,14 +1486,14 @@ C5             -- Tag 5
 <a href="#rfc.section.7.1">7.1.</a> <a href="#extension-points" id="extension-points">Extension Points</a>
 </h1>
 <p id="rfc.section.7.1.p.1">In a protocol design, opportunities for evolution are often included in the form of extension points.  For example, there may be a codepoint space that is not fully allocated from the outset, and the protocol is designed to tolerate and embrace implementations that start using more codepoints than initially allocated.</p>
-<p id="rfc.section.7.1.p.2">Sizing the codepoint space may be difficult because the range required may be hard to predict.  Protocol designs should attempt to make the codepoint space large enough so that it can slowly be filled over the intended lifetime of the protocol.</p>
+<p id="rfc.section.7.1.p.2">Sizing the codepoint space may be difficult because the range required may be hard to predict.  An attempt should be made to make the codepoint space large enough so that it can slowly be filled over the intended lifetime of the protocol.</p>
 <p id="rfc.section.7.1.p.3">CBOR has three major extension points:</p>
 <p></p>
 
 <ul>
-<li>the &#8220;simple&#8221; space (values in major type 7).  Of the 24 efficient (and 224 slightly less efficient) values, only a small number have been allocated.  Implementations receiving an unknown simple data item may easily be able to process it as such, given that the structure of the value is indeed simple. The IANA registry in <a href="#ianasimple" class="xref">Section 9.1</a> is the appropriate way to address the extensibility of this codepoint space.</li>
-<li>the &#8220;tag&#8221; space (values in major type 6).  The total codepoint space is abundant; only a tiny part of it has been allocated.  However, not all of these codepoints are equally efficient: the first 24 only consume a single (&#8220;1+0&#8221;) byte and as of mid 2020 half of them have already been allocated; the next 232 only consume two (&#8220;1+1&#8221;) bytes with nearly a quarter allocated at the time of writing; these subspaces need some curation to last for a few more decades.  Implementations receiving an unknown tag number can choose to process just the enclosed tag content or, preferably, to process the tag as an unknown tag number wrapping the tag content. The IANA registry in <a href="#ianatags" class="xref">Section 9.2</a> is the appropriate way to address the extensibility of this codepoint space.</li>
-<li>the &#8220;additional information&#8221; space.  An implementation receiving an unknown additional information value has no way to continue decoding, so allocating codepoints to this space is a major step beyond just exercising an extension point.  There are also very few codepoints left.  See also <a href="#curating" class="xref">Section 7.2</a>.</li>
+<li>the &#8220;simple&#8221; space (values in major type 7).  Of the 24 efficient (and 224 slightly less efficient) values, only a small number have been allocated.  Implementations receiving an unknown simple data item may be able to process it as such, given that the structure of the value is indeed simple. The IANA registry in <a href="#ianasimple" class="xref">Section 9.1</a> is the appropriate way to address the extensibility of this codepoint space.</li>
+<li>the &#8220;tag&#8221; space (values in major type 6).  Again, only a small part of the codepoint space has been allocated, and the space is abundant (although the early numbers are more efficient than the later ones).  Implementations receiving an unknown tag number can choose to process just the enclosed tag content or, preferably, to process the tag as an unknown tag number wrapping the tag content. The IANA registry in <a href="#ianatags" class="xref">Section 9.2</a> is the appropriate way to address the extensibility of this codepoint space.</li>
+<li>the &#8220;additional information&#8221; space.  An implementation receiving an unknown additional information value has no way to continue decoding, so allocating codepoints to this space is a major step.    There are also very few codepoints left.  See also <a href="#curating" class="xref">Section 7.2</a>.</li>
 </ul>
 <h1 id="rfc.section.7.2">
 <a href="#rfc.section.7.2">7.2.</a> <a href="#curating" id="curating">Curating the Additional Information Space</a>
@@ -1541,7 +1541,7 @@ C5             -- Tag 5
 <a href="#rfc.section.9.2">9.2.</a> <a href="#ianatags" id="ianatags">Tags Registry</a>
 </h1>
 <p id="rfc.section.9.2.p.1">IANA has created the &#8220;Concise Binary Object Representation (CBOR) Tags&#8221; registry at <a href="#IANA.cbor-tags" class="xref">[IANA.cbor-tags]</a>.  The tags that were defined in <a href="#RFC7049" class="xref">[RFC7049]</a> are described in detail in <a href="#tags" class="xref">Section 3.4</a>, and other tags have already been defined.</p>
-<p id="rfc.section.9.2.p.2">New entries in the range 0 to 23 (&#8220;1+0&#8221;) are assigned by Standards Action.  New entries in the ranges 24 to 255 (&#8220;1+1&#8221;) and 256 to 32767 (lower half of &#8220;1+2&#8221;) are assigned by Specification Required.  New entries in the range 32768 to 18446744073709551615 (upper half of &#8220;1+2&#8221;, &#8220;1+4&#8221;, and &#8220;1+8&#8221;) are assigned by First Come First Served. The template for registration requests is:</p>
+<p id="rfc.section.9.2.p.2">New entries in the range 0 to 23 are assigned by Standards Action.  New entries in the range 24 to 255 are assigned by Specification Required.  New entries in the range 256 to 18446744073709551615 are assigned by First Come First Served. The template for registration requests is:</p>
 <p></p>
 
 <ul>
