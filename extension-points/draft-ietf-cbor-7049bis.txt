@@ -2492,20 +2492,19 @@ Internet-Draft                    CBOR                         June 2020
    *  the "tag" space (values in major type 6).  The total codepoint
       space is abundant; only a tiny part of it has been allocated.
       However, not all of these codepoints are equally efficient: the
-      first 24 only consume a single ("1+0") byte and as of mid 2020
-      half of them have already been allocated; the next 232 only
-      consume two ("1+1") bytes with nearly a quarter allocated at the
-      time of writing; these subspaces need some curation to last for a
-      few more decades.  Implementations receiving an unknown tag number
-      can choose to process just the enclosed tag content or,
-      preferably, to process the tag as an unknown tag number wrapping
-      the tag content.  The IANA registry in Section 9.2 is the
-      appropriate way to address the extensibility of this codepoint
-      space.
+      first 24 only consume a single ("1+0") byte, and half of them have
+      already been allocated.  The next 232 values only consume two
+      ("1+1") bytes, with nearly a quarter already allocated.  These
+      subspaces need some curation to last for a few more decades.
+      Implementations receiving an unknown tag number can choose to
+      process just the enclosed tag content or, preferably, to process
+      the tag as an unknown tag number wrapping the tag content.  The
+      IANA registry in Section 9.2 is the appropriate way to address the
+      extensibility of this codepoint space.
 
    *  the "additional information" space.  An implementation receiving
       an unknown additional information value has no way to continue
-      decoding, so allocating codepoints to this space is a major step
+      decoding, so allocating codepoints in this space is a major step
       beyond just exercising an extension point.  There are also very
       few codepoints left.  See also Section 7.2.
 
@@ -2513,7 +2512,8 @@ Internet-Draft                    CBOR                         June 2020
 
    The human mind is sometimes drawn to filling in little perceived gaps
    to make something neat.  We expect the remaining gaps in the
-
+   codepoint space for the additional information values to be an
+   attractor for new ideas, just because they are there.
 
 
 
@@ -2521,9 +2521,6 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 45]
 
 Internet-Draft                    CBOR                         June 2020
 
-
-   codepoint space for the additional information values to be an
-   attractor for new ideas, just because they are there.
 
    The present specification does not manage the additional information
    codepoint space by an IANA registry.  Instead, allocations out of
@@ -2571,14 +2568,15 @@ Internet-Draft                    CBOR                         June 2020
 
    or the equivalent relative time as
 
+      1(1363896240)
+
+
 
 
 Bormann & Hoffman       Expires December 5, 2020               [Page 46]
 
 Internet-Draft                    CBOR                         June 2020
 
-
-      1(1363896240)
 
    Byte strings are notated in one of the base encodings, without
    padding, enclosed in single quotes, prefixed by >h< for base16, >b32<
@@ -2625,6 +2623,8 @@ Internet-Draft                    CBOR                         June 2020
 
    Byte and text strings of indefinite length can be notated in the form
    (_ h'0123', h'4567') and (_ "foo", "bar").
+
+
 
 
 
