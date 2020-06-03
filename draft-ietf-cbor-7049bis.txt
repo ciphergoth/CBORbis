@@ -1573,10 +1573,12 @@ Internet-Draft                    CBOR                         June 2020
    it may help to have some distinguishing characteristics for the data
    itself.
 
-   Tag number 55799 is defined for this purpose.  It does not impart any
-   special semantics on the data item that it encloses; that is, the
-   semantics of the tag content enclosed in tag number 55799 is exactly
-   identical to the semantics of the tag content itself.
+   Tag number 55799 is defined for this purpose, specifically for use at
+   the start of a stored encoded CBOR data item as specified by an
+   application.  It does not impart any special semantics on the data
+   item that it encloses; that is, the semantics of the tag content
+   enclosed in tag number 55799 is exactly identical to the semantics of
+   the tag content itself.
 
    The serialization of this tag's head is 0xd9d9f7, which does not
    appear to be in use as a distinguishing mark for any frequently used
@@ -1616,8 +1618,6 @@ Internet-Draft                    CBOR                         June 2020
    emit preferred serializations ("variant encoder"): Say, it could be
    designed to always use the 32-bit variant for an integer that it
    encodes even if a short representation is available (again, assuming
-   that there is no application need for integers that can only be
-   represented with the 64-bit variant).  A decoder that does not rely
 
 
 
@@ -1626,6 +1626,8 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 29]
 Internet-Draft                    CBOR                         June 2020
 
 
+   that there is no application need for integers that can only be
+   represented with the 64-bit variant).  A decoder that does not rely
    on only ever receiving preferred serializations ("variation-tolerant
    decoder") can there be said to be more universally interoperable (it
    might very well optimize for the case of receiving preferred
@@ -1672,8 +1674,6 @@ Internet-Draft                    CBOR                         June 2020
       -  0 to 23 and -1 to -24 MUST be expressed in the same byte as the
          major type;
 
-      -  24 to 255 and -25 to -256 MUST be expressed only with an
-         additional uint8_t;
 
 
 
@@ -1681,6 +1681,9 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 30]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+      -  24 to 255 and -25 to -256 MUST be expressed only with an
+         additional uint8_t;
 
       -  256 to 65535 and -257 to -65536 MUST be expressed only with an
          additional uint16_t;
@@ -1727,9 +1730,6 @@ Internet-Draft                    CBOR                         June 2020
    semantics for the presence and absence of a specific tag (e.g., by
    allowing both tag 1 data items and raw numbers in a date/time
    position, treating the latter as if they were tagged), the
-   deterministic format would not allow the presence of the tag, based
-   on the "shortest form" principle.  For example, a protocol might give
-   encoders the choice of representing a URL as either a text string or,
 
 
 
@@ -1738,6 +1738,9 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 31]
 Internet-Draft                    CBOR                         June 2020
 
 
+   deterministic format would not allow the presence of the tag, based
+   on the "shortest form" principle.  For example, a protocol might give
+   encoders the choice of representing a URL as either a text string or,
    using Section 3.4.5.3, tag number 32 containing a text string.  This
    protocol's deterministic encoding needs to either require that the
    tag is present or require that it is absent, not allow either one.
@@ -1783,9 +1786,6 @@ Internet-Draft                    CBOR                         June 2020
           representation that accurately represents the value, even for
           integral values, or
 
-      3.  Encode all values as 64-bit floating-point representations.
-
-
 
 
 
@@ -1793,6 +1793,8 @@ Bormann & Hoffman       Expires December 5, 2020               [Page 32]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+      3.  Encode all values as 64-bit floating-point representations.
 
       Rule 1 straddles the boundaries between integers and floating-
       point values, and Rule 3 does not use preferred serialization, so
@@ -1840,8 +1842,6 @@ Internet-Draft                    CBOR                         June 2020
 
    2.  If two keys have the same length, the one with the lower value in
        (byte-wise) lexical order sorts earlier.
-
-
 
 
 
