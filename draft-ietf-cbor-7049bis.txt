@@ -151,17 +151,17 @@ Internet-Draft                    CBOR                         June 2020
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  53
      11.2.  Informative References . . . . . . . . . . . . . . . . .  54
      11.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  56
-   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  57
-   Appendix B.  Jump Table . . . . . . . . . . . . . . . . . . . . .  61
-   Appendix C.  Pseudocode . . . . . . . . . . . . . . . . . . . . .  64
-   Appendix D.  Half-Precision . . . . . . . . . . . . . . . . . . .  66
+   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  58
+   Appendix B.  Jump Table . . . . . . . . . . . . . . . . . . . . .  62
+   Appendix C.  Pseudocode . . . . . . . . . . . . . . . . . . . . .  65
+   Appendix D.  Half-Precision . . . . . . . . . . . . . . . . . . .  67
    Appendix E.  Comparison of Other Binary Formats to CBOR's Design
-                Objectives . . . . . . . . . . . . . . . . . . . . .  67
-     E.1.  ASN.1 DER, BER, and PER . . . . . . . . . . . . . . . . .  68
-     E.2.  MessagePack . . . . . . . . . . . . . . . . . . . . . . .  68
-     E.3.  BSON  . . . . . . . . . . . . . . . . . . . . . . . . . .  69
-     E.4.  MSDTP: RFC 713  . . . . . . . . . . . . . . . . . . . . .  69
-     E.5.  Conciseness on the Wire . . . . . . . . . . . . . . . . .  69
+                Objectives . . . . . . . . . . . . . . . . . . . . .  68
+     E.1.  ASN.1 DER, BER, and PER . . . . . . . . . . . . . . . . .  69
+     E.2.  MessagePack . . . . . . . . . . . . . . . . . . . . . . .  69
+     E.3.  BSON  . . . . . . . . . . . . . . . . . . . . . . . . . .  70
+     E.4.  MSDTP: RFC 713  . . . . . . . . . . . . . . . . . . . . .  70
+     E.5.  Conciseness on the Wire . . . . . . . . . . . . . . . . .  70
 
 
 
@@ -170,11 +170,11 @@ Bormann & Hoffman       Expires December 6, 2020                [Page 3]
 Internet-Draft                    CBOR                         June 2020
 
 
-   Appendix F.  Changes from RFC 7049  . . . . . . . . . . . . . . .  70
-   Appendix G.  Well-formedness errors and examples  . . . . . . . .  71
-     G.1.  Examples for CBOR data items that are not well-formed . .  72
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  74
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  75
+   Appendix F.  Changes from RFC 7049  . . . . . . . . . . . . . . .  71
+   Appendix G.  Well-formedness errors and examples  . . . . . . . .  72
+     G.1.  Examples for CBOR data items that are not well-formed . .  73
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  75
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  76
 
 1.  Introduction
 
@@ -2484,36 +2484,36 @@ Internet-Draft                    CBOR                         June 2020
    start using more codepoints than initially allocated.
 
    Sizing the codepoint space may be difficult because the range
-   required may be hard to predict.  An attempt should be made to make
-   the codepoint space large enough so that it can slowly be filled over
-   the intended lifetime of the protocol.
+   required may be hard to predict.  Protocol designs should attempt to
+   make the codepoint space large enough so that it can slowly be filled
+   over the intended lifetime of the protocol.
 
    CBOR has three major extension points:
 
    *  the "simple" space (values in major type 7).  Of the 24 efficient
       (and 224 slightly less efficient) values, only a small number have
       been allocated.  Implementations receiving an unknown simple data
-      item may be able to process it as such, given that the structure
-      of the value is indeed simple.  The IANA registry in Section 9.1
-      is the appropriate way to address the extensibility of this
-      codepoint space.
+      item may easily be able to process it as such, given that the
+      structure of the value is indeed simple.  The IANA registry in
+      Section 9.1 is the appropriate way to address the extensibility of
+      this codepoint space.
 
-   *  the "tag" space (values in major type 6).  Again, only a small
-      part of the codepoint space has been allocated, and the space is
-      abundant (although the early numbers are more efficient than the
-      later ones).  Implementations receiving an unknown tag number can
-      choose to process just the enclosed tag content or, preferably, to
-      process the tag as an unknown tag number wrapping the tag content.
-      The IANA registry in Section 9.2 is the appropriate way to address
-      the extensibility of this codepoint space.
+   *  the "tag" space (values in major type 6).  The total codepoint
+      space is abundant; only a tiny part of it has been allocated.
+      However, not all of these codepoints are equally efficient: the
+      first 24 only consume a single ("1+0") byte, and half of them have
+      already been allocated.  The next 232 values only consume two
+      ("1+1") bytes, with nearly a quarter already allocated.  These
+      subspaces need some curation to last for a few more decades.
+      Implementations receiving an unknown tag number can choose to
+      process just the enclosed tag content or, preferably, to process
+      the tag as an unknown tag number wrapping the tag content.  The
+      IANA registry in Section 9.2 is the appropriate way to address the
+      extensibility of this codepoint space.
 
    *  the "additional information" space.  An implementation receiving
       an unknown additional information value has no way to continue
-      decoding, so allocating codepoints to this space is a major step.
-      There are also very few codepoints left.  See also Section 7.2.
-
-
-
+      decoding, so allocating codepoints in this space is a major step
 
 
 
@@ -2521,6 +2521,9 @@ Bormann & Hoffman       Expires December 6, 2020               [Page 45]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+      beyond just exercising an extension point.  There are also very
+      few codepoints left.  See also Section 7.2.
 
 7.2.  Curating the Additional Information Space
 
@@ -2567,9 +2570,6 @@ Internet-Draft                    CBOR                         June 2020
    JavaScript.  The non-finite floating-point numbers Infinity,
    -Infinity, and NaN are written exactly as in this sentence (this is
    also a way they can be written in JavaScript, although JSON does not
-   allow them).  A tag is written as an integer number for the tag
-   number, followed by the tag content in parentheses; for instance, an
-   RFC 3339 (ISO 8601) date could be notated as:
 
 
 
@@ -2577,6 +2577,10 @@ Bormann & Hoffman       Expires December 6, 2020               [Page 46]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   allow them).  A tag is written as an integer number for the tag
+   number, followed by the tag content in parentheses; for instance, an
+   RFC 3339 (ISO 8601) date could be notated as:
 
       0("2013-03-21T20:04:00Z")
 
@@ -2622,10 +2626,6 @@ Internet-Draft                    CBOR                         June 2020
    preceding item (or, for arrays and maps, the item starting with the
    preceding bracket or brace) was encoded with an additional
    information value of 24+n.  For example, 1.5_1 is a half-precision
-   floating-point number, while 1.5_3 is encoded as double precision.
-   This encoding indicator is not shown in Appendix A.  (Note that the
-   encoding indicator "_" is thus an abbreviation of the full form "_7",
-   which is not used.)
 
 
 
@@ -2633,6 +2633,11 @@ Bormann & Hoffman       Expires December 6, 2020               [Page 47]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   floating-point number, while 1.5_3 is encoded as double precision.
+   This encoding indicator is not shown in Appendix A.  (Note that the
+   encoding indicator "_" is thus an abbreviation of the full form "_7",
+   which is not used.)
 
    Byte and text strings of indefinite length can be notated in the form
    (_ h'0123', h'4567') and (_ "foo", "bar").
@@ -2669,19 +2674,14 @@ Internet-Draft                    CBOR                         June 2020
    [RFC7049] are described in detail in Section 3.4, and other tags have
    already been defined.
 
-   New entries in the range 0 to 23 are assigned by Standards Action.
-   New entries in the range 24 to 255 are assigned by Specification
-   Required.  New entries in the range 256 to 18446744073709551615 are
-   assigned by First Come First Served.  The template for registration
-   requests is:
+   New entries in the range 0 to 23 ("1+0") are assigned by Standards
+   Action.  New entries in the ranges 24 to 255 ("1+1") and 256 to 32767
+   (lower half of "1+2") are assigned by Specification Required.  New
+   entries in the range 32768 to 18446744073709551615 (upper half of
+   "1+2", "1+4", and "1+8") are assigned by First Come First Served.
+   The template for registration requests is:
 
    *  Data item
-
-   *  Semantics (short form)
-
-   In addition, First Come First Served requests should include:
-
-   *  Point of contact
 
 
 
@@ -2689,6 +2689,12 @@ Bormann & Hoffman       Expires December 6, 2020               [Page 48]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   *  Semantics (short form)
+
+   In addition, First Come First Served requests should include:
+
+   *  Point of contact
 
    *  Description of semantics (URL) - This description is optional; the
       URL can point to something like an Internet-Draft or a web page.
@@ -2731,13 +2737,7 @@ Internet-Draft                    CBOR                         June 2020
 
       -  Macintosh file type code(s): n/a
 
-   Person & email address to contact for further information:  IETF CBOR
-      Working Group cbor@ietf.org [1] or IETF Applications and Real-Time
-      Area art@ietf.org [2]
 
-   Intended usage: COMMON
-
-   Restrictions on usage: none
 
 
 
@@ -2745,6 +2745,14 @@ Bormann & Hoffman       Expires December 6, 2020               [Page 49]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   Person & email address to contact for further information:  IETF CBOR
+      Working Group cbor@ietf.org [1] or IETF Applications and Real-Time
+      Area art@ietf.org [2]
+
+   Intended usage: COMMON
+
+   Restrictions on usage: none
 
    Author:  IETF CBOR Working Group cbor@ietf.org [3]
 
@@ -2785,14 +2793,6 @@ Internet-Draft                    CBOR                         June 2020
       is no fragment identification syntax defined for "application/
       cbor".)
 
-      The syntax and semantics for fragment identifiers for a specific
-      "xxx/yyy+cbor" SHOULD be processed as follows:
-
-      -  For cases defined in +cbor, where the fragment identifier
-         resolves per the +cbor rules, then process as specified in
-         +cbor.
-
-
 
 
 
@@ -2801,6 +2801,13 @@ Bormann & Hoffman       Expires December 6, 2020               [Page 50]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+      The syntax and semantics for fragment identifiers for a specific
+      "xxx/yyy+cbor" SHOULD be processed as follows:
+
+      -  For cases defined in +cbor, where the fragment identifier
+         resolves per the +cbor rules, then process as specified in
+         +cbor.
 
       -  For cases defined in +cbor, where the fragment identifier does
          not resolve per the +cbor rules, then process as specified in
@@ -2843,13 +2850,6 @@ Internet-Draft                    CBOR                         June 2020
    (strings, arrays, maps, or even arbitrary precision numbers) or
    exhaust the stack depth by setting up deeply nested items.  Decoders
    need to have appropriate resource management to mitigate these
-   attacks.  (Items for which very large sizes are given can also
-   attempt to exploit integer overflow vulnerabilities.)
-
-   A CBOR decoder, by definition, only accepts well-formed CBOR; this is
-   the first step to its robustness.  Input that is not well-formed CBOR
-   causes no further processing from the point where the lack of well-
-   formedness was detected.  If possible, any data decoded up to this
 
 
 
@@ -2858,6 +2858,13 @@ Bormann & Hoffman       Expires December 6, 2020               [Page 51]
 Internet-Draft                    CBOR                         June 2020
 
 
+   attacks.  (Items for which very large sizes are given can also
+   attempt to exploit integer overflow vulnerabilities.)
+
+   A CBOR decoder, by definition, only accepts well-formed CBOR; this is
+   the first step to its robustness.  Input that is not well-formed CBOR
+   causes no further processing from the point where the lack of well-
+   formedness was detected.  If possible, any data decoded up to this
    point should have no impact on the application using the CBOR
    decoder.
 
@@ -2899,13 +2906,6 @@ Internet-Draft                    CBOR                         June 2020
    example, an attacker could make use of invalid input such as
    duplicate keys in maps, or exploit different precision in processing
    numbers to make one application base its decisions on a different
-   interpretation than the one that will be used by a second
-   application.  To facilitate consistent interpretation, encoder and
-   decoder implementations should provide a validity checking mode of
-   operation (Section 5.4).  Note, however, that a generic decoder
-   cannot know about all requirements that an application poses on its
-   input data; it is therefore not relieving the application from
-   performing its own input checking.  Also, since the set of defined
 
 
 
@@ -2914,6 +2914,13 @@ Bormann & Hoffman       Expires December 6, 2020               [Page 52]
 Internet-Draft                    CBOR                         June 2020
 
 
+   interpretation than the one that will be used by a second
+   application.  To facilitate consistent interpretation, encoder and
+   decoder implementations should provide a validity checking mode of
+   operation (Section 5.4).  Note, however, that a generic decoder
+   cannot know about all requirements that an application poses on its
+   input data; it is therefore not relieving the application from
+   performing its own input checking.  Also, since the set of defined
    tag numbers evolves, the application may employ a tag number that is
    not yet supported for validity checking by the generic decoder it
    uses.  Generic decoders therefore need to provide documentation which
@@ -2952,14 +2959,7 @@ Internet-Draft                    CBOR                         June 2020
               10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
               2003, <https://www.rfc-editor.org/info/rfc3629>.
 
-   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
-              Resource Identifier (URI): Generic Syntax", STD 66,
-              RFC 3986, DOI 10.17487/RFC3986, January 2005,
-              <https://www.rfc-editor.org/info/rfc3986>.
 
-   [RFC4287]  Nottingham, M., Ed. and R. Sayre, Ed., "The Atom
-              Syndication Format", RFC 4287, DOI 10.17487/RFC4287,
-              December 2005, <https://www.rfc-editor.org/info/rfc4287>.
 
 
 
@@ -2969,6 +2969,15 @@ Bormann & Hoffman       Expires December 6, 2020               [Page 53]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+              Resource Identifier (URI): Generic Syntax", STD 66,
+              RFC 3986, DOI 10.17487/RFC3986, January 2005,
+              <https://www.rfc-editor.org/info/rfc3986>.
+
+   [RFC4287]  Nottingham, M., Ed. and R. Sayre, Ed., "The Atom
+              Syndication Format", RFC 4287, DOI 10.17487/RFC4287,
+              December 2005, <https://www.rfc-editor.org/info/rfc4287>.
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
@@ -3009,6 +3018,14 @@ Internet-Draft                    CBOR                         June 2020
               Values",
               <http://www.iana.org/assignments/cbor-simple-values>.
 
+
+
+
+Bormann & Hoffman       Expires December 6, 2020               [Page 54]
+
+Internet-Draft                    CBOR                         June 2020
+
+
    [IANA.cbor-tags]
               IANA, "Concise Binary Object Representation (CBOR) Tags",
               <http://www.iana.org/assignments/cbor-tags>.
@@ -3017,14 +3034,6 @@ Internet-Draft                    CBOR                         June 2020
               IANA, "Constrained RESTful Environments (CoRE)
               Parameters",
               <http://www.iana.org/assignments/core-parameters>.
-
-
-
-
-Bormann & Hoffman       Expires December 6, 2020               [Page 54]
-
-Internet-Draft                    CBOR                         June 2020
-
 
    [IANA.media-type-structured-suffix]
               IANA, "Structured Syntax Suffix Registry",
@@ -3063,15 +3072,6 @@ Internet-Draft                    CBOR                         June 2020
               DOI 10.17487/RFC7493, March 2015,
               <https://www.rfc-editor.org/info/rfc7493>.
 
-   [RFC7991]  Hoffman, P., "The "xml2rfc" Version 3 Vocabulary",
-              RFC 7991, DOI 10.17487/RFC7991, December 2016,
-              <https://www.rfc-editor.org/info/rfc7991>.
-
-   [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
-              Interchange Format", STD 90, RFC 8259,
-              DOI 10.17487/RFC8259, December 2017,
-              <https://www.rfc-editor.org/info/rfc8259>.
-
 
 
 
@@ -3081,6 +3081,15 @@ Bormann & Hoffman       Expires December 6, 2020               [Page 55]
 
 Internet-Draft                    CBOR                         June 2020
 
+
+   [RFC7991]  Hoffman, P., "The "xml2rfc" Version 3 Vocabulary",
+              RFC 7991, DOI 10.17487/RFC7991, December 2016,
+              <https://www.rfc-editor.org/info/rfc7991>.
+
+   [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", STD 90, RFC 8259,
+              DOI 10.17487/RFC8259, December 2017,
+              <https://www.rfc-editor.org/info/rfc8259>.
 
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
               Definition Language (CDDL): A Notational Convention to
@@ -3122,6 +3131,13 @@ Internet-Draft                    CBOR                         June 2020
 
    [5] mailto:cbor@ietf.org
 
+
+
+Bormann & Hoffman       Expires December 6, 2020               [Page 56]
+
+Internet-Draft                    CBOR                         June 2020
+
+
    [6] mailto:art@ietf.org
 
    [7] mailto:iesg@ietf.org
@@ -3133,7 +3149,47 @@ Internet-Draft                    CBOR                         June 2020
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 56]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bormann & Hoffman       Expires December 6, 2020               [Page 57]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3189,7 +3245,7 @@ Appendix A.  Examples
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 57]
+Bormann & Hoffman       Expires December 6, 2020               [Page 58]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3245,7 +3301,7 @@ Internet-Draft                    CBOR                         June 2020
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 58]
+Bormann & Hoffman       Expires December 6, 2020               [Page 59]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3301,7 +3357,7 @@ Internet-Draft                    CBOR                         June 2020
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 59]
+Bormann & Hoffman       Expires December 6, 2020               [Page 60]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3357,7 +3413,7 @@ Internet-Draft                    CBOR                         June 2020
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 60]
+Bormann & Hoffman       Expires December 6, 2020               [Page 61]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3413,7 +3469,7 @@ Appendix B.  Jump Table
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 61]
+Bormann & Hoffman       Expires December 6, 2020               [Page 62]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3469,7 +3525,7 @@ Internet-Draft                    CBOR                         June 2020
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 62]
+Bormann & Hoffman       Expires December 6, 2020               [Page 63]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3525,7 +3581,7 @@ Internet-Draft                    CBOR                         June 2020
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 63]
+Bormann & Hoffman       Expires December 6, 2020               [Page 64]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3581,7 +3637,7 @@ Appendix C.  Pseudocode
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 64]
+Bormann & Hoffman       Expires December 6, 2020               [Page 65]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3637,7 +3693,7 @@ Internet-Draft                    CBOR                         June 2020
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 65]
+Bormann & Hoffman       Expires December 6, 2020               [Page 66]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3693,7 +3749,7 @@ Appendix D.  Half-Precision
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 66]
+Bormann & Hoffman       Expires December 6, 2020               [Page 67]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3749,7 +3805,7 @@ Appendix E.  Comparison of Other Binary Formats to CBOR's Design
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 67]
+Bormann & Hoffman       Expires December 6, 2020               [Page 68]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3805,7 +3861,7 @@ E.2.  MessagePack
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 68]
+Bormann & Hoffman       Expires December 6, 2020               [Page 69]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3861,7 +3917,7 @@ E.5.  Conciseness on the Wire
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 69]
+Bormann & Hoffman       Expires December 6, 2020               [Page 70]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3917,7 +3973,7 @@ Appendix F.  Changes from RFC 7049
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 70]
+Bormann & Hoffman       Expires December 6, 2020               [Page 71]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -3973,7 +4029,7 @@ Appendix G.  Well-formedness errors and examples
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 71]
+Bormann & Hoffman       Expires December 6, 2020               [Page 72]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -4029,7 +4085,7 @@ G.1.  Examples for CBOR data items that are not well-formed
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 72]
+Bormann & Hoffman       Expires December 6, 2020               [Page 73]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -4085,7 +4141,7 @@ Internet-Draft                    CBOR                         June 2020
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 73]
+Bormann & Hoffman       Expires December 6, 2020               [Page 74]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -4141,7 +4197,7 @@ Acknowledgements
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 74]
+Bormann & Hoffman       Expires December 6, 2020               [Page 75]
 
 Internet-Draft                    CBOR                         June 2020
 
@@ -4197,4 +4253,4 @@ Authors' Addresses
 
 
 
-Bormann & Hoffman       Expires December 6, 2020               [Page 75]
+Bormann & Hoffman       Expires December 6, 2020               [Page 76]
