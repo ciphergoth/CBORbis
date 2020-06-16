@@ -354,6 +354,9 @@ ul.toc li {
 <link href="#rfc.appendix.F" rel="Chapter" title="F Changes from RFC 7049">
 <link href="#rfc.appendix.G" rel="Chapter" title="G Well-formedness errors and examples">
 <link href="#rfc.appendix.G.1" rel="Chapter" title="G.1 Examples for CBOR data items that are not well-formed">
+<link href="#rfc.appendix.G.2" rel="Chapter" title="G.2 Errata processing, clerical changes">
+<link href="#rfc.appendix.G.3" rel="Chapter" title="G.3 Changes in IANA considerations">
+<link href="#rfc.appendix.G.4" rel="Chapter" title="G.4 Changes in suggestions and other informational components">
 <link href="#rfc.acknowledgements" rel="Chapter">
 <link href="#rfc.authors" rel="Chapter">
 
@@ -406,9 +409,9 @@ ul.toc li {
 <p>The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack.</p>
 <p>This document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format.</p>
 <h1><a>Contributing</a></h1>
+<p>[This note is to be removed before publishing as an RFC.]</p>
 <p>This document is being worked on in the CBOR Working Group.  Please contribute on the mailing list there, or in the GitHub repository for this draft: https://github.com/cbor-wg/CBORbis</p>
 <p>The charter for the CBOR Working Group says that the WG will update RFC 7049 to fix verified errata. Security issues and clarifications may be addressed, but changes to this document will ensure backward compatibility for popular deployed codebases. This document will be targeted at becoming an Internet Standard.</p>
-<p>[RFC editor: please remove this note.]</p>
 <h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
@@ -566,6 +569,12 @@ ul.toc li {
 <li>Appendix G.   <a href="#rfc.appendix.G">Well-formedness errors and examples</a>
 </li>
 <ul><li>G.1.   <a href="#rfc.appendix.G.1">Examples for CBOR data items that are not well-formed</a>
+</li>
+<li>G.2.   <a href="#rfc.appendix.G.2">Errata processing, clerical changes</a>
+</li>
+<li>G.3.   <a href="#rfc.appendix.G.3">Changes in IANA considerations</a>
+</li>
+<li>G.4.   <a href="#rfc.appendix.G.4">Changes in suggestions and other informational components</a>
 </li>
 </ul><li><a href="#rfc.acknowledgements">Acknowledgements</a>
 </li>
@@ -1307,7 +1316,7 @@ C5             -- Tag 5
 <li>The same number can be represented by different decimal fractions, by different bigfloats, and by different forms under other tags that may be defined to express numeric values. Depending on the implementation, it may not always be practical to determine whether any of these forms (or forms in the basic generic data model) are equivalent.  An application protocol that presents choices of this kind for the representation format of numbers needs to be explicit in how the formats are to be chosen for deterministic encoding.</li>
 </ul>
 <h1 id="rfc.section.4.2.3">
-<a href="#rfc.section.4.2.3">4.2.3.</a> <a href="#length-first-map-key-ordering" id="length-first-map-key-ordering">Length-first Map Key Ordering</a>
+<a href="#rfc.section.4.2.3">4.2.3.</a> <a href="#length-first" id="length-first">Length-first Map Key Ordering</a>
 </h1>
 <p id="rfc.section.4.2.3.p.1">The core deterministic encoding requirements (<a href="#core-det" class="xref">Section 4.2.1</a>) sort map keys in a different order from the one suggested by Section 3.9 of <a href="#RFC7049" class="xref">[RFC7049]</a> (called &#8220;Canonical CBOR&#8221; there). Protocols that need to be compatible with <a href="#RFC7049" class="xref">[RFC7049]</a>&#8217;s order can instead be specified in terms of this specification&#8217;s &#8220;length-first core deterministic encoding requirements&#8221;:</p>
 <p id="rfc.section.4.2.3.p.2">A CBOR encoding satisfies the &#8220;length-first core deterministic encoding requirements&#8221; if it satisfies the core deterministic encoding requirements except that the keys in every map MUST be sorted such that:</p>
@@ -2607,34 +2616,7 @@ def decode_half(half):
 <h1 id="rfc.appendix.F">
 <a href="#rfc.appendix.F">Appendix F.</a> <a href="#changes-from-rfc-7049" id="changes-from-rfc-7049">Changes from RFC 7049</a>
 </h1>
-<p id="rfc.section.F.p.1">The following is a list of known changes from RFC 7049. This list is non-authoritative. It is meant to help reviewers see the significant differences.</p>
-<p></p>
-
-<ul>
-<li>Made some use of new RFCXML functionality <a href="#RFC7991" class="xref">[RFC7991]</a>
-</li>
-<li>Updated references, e.g. for RFC4627 to <a href="#RFC8259" class="xref">[RFC8259]</a> in many places, for CNN-TERMS to <a href="#RFC7228" class="xref">[RFC7228]</a>; added missing reference to <a href="#IEEE754" class="xref">[IEEE754]</a> and updated to <a href="#ECMA262" class="xref">[ECMA262]</a>
-</li>
-<li>Fixed errata: in the example in Section 2.4.2 (&#8220;29&#8221; -&gt; &#8220;49&#8221;), and in the last paragraph of Section 3.6 (&#8220;0b000_11101&#8221; -&gt; &#8220;0b000_11001&#8221;)</li>
-<li>Added a comment to the last example in <a href="#indef" class="xref">Section 3.2.2</a> (added &#8220;Second value&#8221;)</li>
-<li>Applied numerous small editorial changes</li>
-<li>Added a few tables for illustration</li>
-<li>More stringently used terminology for well-formed and valid data, avoiding less well-defined alternative terms such as &#8220;syntax error&#8221;, &#8220;decoding error&#8221; and &#8220;strict mode&#8221; outside examples</li>
-<li>Streamlined terminology to talk about tags, tag numbers, and tag content</li>
-<li>Clarified the restrictions on tag content, in general and specifically for tag 1</li>
-<li>Added text about the CBOR data model and its small variations (basic generic, extended generic, specific)</li>
-<li>More clearly separated integers from floating-point values; provided a suggestion (based on I-JSON <a href="#RFC7493" class="xref">[RFC7493]</a>) for handling these types when converting JSON to CBOR</li>
-<li>Added term &#8220;preferred serialization&#8221; and defined it for various kinds of data items</li>
-<li>Added comment about tags with semantics that depend on serialization order</li>
-<li>Defined &#8220;deterministic encoding&#8221;, making use of &#8220;preferred serialization&#8221;, and simplified the suggested map ordering for the &#8220;Core Deterministic Encoding Requirements&#8221;, easing implementation, while keeping RFC 7049 map ordering as an alternative &#8220;length-first map key ordering&#8221;; now avoiding the terms &#8220;canonical&#8221; and &#8220;canonicalization&#8221;</li>
-<li>Clarified map validity (handling of duplicate keys) and explained the domain of applicability of certain implementation choices</li>
-<li>Updated IANA considerations</li>
-<li>Added security considerations</li>
-<li>Clarified handling of non-well-formed simple values in text and pseudocode</li>
-<li>Added <a href="#errors" class="xref">Appendix G</a>, well-formedness errors and examples</li>
-<li>Removed UBJSON from <a href="#comparison-app" class="xref">Appendix E</a>, as that format has completely changed since RFC 7049; added reference to <a href="#RFC8618" class="xref">[RFC8618]</a>
-</li>
-</ul>
+<p id="rfc.section.F.p.1">As discussed in the introduction, this document is a revised edition of RFC 7049, with editorial improvements, added detail, and fixed errata.  This revision formally obsoletes RFC 7049, while keeping full compatibility of the interchange format from RFC 7049.  It does not create a new version of the format.</p>
 <h1 id="rfc.appendix.G">
 <a href="#rfc.appendix.G">Appendix G.</a> <a href="#errors" id="errors">Well-formedness errors and examples</a>
 </h1>
@@ -2701,6 +2683,38 @@ def decode_half(half):
 <p></p>
 
 <ul><li>Major type 0, 1, 6 with additional information 31: 1f, 3f, df</li></ul>
+<h1 id="rfc.appendix.G.2">
+<a href="#rfc.appendix.G.2">G.2.</a> <a href="#errata-processing-clerical-changes" id="errata-processing-clerical-changes">Errata processing, clerical changes</a>
+</h1>
+<p id="rfc.section.G.2.p.1">The two verified errata on RFC 7049, EID 3764 and EID 3770, concerned two encoding examples in the text that have been corrected (<a href="#bignums" class="xref">Section 3.4.3</a>: &#8220;29&#8221; -&gt; &#8220;49&#8221;, <a href="#numbers" class="xref">Section 5.5</a>: &#8220;0b000_11101&#8221; -&gt; &#8220;0b000_11001&#8221;).  Also, RFC 7049 contained an example using the simple type value 24 (EID 5917), which is not well-formed; this example has been removed.  Errata report 5763 pointed to an accident in the wording of the definition of tags; this was resolved during a re-write of <a href="#tags" class="xref">Section 3.4</a>.  Errata report 5434 pointed out that the UBJSON example in <a href="#comparison-app" class="xref">Appendix E</a> no longer complied with the version of UBJSON current at the time of submitting the report.  It turned out that the UBJSON specification had completely changed since 2013; this example therefore also was removed.  Further errata reports (4409, 4963, 4964) complained that the map key sorting rules for canonical encoding were onerous; these led to a reconsideration of the canonical encoding suggestions and replacement by the deterministic encoding suggestions, see below.  An editorial suggestion in errata report 4294 was also implemented (improved symmetry by adding &#8220;Second value&#8221; to a comment to the last example in <a href="#indef" class="xref">Section 3.2.2</a>).</p>
+<p id="rfc.section.G.2.p.2">Other more clerical changes include:</p>
+<p></p>
+
+<ul>
+<li>use of new RFCXML functionality <a href="#RFC7991" class="xref">[RFC7991]</a>;</li>
+<li>explain some more of the notation used;</li>
+<li>updated references, e.g. for RFC4627 to <a href="#RFC8259" class="xref">[RFC8259]</a> in many places, for CNN-TERMS to <a href="#RFC7228" class="xref">[RFC7228]</a>; added missing reference to <a href="#IEEE754" class="xref">[IEEE754]</a> (importing required definitions) and updated to <a href="#ECMA262" class="xref">[ECMA262]</a>; added a reference to <a href="#RFC8618" class="xref">[RFC8618]</a> that further illustrates the discussion in <a href="#comparison-app" class="xref">Appendix E</a>;</li>
+<li>the discussion of diagnostic notation mentions the &#8220;Extended Diagnostic Notation&#8221; (EDN) defined in <a href="#RFC8610" class="xref">[RFC8610]</a>,</li>
+<li>the addition of this appendix.</li>
+</ul>
+<h1 id="rfc.appendix.G.3">
+<a href="#rfc.appendix.G.3">G.3.</a> <a href="#changes-in-iana-considerations" id="changes-in-iana-considerations">Changes in IANA considerations</a>
+</h1>
+<p id="rfc.section.G.3.p.1">The IANA considerations were generally updated (clerical changes, e.g., now pointing to the CBOR working group as the author of the specification).  References to the respective IANA registries have been added to the informative references.</p>
+<p id="rfc.section.G.3.p.2">Tags in the space from 256 to 32767 (lower half of &#8220;1+2&#8221;) are no longer assigned by First Come First Served; this range is now Specification Required.</p>
+<h1 id="rfc.appendix.G.4">
+<a href="#rfc.appendix.G.4">G.4.</a> <a href="#changes-in-suggestions-and-other-informational-components" id="changes-in-suggestions-and-other-informational-components">Changes in suggestions and other informational components</a>
+</h1>
+<p id="rfc.section.G.4.p.1">In revising the document, beyond processing errata reports, the WG could use nearly seven years of experience with the use of CBOR in a diverse set of applications.  This led to a number of editorial changes, including adding tables for illustration, but also to emphasizing some aspects and de-emphasizing others.</p>
+<p id="rfc.section.G.4.p.2">A significant addition in this revision is <a href="#cbor-data-models" class="xref">Section 2</a>, which discusses the CBOR data model and its small variations involved in the processing of CBOR.  Introducing terms for those (basic generic, extended generic, specific) enables more concise language in other places of the document, but also helps in clarifying expectations on implementations and on the extensibility features of the format.</p>
+<p id="rfc.section.G.4.p.3">RFC 7049, as a format derived from the JSON ecosystem, was influenced by the JSON number system that was in turn inherited from JavaScript at the time.  JSON does not provide distinct integers and floating point values (and the latter are decimal in the format).  CBOR provides binary representations of numbers, which do differ between integers and floating point values.  Experience from implementation and use now suggested that the separation between these two number domains should be more clearly drawn in the document; language that suggested an integer could seamlessly stand in for a floating point value was removed.  Also, a suggestion (based on I-JSON <a href="#RFC7493" class="xref">[RFC7493]</a>) was added for handling these types when converting JSON to CBOR.</p>
+<p id="rfc.section.G.4.p.4">For a single value in the data model, CBOR often provides multiple encoding options.  The revision adds a new section <a href="#serialization-considerations" class="xref">Section 4</a>, which first introduces the term &#8220;preferred serialization&#8221; (<a href="#preferred" class="xref">Section 4.1</a>) and defines it for various kinds of data items.  On the basis of this terminology, the section goes on to discuss how a CBOR-based protocol can define &#8220;deterministic encoding&#8221; (<a href="#det-enc" class="xref">Section 4.2</a>), which now avoids the RFC 7049 terms &#8220;canonical&#8221; and &#8220;canonicalization&#8221;.  The suggestion of &#8220;Core Deterministic Encoding Requirements&#8221; <a href="#core-det" class="xref">Section 4.2.1</a> enables generic support for such protocol-defined encoding requirements.  The present revision further eases the implementation of deterministic encoding by simplifying the map ordering suggested in RFC 7049 to simple lexicographic ordering of encoded keys.  A description of the older suggestion is kept as an alternative, now termed &#8220;length-first map key ordering&#8221; (<a href="#length-first" class="xref">Section 4.2.3</a>).</p>
+<p id="rfc.section.G.4.p.5">The terminology for well-formed and valid data was sharpened and more stringently used, avoiding less well-defined alternative terms such as &#8220;syntax error&#8221;, &#8220;decoding error&#8221; and &#8220;strict mode&#8221; outside examples.  Also, a third level of requirements beyond CBOR-level validity that an application has on its input data is now explicitly called out.  Well-formed (processable at all), valid (checked by a validity-checking generic decoder), and expected input (as checked by the application) are treated as a hierarchy of layers of acceptability.</p>
+<p id="rfc.section.G.4.p.6">The handling of non-well-formed simple values was clarified in text and pseudocode.  <a href="#errors" class="xref">Appendix G</a> was added to discuss well-formedness errors and provide examples for them.</p>
+<p id="rfc.section.G.4.p.7">The discussion of validity has been sharpened in two areas.  Map validity (handling of duplicate keys) was clarified and the domain of applicability of certain implementation choices explained.  Also, while streamlining the terminology for tags, tag numbers, and tag content, discussion was added on tag validity, and the restrictions pwere clarified on tag content, in general and specifically for tag 1.</p>
+<p id="rfc.section.G.4.p.8">An implementation note (and note for future tag definitions) was added to <a href="#tags" class="xref">Section 3.4</a> about defining tags with semantics that depend on serialization order.</p>
+<p id="rfc.section.G.4.p.9">Terminology was introduced in <a href="#encoding" class="xref">Section 3</a> for &#8220;argument&#8221; and &#8220;head&#8221;, simplifying further discussion.</p>
+<p id="rfc.section.G.4.p.10">The security considerations were mostly rewritten and significantly expanded; in multiple other places, the document is now more explicit that a decoder cannot simply condone well-formedness errors.</p>
 <h1 id="rfc.acknowledgements"><a href="#rfc.acknowledgements">Acknowledgements</a></h1>
 <p id="rfc.section.H.p.1">CBOR was inspired by MessagePack.  MessagePack was developed and promoted by Sadayuki Furuhashi (&#8220;frsyuki&#8221;).  This reference to MessagePack is solely for attribution; CBOR is not intended as a version of or replacement for MessagePack, as it has different design goals and requirements.</p>
 <p id="rfc.section.H.p.2">The need for functionality beyond the original MessagePack Specification became obvious to many people at about the same time around the year 2012.  BinaryPack is a minor derivation of MessagePack that was developed by Eric Zhang for the binaryjs project.  A similar, but different, extension was made by Tim Caswell for his msgpack-js and msgpack-js-browser projects.  Many people have contributed to the discussion about extending MessagePack to separate text string representation from byte string representation.</p>
