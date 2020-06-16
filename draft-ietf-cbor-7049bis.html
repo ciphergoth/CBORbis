@@ -798,7 +798,7 @@ ul.toc li {
 <a href="#rfc.section.3.2.2">3.2.2.</a> <a href="#indef" id="indef">Indefinite-Length Arrays and Maps</a>
 </h1>
 <p id="rfc.section.3.2.2.p.1">Indefinite-length arrays and maps are represented using their major type with the additional information value of 31, followed by an arbitrary-length sequence of zero or more items for an array or key/value pairs for a map, followed by the &#8220;break&#8221; stop code (<a href="#break" class="xref">Section 3.2.1</a>).  In other words, indefinite-length arrays and maps look identical to other arrays and maps except for beginning with the additional information value of 31 and ending with the &#8220;break&#8221; stop code.</p>
-<p id="rfc.section.3.2.2.p.2">If the &#8220;break&#8221; stop code appears after a key in a map, in place of that key&#8217;s value, the map is not well-formed.</p>
+<p id="rfc.section.3.2.2.p.2">If the break stop code appears after a key in a map, in place of that key&#8217;s value, the map is not well-formed.</p>
 <p id="rfc.section.3.2.2.p.3">There is no restriction against nesting indefinite-length array or map items.  A &#8220;break&#8221; only terminates a single item, so nested indefinite-length items need exactly as many &#8220;break&#8221; stop codes as there are type bytes starting an indefinite-length item.</p>
 <p id="rfc.section.3.2.2.p.4">For example, assume an encoder wants to represent the abstract array [1, [2, 3], [4, 5]].  The definite-length encoding would be 0x8301820203820405:</p>
 <pre>
@@ -2423,7 +2423,7 @@ C5             -- Tag 5
 <li>Arithmetic works as in C.</li>
 <li>All variables are unsigned integers of sufficient range.</li>
 </ul>
-<p id="rfc.section.C.p.5">Note that <samp>well_formed</samp> returns the major type for well-formed definite length items, but 0 for an indefinite length item (or -1 for a &#8220;break&#8221; stop code, only if <samp>breakable</samp> is set).  This is used in <samp>well_formed_indefinite</samp> to ascertain that indefinite length strings only contain definite length strings as chunks.</p>
+<p id="rfc.section.C.p.5">Note that <samp>well_formed</samp> returns the major type for well-formed definite length items, but 0 for an indefinite length item (or -1 for a break stop code, only if <samp>breakable</samp> is set).  This is used in <samp>well_formed_indefinite</samp> to ascertain that indefinite length strings only contain definite length strings as chunks.</p>
 <div id="rfc.figure.1"></div>
 <div id="pseudo"></div>
 <pre>
@@ -2653,7 +2653,7 @@ def decode_half(half):
 <li>a reserved value is used for additional information (28, 29, 30)</li>
 <li>major type 7, additional information 24, value &lt; 32 (incorrect or incorrectly encoded simple type)</li>
 <li>incorrect substructure of indefinite length byte/text string (may only contain definite length strings of the same major type)</li>
-<li>&#8220;break&#8221; stop code (mt=7, ai=31) occurs in a value position of a map or except at a position directly in an indefinite length item where also another enclosed data item could occur</li>
+<li>break stop code (mt=7, ai=31) occurs in a value position of a map or except at a position directly in an indefinite length item where also another enclosed data item could occur</li>
 <li>additional information 31 used with major type 0, 1, or 6</li>
 </ul>
 <h1 id="rfc.appendix.G.1">
@@ -2662,7 +2662,7 @@ def decode_half(half):
 <p id="rfc.section.G.1.p.1">This subsection shows a few examples for CBOR data items that are not well-formed.  Each example is a sequence of bytes each shown in hexadecimal; multiple examples in a list are separated by commas.</p>
 <p id="rfc.section.G.1.p.2">Examples for well-formedness error kind 1 (too much data) can easily be formed by adding data to a well-formed encoded CBOR data item.</p>
 <p id="rfc.section.G.1.p.3">Similarly, examples for well-formedness error kind 2 (too little data) can be formed by truncating a well-formed encoded CBOR data item.  In test suites, it may be beneficial to specifically test with incomplete data items that would require large amounts of addition to be completed (for instance by starting the encoding of a string of a very large size).</p>
-<p id="rfc.section.G.1.p.4">A premature end of the input can occur in a head or within the enclosed data, which may be bare strings or enclosed data items that are either counted or should have been ended by a &#8220;break&#8221; stop code.</p>
+<p id="rfc.section.G.1.p.4">A premature end of the input can occur in a head or within the enclosed data, which may be bare strings or enclosed data items that are either counted or should have been ended by a break stop code.</p>
 <p></p>
 
 <ul>
@@ -2670,8 +2670,8 @@ def decode_half(half):
 <li>Definite length strings with short data: 41, 61, 5a ff ff ff ff 00, 5b ff ff ff ff ff ff ff ff 01 02 03, 7a ff ff ff ff 00, 7b 7f ff ff ff ff ff ff ff 01 02 03</li>
 <li>Definite length maps and arrays not closed with enough items: 81, 81 81 81 81 81 81 81 81 81, 82 00, a1, a2 01 02, a1 00, a2 00 00 00</li>
 <li>Tag number not followed by tag content: c0</li>
-<li>Indefinite length strings not closed by a &#8220;break&#8221; stop code: 5f 41 00, 7f 61 00</li>
-<li>Indefinite length maps and arrays not closed by a &#8220;break&#8221; stop code: 9f, 9f 01 02, bf, bf 01 02 01 02, 81 9f, 9f 80 00, 9f 9f 9f 9f 9f ff ff ff ff, 9f 81 9f 81 9f 9f ff ff ff</li>
+<li>Indefinite length strings not closed by a break stop code: 5f 41 00, 7f 61 00</li>
+<li>Indefinite length maps and arrays not closed by a break stop code: 9f, 9f 01 02, bf, bf 01 02 01 02, 81 9f, 9f 80 00, 9f 9f 9f 9f 9f ff ff ff ff, 9f 81 9f 81 9f 9f ff ff ff</li>
 </ul>
 <p id="rfc.section.G.1.p.6">A few examples for the five subkinds of well-formedness error kind 3 (syntax error) are shown below.</p>
 <p id="rfc.section.G.1.p.7">Subkind 1:</p>
