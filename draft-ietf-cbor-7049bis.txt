@@ -866,13 +866,15 @@ Internet-Draft                    CBOR                         July 2020
    If any item between the indefinite-length string indicator
    (0b010_11111 or 0b011_11111) and the "break" stop code is not a
    definite-length string item of the same major type, the string is not
-   well-formed.  (Note that a decision has been made not to allow
-   nesting indefinite-length strings as chunks into indefinite-length
-   strings.  This would require decoder implementations to keep a stack,
-   or at least a count, of nesting levels.  It is also unnecessary on
-   the encoder side, as the inner indefinite-length string would consist
-   of chunks, which can simply be put right into the outer indefinite-
-   length string.)
+   well-formed.
+
+   The design does not allow nesting indefinite-length strings as chunks
+   into indefinite-length strings.  If it was allowed, it would require
+   decoder implementations to keep a stack, or at least a count, of
+   nesting levels.  It is unnecessary on the encoder side because the
+   inner indefinite-length string would consist of chunks, and these
+   could instead be put directly into the outer indefinite-length
+   string.
 
    If any definite-length text string inside an indefinite-length text
    string is invalid, the indefinite-length text string is invalid.
@@ -884,12 +886,10 @@ Internet-Draft                    CBOR                         July 2020
 
    0b010_11111 0b010_00100 0xaabbccdd 0b010_00011 0xeeff99 0b111_11111
 
-   5F              -- Start indefinite-length byte string
-      44           -- Byte string of length 4
-         aabbccdd  -- Bytes content
-      43           -- Byte string of length 3
-         eeff99    -- Bytes content
-      FF           -- "break"
+
+
+
+
 
 
 
@@ -897,6 +897,13 @@ Bormann & Hoffman        Expires January 7, 2021               [Page 16]
 
 Internet-Draft                    CBOR                         July 2020
 
+
+   5F              -- Start indefinite-length byte string
+      44           -- Byte string of length 4
+         aabbccdd  -- Bytes content
+      43           -- Byte string of length 3
+         eeff99    -- Bytes content
+      FF           -- "break"
 
    After decoding, this results in a single byte string with seven
    bytes: 0xaabbccddeeff99.
@@ -938,13 +945,6 @@ Internet-Draft                    CBOR                         July 2020
    meaning, as defined in Table 3.  Like the major types for integers,
    items of this major type do not carry content data; all the
    information is in the initial bytes.
-
-
-
-
-
-
-
 
 
 
